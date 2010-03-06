@@ -15,29 +15,8 @@ Engine::~Engine() {
   SDL_Quit();
 }
 
-
-void Engine::loop() {
-  in_loop = true;
+bool Engine::showScene(Scene *scene) {
+  scene->setup();
   
-  while (in_loop) {
-    while (SDL_PollEvent(&event)) {
-      
-      // the window was closed
-      if (event.type == SDL_QUIT) {
-        in_loop = false;
-      }
-      
-      // apply force if the mouse was clicked
-      
-      
-      // redraw the scene
-      
-      
-    }
-  }
-}
-
-
-bool Engine::showScene() {
   return true;
 }

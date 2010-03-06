@@ -1,5 +1,10 @@
 #include "SDL.h"
 
+#include "scene.h"
+
+#ifndef ENGINE_H
+#define ENGINE_H
+
 class Engine {
 
   public:
@@ -13,7 +18,7 @@ class Engine {
     void loop();
     
     // replace the current scene with a new scene
-    bool showScene();
+    bool showScene(Scene*);
   
   
   private:
@@ -26,3 +31,5 @@ class Engine {
     // SDL event structure
     SDL_Event event;
 };
+
+#endif
