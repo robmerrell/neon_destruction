@@ -18,6 +18,15 @@ void Scene::scheduleLoop(float ticks_per_sec) {
     // for each tick call the scheduled method
     gameLoop();
     
+    // clear the screen
+    glClear(GL_COLOR_BUFFER_BIT);
+    
+    // reposition all sprites with the renderer
+    
+    
+    // update the screen
+    SDL_GL_SwapBuffers();
+    
     // delay to have a consistent framerate
   }
 }

@@ -7,7 +7,9 @@ task :compile do
     "-g",
     "-Wall",
     `sdl-config --cflags`.strip,
-    `sdl-config --libs`.strip
+    `sdl-config --libs`.strip,
+    "-I/System/Library/Frameworks/OpenGL.framework/Headers",
+    "-framework OpenGL"
   ]
   
   # get a list of cpp files to compile

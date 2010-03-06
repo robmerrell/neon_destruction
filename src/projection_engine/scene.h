@@ -1,4 +1,5 @@
 #include "SDL.h"
+#include "SDL_opengl.h"
 
 #ifndef SCENE_H
 #define SCENE_H
