@@ -2,19 +2,16 @@
 
 #include <iostream>
 
-IntroScene::IntroScene() {
-  // show the logo image
-  // create the logo mask
-  
-  // create the sceduler
-}
-
-
 void IntroScene::setup() {
+  // add the logo image
+  // add the logo mask
+  
+  
+  // start the game loop
+  scheduleLoop(1.0f/60.f);
 }
 
 
 void IntroScene::gameLoop() {
-  
 }
 

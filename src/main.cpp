@@ -9,8 +9,6 @@ int main(int argc, char* argv[]) {
   // show the title scene and start the game loop
   IntroScene *intro_scene = new IntroScene();
   engine.showScene(intro_scene);
-
-  SDL_Delay(3000);
   
   delete intro_scene;
 

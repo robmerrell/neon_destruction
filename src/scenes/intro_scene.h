@@ -6,7 +6,7 @@
 class IntroScene : public Scene {
   
   public:
-    IntroScene();
+    IntroScene() {};
     
     /**
      * Setup the logo sprite

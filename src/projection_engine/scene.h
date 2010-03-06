@@ -1,3 +1,5 @@
+#include "SDL.h"
+
 #ifndef SCENE_H
 #define SCENE_H
 
@@ -5,6 +7,7 @@ class Scene {
 
   protected:
     bool in_loop;
+    SDL_Event event;
   
   public:
     /**
@@ -20,8 +23,14 @@ class Scene {
     /**
      * Schedules a loop that calls the param method every count seconds
      *
+     * float ticks per second: ex 1.0f/60.f
      */
-    void scheduleLoop();
+    void scheduleLoop(float);
+    
+    /**
+     * The actual method called in each scene that contains the looping logic
+     */
+    virtual void gameLoop() {};
   
 };
 
