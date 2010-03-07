@@ -11,6 +11,7 @@ Scene::~Scene() {
   vector<Sprite*>::iterator iter;
   for (iter = objects.begin(); iter != objects.end(); iter++) {
     delete (*iter);
+    (*iter) = NULL;
   }
 
   objects.clear();
