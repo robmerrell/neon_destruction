@@ -2,6 +2,7 @@
 #include "SDL_opengl.h"
 
 #include "scene.h"
+#include "sprite.h"
 
 #ifndef ENGINE_H
 #define ENGINE_H

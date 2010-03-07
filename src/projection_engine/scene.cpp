@@ -1,7 +1,23 @@
 #include "scene.h"
 
+using namespace std;
+
 Scene::Scene() {
   in_loop = false;
+}
+
+// TODO: check this for memory leaks
+Scene::~Scene() {
+  vector<Sprite*>::iterator iter;
+  for (iter = objects.begin(); iter != objects.end(); iter++) {
+    delete (*iter);
+  }
+
+  objects.clear();
+}
+
+void Scene::addObject(Sprite* sprite) {
+  objects.push_back(sprite);
 }
 
 void Scene::scheduleLoop(float ticks_per_sec) {
@@ -15,14 +31,17 @@ void Scene::scheduleLoop(float ticks_per_sec) {
         in_loop = false;
     }
     
-    // for each tick call the scheduled method
+    // move
     gameLoop();
     
-    // clear the screen
+    // clear display
     glClear(GL_COLOR_BUFFER_BIT);
     
-    // reposition all sprites with the renderer
-    
+    // display
+    vector<Sprite*>::iterator sprite;
+    for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
+      (*sprite)->display();
+    }
     
     // update the screen
     SDL_GL_SwapBuffers();
