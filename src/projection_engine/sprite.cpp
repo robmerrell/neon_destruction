@@ -14,9 +14,10 @@ void Sprite::display() {
     glVertex2i(0, 0);
     glVertex2i(width, height);
     
+    glColor4f(0.0, 1.0, 0.0, 1.0);
     glVertex2i(width, 0);
-    glVertex2i((width / 2), height);
-    glVertex2i((width / 2), 0);
+    glVertex2i(width, height);
+    glVertex2i(width, 0);
   glEnd();
 }
 
