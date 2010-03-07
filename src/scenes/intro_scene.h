@@ -5,6 +5,9 @@
 
 class IntroScene : public Scene {
   
+  private:
+    Sprite* logo;
+  
   public:
     IntroScene() {};
     

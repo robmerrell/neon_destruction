@@ -26,8 +26,10 @@ float Sprite::getX() {
 }
 
 void Sprite::setX(float _x) {
+  if (_x != x)
+    glTranslatef(_x, 0.0, 0.0);
+  
   x = _x;
-  glTranslatef(x, 0.0, 0.0);
 }
 
 float Sprite::getY() {
@@ -35,8 +37,10 @@ float Sprite::getY() {
 }
 
 void Sprite::setY(float _y) {
+  if (_y != y)
+    glTranslatef(0.0, _y, 0.0);
+  
   y = _y;
-  glTranslatef(0.0, y, 0.0);
 }
 
 float Sprite::getWidth() {

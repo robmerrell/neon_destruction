@@ -5,7 +5,7 @@
 void IntroScene::setup() {
   // add the logo image
   // add the logo mask
-  Sprite *logo = new Sprite("", 64, 64);
+  logo = new Sprite("", 64, 64);
   logo->setX(100);
   logo->setY(100);
   addObject(logo);
@@ -16,5 +16,7 @@ void IntroScene::setup() {
 
 
 void IntroScene::gameLoop() {
+  float old_x = logo->getX();
+  logo->setX(old_x + 0.01);
 }
 
