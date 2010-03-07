@@ -7,6 +7,7 @@
 
 // engine
 #include "sprite.h"
+#include "timer.h"
 
 #ifndef SCENE_H
 #define SCENE_H
@@ -17,6 +18,10 @@ class Scene {
     bool in_loop;
     SDL_Event event;
     std::vector<Sprite*> objects;
+    
+    // frame capping
+    int frame;
+    Timer fps;
   
   public:
     /**
@@ -40,9 +45,9 @@ class Scene {
     /**
      * Schedules a loop that calls the param method every count seconds
      *
-     * float ticks per second: ex 1.0f/60.f
+     * int ticks per second: ex 60
      */
-    void scheduleLoop(float);
+    void scheduleLoop(int);
     
     /**
      * The actual method called in each scene that contains the looping logic

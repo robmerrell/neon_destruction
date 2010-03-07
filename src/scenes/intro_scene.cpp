@@ -11,12 +11,12 @@ void IntroScene::setup() {
   addObject(logo);
   
   // start the game loop
-  scheduleLoop(1.0f/60.f);
+  scheduleLoop(60);
 }
 
 
 void IntroScene::gameLoop() {
   float old_x = logo->getX();
-  logo->setX(old_x + 0.01);
+  logo->setX(old_x + 1);
 }
 

@@ -3,6 +3,7 @@
 
 #include "scene.h"
 #include "sprite.h"
+#include "timer.h"
 
 #ifndef ENGINE_H
 #define ENGINE_H

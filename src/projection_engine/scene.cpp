@@ -4,6 +4,7 @@ using namespace std;
 
 Scene::Scene() {
   in_loop = false;
+  frame = 0;
 }
 
 // TODO: check this for memory leaks
@@ -21,10 +22,11 @@ void Scene::addObject(Sprite* sprite) {
   objects.push_back(sprite);
 }
 
-void Scene::scheduleLoop(float ticks_per_sec) {
+void Scene::scheduleLoop(int ticks_per_sec) {
   in_loop = true;
   
   while (in_loop) {
+    fps.start();
     
     // capture the events and send the relevent tap events to the game scene
     while (SDL_PollEvent(&event)) {
@@ -45,8 +47,14 @@ void Scene::scheduleLoop(float ticks_per_sec) {
     }
     
     // update the screen
-    SDL_GL_SwapBuffers();
+    if (frame % ticks_per_sec == 0)
+      SDL_GL_SwapBuffers();
+    
+    frame++;
     
     // delay to have a consistent framerate
+    if (fps.get_ticks() < 1000 / ticks_per_sec) {
+      SDL_Delay((1000/ticks_per_sec) - fps.get_ticks());
+    }
   }
 }
