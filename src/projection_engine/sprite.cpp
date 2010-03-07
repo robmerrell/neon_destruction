@@ -1,6 +1,8 @@
 #include "sprite.h"
 
-Sprite::Sprite(std::string filename) {
+Sprite::Sprite(std::string filename, float _width, float _height) {
+  width = _width;
+  height = _height;
 }
 
 void Sprite::display() {
@@ -8,14 +10,13 @@ void Sprite::display() {
   
   glBegin(GL_TRIANGLE_STRIP);
     glColor4f(1.0, 0.0, 0.0, 1.0);
-    glVertex2i(0, 100);
+    glVertex2i(0, height);
     glVertex2i(0, 0);
-    glVertex2i(100, 100);
+    glVertex2i(width, height);
     
-    glColor4f(0.0, 0.0, 1.0, 1.0);
-    glVertex2i(100, 0);
-    glVertex2i(200, 100);
-    glVertex2i(200, 0);
+    glVertex2i(width, 0);
+    glVertex2i((width / 2), height);
+    glVertex2i((width / 2), 0);
   glEnd();
 }
 
@@ -23,8 +24,8 @@ float Sprite::getX() {
   return x;
 }
 
-void Sprite::setX(float new_x) {
-  x = new_x;
+void Sprite::setX(float _x) {
+  x = _x;
   glTranslatef(x, 0.0, 0.0);
 }
 
@@ -32,8 +33,8 @@ float Sprite::getY() {
   return y;
 }
 
-void Sprite::setY(float new_y) {
-  y = new_y;
+void Sprite::setY(float _y) {
+  y = _y;
   glTranslatef(0.0, y, 0.0);
 }
 

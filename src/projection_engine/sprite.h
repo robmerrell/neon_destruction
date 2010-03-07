@@ -20,8 +20,10 @@ class Sprite {
      * Constructor
      *
      * string file name of the image
+     * float width
+     * float height
      */
-     Sprite(std::string);
+     Sprite(std::string, float, float);
      
     /**
      * Define the sprite's display properties through openGL
