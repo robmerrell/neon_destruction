@@ -21,28 +21,6 @@ void Sprite::display() {
   glEnd();
 }
 
-float Sprite::getX() {
-  return x;
-}
-
-void Sprite::setX(float _x) {
-  if (_x != x)
-    glTranslatef(_x - x, 0.0, 0.0);
-  
-  x = _x;
-}
-
-float Sprite::getY() {
-  return y;
-}
-
-void Sprite::setY(float _y) {
-  if (_y != y)
-    glTranslatef(0.0, _y - y, 0.0);
-  
-  y = _y;
-}
-
 float Sprite::getWidth() {
   return width;
 }

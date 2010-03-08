@@ -1,19 +1,14 @@
 #include <iostream>
-#include "SDL.h"
-#include "SDL_opengl.h"
+#include "game_object.h"
 
 #ifndef SPRITE_H
 #define SPRITE_H
 
-class Sprite {
+class Sprite : public GameObject {
   
   protected:
-    float x;
-    float y;
-    
     float width;
     float height;
-    
     
   public:
     /**
@@ -23,26 +18,18 @@ class Sprite {
      * float width
      * float height
      */
-     Sprite(std::string, float, float);
+    Sprite(std::string, float, float);
      
-    /**
-     * Define the sprite's display properties through openGL
-     */
-    void display();
+     /**
+      * Render a texture to a square made of a triangle stip
+      */
+     void display();
 
-    /**
-     * Getters and setters for position
-     */
-     float getX();
-     void setX(float);
-     float getY();
-     void setY(float);
-     
     /**
      * Getters for the size
      */
-     float getWidth();
-     float getHeight();
+    float getWidth();
+    float getHeight();
 };
 
 #endif
