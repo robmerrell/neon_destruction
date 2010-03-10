@@ -9,6 +9,7 @@ class GameObject {
   protected:
     float x;
     float y;
+    float alpha;
     
   public:
     /**
@@ -28,6 +29,12 @@ class GameObject {
     void setX(float);
     float getY();
     void setY(float);
+    
+    /**
+     * Getters and setters for alpha
+     */
+   float getAlpha();
+   void setAlpha(float);
 
 };
 

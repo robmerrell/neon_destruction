@@ -18,5 +18,8 @@ void IntroScene::setup() {
 void IntroScene::gameLoop() {
   float old_x = logo->getX();
   logo->setX(old_x + 1);
+  
+  float old_alpha = logo->getAlpha();
+  logo->setAlpha(old_alpha - 0.01);
 }
 

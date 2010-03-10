@@ -21,3 +21,11 @@ void GameObject::setY(float _y) {
   
   y = _y;
 }
+
+float GameObject::getAlpha() {
+  return alpha;
+}
+
+void GameObject::setAlpha(float _alpha) {
+  alpha = _alpha;
+}

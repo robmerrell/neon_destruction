@@ -15,6 +15,10 @@ Engine::Engine() {
   glLoadIdentity();
   glOrtho(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, -1, 1);
   
+  // blending
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+  
   // setup the modelview matrix for our sprites
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
