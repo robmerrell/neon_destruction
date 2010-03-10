@@ -47,8 +47,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     }
     
     // update the screen
-    if (frame % ticks_per_sec == 0)
-      SDL_GL_SwapBuffers();
+    SDL_GL_SwapBuffers();
     
     frame++;
     
