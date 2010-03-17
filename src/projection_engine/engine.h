@@ -24,7 +24,7 @@ class Engine {
     bool showScene(Scene*);
   
   
-  private:
+  private:    
     // tracks if we are running in the loop or not
     bool in_loop;
     

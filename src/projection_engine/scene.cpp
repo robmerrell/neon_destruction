@@ -57,3 +57,15 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     }
   }
 }
+
+
+/** Helpers for Box2D **/
+// convert pixels to meters
+float Scene::p2m(float pixel) {
+  return pixel / PTM_RATIO;
+}
+
+// convert meters to pixels
+float Scene::m2p(float meters) {
+  return meters * PTM_RATIO;
+}

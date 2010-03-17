@@ -4,6 +4,7 @@
 // utilities
 #include "SDL.h"
 #include "SDL_opengl.h"
+#include "Box2D.h"
 
 // engine
 #include "sprite.h"
@@ -11,6 +12,8 @@
 
 #ifndef SCENE_H
 #define SCENE_H
+
+const float PTM_RATIO = 32.0f;
 
 class Scene {
 
@@ -53,7 +56,11 @@ class Scene {
      * The actual method called in each scene that contains the looping logic
      */
     virtual void gameLoop() {};
+    
+    float p2m(float);
+    float m2p(float);
   
 };
+
 
 #endif

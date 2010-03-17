@@ -7,6 +7,9 @@ class IntroScene : public Scene {
   
   private:
     Sprite* logo;
+    b2AABB worldAABB;
+    b2World* world;
+    b2Body* body;
   
   public:
     IntroScene() {};
