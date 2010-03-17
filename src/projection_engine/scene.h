@@ -25,6 +25,10 @@ class Scene {
     // frame capping
     int frame;
     Timer fps;
+    
+    // physics
+    b2AABB worldAABB;
+    b2World* world;
   
   public:
     /**
@@ -57,7 +61,14 @@ class Scene {
      */
     virtual void gameLoop() {};
     
+    /**
+     * Convert pixels to meters
+     */
     float p2m(float);
+    
+    /**
+     * Convert meters to pixels
+     */
     float m2p(float);
   
 };

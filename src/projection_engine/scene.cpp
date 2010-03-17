@@ -5,6 +5,15 @@ using namespace std;
 Scene::Scene() {
   in_loop = false;
   frame = 0;
+  
+  // setup the physics environment
+  worldAABB.lowerBound.Set(0, 0);
+  worldAABB.upperBound.Set(640/PTM_RATIO, 480/PTM_RATIO);
+  
+  b2Vec2 gravity(0.0f, 10.0f);
+  bool doSleep = true;
+  
+  world = new b2World(worldAABB, gravity, doSleep);
 }
 
 // TODO: check this for memory leaks
@@ -16,6 +25,9 @@ Scene::~Scene() {
   }
 
   objects.clear();
+  
+  delete world;
+  world = NULL;
 }
 
 void Scene::addObject(Sprite* sprite) {
@@ -24,7 +36,7 @@ void Scene::addObject(Sprite* sprite) {
 
 void Scene::scheduleLoop(int ticks_per_sec) {
   in_loop = true;
-  
+    
   while (in_loop) {
     fps.start();
     
@@ -33,6 +45,11 @@ void Scene::scheduleLoop(int ticks_per_sec) {
       if (event.type == SDL_QUIT)
         in_loop = false;
     }
+    
+    // physics step
+    float32 timeStep = 1.0f / ticks_per_sec;
+    int32 iterations = 10;
+    world->Step(timeStep, iterations);
     
     // move
     gameLoop();
@@ -59,13 +76,10 @@ void Scene::scheduleLoop(int ticks_per_sec) {
 }
 
 
-/** Helpers for Box2D **/
-// convert pixels to meters
 float Scene::p2m(float pixel) {
   return pixel / PTM_RATIO;
 }
 
-// convert meters to pixels
 float Scene::m2p(float meters) {
   return meters * PTM_RATIO;
 }
