@@ -4,7 +4,6 @@
 // utilities
 #include "SDL.h"
 #include "SDL_opengl.h"
-#include "Box2D.h"
 
 // engine
 #include "sprite.h"
@@ -12,8 +11,6 @@
 
 #ifndef SCENE_H
 #define SCENE_H
-
-const float PTM_RATIO = 32.0f;
 
 class Scene {
 
@@ -27,8 +24,6 @@ class Scene {
     Timer fps;
     
     // physics
-    b2AABB worldAABB;
-    b2World* world;
   
   public:
     /**
@@ -60,17 +55,6 @@ class Scene {
      * The actual method called in each scene that contains the looping logic
      */
     virtual void gameLoop() {};
-    
-    /**
-     * Convert pixels to meters
-     */
-    float p2m(float);
-    
-    /**
-     * Convert meters to pixels
-     */
-    float m2p(float);
-  
 };
 
 

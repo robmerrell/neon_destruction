@@ -7,7 +7,6 @@ class IntroScene : public Scene {
   
   private:
     Sprite* logo;
-    b2Body* body;
   
   public:
     IntroScene() {};

@@ -8,9 +8,7 @@ task :compile do
     `sdl-config --cflags`.strip,
     `sdl-config --libs`.strip,
     "-I/System/Library/Frameworks/OpenGL.framework/Headers",
-    "-framework OpenGL",
-    "-I/opt/local/include/box2d",
-    "-lbox2d"
+    "-framework OpenGL"
   ]
   
   # get a list of cpp files to compile
