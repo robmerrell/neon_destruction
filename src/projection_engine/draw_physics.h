@@ -2,6 +2,7 @@
 #include "chipmunk/chipmunk.h"
 
 #include <math.h>
+#include <stdio.h>
 
 #ifndef DRAW_PHYSICS_H
 #define DRAW_PHYSICS_H

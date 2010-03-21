@@ -17,6 +17,37 @@ static void drawCircleShape(cpBody *body, cpCircleShape *circle) {
   glEnd();
 }
 
+// static void
+// drawPolyShape(cpBody *body, cpPolyShape *poly)
+// {
+//  int count = count=poly->numVerts;
+//  glVertexPointer(2, GL_DOUBLE, 0, poly->tVerts);
+//  
+//  if(!poly->shape.sensor){
+//    glColor_from_pointer(poly);
+//    glDrawArrays(GL_TRIANGLE_FAN, 0, count);
+//  }
+//  
+//  glColor3f(LINE_COLOR);
+//  glDrawArrays(GL_LINE_LOOP, 0, count);
+// }
+
+static void drawPolyShape(cpBody *body, cpPolyShape *poly) {
+  int count = poly->numVerts;
+
+  glLoadIdentity();
+  glBegin(GL_LINE_STRIP);
+    glColor4f(BODY_COLOR);
+    for (int i = 0; i < count; i++) {
+      cpVect poly_vert = poly->verts[i];
+      glVertex2f(poly_vert.x, poly_vert.y);
+    }
+    
+    glVertex2f(poly->verts[0].x, poly->verts[0].y);
+  glEnd();
+
+}
+
 static void drawObject(void *ptr, void *unused) {
 	cpShape *shape = (cpShape *)ptr;
 	cpBody *body = shape->body;
@@ -28,9 +59,9 @@ static void drawObject(void *ptr, void *unused) {
     // case CP_SEGMENT_SHAPE:
     //  drawSegmentShape(body, (cpSegmentShape *)shape);
     //  break;
-    // case CP_POLY_SHAPE:
-    //  drawPolyShape(body, (cpPolyShape *)shape);
-    //  break;
+    case CP_POLY_SHAPE:
+     drawPolyShape(body, (cpPolyShape *)shape);
+     break;
     // default:
     //  printf("Bad enumeration in drawObject().\n");
 	}
