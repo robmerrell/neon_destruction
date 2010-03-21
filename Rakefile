@@ -25,3 +25,9 @@ task :compile do
   puts compile_cmd
   system(compile_cmd)
 end
+
+desc "Compile and run"
+task :run do
+  Rake::Task["compile"].invoke
+  system("./main")
+end
