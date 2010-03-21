@@ -11,6 +11,7 @@ Scene::Scene() {
   cpInitChipmunk();
   space = cpSpaceNew();
   space->iterations = 10;
+  space->elasticIterations = 10;
   // cpSpaceResizeStaticHash(space, 30.0f, 1000);
   // cpSpaceResizeActiveHash(space, 30.0f, 1000);
 	space->gravity = cpv(0, 100);
@@ -60,7 +61,9 @@ void Scene::scheduleLoop(int ticks_per_sec) {
       if (!draw_physics)
         (*sprite)->display();
       else {
-        drawPhysics(space);
+        // drawPhysics(space);
+        drawSpaceOptions options = {0,0,1,4.0f,0.0f,1.5f,};
+        drawSpace(space, &options);
       }
     }
     

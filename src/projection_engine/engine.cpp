@@ -23,6 +23,8 @@ Engine::Engine(bool _draw_physics) {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   
+  glEnableClientState(GL_VERTEX_ARRAY);
+  
   draw_physics = _draw_physics;
 }
 
