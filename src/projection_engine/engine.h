@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "SDL_opengl.h"
+#include "chipmunk/chipmunk.h"
 
 #include "scene.h"
 #include "sprite.h"
