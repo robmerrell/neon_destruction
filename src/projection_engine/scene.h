@@ -5,6 +5,7 @@
 #include "SDL.h"
 #include "SDL_opengl.h"
 #include "chipmunk/chipmunk.h"
+#include "draw_physics.h"
 
 // engine
 #include "sprite.h"

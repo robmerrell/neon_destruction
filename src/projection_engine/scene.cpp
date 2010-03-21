@@ -60,7 +60,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
       if (!draw_physics)
         (*sprite)->display();
       else {
-        
+        drawPhysics(space);
       }
     }
     
