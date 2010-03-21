@@ -29,6 +29,8 @@ static void drawPolyShape(cpBody *body, cpPolyShape *poly) {
   //   glVertex2f(1, 1);
   // glEnd();
   
+  glLoadIdentity();
+  glTranslatef(body->p.x, body->p.y, 0.0);
   glBegin(GL_LINE_STRIP);
     glColor4f(BODY_COLOR);
     for (int i = 0; i < count; i++) {
