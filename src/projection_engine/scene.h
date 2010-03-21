@@ -4,6 +4,7 @@
 // utilities
 #include "SDL.h"
 #include "SDL_opengl.h"
+#include "chipmunk/chipmunk.h"
 
 // engine
 #include "sprite.h"
@@ -24,6 +25,7 @@ class Scene {
     Timer fps;
     
     // physics
+    cpSpace *space;
   
   public:
     /**

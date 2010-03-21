@@ -5,10 +5,22 @@ using namespace std;
 Scene::Scene() {
   in_loop = false;
   frame = 0;
+  
+  // set up the Chipmunk physics space
+  space = cpSpaceNew();
+  space->iterations = 10;
+  // cpSpaceResizeStaticHash(space, 30.0f, 1000);
+  // cpSpaceResizeActiveHash(space, 30.0f, 1000);
+	space->gravity = cpv(0, -100);
 }
 
 // TODO: check this for memory leaks
 Scene::~Scene() {
+  // free all of the physics simulation items
+  cpSpaceFreeChildren(space);
+	cpSpaceFree(space);
+  
+  // free all of the sprites
   vector<Sprite*>::iterator iter;
   for (iter = objects.begin(); iter != objects.end(); iter++) {
     delete (*iter);
