@@ -12,6 +12,8 @@ Scene::Scene() {
   // cpSpaceResizeStaticHash(space, 30.0f, 1000);
   // cpSpaceResizeActiveHash(space, 30.0f, 1000);
 	space->gravity = cpv(0, -100);
+	
+  draw_physics = false;
 }
 
 // TODO: check this for memory leaks
@@ -55,7 +57,11 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     // display
     vector<Sprite*>::iterator sprite;
     for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
-      (*sprite)->display();
+      if (!draw_physics)
+        (*sprite)->display();
+      else {
+        
+      }
     }
     
     // update the screen
@@ -68,4 +74,8 @@ void Scene::scheduleLoop(int ticks_per_sec) {
       SDL_Delay((1000/ticks_per_sec) - fps.get_ticks());
     }
   }
+}
+
+void Scene::setDrawPhysics(bool draw) {
+  draw_physics = draw;
 }

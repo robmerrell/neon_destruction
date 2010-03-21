@@ -4,7 +4,7 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 const int SCREEN_BPP = 32;
 
-Engine::Engine() {
+Engine::Engine(bool _draw_physics) {
   // create the sdl context
   SDL_Init(SDL_INIT_EVERYTHING);
   screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_OPENGL);
@@ -22,6 +22,8 @@ Engine::Engine() {
   // setup the modelview matrix for our sprites
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+  
+  draw_physics = _draw_physics;
 }
 
 Engine::~Engine() {
@@ -29,6 +31,7 @@ Engine::~Engine() {
 }
 
 bool Engine::showScene(Scene *scene) {
+  scene->setDrawPhysics(draw_physics);
   scene->setup();
   
   return true;

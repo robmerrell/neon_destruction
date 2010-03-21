@@ -26,6 +26,7 @@ class Scene {
     
     // physics
     cpSpace *space;
+    bool draw_physics;
   
   public:
     /**
@@ -57,6 +58,11 @@ class Scene {
      * The actual method called in each scene that contains the looping logic
      */
     virtual void gameLoop() {};
+    
+    /**
+     * Propagated from the engine, tell the scene that we should render physics and not textures
+     */
+    void setDrawPhysics(bool);
 };
 
 

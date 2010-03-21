@@ -4,7 +4,7 @@
 #include "scenes/intro_scene.h"
 
 int main(int argc, char* argv[]) {
-  Engine engine;
+  Engine engine(true);
 
   // show the title scene and start the game loop
   IntroScene *intro_scene = new IntroScene();

@@ -12,7 +12,7 @@ class Engine {
 
   public:
     // constructor
-    Engine();
+    Engine(bool);
     
     // destructor
     ~Engine();
@@ -23,7 +23,6 @@ class Engine {
     // replace the current scene with a new scene
     bool showScene(Scene*);
   
-  
   private:    
     // tracks if we are running in the loop or not
     bool in_loop;
@@ -33,6 +32,9 @@ class Engine {
     
     // SDL event structure
     SDL_Event event;
+    
+    // if set to true then draw physics shapes instead of applying textures
+    bool draw_physics;
 };
 
 #endif
