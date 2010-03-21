@@ -17,25 +17,18 @@ static void drawCircleShape(cpBody *body, cpCircleShape *circle) {
   glEnd();
 }
 
-// static void
-// drawPolyShape(cpBody *body, cpPolyShape *poly)
-// {
-//  int count = count=poly->numVerts;
-//  glVertexPointer(2, GL_DOUBLE, 0, poly->tVerts);
-//  
-//  if(!poly->shape.sensor){
-//    glColor_from_pointer(poly);
-//    glDrawArrays(GL_TRIANGLE_FAN, 0, count);
-//  }
-//  
-//  glColor3f(LINE_COLOR);
-//  glDrawArrays(GL_LINE_LOOP, 0, count);
-// }
-
 static void drawPolyShape(cpBody *body, cpPolyShape *poly) {
   int count = poly->numVerts;
 
-  glLoadIdentity();
+  // find the center of the polygon
+  // glLoadIdentity();
+  // glTranslatef(body->p.x, body->p.y, 0.0);
+  // glPointSize(3.0);
+  // glBegin(GL_POINTS);
+  //   glColor4f(1.0, 0.0, 1.0, 1.0);
+  //   glVertex2f(1, 1);
+  // glEnd();
+  
   glBegin(GL_LINE_STRIP);
     glColor4f(BODY_COLOR);
     for (int i = 0; i < count; i++) {
