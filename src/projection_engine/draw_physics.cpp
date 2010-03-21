@@ -4,9 +4,10 @@
  * basic algorithm found at: http://basic4gl.wikispaces.com/2D+Drawing+in+OpenGL
  */
 static void drawCircleShape(cpBody *body, cpCircleShape *circle) {
-  int segments = 360;
   cpVect center = circle->tc;
-
+  
+  glLoadIdentity();
+  glTranslatef(center.x, center.y, 0.0);
   glBegin(GL_LINE_STRIP);
     glColor4f(BODY_COLOR);
     glVertex2f(center.x, center.y);

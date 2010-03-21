@@ -8,7 +8,8 @@ Sprite::Sprite(std::string filename, float _width, float _height) {
 }
 
 void Sprite::display() {
-  glTranslatef(0.0, 0.0, 0.0);
+  glLoadIdentity();
+  glTranslatef(x, y, 0.0);
   
   glBegin(GL_TRIANGLE_STRIP);
     glColor4f(1.0, 0.0, 0.0, alpha);

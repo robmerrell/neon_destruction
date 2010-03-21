@@ -11,7 +11,7 @@ Scene::Scene() {
   space->iterations = 10;
   // cpSpaceResizeStaticHash(space, 30.0f, 1000);
   // cpSpaceResizeActiveHash(space, 30.0f, 1000);
-	space->gravity = cpv(0, -100);
+	space->gravity = cpv(0, 100);
 	
   draw_physics = false;
 }
