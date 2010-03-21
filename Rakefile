@@ -9,9 +9,9 @@ task :compile do
     `sdl-config --cflags`.strip,
     `sdl-config --libs`.strip,
     "-I/System/Library/Frameworks/OpenGL.framework/Headers",
-    "-framework OpenGL",
-    "-Lsrc/projection_engine/chipmunk/lib",
-    "-lchipmunk"
+    "-framework OpenGL"
+    # "-Lsrc/projection_engine/chipmunk/lib",
+    # "-lchipmunk"
   ]
   
   # get a list of cpp files to compile
