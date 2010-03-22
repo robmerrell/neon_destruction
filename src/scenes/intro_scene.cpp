@@ -5,10 +5,19 @@
 void IntroScene::setup() {
   // add the logo image
   // add the logo mask
-  logo = new Sprite("", 64, 64);
-  logo->setX(100);
-  logo->setY(100);
-  addObject(logo);
+  cannon = new Cannon(100, 100);
+  cannon->definePhysics(space);
+  addObject(cannon);
+  
+  // 
+  // cpBody *body = cpBodyNew(10.0f, INFINITY);
+  // body->p = cpv(100, 100);
+  // cpSpaceAddBody(space, body);
+  // 
+  // cpVect base_verts[] = { cpv(0.0, 0.0), cpv(50.0, 0.0), cpv(50.0, -15.0), cpv(0.0, -15.0) };
+  // cpShape *baseShape = cpPolyShapeNew(body, 4, base_verts, cpvzero);  
+  // baseShape->e = 0.5f; baseShape->u = 0.9f;
+  // cpSpaceAddShape(space, baseShape);
   
   
   // Add a moving circle object.
@@ -18,7 +27,7 @@ void IntroScene::setup() {
 	cpBody *ballBody = cpBodyNew(mass, INFINITY);
 	// Set some parameters of the body:
 	// For more info: http://code.google.com/p/chipmunk-physics/wiki/cpBody
-	ballBody->p = cpv(100, 0);
+	ballBody->p = cpv(120, 0);
 	// Add the body to the space so it will be simulated and move around.
 	cpSpaceAddBody(space, ballBody);
 	

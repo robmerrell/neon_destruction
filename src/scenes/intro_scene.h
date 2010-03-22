@@ -1,4 +1,5 @@
 #include "../projection_engine/scene.h"
+#include "../objects/cannon.h"
 
 #ifndef INTRO_SCENE_H
 #define INTRO_SCENE_H
@@ -6,7 +7,7 @@
 class IntroScene : public Scene {
   
   private:
-    Sprite* logo;
+    Cannon *cannon;
   
   public:
     IntroScene() {};

@@ -1,6 +1,8 @@
 #include <iostream>
 #include "game_object.h"
 
+#include "chipmunk/chipmunk.h"
+
 #ifndef SPRITE_H
 #define SPRITE_H
 
@@ -30,6 +32,8 @@ class Sprite : public GameObject {
      */
     float getWidth();
     float getHeight();
+    
+    virtual void definePhysics(cpSpace*) {};
 };
 
 #endif
