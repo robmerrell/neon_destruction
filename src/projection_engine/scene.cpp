@@ -12,9 +12,9 @@ Scene::Scene() {
   space = cpSpaceNew();
   space->iterations = 10;
   space->elasticIterations = 10;
-  // cpSpaceResizeStaticHash(space, 30.0f, 1000);
-  // cpSpaceResizeActiveHash(space, 30.0f, 1000);
 	space->gravity = cpv(0, 100);
+	
+  staticBody = cpBodyNew(INFINITY, INFINITY);
 }
 
 // TODO: check this for memory leaks
@@ -81,4 +81,38 @@ void Scene::scheduleLoop(int ticks_per_sec) {
 
 void Scene::setDrawPhysics(bool draw) {
   draw_physics = draw;
+}
+
+void Scene::defineBorder(bool top, bool right, bool bottom, bool left) {
+  float border_elasticity = 0.3f;
+  float border_friction = 1.0f;
+  
+  // top border
+  if (top) {
+    cpShape *border_top = cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(320, 0), 0.0f);
+    border_top->e = border_elasticity; border_top->u = border_friction;
+    cpSpaceAddStaticShape(space, border_top);
+  }
+  
+  // right border
+  if (right) {
+    cpShape *border_right = cpSegmentShapeNew(staticBody, cpv(320, 0), cpv(320, 480), 0.0f);
+    border_right->e = border_elasticity; border_right->u = border_friction;
+    cpSpaceAddStaticShape(space, border_right);
+  }
+  
+  // bottom border
+  if (bottom) {
+    cpShape *border_bottom = cpSegmentShapeNew(staticBody, cpv(0, 480), cpv(320, 480), 0.0f);
+    border_bottom->e = border_elasticity; border_bottom->u = border_friction;
+    cpSpaceAddStaticShape(space, border_bottom);
+  }
+  
+  // left border
+  if (left) {
+    cpShape *border_left = cpSegmentShapeNew(staticBody, cpv(0, 0), cpv(0, 480), 0.0f);
+    border_left->e = border_elasticity; border_left->u = border_friction;
+    cpSpaceAddStaticShape(space, border_left);
+  }
+  
 }

@@ -27,6 +27,7 @@ class Scene {
     
     // physics
     cpSpace *space;
+    cpBody *staticBody;
     bool draw_physics;
   
   public:
@@ -64,6 +65,12 @@ class Scene {
      * Propagated from the engine, tell the scene that we should render physics and not textures
      */
     void setDrawPhysics(bool);
+    
+    /**
+     * Add static shape segment borders to the scene.
+     * The arguments go in order of top, right, bottom, left
+     */
+    void defineBorder(bool, bool, bool, bool);
 };
 
 
