@@ -50,6 +50,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     }
     
     // move
+    cpSpaceStep(space, 1.0f/ticks_per_sec);
     gameLoop();
     
     // clear display

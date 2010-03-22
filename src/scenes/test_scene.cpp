@@ -1,6 +1,6 @@
-#include "intro_scene.h"
+#include "test_scene.h"
 
-void IntroScene::setup() {
+void TestScene::setup() {
   defineBorder(true, true, true, true);
   
   cannon = new Cannon(100, 100);
@@ -12,7 +12,6 @@ void IntroScene::setup() {
 }
 
 
-void IntroScene::gameLoop() {
+void TestScene::gameLoop() {
   
 }
-
