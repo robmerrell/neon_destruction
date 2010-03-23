@@ -5,6 +5,8 @@
 #include "sprite.h"
 #include "timer.h"
 
+#include "../game_const.h"
+
 #ifndef ENGINE_H
 #define ENGINE_H
 

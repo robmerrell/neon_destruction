@@ -1,9 +1,5 @@
 #include "engine.h"
 
-const int SCREEN_WIDTH = 320;
-const int SCREEN_HEIGHT = 480;
-const int SCREEN_BPP = 32;
-
 Engine::Engine(bool _draw_physics) {
   // create the sdl context
   SDL_Init(SDL_INIT_EVERYTHING);

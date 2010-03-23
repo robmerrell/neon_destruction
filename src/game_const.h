@@ -12,4 +12,12 @@ const int BALL_COLLISION = 2;
 
 const int PROJECTION_MULTIPLIER = 20;
 
+
+/************
+** WINDOW **
+************/
+const int SCREEN_WIDTH = 480;
+const int SCREEN_HEIGHT = 320;
+const int SCREEN_BPP = 32;
+
 #endif
