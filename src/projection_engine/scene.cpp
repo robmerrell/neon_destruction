@@ -50,6 +50,7 @@ Sprite* Scene::findObject(int tag) {
 
 void Scene::scheduleLoop(int ticks_per_sec) {
   in_loop = true;
+  int mouse_x, mouse_y = 0;
     
   while (in_loop) {
     fps.start();
@@ -58,6 +59,19 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     while (SDL_PollEvent(&event)) {
       if (event.type == SDL_QUIT)
         in_loop = false;
+      else if (event.type == SDL_MOUSEBUTTONDOWN) {
+        mouse_x = event.button.x;
+        mouse_y = event.button.y;
+        
+        // find the cannon game object
+        Sprite *cannon = findObject(CANNON_TAG);
+        if (cannon != NULL) {
+          // add an ammo object and give it an impulse
+          Ball *ball = new Ball(cannon->getX(), cannon->getY());
+          ball->definePhysics(space);
+          ball->applyImpulse(cpv(mouse_x, mouse_y), cpv(cannon->getX(), cannon->getY()));
+        }
+      }
     }
     
     // move

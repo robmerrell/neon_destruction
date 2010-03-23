@@ -7,6 +7,9 @@
 #include "chipmunk/chipmunk.h"
 #include "chipmunk/drawSpace.h"
 
+#include "../game_const.h"
+#include "../objects/ball.h"
+
 // engine
 #include "sprite.h"
 #include "timer.h"

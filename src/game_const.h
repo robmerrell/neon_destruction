@@ -1,3 +1,6 @@
+#ifndef GAME_CONST_H
+#define GAME_CONST_H
+
 /************
 ** Physics **
 *************/
@@ -9,3 +12,4 @@ const int BALL_COLLISION = 2;
 
 const int PROJECTION_MULTIPLIER = 20;
 
+#endif
