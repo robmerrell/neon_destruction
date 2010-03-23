@@ -37,6 +37,17 @@ void Scene::addObject(Sprite* sprite) {
   objects.push_back(sprite);
 }
 
+Sprite* Scene::findObject(int tag) {
+  vector<Sprite*>::iterator sprite;
+  for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
+    if ((*sprite)->getTag() == tag) {
+      return *sprite;
+    }
+  }
+  
+  return NULL;
+}
+
 void Scene::scheduleLoop(int ticks_per_sec) {
   in_loop = true;
     

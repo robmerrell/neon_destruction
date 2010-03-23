@@ -50,6 +50,13 @@ class Scene {
     void addObject(Sprite*);
     
     /**
+     * Find an object in the scene based on the tag
+     *
+     * int tag
+     */
+    Sprite* findObject(int);
+    
+    /**
      * Schedules a loop that calls the param method every count seconds
      *
      * int ticks per second: ex 60
