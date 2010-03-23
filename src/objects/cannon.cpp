@@ -15,5 +15,7 @@ void Cannon::definePhysics(cpSpace *space) {
   cpVect base_verts[] = { cpv(0.0, 0.0), cpv(50.0, 0.0), cpv(50.0, -15.0), cpv(0.0, -15.0) };
   cpShape *baseShape = cpPolyShapeNew(body, 4, base_verts, cpvzero);  
   baseShape->e = 0.5; baseShape->u = 0.9;
+  baseShape->data = this;
+  baseShape->collision_type = CANNON_COLLISION;
   cpSpaceAddShape(space, baseShape);
 }
