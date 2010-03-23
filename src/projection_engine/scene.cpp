@@ -15,6 +15,9 @@ Scene::Scene() {
 	space->gravity = cpv(0, 100);
 	
   staticBody = cpBodyNew(INFINITY, INFINITY);
+  
+  // by default ignore collisions between the cannon and the balls
+  cpSpaceAddCollisionHandler(space, 1, 2, NULL, ignore_pre_solve, NULL, NULL, NULL);
 }
 
 // TODO: check this for memory leaks
@@ -76,6 +79,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     
     // move
     cpSpaceStep(space, 1.0f/ticks_per_sec);
+    cpSpaceHashEach(space->activeShapes, &updateShape, NULL);
     gameLoop();
     
     // clear display
@@ -141,4 +145,24 @@ void Scene::defineBorder(bool top, bool right, bool bottom, bool left) {
     cpSpaceAddStaticShape(space, border_left);
   }
   
+}
+
+// update a shape's visual representation
+void updateShape(void *ptr, void* unused) {
+  cpShape *shape = (cpShape*)ptr;
+  
+  // make sure the shape is constructed correctly
+  if(shape == NULL || shape->body == NULL || shape->data == NULL) {
+    // add debugging here
+    return;
+  }
+  
+  Sprite *sprite = (Sprite*)shape->data;
+  
+  sprite->setX(shape->body->p.x);
+  sprite->setY(shape->body->p.y);
+}
+
+static int ignore_pre_solve(cpArbiter *arb, cpSpace *space, void *ignore) {
+  return 0;
 }

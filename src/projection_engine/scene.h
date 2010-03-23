@@ -83,5 +83,8 @@ class Scene {
     void defineBorder(bool, bool, bool, bool);
 };
 
+void updateShape(void*, void*);
+
+static int ignore_pre_solve(cpArbiter*, cpSpace*, void*);
 
 #endif
