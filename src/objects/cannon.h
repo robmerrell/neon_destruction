@@ -1,4 +1,5 @@
 #include "../projection_engine/sprite.h"
+#include "../game_const.h"
 
 #ifndef CANNON_H
 #define CANNON_H
