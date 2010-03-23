@@ -1,6 +1,6 @@
 #include "cannon.h"
 
-Cannon::Cannon(float x, float y) : Sprite("", 64, 64) {
+Cannon::Cannon(float x, float y) : Sprite("", 64, 64, 1) {
   setX(x);
   setY(y);
 }

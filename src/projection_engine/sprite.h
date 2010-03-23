@@ -11,6 +11,7 @@ class Sprite : public GameObject {
   protected:
     float width;
     float height;
+    int tag;
     
   public:
     /**
@@ -19,8 +20,9 @@ class Sprite : public GameObject {
      * string file name of the image
      * float width
      * float height
+     * int tag
      */
-    Sprite(std::string, float, float);
+    Sprite(std::string, float, float, int);
      
      /**
       * Render a texture to a square made of a triangle stip
@@ -28,10 +30,11 @@ class Sprite : public GameObject {
      void display();
 
     /**
-     * Getters for the size
+     * Getters for the size and the tag
      */
     float getWidth();
     float getHeight();
+    int getTag();
     
     virtual void definePhysics(cpSpace*) {};
 };
