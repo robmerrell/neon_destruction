@@ -13,7 +13,7 @@ Scene::Scene() {
   space = cpSpaceNew();
   space->iterations = 10;
   space->elasticIterations = 10;
-	space->gravity = cpv(0, 100);
+	space->gravity = cpv(0, GRAVITY_RATE);
 	
   staticBody = cpBodyNew(INFINITY, INFINITY);
   
@@ -185,11 +185,20 @@ static int gravity_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
   GravitySwitch *sprite = (GravitySwitch*)a->data;
   cpVect gravity;
   
-  if (sprite->getDirection() == GRAVITY_UP) {
+  // up and down
+  if (sprite->getDirection() == GRAVITY_UP || sprite->getDirection() == GRAVITY_DOWN) {
     if (space->gravity.y < 0)
-      space->gravity = cpv(space->gravity.x, 100);
+      space->gravity = cpv(0, GRAVITY_RATE);
     else
-      space->gravity = cpv(space->gravity.x, -100);
+      space->gravity = cpv(0, -GRAVITY_RATE);
+  }
+  
+  // left and right
+  if (sprite->getDirection() == GRAVITY_LEFT || sprite->getDirection() == GRAVITY_RIGHT) {
+    if (space->gravity.x <= 0)
+      space->gravity = cpv(GRAVITY_RATE, 0);
+    else
+      space->gravity = cpv(-GRAVITY_RATE, 0);
   }
   
   return 0;

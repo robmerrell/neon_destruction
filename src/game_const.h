@@ -4,6 +4,8 @@
 /************
 ** Physics **
 *************/
+const int GRAVITY_RATE = 100;
+
 const int CANNON_TAG = 1;
 const int BALL_TAG = 2;
 const int PLATFORM_TAG = 3;
