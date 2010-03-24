@@ -6,17 +6,20 @@ task :compile do
   flags = [
     "-Wno-write-strings",
     "-g",
-    `sdl-config --cflags`.strip,
-    `sdl-config --libs`.strip,
-    "-I/System/Library/Frameworks/OpenGL.framework/Headers",
-    "-framework OpenGL",
+    "-I/opt/PalmPDK/include",
+    "-I/opt/PalmPDK/include/SDL",
+    "-L/opt/PalmPDK/host/lib",
+    "-framework cocoa",
+    "-arch i386",
     "-Lsrc/projection_engine/chipmunk/lib",
-    "-lchipmunk"
+    "-lchipmunk",
+    "-lSDL",
+    "-lSDLmain",
+    "-lGLESv2"
   ]
   
   # get a list of cpp files to compile
   files = Dir.glob("src/**/*.cpp")
-  files << "utils/SDLMain.m"
   
   output_name = "main"
   
