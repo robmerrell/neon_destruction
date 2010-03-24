@@ -20,7 +20,7 @@ Scene::Scene() {
   // by default ignore collisions between the cannon and the balls and goals
   cpSpaceAddCollisionHandler(space, CANNON_COLLISION, BALL_COLLISION, NULL, ignore_pre_solve, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION, NULL, pre_solve_goal, NULL, NULL, NULL);
-  cpSpaceAddCollisionHandler(space, GRAVITY_SWITCH_COLLISION, BALL_COLLISION, NULL, pre_solve_gravity, NULL, NULL, NULL);
+  cpSpaceAddCollisionHandler(space, GRAVITY_SWITCH_COLLISION, BALL_COLLISION, gravity_switch_solver, NULL, NULL, NULL, NULL);
 }
 
 // TODO: check this for memory leaks
@@ -180,7 +180,7 @@ static int pre_solve_goal(cpArbiter *arb, cpSpace *space, void *ignore) {
 }
 
 
-static int pre_solve_gravity(cpArbiter *arb, cpSpace *space, void *ignore) {
+static int gravity_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
   cpShape *a, *b; cpArbiterGetShapes(arb, &a, &b);
   GravitySwitch *sprite = (GravitySwitch*)a->data;
   cpVect gravity;

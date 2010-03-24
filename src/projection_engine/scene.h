@@ -91,6 +91,6 @@ void updateShape(void*, void*);
 
 static int ignore_pre_solve(cpArbiter*, cpSpace*, void*);
 static int pre_solve_goal(cpArbiter*, cpSpace*, void*);
-static int pre_solve_gravity(cpArbiter*, cpSpace*, void*);
+static int gravity_switch_solver(cpArbiter*, cpSpace*, void*);
 
 #endif
