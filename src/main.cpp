@@ -1,3 +1,15 @@
+// #include <GLES/gl.h>
+// #include "SDL.h"
+// 
+// GL_API int GL_APIENTRY _dgles_load_library(void *, void *(*)(void *, const char *));
+// 
+// static void *proc_loader(void *h, const char *name)
+// {
+//     (void) h;
+//     return SDL_GL_GetProcAddress(name);
+// }
+
+
 #include "projection_engine/engine.h"
 
 // scenes

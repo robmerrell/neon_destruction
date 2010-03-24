@@ -25,7 +25,8 @@
 #include <limits.h>
 #include <string.h>
 
-#include "SDL_opengl.h"
+#include <GLES/gl.h>
+#include <GLES/glext.h>
 
 #include "chipmunk.h"
 #include "drawSpace.h"
@@ -42,9 +43,9 @@
 	about Chipmunk which may change with little to no warning.
 */
 
-#define LINE_COLOR 0.0f, 0.0f, 0.0f
-#define COLLISION_COLOR 1.0f, 0.0f, 0.0f
-#define BODY_COLOR 0.0f, 0.0f, 1.0f
+#define LINE_COLOR 0.0f, 0.0f, 0.0f, 1.0f
+#define COLLISION_COLOR 1.0f, 0.0f, 0.0f, 1.0f
+#define BODY_COLOR 0.0f, 0.0f, 1.0f, 1.0f
 
 static void
 glColor_from_pointer(void *ptr)
@@ -62,7 +63,7 @@ glColor_from_pointer(void *ptr)
 //	GLfloat v = (GLfloat)val/(GLfloat)ULONG_MAX;
 //	v = 0.95f - v*0.15f;
 //	
-//	glColor3f(v, v, v);
+//	glColor4f(v, v, v);
 
 	GLubyte r = (val>>0) & 0xFF;
 	GLubyte g = (val>>8) & 0xFF;
@@ -76,7 +77,7 @@ glColor_from_pointer(void *ptr)
 	g = (g*mult)/max + add;
 	b = (b*mult)/max + add;
 	
-	glColor3ub(r, g, b);
+	glColor4ub(r, g, b, 255);
 }
 
 static const GLfloat circleVAR[] = {
@@ -125,7 +126,7 @@ drawCircleShape(cpBody *body, cpCircleShape *circle)
 			glDrawArrays(GL_TRIANGLE_FAN, 0, circleVAR_count - 1);
 		}
 		
-		glColor3f(LINE_COLOR);
+		glColor4f(LINE_COLOR);
 		glDrawArrays(GL_LINE_STRIP, 0, circleVAR_count);
 	} glPopMatrix();
 }
@@ -186,11 +187,11 @@ drawSegmentShape(cpBody *body, cpSegmentShape *seg)
 				glDrawArrays(GL_TRIANGLE_FAN, 0, pillVAR_count);
 			}
 			
-			glColor3f(LINE_COLOR);
+			glColor4f(LINE_COLOR);
 			glDrawArrays(GL_LINE_LOOP, 0, pillVAR_count);
 		} glPopMatrix();
 	} else {
-		glColor3f(LINE_COLOR);
+		glColor4f(LINE_COLOR);
 		glBegin(GL_LINES); {
 			glVertex2f(a.x, a.y);
 			glVertex2f(b.x, b.y);
@@ -209,7 +210,7 @@ drawPolyShape(cpBody *body, cpPolyShape *poly)
 		glDrawArrays(GL_TRIANGLE_FAN, 0, count);
 	}
 	
-	glColor3f(LINE_COLOR);
+	glColor4f(LINE_COLOR);
 	glDrawArrays(GL_LINE_LOOP, 0, count);
 }
 
@@ -412,7 +413,7 @@ drawSpatialHash(cpSpaceHash *hash)
 				cell_count++;
 			
 			GLfloat v = 1.0f - (GLfloat)cell_count/10.0f;
-			glColor3f(v,v,v);
+			glColor4f(v,v,v);
 			glRectf(i*dim, j*dim, (i + 1)*dim, (j + 1)*dim);
 		}
 	}
@@ -426,7 +427,7 @@ drawSpace(cpSpace *space, drawSpaceOptions *options)
 	
 	glLineWidth(1.0f);
 	if(options->drawBBs){
-		glColor3f(0.3f, 0.5f, 0.3f);
+		glColor4f(0.3f, 0.5f, 0.3f);
 		cpSpaceHashEach(space->activeShapes, &drawBB, NULL);
 		cpSpaceHashEach(space->staticShapes, &drawBB, NULL);
 	}
@@ -439,7 +440,7 @@ drawSpace(cpSpace *space, drawSpaceOptions *options)
 	
 	cpArray *constraints = space->constraints;
 
-	glColor3f(0.5f, 1.0f, 0.5f);
+	glColor4f(0.5f, 1.0f, 0.5f);
 	for(int i=0, count = constraints->num; i<count; i++){
 		drawConstraint((cpConstraint *)constraints->arr[i]);
 	}
@@ -449,7 +450,7 @@ drawSpace(cpSpace *space, drawSpaceOptions *options)
 
 		glPointSize(options->bodyPointSize);
 		glBegin(GL_POINTS); {
-			glColor3f(LINE_COLOR);
+			glColor4f(LINE_COLOR);
 			for(int i=0, count = bodies->num; i<count; i++){
 				cpBody *body = (cpBody *)bodies->arr[i];
 				glVertex2f(body->p.x, body->p.y);
@@ -460,7 +461,7 @@ drawSpace(cpSpace *space, drawSpaceOptions *options)
 	if(options->collisionPointSize){
 		glPointSize(options->collisionPointSize);
 		glBegin(GL_POINTS); {
-			glColor3f(COLLISION_COLOR);
+			glColor4f(COLLISION_COLOR);
 			cpArrayEach(space->arbiters, &drawCollisions, NULL);
 		} glEnd();
 	}
