@@ -8,7 +8,10 @@
 #include "chipmunk/drawSpace.h"
 
 #include "../game_const.h"
+#include "../objects/goal.h"
 #include "../objects/ball.h"
+#include "../objects/platform.h"
+#include "../objects/gravity_switch.h"
 
 // engine
 #include "sprite.h"
@@ -20,6 +23,7 @@
 class Scene {
 
   protected:
+    int score;
     bool in_loop;
     SDL_Event event;
     std::vector<Sprite*> objects;
@@ -86,5 +90,7 @@ class Scene {
 void updateShape(void*, void*);
 
 static int ignore_pre_solve(cpArbiter*, cpSpace*, void*);
+static int pre_solve_goal(cpArbiter*, cpSpace*, void*);
+static int pre_solve_gravity(cpArbiter*, cpSpace*, void*);
 
 #endif

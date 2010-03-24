@@ -3,6 +3,7 @@
 using namespace std;
 
 Scene::Scene() {
+  score = 0;
   draw_physics = false;
   in_loop = false;
   frame = 0;
@@ -16,8 +17,10 @@ Scene::Scene() {
 	
   staticBody = cpBodyNew(INFINITY, INFINITY);
   
-  // by default ignore collisions between the cannon and the balls
-  cpSpaceAddCollisionHandler(space, 1, 2, NULL, ignore_pre_solve, NULL, NULL, NULL);
+  // by default ignore collisions between the cannon and the balls and goals
+  cpSpaceAddCollisionHandler(space, CANNON_COLLISION, BALL_COLLISION, NULL, ignore_pre_solve, NULL, NULL, NULL);
+  cpSpaceAddCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION, NULL, pre_solve_goal, NULL, NULL, NULL);
+  cpSpaceAddCollisionHandler(space, GRAVITY_SWITCH_COLLISION, BALL_COLLISION, NULL, pre_solve_gravity, NULL, NULL, NULL);
 }
 
 // TODO: check this for memory leaks
@@ -69,6 +72,9 @@ void Scene::scheduleLoop(int ticks_per_sec) {
         // find the cannon game object
         Sprite *cannon = findObject(CANNON_TAG);
         if (cannon != NULL) {
+          score++;
+          cout << score << endl;
+          
           // add an ammo object and give it an impulse
           Ball *ball = new Ball(cannon->getX(), cannon->getY());
           ball->definePhysics(space);
@@ -164,5 +170,27 @@ void updateShape(void *ptr, void* unused) {
 }
 
 static int ignore_pre_solve(cpArbiter *arb, cpSpace *space, void *ignore) {
+  return 0;
+}
+
+static int pre_solve_goal(cpArbiter *arb, cpSpace *space, void *ignore) {
+  cout << "Level finished!" << endl;
+  
+  return 0;
+}
+
+
+static int pre_solve_gravity(cpArbiter *arb, cpSpace *space, void *ignore) {
+  cpShape *a, *b; cpArbiterGetShapes(arb, &a, &b);
+  GravitySwitch *sprite = (GravitySwitch*)a->data;
+  cpVect gravity;
+  
+  if (sprite->getDirection() == GRAVITY_UP) {
+    if (space->gravity.y < 0)
+      space->gravity = cpv(space->gravity.x, 100);
+    else
+      space->gravity = cpv(space->gravity.x, -100);
+  }
+  
   return 0;
 }
