@@ -3,7 +3,7 @@
 void TestScene::setup() {
   defineBorder(true, true, true, true);
   
-  cannon = new Cannon(30, 300);
+  cannon = new Cannon(150, 150);
   cannon->definePhysics(space);
   addObject(cannon);
   
@@ -15,7 +15,7 @@ void TestScene::setup() {
   gs->definePhysics(space);
   addObject(gs);
 
-  Platform *platform1 = new Platform(10, 300, 85, 300);
+  Platform *platform1 = new Platform(155, 150, 180, 150);
   platform1->definePhysics(space);
   addObject(platform1);
   

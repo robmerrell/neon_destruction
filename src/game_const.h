@@ -4,7 +4,7 @@
 /************
 ** Physics **
 *************/
-const int GRAVITY_RATE = 100;
+const int GRAVITY_RATE = 400;
 
 const int CANNON_TAG = 1;
 const int BALL_TAG = 2;
@@ -17,8 +17,6 @@ const int BALL_COLLISION = 2;
 const int PLATFORM_COLLISION = 3;
 const int GOAL_COLLISION = 4;
 const int GRAVITY_SWITCH_COLLISION = 5;
-
-const int PROJECTION_MULTIPLIER = 25;
 
 const int GRAVITY_UP = 1;
 const int GRAVITY_DOWN = 2;

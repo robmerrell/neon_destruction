@@ -73,7 +73,6 @@ void Scene::scheduleLoop(int ticks_per_sec) {
         Sprite *cannon = findObject(CANNON_TAG);
         if (cannon != NULL) {
           score++;
-          cout << score << endl;
           
           // add an ammo object and give it an impulse
           Ball *ball = new Ball(cannon->getX(), cannon->getY());
@@ -174,8 +173,6 @@ static int ignore_pre_solve(cpArbiter *arb, cpSpace *space, void *ignore) {
 }
 
 static int pre_solve_goal(cpArbiter *arb, cpSpace *space, void *ignore) {
-  cout << "Level finished!" << endl;
-  
   return 0;
 }
 
