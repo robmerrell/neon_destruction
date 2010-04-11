@@ -7,6 +7,7 @@
 #include "../chipmunk/headers/chipmunk.h"
 #include "../chipmunk/headers/drawSpace.h"
 
+#include "draw_physics.h"
 #include "../game_const.h"
 #include "../objects/goal.h"
 #include "../objects/ball.h"

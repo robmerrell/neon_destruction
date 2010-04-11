@@ -4,6 +4,7 @@ Engine::Engine(bool _draw_physics) {
   // create the sdl context
   SDL_Init(SDL_INIT_EVERYTHING);
   screen = SDL_SetVideoMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_OPENGL);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 1); 
   
   // setup openGL
   glClearColor(0, 0, 0, 0);
@@ -18,8 +19,6 @@ Engine::Engine(bool _draw_physics) {
   // setup the modelview matrix for our sprites
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
-  
-  glEnableClientState(GL_VERTEX_ARRAY);
   
   draw_physics = _draw_physics;
 }

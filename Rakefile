@@ -153,16 +153,6 @@ end
 
 
 
-
-
-
-
-
-
-
-
-
-
 desc "A quick and dirty compile, not suitable for large projects."
 task :compile do
   # generate the compiler and linker flags
@@ -191,14 +181,6 @@ task :compile do
   puts compile_cmd
   system(compile_cmd)
 end
-
-desc "Compile and run"
-task :run do
-  Rake::Task["compile"].invoke
-  system("./main")
-end
-
-
 
 
 
