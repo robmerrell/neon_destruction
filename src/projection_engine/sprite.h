@@ -1,7 +1,8 @@
 #include <iostream>
 #include "game_object.h"
+#include "GLES/gl.h"
 
-#include "chipmunk/chipmunk.h"
+#include "../chipmunk/headers/chipmunk.h"
 
 #ifndef SPRITE_H
 #define SPRITE_H

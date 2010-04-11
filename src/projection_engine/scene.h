@@ -3,8 +3,9 @@
 
 // utilities
 #include "SDL.h"
-#include "chipmunk/chipmunk.h"
-#include "chipmunk/drawSpace.h"
+#include "GLES/gl.h"
+#include "../chipmunk/headers/chipmunk.h"
+#include "../chipmunk/headers/drawSpace.h"
 
 #include "../game_const.h"
 #include "../objects/goal.h"

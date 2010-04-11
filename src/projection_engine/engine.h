@@ -1,4 +1,5 @@
 #include "SDL.h"
+#include "GLES/gl.h"
 
 #include "scene.h"
 #include "sprite.h"
