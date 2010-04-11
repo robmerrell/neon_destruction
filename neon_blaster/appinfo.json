@@ -1,0 +1,11 @@
+{
+	"id": "com.trackera.neonblaster",
+	"version": "1.0.0",
+	"vendor": "Rob Merrell",
+	"type": "game",
+	"main": "main",
+	"title": "Neon Blaster",
+	"icon": "icon.png",
+	"requiredMemory": "32"
+}
+

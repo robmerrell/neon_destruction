@@ -141,47 +141,11 @@ task :pkg do
   pdk_bin = "/opt/PalmPDK/bin"
   
   # copy the executable and asset file to the package dir
-  system("cp main chipmunk_test")
-  system("cp assets/ball.gif chipmunk_test/assets")
+  system("cp main neon_blaster")
 
   puts "packaging..."
-  system("#{pdk_bin}/pdk-package chipmunk_test")
+  system("#{pdk_bin}/pdk-package neon_blaster")
   
   puts "installing..."
-  system("#{pdk_bin}/pdk-install com.trackera.chipmunk-test_1.0.0_all.ipk")
+  system("#{pdk_bin}/pdk-install com.trackera.neonblaster_1.0.0_all.ipk")
 end
-
-
-
-desc "A quick and dirty compile, not suitable for large projects."
-task :compile do
-  # generate the compiler and linker flags
-  flags = [
-    "-Wno-write-strings",
-    "-g",
-    "-I/opt/PalmPDK/include",
-    "-I/opt/PalmPDK/include/SDL",
-    "-L/opt/PalmPDK/host/lib",
-    "-framework cocoa",
-    "-arch i386",
-    "-Lsrc/projection_engine/chipmunk/lib",
-    "-lchipmunk",
-    "-lSDL",
-    "-lSDLmain",
-    "-lGLESv2"
-  ]
-  
-  # get a list of cpp files to compile
-  files = Dir.glob("src/**/*.cpp")
-  
-  output_name = "main"
-  
-  # compile the files
-  compile_cmd = "g++ #{files.join(' ')} #{flags.join(' ')} -o #{output_name}"
-  puts compile_cmd
-  system(compile_cmd)
-end
-
-
-
-
