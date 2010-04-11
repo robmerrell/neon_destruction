@@ -97,8 +97,8 @@ void Scene::scheduleLoop(int ticks_per_sec) {
         (*sprite)->display();
       else {
         // drawPhysics(space);
-        drawSpaceOptions options = {0,0,1,4.0f,0.0f,1.5f,};
-        drawSpace(space, &options);
+        // drawSpaceOptions options = {0,0,1,4.0f,0.0f,1.5f,};
+        // drawSpace(space, &options);
       }
     }
     

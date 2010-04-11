@@ -9,7 +9,7 @@ Engine::Engine(bool _draw_physics) {
   glClearColor(0, 0, 0, 0);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  glOrtho(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, -1, 1);
+  glOrthof(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, -1, 1);
   
   // blending
   glEnable(GL_BLEND);
