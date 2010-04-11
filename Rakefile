@@ -75,7 +75,7 @@ task :build => :arch_settings do
     "-I#{$pdk_path}/include/SDL"
   ]
   
-  flags = [
+  libs = [
     "-Lbuild",
     "-lchipmunk",
     "-lSDL",
@@ -84,13 +84,13 @@ task :build => :arch_settings do
   ]
   
   if ENV["TARGET"] == "pre" || ENV["TARGET"] == "pixi"
-    flags << "-L#{$pdk_path}/device/lib -Wl,--allow-shlib-undefined"
-    flags << "--sysroot=#{$pdk_path}/arm-gcc/sysroot"
-    flags << "-DDEVICE"
+    libs << "-L#{$pdk_path}/device/lib -Wl,--allow-shlib-undefined"
+    cflags << "--sysroot=#{$pdk_path}/arm-gcc/sysroot"
+    cflags << "-DDEVICE"
   else
-    flags << "-L#{$pdk_path}/host/lib"
-    flags << "-framework cocoa"
-    flags << "-lSDLmain"
+    libs << "-L#{$pdk_path}/host/lib"
+    cflags << "-framework cocoa"
+    cflags << "-lSDLmain"
   end
   
   # compile all of the files
@@ -107,7 +107,7 @@ task :build => :arch_settings do
   
   # link all of the files
   files = Dir.glob("build/**/*.o").reject {|file| file.include?("chipmunk")}
-  cmd = "#{$gpp} #{$arch_settings} #{cflags.join(' ')} #{flags.join(' ')} #{files.join(' ')} -o main"
+  cmd = "#{$gpp} #{files.join(' ')} #{$arch_settings} #{cflags.join(' ')} #{libs.join(' ')} -o main"
   puts cmd
   system cmd
 end
