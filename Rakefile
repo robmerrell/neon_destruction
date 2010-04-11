@@ -118,21 +118,18 @@ task :clean do
   puts "removing build files..."
   FileUtils.rmtree "build"
   FileUtils.rm "main"
+  FileUtils.rm "com.trackera.neonblaster_1.0.0_all.ipk"
 end
 
 
 desc "Copy the app to /media/internal on the device without creating a package and run the jerk"
 task :run do
-  # copy_bin = "scp -r -P 10022 main root@localhost:/media/internal/pdk_chipmunk"
-  # puts copy_bin
-  # system(copy_bin)
-  # 
-  # copy_asset = "scp -r -P 10022 assets/ball.gif root@localhost:/media/internal/pdk_chipmunk/assets"
-  # puts copy_asset
-  # system(copy_asset)
-  # 
-  # run_cmd = "novacom run file:///media/internal/pdk_chipmunk/main"
-  # system(run_cmd)
+  copy_bin = "scp -r -P 10022 main root@localhost:/media/internal/neon_blaster"
+  puts copy_bin
+  system(copy_bin)
+  
+  run_cmd = "novacom run file:///media/internal/neon_blaster/main"
+  system(run_cmd)
 end
 
 
