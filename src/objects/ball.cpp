@@ -46,6 +46,13 @@ void Ball::applyImpulse(cpVect mouse, cpVect originating) {
   // to invert our y vector when shooting up
   if (negate)
     vect_y = vect_y * -1;
+    
+  // only allow our x vector to be so fast
+  if (vect_x > 650)
+    vect_x = 650;
   
+  cout << "delta: " << delta_x << "," << delta_y << endl;
+  cout << "vector: " << vect_x << "," << vect_y << endl;
+    
   cpBodyApplyImpulse(body, cpv(vect_x, vect_y), cpvzero);
 }
