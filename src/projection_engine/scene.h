@@ -5,7 +5,6 @@
 #include "SDL.h"
 #include "GLES/gl.h"
 #include "../chipmunk/headers/chipmunk.h"
-#include "../chipmunk/headers/drawSpace.h"
 
 #include "draw_physics.h"
 #include "../game_const.h"
