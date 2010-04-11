@@ -117,8 +117,8 @@ desc "Clean build files by removing the build directory"
 task :clean do
   puts "removing build files..."
   FileUtils.rmtree "build"
-  FileUtils.rm "main"
-  FileUtils.rm "com.trackera.neonblaster_1.0.0_all.ipk"
+  FileUtils.rm "main" if File.exists?("main")
+  FileUtils.rm "com.trackera.neonblaster_1.0.0_all.ipk" if File.exists?("com.trackera.neonblaster_1.0.0_all.ipk")
 end
 
 
