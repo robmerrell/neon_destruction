@@ -59,6 +59,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
   int mouse_x, mouse_y = 0;
     
   while (in_loop) {
+    glClear(GL_COLOR_BUFFER_BIT);
     fps.start();
     
     // capture the events and send the relevent tap events to the game scene
@@ -86,9 +87,6 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     cpSpaceStep(space, 1.0f/ticks_per_sec);
     cpSpaceHashEach(space->activeShapes, &updateShape, NULL);
     gameLoop();
-    
-    // clear display
-    glClear(GL_COLOR_BUFFER_BIT);
     
     // display
     vector<Sprite*>::iterator sprite;
