@@ -23,21 +23,24 @@ static void draw_shapes(void *ptr, void *unused) {
 }
 
 static void draw_circle(cpBody *body, cpCircleShape *circle) {
-  GLfloat vertices[720];
+  GLfloat vertices[24];
   
   glLoadIdentity();
   glTranslatef(circle->tc.x, circle->tc.y, 0);
   
-  for (int i = 0; i < 720; i += 2) {
-    vertices[i]   = (cos(DEGREES_TO_RADIANS(i)) * 1) * circle->r;
-    vertices[i+1] = (sin(DEGREES_TO_RADIANS(i)) * 1) * circle->r;
+  int x = 0;
+  for (int i = 0; i < 360; i += 30) {
+    vertices[x] = (cos(DEGREES_TO_RADIANS(i)) * 1) * circle->r;
+    x++;
+    vertices[x] = (sin(DEGREES_TO_RADIANS(i)) * 1) * circle->r;
+    x++;
   }
-  
+    
   glVertexPointer(2, GL_FLOAT, 0, vertices);
   glEnableClientState(GL_VERTEX_ARRAY);
   
   glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-  glDrawArrays(GL_TRIANGLE_FAN, 0, 360);
+  glDrawArrays(GL_LINE_LOOP, 0, 12);
   
   glDisableClientState(GL_VERTEX_ARRAY);
 }
