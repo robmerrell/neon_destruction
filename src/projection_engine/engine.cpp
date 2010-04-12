@@ -15,23 +15,16 @@ Engine::Engine(bool _draw_physics) {
   
   // setup openGL
   glClearColor(0, 0, 0, 0);
+  
   glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
+  glRotatef(-90, 0, 0, 1);
+  glRotatef(180, 1, 0, 0);
   
-  #ifdef DEVICE
-    glOrthof(0, SCREEN_HEIGHT, SCREEN_WIDTH, 0, -1, 1);
-    // setup the modelview matrix for our sprites
-    glMatrixMode(GL_MODELVIEW);
-  	glLoadIdentity();
-    // glTranslatef(160.0f, 240.0f, 0.0f );
-  	glRotatef(90.0, 0.0, 0.0, 1.0);
-  	glScalef(1.0, -1.0, 1.0);
-  #else
-    glOrthof(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, -1, 1);
-    glMatrixMode(GL_MODELVIEW);
-  	glLoadIdentity();
-  #endif
-  
+  glOrthof(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, -1, 1);
+
+  glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
   // blending
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE);
