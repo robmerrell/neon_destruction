@@ -17,10 +17,13 @@ Engine::Engine(bool _draw_physics) {
   glClearColor(0, 0, 0, 0);
   
   glMatrixMode(GL_PROJECTION);
-  glRotatef(-90, 0, 0, 1);
-  glRotatef(180, 1, 0, 0);
+  glLoadIdentity();
   
+  glRotatef(-270, 0, 0, 1);
+  glRotatef(180, 1, 0, 0);
+  glScalef(-1.0, -1.0, 1.0);
   glOrthof(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, -1, 1);
+
 
   glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
