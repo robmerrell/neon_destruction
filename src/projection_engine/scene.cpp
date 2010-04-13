@@ -116,7 +116,7 @@ void Scene::setDrawPhysics(bool draw) {
 
 void Scene::defineBorder(bool top, bool right, bool bottom, bool left) {
   float border_elasticity = 0.3f;
-  float border_friction = 1.0f;
+  float border_friction = 0.5f;
   
   // top border
   if (top) {

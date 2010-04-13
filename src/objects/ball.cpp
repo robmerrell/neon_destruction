@@ -17,8 +17,8 @@ void Ball::definePhysics(cpSpace *space) {
 
   // ball shape
   cpShape *ballShape = cpCircleShapeNew(body, 10.0, cpvzero);
-  ballShape->e = 0.5;
-  ballShape->u = 0.3;
+  ballShape->e = 0.8;
+  ballShape->u = 0.2;
   ballShape->data = this;
   ballShape->collision_type = BALL_COLLISION;
   cpSpaceAddShape(space, ballShape);
