@@ -67,8 +67,8 @@ void Scene::scheduleLoop(int ticks_per_sec) {
       if (event.type == SDL_QUIT)
         in_loop = false;
       else if (event.type == SDL_MOUSEBUTTONDOWN) {
-        mouse_x = event.button.x;
-        mouse_y = event.button.y;
+        mouse_x = event.button.y;
+        mouse_y = SCREEN_HEIGHT - event.button.x;
         
         // find the cannon game object
         Sprite *cannon = findObject(CANNON_TAG);
