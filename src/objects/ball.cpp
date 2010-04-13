@@ -50,6 +50,8 @@ void Ball::applyImpulse(cpVect mouse, cpVect originating) {
   // only allow our x vector to be so fast
   if (vect_x > 650)
     vect_x = 650;
+  if (vect_x < -650)
+    vect_x = -650;
   
   cout << "delta: " << delta_x << "," << delta_y << endl;
   cout << "vector: " << vect_x << "," << vect_y << endl;
