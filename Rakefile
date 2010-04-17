@@ -62,11 +62,54 @@ file :build_chipmunk => :arch_settings do
 end
 
 
+desc "Create a static library for SOIL TARGET=pre, pixi or host(mac); host is assumed if TARGET is not set"
+file :build_soil => :arch_settings do
+  flags = [
+    "-Wno-write-strings",
+    "-O3"
+  ]
+  
+  if ENV["TARGET"] == "pre" || ENV["TARGET"] == "pixi"
+    flags << "-L#{$pdk_path}/device/lib -Wl,--allow-shlib-undefined"
+    flags << "-I#{$pdk_path}/include"
+    flags << "--sysroot=#{$pdk_path}/arm-gcc/sysroot"
+  end
+  
+  # compile all of the files
+  files = Dir.glob("src/soil/*.c")
+  files.each do |file|
+    # make sure the dir exists for the object file
+    dir_name = file.gsub(File.basename(file), '')
+    FileUtils.mkdir_p "build/#{dir_name}"
+    
+    cmd = "#{$cc} #{$arch_settings} #{flags.join(' ')} -c #{file} -o build/#{file}.o"
+    puts cmd
+    system cmd
+  end
+  
+  # create libchipmunk.a out of the compiled files
+  files = Dir.glob("build/src/soil/**/*.o")
+  cmd = "#{$ar} cr build/libSOIL.a #{files.join(' ')}"
+  puts cmd
+  system cmd
+  
+  # do ranlib on the library
+  cmd = "#{$ranlib} build/libSOIL.a"
+  puts cmd
+  system cmd
+end
+
+
 desc "Build the main project and chipmunk if needed TARGET=pre, pixi or host(mac); host is assumed if TARGET is not set"
 task :build => :arch_settings do
   # build the chipmunk lib if we can't find build/libchipmunk.a
   if !FileTest.exists? "build/libchipmunk.a"
     Rake::Task[:build_chipmunk].invoke
+  end
+  
+  # build the soil lib if we can't find build/libSOIL.a
+  if !FileTest.exists? "build/libSOIL.a"
+    Rake::Task[:build_soil].invoke
   end
   
   cflags = [
@@ -78,6 +121,7 @@ task :build => :arch_settings do
   libs = [
     "-Lbuild",
     "-lchipmunk",
+    "-lSOIL",
     "-lSDL",
     "-lGLES_CM",
     "-lpdl"
