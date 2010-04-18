@@ -79,6 +79,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
           Ball *ball = new Ball(cannon->getX(), cannon->getY());
           ball->definePhysics(space);
           ball->applyImpulse(cpv(mouse_x, mouse_y), cpv(cannon->getX(), cannon->getY()));
+          addObject(ball);
         }
       }
     }
@@ -91,9 +92,9 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     // display
     vector<Sprite*>::iterator sprite;
     for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
-      if (!draw_physics)
+      if (!draw_physics) {
         (*sprite)->display();
-      else {
+      } else {
         draw_chipmunk(space);
       }
     }

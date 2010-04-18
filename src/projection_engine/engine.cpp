@@ -1,4 +1,5 @@
 #include "engine.h"
+#include <stdio.h>
 
 Engine::Engine(bool _draw_physics) {
   // create the sdl context
@@ -24,14 +25,14 @@ Engine::Engine(bool _draw_physics) {
   glScalef(-1.0, -1.0, 1.0);
   glOrthof(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, -1, 1);
 
-
   glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
   // blending
+  glEnable(GL_TEXTURE_2D);
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-
+  
   draw_physics = _draw_physics;
 }
 

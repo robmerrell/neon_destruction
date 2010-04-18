@@ -17,7 +17,7 @@ class GameObject {
     GameObject() {};
      
     /**
-     * openGL display routine
+     * OpenGL display routine
      */
     virtual void display() {};
 

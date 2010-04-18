@@ -1,5 +1,8 @@
+#include <map>
+
 #include "SDL.h"
 #include "GLES/gl.h"
+#include "GLES/glext.h"
 
 #include "scene.h"
 #include "sprite.h"
@@ -9,6 +12,8 @@
 
 #ifndef ENGINE_H
 #define ENGINE_H
+
+using namespace std;
 
 class Engine {
 
@@ -36,7 +41,7 @@ class Engine {
     SDL_Event event;
     
     // if set to true then draw physics shapes instead of applying textures
-    bool draw_physics;
+    bool draw_physics;   
 };
 
 #endif

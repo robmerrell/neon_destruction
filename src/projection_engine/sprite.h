@@ -1,6 +1,7 @@
 #include <iostream>
 #include "game_object.h"
 #include "GLES/gl.h"
+#include "../soil/SOIL.h"
 
 #include "../chipmunk/headers/chipmunk.h"
 
@@ -24,11 +25,6 @@ class Sprite : public GameObject {
      * int tag
      */
     Sprite(std::string, float, float, int);
-     
-     /**
-      * Render a texture to a square made of a triangle stip
-      */
-     virtual void display() {};
 
     /**
      * Getters for the size and the tag
