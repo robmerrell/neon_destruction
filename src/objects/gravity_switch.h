@@ -27,7 +27,7 @@ class GravitySwitch : public Sprite {
     /**
      * Display the gravity switch
      */
-    void display() {}
+    void display();
     
     /**
      * Get the direction

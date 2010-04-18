@@ -19,3 +19,7 @@ void Cannon::definePhysics(cpSpace *space) {
   baseShape->collision_type = CANNON_COLLISION;
   cpSpaceAddShape(space, baseShape);
 }
+
+void Cannon::display() {
+
+}

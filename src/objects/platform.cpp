@@ -20,3 +20,7 @@ void Platform::definePhysics(cpSpace *space) {
   
   cpSpaceAddStaticShape(space, platformShape);
 }
+
+void Platform::display() {
+  
+}

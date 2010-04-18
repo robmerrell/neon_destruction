@@ -22,7 +22,7 @@ class Cannon : public Sprite {
     /**
      * Display the cannon
      */
-    void display() {}
+    void display();
     
 };
 

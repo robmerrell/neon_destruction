@@ -24,3 +24,7 @@ void GravitySwitch::definePhysics(cpSpace *space) {
 int GravitySwitch::getDirection() {
   return direction;
 }
+
+void GravitySwitch::display() {
+  
+}

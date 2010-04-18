@@ -19,3 +19,7 @@ void Goal::definePhysics(cpSpace *space) {
   goalShape->collision_type = GOAL_COLLISION;
   cpSpaceAddShape(space, goalShape);
 }
+
+void Goal::display() {
+  
+}

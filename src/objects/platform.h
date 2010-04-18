@@ -31,7 +31,7 @@ class Platform : public Sprite {
     /**
      * Display the platform
      */
-    void display() {}
+    void display();
 };
 
 #endif

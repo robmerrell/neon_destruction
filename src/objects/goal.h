@@ -25,7 +25,7 @@ class Goal : public Sprite {
     /**
      * Display the goal
      */
-    void display() {}
+    void display();
 };
 
 #endif
