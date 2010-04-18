@@ -31,4 +31,10 @@ const int SCREEN_WIDTH = 480;
 const int SCREEN_HEIGHT = 320;
 const int SCREEN_BPP = 32;
 
+
+/*************
+** Textures **
+**************/
+const int TEXTURE_COUNT = 1;
+
 #endif
