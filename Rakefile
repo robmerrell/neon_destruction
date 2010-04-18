@@ -147,6 +147,7 @@ task :build => :arch_settings do
     cmd = "#{$gpp} #{$arch_settings} #{cflags.join(' ')} -c #{file} -o build/#{file}.o"
     puts cmd
     system cmd
+    exit if $?.to_i > 0
   end
   
   # link all of the files
