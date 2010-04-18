@@ -169,12 +169,22 @@ end
 
 desc "Copy the app to /media/internal on the device without creating a package and run the jerk"
 task :run do
+  Rake::Task[:cp].invoke
+
+  run_cmd = "novacom run file:///media/internal/neon_blaster/main"
+  system(run_cmd)
+end
+
+
+desc "Copy the app to /media/internal/neon_blaster"
+task :cp do
   copy_bin = "scp -r -P 10022 main root@localhost:/media/internal/neon_blaster"
   puts copy_bin
   system(copy_bin)
   
-  run_cmd = "novacom run file:///media/internal/neon_blaster/main"
-  system(run_cmd)
+  copy_assets = "scp -r -P 10022 assets root@localhost:/media/internal/neon_blaster"
+  puts copy_assets
+  system(copy_assets)
 end
 
 
