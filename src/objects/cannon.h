@@ -19,6 +19,11 @@ class Cannon : public Sprite {
      */
     void definePhysics(cpSpace*);
     
+    /**
+     * Display the cannon
+     */
+    void display() {}
+    
 };
 
 #endif

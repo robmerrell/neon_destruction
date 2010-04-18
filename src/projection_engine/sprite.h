@@ -28,7 +28,7 @@ class Sprite : public GameObject {
      /**
       * Render a texture to a square made of a triangle stip
       */
-     void display();
+     virtual void display() {};
 
     /**
      * Getters for the size and the tag

@@ -23,6 +23,11 @@ class Ball : public Sprite {
     void definePhysics(cpSpace*);
     
     /**
+     * Display the ball
+     */
+    void display();
+    
+    /**
      * Apply an impulse to the ball
      *
      * cpv(mouse coords), cpv(originating coords)

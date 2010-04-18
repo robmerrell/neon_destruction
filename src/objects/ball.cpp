@@ -58,3 +58,7 @@ void Ball::applyImpulse(cpVect mouse, cpVect originating) {
     
   cpBodyApplyImpulse(body, cpv(vect_x, vect_y), cpvzero);
 }
+
+void Ball::display() {
+  
+}

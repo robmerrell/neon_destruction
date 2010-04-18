@@ -25,6 +25,11 @@ class GravitySwitch : public Sprite {
     void definePhysics(cpSpace*);
     
     /**
+     * Display the gravity switch
+     */
+    void display() {}
+    
+    /**
      * Get the direction
      */
     int getDirection();

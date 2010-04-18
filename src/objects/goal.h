@@ -21,6 +21,11 @@ class Goal : public Sprite {
      * Define the physics properties of the goal
      */
     void definePhysics(cpSpace*);
+    
+    /**
+     * Display the goal
+     */
+    void display() {}
 };
 
 #endif

@@ -27,6 +27,11 @@ class Platform : public Sprite {
      * Define the physics properties of the platform
      */
     void definePhysics(cpSpace*);
+    
+    /**
+     * Display the platform
+     */
+    void display() {}
 };
 
 #endif
