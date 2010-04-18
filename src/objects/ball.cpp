@@ -60,5 +60,20 @@ void Ball::applyImpulse(cpVect mouse, cpVect originating) {
 }
 
 void Ball::display() {
+  GLfloat vertices[] = {0,32,0, 32,32,0, 0,0,0, 32,0,0};
+  GLfloat tex[] = {0,32,0, 32,32,0, 0,0,0, 32,0,0};
   
+  glLoadIdentity();
+  glTranslatef(body->p.x, body->p.y, 0.0);
+  
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+  
+  glVertexPointer(3, GL_FLOAT, 0, vertices);
+  glTexCoordPointer(3, GL_FLOAT, 0, tex);
+  
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
+  glDisableClientState(GL_VERTEX_ARRAY);
+  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
