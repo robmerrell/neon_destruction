@@ -66,7 +66,7 @@ void Ball::display() {
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
   glLoadIdentity();
-  glTranslatef(body->p.x, body->p.y, 0.0);
+  glTranslatef(body->p.x - 32, body->p.y - 32, 0.0);
   
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
