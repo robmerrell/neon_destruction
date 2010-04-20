@@ -1,7 +1,6 @@
 #include <iostream>
 #include "game_object.h"
 #include "GLES/gl.h"
-#include "../soil/SOIL.h"
 
 #include "../chipmunk/headers/chipmunk.h"
 
