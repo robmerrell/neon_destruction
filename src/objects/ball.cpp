@@ -60,19 +60,38 @@ void Ball::applyImpulse(cpVect mouse, cpVect originating) {
 }
 
 void Ball::display() {
+  GLfloat shadow_vertices[] = {0,80,0, 80,80,0, 0,0,0, 80,0,0};
+  GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
+
+  // ball shadow
   TexManager::Instance()->bindTexture(1);
   
-  GLfloat vertices[] = {0,64,0, 64,64,0, 0,0,0, 64,0,0};
-  GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
-  
   glLoadIdentity();
-  glTranslatef(body->p.x - 32, body->p.y - 32, 0.0);
-  glColor4f(1.0, 1.0, 1.0, 1.0);
+  glTranslatef(body->p.x - 43, body->p.y - 43, 0.0);
   
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
   
-  glVertexPointer(3, GL_FLOAT, 0, vertices);
+  glVertexPointer(3, GL_FLOAT, 0, shadow_vertices);
+  glTexCoordPointer(3, GL_FLOAT, 0, tex);
+  
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
+  glDisableClientState(GL_VERTEX_ARRAY);
+  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+  
+  // ball
+  GLfloat ball_vertices[] = {0,64,0, 64,64,0, 0,0,0, 64,0,0};
+  
+  TexManager::Instance()->bindTexture(0);
+  
+  glLoadIdentity();
+  glTranslatef(body->p.x - 32, body->p.y - 32, 0.0);
+  
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+  
+  glVertexPointer(3, GL_FLOAT, 0, ball_vertices);
   glTexCoordPointer(3, GL_FLOAT, 0, tex);
   
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
