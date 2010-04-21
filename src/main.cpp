@@ -8,7 +8,8 @@ int main(int argc, char* argv[]) {
   Engine engine(false);
   
   // load the textures
-  TexManager::Instance()->loadTexture("filename");
+  TexManager::Instance()->loadTexture("assets/ball.png");
+  TexManager::Instance()->loadTexture("assets/ball_glow.png");
 
   // show the title scene and start the game loop
   TestScene *test_scene = new TestScene();

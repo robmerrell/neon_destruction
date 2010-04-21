@@ -35,6 +35,6 @@ const int SCREEN_BPP = 32;
 /*************
 ** Textures **
 **************/
-const int TEXTURE_COUNT = 1;
+const int TEXTURE_COUNT = 2;
 
 #endif

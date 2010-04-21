@@ -2,35 +2,41 @@
 
 TexManager* TexManager::inst = NULL; 
 
+TexManager::TexManager() {
+  texture_ref = 0;
+}
+
 TexManager* TexManager::Instance() {
   if (!inst)
     inst = new TexManager;
+  
+  // glGenTextures(TEXTURE_COUNT, inst->texture);
     
   return inst;
 }
 
 void TexManager::loadTexture(string filename) {
-  glGenTextures(1, &inst->texture);
+  printf("before load\n");
   
-  inst->texture = SOIL_load_OGL_texture
+  inst->texture[inst->texture_ref] = SOIL_load_OGL_texture
     (   
-      "assets/ball.png",
+      filename.c_str(),
       SOIL_LOAD_AUTO,
       SOIL_CREATE_NEW_ID,
-      SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+      SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_MULTIPLY_ALPHA
     );
     
-  if (inst->texture == 0) {
+  if (inst->texture[inst->texture_ref] == 0) {
     printf( "SOIL loading error: '%s'\n", SOIL_last_result() );
   } else {
     printf("loaded\n");
   }
     
-  inst->texture_ref=27;
+  inst->texture_ref++;
 }
 
 void TexManager::bindTexture(int ref) {
-  glBindTexture(GL_TEXTURE_2D, inst->texture);
+  glBindTexture(GL_TEXTURE_2D, inst->texture[ref]);
 }
 
 void TexManager::unbindTexture() {
