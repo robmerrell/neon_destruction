@@ -41,6 +41,7 @@ Engine::Engine(bool _draw_physics) {
 }
 
 Engine::~Engine() {
+  TexManager::Instance()->deleteAllTextures();
   SDL_Quit();
 }
 

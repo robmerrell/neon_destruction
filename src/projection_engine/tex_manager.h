@@ -40,6 +40,11 @@ class TexManager {
     void unbindTexture();
     
     /**
+     * Delete all textures
+     */
+    void deleteAllTextures();
+    
+    /**
      * Return the current texture refernce count
      */
     int getTextureRef();

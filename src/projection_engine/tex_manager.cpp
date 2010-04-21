@@ -46,3 +46,7 @@ void TexManager::unbindTexture() {
 int TexManager::getTextureRef() {
   return inst->texture_ref;
 }
+
+void TexManager::deleteAllTextures() {
+  glDeleteTextures(TEXTURE_COUNT, inst->texture);
+}
