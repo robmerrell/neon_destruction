@@ -133,8 +133,8 @@ task :build => :arch_settings do
     cflags << "-DDEVICE"
   else
     libs << "-L#{$pdk_path}/host/lib"
-    cflags << "-framework cocoa"
-    cflags << "-lSDLmain"
+    libs << "-framework cocoa"
+    libs << "-lSDLmain"
   end
   
   # compile all of the files
