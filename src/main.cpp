@@ -5,7 +5,7 @@
 #include "scenes/test_scene.h"
 
 int main(int argc, char* argv[]) {
-  Engine engine(false);
+  Engine engine(true);
   
   // load the textures
   TexManager::Instance()->loadTexture("assets/ball.png");

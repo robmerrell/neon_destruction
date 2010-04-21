@@ -97,11 +97,10 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     // display
     vector<Sprite*>::iterator sprite;
     for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
-      if (!draw_physics) {
-        (*sprite)->display();
-      } else {
+      (*sprite)->display();
+      
+      if (draw_physics)
         draw_chipmunk(space);
-      }
     }
     
     // update the screen
