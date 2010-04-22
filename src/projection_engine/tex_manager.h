@@ -27,7 +27,7 @@ class TexManager {
     /**
      * Load the specified texture
      */
-    void loadTexture(string filename);
+    void loadTexture(string, bool);
     
     /**
      * Bind the referenced texture

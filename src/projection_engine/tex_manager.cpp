@@ -15,15 +15,17 @@ TexManager* TexManager::Instance() {
   return inst;
 }
 
-void TexManager::loadTexture(string filename) {
-  printf("before load\n");
+void TexManager::loadTexture(string filename, bool alpha) {
+  unsigned int flags = SOIL_FLAG_MIPMAPS;
+  if (alpha)
+    flags = flags | SOIL_FLAG_MULTIPLY_ALPHA;
   
   inst->texture[inst->texture_ref] = SOIL_load_OGL_texture
     (   
       filename.c_str(),
       SOIL_LOAD_AUTO,
       SOIL_CREATE_NEW_ID,
-      SOIL_FLAG_INVERT_Y | SOIL_FLAG_MULTIPLY_ALPHA
+      flags
     );
     
   if (inst->texture[inst->texture_ref] == 0) {
