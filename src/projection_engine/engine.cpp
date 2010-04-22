@@ -33,6 +33,7 @@ Engine::Engine(bool _draw_physics) {
 	glLoadIdentity();
 	
 	glEnable(GL_TEXTURE_2D);
+  glDisable(GL_DEPTH_TEST);
   
   draw_physics = _draw_physics;
 }

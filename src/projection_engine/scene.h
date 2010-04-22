@@ -1,5 +1,6 @@
 // stdlib
 #include <vector>
+#include <Math.h>
 
 // utilities
 #include "SDL.h"

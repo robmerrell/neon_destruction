@@ -57,6 +57,9 @@ Sprite* Scene::findObject(int tag) {
 void Scene::scheduleLoop(int ticks_per_sec) {
   in_loop = true;
   int mouse_x, mouse_y = 0;
+  float delta_x, delta_y, angle, radians;
+  cpVect ball_start_coords;
+  cpVect test;
     
   while (in_loop) {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -80,8 +83,19 @@ void Scene::scheduleLoop(int ticks_per_sec) {
         if (cannon != NULL) {
           score++;
           
+          delta_x = mouse_x - cannon->getX();
+          delta_y = mouse_y - cannon->getY();
+          angle = 180 + (atan2(delta_y, -delta_x) * (180/M_PI));
+          radians = angle * (M_PI/180);
+
+          test = cpvmult(cpvforangle(radians), 30);
+          cout << test.x << "," << test.y << endl;
+
+          ball_start_coords.x = cannon->getX() + test.x;
+          ball_start_coords.y = cannon->getY() - test.y;
+                    
           // add an ammo object and give it an impulse
-          Ball *ball = new Ball(cannon->getX(), cannon->getY());
+          Ball *ball = new Ball(ball_start_coords.x, ball_start_coords.y);
           ball->definePhysics(space);
           ball->applyImpulse(cpv(mouse_x, mouse_y), cpv(cannon->getX(), cannon->getY()));
           addObject(ball);
@@ -97,7 +111,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     glDisable(GL_BLEND);
     
     // draw the background
-    drawBackground();
+    // drawBackground();
     
     // blending
     glEnable(GL_BLEND);
