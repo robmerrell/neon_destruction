@@ -5,11 +5,12 @@
 #include "scenes/test_scene.h"
 
 int main(int argc, char* argv[]) {
-  Engine engine(true);
+  Engine engine(false);
   
   // load the textures
-  TexManager::Instance()->loadTexture("assets/ball.png");
-  TexManager::Instance()->loadTexture("assets/ball_glow.png");
+  TexManager::Instance()->loadTexture("assets/ball.png", true);
+  TexManager::Instance()->loadTexture("assets/ball_glow.png", true);
+  TexManager::Instance()->loadTexture("assets/star_background.png", false);
 
   // show the title scene and start the game loop
   TestScene *test_scene = new TestScene();

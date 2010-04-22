@@ -23,6 +23,7 @@
 class Scene {
 
   protected:
+    GLuint background_texture;
     int score;
     bool in_loop;
     SDL_Event event;
@@ -85,6 +86,16 @@ class Scene {
      * The arguments go in order of top, right, bottom, left
      */
     void defineBorder(bool, bool, bool, bool);
+    
+    /**
+     * Defines which texture should be used for the background
+     */
+    void defineBackground(GLuint);
+    
+    /**
+     * Add the level background to a scene
+     */
+    void drawBackground();
 };
 
 void updateShape(void*, void*);

@@ -31,11 +31,8 @@ Engine::Engine(bool _draw_physics) {
   
   glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
-  // blending
-  glEnable(GL_TEXTURE_2D);
-  glEnable(GL_BLEND);
-  glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+	
+	glEnable(GL_TEXTURE_2D);
   
   draw_physics = _draw_physics;
 }

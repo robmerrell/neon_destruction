@@ -94,6 +94,15 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     cpSpaceHashEach(space->activeShapes, &updateShape, NULL);
     gameLoop();
     
+    glDisable(GL_BLEND);
+    
+    // draw the background
+    drawBackground();
+    
+    // blending
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+    
     // display
     vector<Sprite*>::iterator sprite;
     for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
@@ -151,6 +160,32 @@ void Scene::defineBorder(bool top, bool right, bool bottom, bool left) {
     cpSpaceAddStaticShape(space, border_left);
   }
   
+}
+
+void Scene::defineBackground(GLuint texture) {
+  background_texture = texture;
+}
+
+void Scene::drawBackground() {
+  GLfloat shadow_vertices[] = {0,SCREEN_HEIGHT,0, SCREEN_WIDTH,SCREEN_HEIGHT,0, 0,0,0, SCREEN_WIDTH,0,0};
+  GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
+
+  // ball shadow
+  TexManager::Instance()->bindTexture(background_texture);
+  
+  glLoadIdentity();
+  glTranslatef(0, 0, 0);
+  
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+  
+  glVertexPointer(3, GL_FLOAT, 0, shadow_vertices);
+  glTexCoordPointer(3, GL_FLOAT, 0, tex);
+  
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
+  glDisableClientState(GL_VERTEX_ARRAY);
+  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 // update a shape's visual representation
