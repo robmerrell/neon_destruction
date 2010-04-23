@@ -23,6 +23,27 @@ void Cannon::definePhysics(cpSpace *space) {
 
 void Cannon::display() {
   // turret
+  GLfloat shadow_vertices[] = {0,138,0, 138,138,0, 0,0,0, 138,0,0};
+  GLfloat shadow_tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
+
+  TexManager::Instance()->bindTexture(4);
+  
+  // place and rotate the turret
+  glLoadIdentity();
+  glTranslatef(body->p.x - 70, body->p.y - 70, 0);
+  glTranslatef(69, 69, 0.0);
+  glRotatef(turret_angle, 0.0, 0.0, 1.0);
+  glTranslatef(-69, -69, 0.0);
+  
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+  
+  glVertexPointer(3, GL_FLOAT, 0, shadow_vertices);
+  glTexCoordPointer(3, GL_FLOAT, 0, shadow_tex);
+  
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+  
   GLfloat turret_vertices[] = {0,128,0, 128,128,0, 0,0,0, 128,0,0};
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
 

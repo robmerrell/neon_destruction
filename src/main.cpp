@@ -12,6 +12,7 @@ int main(int argc, char* argv[]) {
   TexManager::Instance()->loadTexture("assets/ball_glow.png", true);
   TexManager::Instance()->loadTexture("assets/star_background.png", false);
   TexManager::Instance()->loadTexture("assets/cannon_top.png", true);
+  TexManager::Instance()->loadTexture("assets/cannon_top_glow.png", true);
 
   // show the title scene and start the game loop
   TestScene *test_scene = new TestScene();
