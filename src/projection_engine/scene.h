@@ -6,6 +6,7 @@
 #include "SDL.h"
 #include "GLES/gl.h"
 #include "../chipmunk/headers/chipmunk.h"
+#include "event_translations.h"
 
 #include "draw_physics.h"
 #include "../game_const.h"

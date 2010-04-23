@@ -56,8 +56,7 @@ Sprite* Scene::findObject(int tag) {
 
 void Scene::scheduleLoop(int ticks_per_sec) {
   in_loop = true;
-  int mouse_x, mouse_y = 0;
-  float delta_x, delta_y, angle, inverted_angle, radians;
+  float angle, radians;
   cpVect ball_start_coords, calc_vect;
     
   while (in_loop) {
@@ -68,28 +67,23 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     while (SDL_PollEvent(&event)) {
       if (event.type == SDL_QUIT)
         in_loop = false;
-      else if (event.type == SDL_MOUSEBUTTONDOWN) {
-        #ifdef DEVICE
-          mouse_x = event.button.y;
-          mouse_y = SCREEN_HEIGHT - event.button.x;
-        #else
-          mouse_x = event.button.x;
-          mouse_y = event.button.y;
-        #endif
+      else if (event.type == SDL_MOUSEMOTION) {
+        // rotate the turret
+        cpVect event_coords = translatedMouseCoords(event.motion.x, event.motion.y);
+        
+        Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
+        if (cannon != NULL) {
+          angle = getInvertedMouseAngle(cpv(cannon->getX(), cannon->getY()), event_coords);
+          cannon->rotateTurret(angle);
+        }
+      } else if (event.type == SDL_MOUSEBUTTONUP) {
+        cpVect event_coords = translatedMouseCoords(event.button.x, event.button.y);
         
         // find the cannon game object
         Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
         if (cannon != NULL) {
           score++;
-          
-          // get the angle of the cannon to the tap event
-          delta_x = mouse_x - cannon->getX();
-          delta_y = mouse_y - cannon->getY();
-          angle = 180 + (atan2(delta_y, -delta_x) * (180/M_PI));
-          inverted_angle = 180 + (atan2(-delta_y, -delta_x) * (180/M_PI));
-          radians = angle * (M_PI/180);
-          
-          cannon->rotateTurret(inverted_angle);
+          radians = getMouseRadians(cpv(cannon->getX(), cannon->getY()), event_coords);
           
           // calculate the starting coordinates for the ball
           calc_vect = cpvmult(cpvforangle(radians), 30);
@@ -99,7 +93,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
           // add an ammo object and give it an impulse
           Ball *ball = new Ball(ball_start_coords.x, ball_start_coords.y);
           ball->definePhysics(space);
-          ball->applyImpulse(cpv(mouse_x, mouse_y), cpv(cannon->getX(), cannon->getY()));
+          ball->applyImpulse(event_coords, cpv(cannon->getX(), cannon->getY()));
           addObject(ball);
         }
       }
