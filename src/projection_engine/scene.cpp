@@ -57,9 +57,8 @@ Sprite* Scene::findObject(int tag) {
 void Scene::scheduleLoop(int ticks_per_sec) {
   in_loop = true;
   int mouse_x, mouse_y = 0;
-  float delta_x, delta_y, angle, radians;
-  cpVect ball_start_coords;
-  cpVect test;
+  float delta_x, delta_y, angle, inverted_angle, radians;
+  cpVect ball_start_coords, calc_vect;
     
   while (in_loop) {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -79,20 +78,23 @@ void Scene::scheduleLoop(int ticks_per_sec) {
         #endif
         
         // find the cannon game object
-        Sprite *cannon = findObject(CANNON_TAG);
+        Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
         if (cannon != NULL) {
           score++;
           
+          // get the angle of the cannon to the tap event
           delta_x = mouse_x - cannon->getX();
           delta_y = mouse_y - cannon->getY();
           angle = 180 + (atan2(delta_y, -delta_x) * (180/M_PI));
+          inverted_angle = 180 + (atan2(-delta_y, -delta_x) * (180/M_PI));
           radians = angle * (M_PI/180);
-
-          test = cpvmult(cpvforangle(radians), 30);
-          cout << test.x << "," << test.y << endl;
-
-          ball_start_coords.x = cannon->getX() + test.x;
-          ball_start_coords.y = cannon->getY() - test.y;
+          
+          cannon->rotateTurret(inverted_angle);
+          
+          // calculate the starting coordinates for the ball
+          calc_vect = cpvmult(cpvforangle(radians), 30);
+          ball_start_coords.x = cannon->getX() + calc_vect.x;
+          ball_start_coords.y = cannon->getY() - calc_vect.y;
                     
           // add an ammo object and give it an impulse
           Ball *ball = new Ball(ball_start_coords.x, ball_start_coords.y);

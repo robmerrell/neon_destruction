@@ -13,6 +13,7 @@
 #include "../objects/ball.h"
 #include "../objects/platform.h"
 #include "../objects/gravity_switch.h"
+#include "../objects/cannon.h"
 
 // engine
 #include "sprite.h"

@@ -9,6 +9,7 @@ class Cannon : public Sprite {
 
   private:
     cpBody *body;
+    float turret_angle;
 
   public:
     /**
@@ -27,6 +28,12 @@ class Cannon : public Sprite {
      * Display the cannon
      */
     void display();
+    
+    /**
+     * Rotate the turet
+     * float angle
+     */
+    void rotateTurret(float);
     
 };
 
