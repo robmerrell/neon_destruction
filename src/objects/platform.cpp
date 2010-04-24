@@ -13,7 +13,7 @@ void Platform::definePhysics(cpSpace *space) {
   body = cpBodyNew(INFINITY, INFINITY);
 
   // segment
-  cpShape *platformShape = cpSegmentShapeNew(body, cpv(start_x, start_y), cpv(end_x, end_y), 6.0f);
+  cpShape *platformShape = cpSegmentShapeNew(body, cpv(start_x, start_y), cpv(end_x, end_y), 3.0f);
   platformShape->e = 0.5;
   platformShape->u = 0.3;
   platformShape->collision_type = PLATFORM_COLLISION;
