@@ -1,5 +1,6 @@
 #include "../projection_engine/sprite.h"
 #include "../game_const.h"
+#include "../projection_engine/tex_manager.h"
 
 #ifndef PLATFORM_H
 #define PLATFORM_H

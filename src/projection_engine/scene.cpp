@@ -74,7 +74,6 @@ void Scene::scheduleLoop(int ticks_per_sec) {
         Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
         if (cannon != NULL) {
           angle = getInvertedMouseAngle(cpv(cannon->getX(), cannon->getY()), event_coords);
-          cout << angle << endl;
           
           if (angle < 17 || angle > 144)
             cannon->rotateTurret(angle);
