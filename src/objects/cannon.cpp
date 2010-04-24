@@ -8,17 +8,16 @@ Cannon::Cannon(float x, float y) : Sprite("", 64, 64, CANNON_TAG) {
 
 void Cannon::definePhysics(cpSpace *space) {
   // body
-  body = cpBodyNew(10.0f, INFINITY);
+  body = cpBodyNew(INFINITY, INFINITY);
   body->p = cpv(x, y);
-  cpSpaceAddBody(space, body);
+
+  // segment
+  cpShape *shape = cpSegmentShapeNew(body, cpv(0, 0), cpv(2, 2), 1.0f);
+  shape->e = 0.5;
+  shape->u = 0.3;
+  shape->collision_type = CANNON_COLLISION;
   
-  // base shape
-  cpVect base_verts[] = { cpv(0.0, 0.0), cpv(50.0, 0.0), cpv(50.0, -15.0), cpv(0.0, -15.0) };
-  cpShape *baseShape = cpPolyShapeNew(body, 4, base_verts, cpvzero);  
-  baseShape->e = 0.5; baseShape->u = 0.9;
-  baseShape->data = this;
-  baseShape->collision_type = CANNON_COLLISION;
-  cpSpaceAddShape(space, baseShape);
+  cpSpaceAddStaticShape(space, shape);
 }
 
 void Cannon::display() {
