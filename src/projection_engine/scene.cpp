@@ -90,8 +90,9 @@ void Scene::scheduleLoop(int ticks_per_sec) {
           
           // calculate the starting coordinates for the ball
           calc_vect = cpvmult(cpvforangle(radians), 30);
-          ball_start_coords.x = cannon->getX() + calc_vect.x;
-          ball_start_coords.y = cannon->getY() - calc_vect.y;
+          cpVect cannon_coords = cannon->translatedCoords();
+          ball_start_coords.x = cannon_coords.x + calc_vect.x;
+          ball_start_coords.y = cannon_coords.y - calc_vect.y;
                     
           // add an ammo object and give it an impulse
           Ball *ball = new Ball(ball_start_coords.x, ball_start_coords.y);

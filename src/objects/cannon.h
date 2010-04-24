@@ -35,6 +35,11 @@ class Cannon : public Sprite {
      */
     void rotateTurret(float);
     
+    /**
+     * Return the coordinates that have been translated along with the textures
+     */
+    cpVect translatedCoords();
+    
 };
 
 #endif
