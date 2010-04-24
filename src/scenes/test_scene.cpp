@@ -24,6 +24,10 @@ void TestScene::setup() {
   platform2->definePhysics(space);
   addObject(platform2);
   
+  Platform *platform3 = new Platform(50, 150, 200, 250);
+  platform3->definePhysics(space);
+  addObject(platform3);
+  
   // start the game loop
   scheduleLoop(60);
 }
