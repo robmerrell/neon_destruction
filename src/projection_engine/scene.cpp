@@ -79,6 +79,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
   int millistep = 16;
   float timeStep = float(millistep)/1000;
   fps.start();
+  animation_ticks = 0;
     
   while (in_loop) {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -122,7 +123,8 @@ void Scene::scheduleLoop(int ticks_per_sec) {
       }
     }
     
-    accumulator += fps.get_ticks();
+    animation_ticks = fps.get_ticks();
+    accumulator += animation_ticks;
     fps.start();
     
     while (accumulator >= millistep) {
@@ -137,6 +139,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     glDisable(GL_BLEND);
     
     // draw the background
+    moveBackground(animation_ticks);
     drawBackground();
     
     // blending
@@ -228,6 +231,16 @@ void Scene::drawBackground() {
   glVertexPointer(2, GL_FLOAT, 0, star_verts);
   glDrawArrays(GL_POINTS, 0, STARS_PER_FIELD * 2);
   glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+void Scene::moveBackground(int ticks) {
+  for (int i = 0; i < STARS_PER_FIELD; i++) {
+    starfield1[i].x -= (100.0 * (ticks * 0.001));
+
+    if (starfield1[i].x < 0) {
+      starfield1[i].x = SCREEN_WIDTH;
+    }
+  }
 }
 
 // update a shape's visual representation

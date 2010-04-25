@@ -34,6 +34,7 @@ class Scene {
     // frame capping
     int frame;
     Timer fps;
+    float animation_ticks;
     
     GLuint background_texture;
     cpVect starfield1[STARS_PER_FIELD];
@@ -102,6 +103,11 @@ class Scene {
      * Add the level background to a scene
      */
     void drawBackground();
+    
+    /**
+     * Moves the star fields
+     */
+    void moveBackground(int);
 };
 
 void updateShape(void*, void*);
