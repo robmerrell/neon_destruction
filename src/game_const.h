@@ -36,5 +36,6 @@ const int SCREEN_BPP = 32;
 ** Textures **
 **************/
 const int TEXTURE_COUNT = 7;
+const int STARS_PER_FIELD = 256;
 
 #endif

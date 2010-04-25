@@ -21,6 +21,21 @@ Scene::Scene() {
   cpSpaceAddCollisionHandler(space, CANNON_COLLISION, BALL_COLLISION, NULL, ignore_pre_solve, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION, NULL, pre_solve_goal, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, GRAVITY_SWITCH_COLLISION, BALL_COLLISION, gravity_switch_solver, NULL, NULL, NULL, NULL);
+  
+  // generate the backgrounds
+  int x, y = 0;
+  srand((unsigned)time(0)); 
+  for (int i = 0; i < STARS_PER_FIELD; i++) {
+    x = 1 + rand() % (SCREEN_WIDTH);
+    y = 1 + rand() % (SCREEN_HEIGHT);
+
+    starfield1[i] = cpv(x, y);
+
+    x = 1 + rand() % (SCREEN_WIDTH);
+    y = 1 + rand() % (SCREEN_HEIGHT);
+
+    starfield2[i] = cpv(x, y);
+  }
 }
 
 // TODO: check this for memory leaks
@@ -122,7 +137,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     glDisable(GL_BLEND);
     
     // draw the background
-    // drawBackground();
+    drawBackground();
     
     // blending
     glEnable(GL_BLEND);
@@ -187,25 +202,32 @@ void Scene::defineBackground(GLuint texture) {
 }
 
 void Scene::drawBackground() {
-  GLfloat shadow_vertices[] = {0,SCREEN_HEIGHT,0, SCREEN_WIDTH,SCREEN_HEIGHT,0, 0,0,0, SCREEN_WIDTH,0,0};
-  GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
+  TexManager::Instance()->unbindTexture();
 
-  // ball shadow
-  TexManager::Instance()->bindTexture(background_texture);
-  
+  int v_count = 0;
+
+  GLfloat star_verts[STARS_PER_FIELD * 4];
+  for (int i = 0; i < STARS_PER_FIELD; i++) {
+    star_verts[v_count] = starfield1[i].x;
+    v_count++;
+
+    star_verts[v_count] = starfield1[i].y;
+    v_count++;
+
+    star_verts[v_count] = starfield2[i].x;
+    v_count++;
+
+    star_verts[v_count] = starfield2[i].y;
+    v_count++;
+  }
+
   glLoadIdentity();
   glTranslatef(0, 0, 0);
-  
+
   glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-  
-  glVertexPointer(3, GL_FLOAT, 0, shadow_vertices);
-  glTexCoordPointer(3, GL_FLOAT, 0, tex);
-  
-  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-  
+  glVertexPointer(2, GL_FLOAT, 0, star_verts);
+  glDrawArrays(GL_POINTS, 0, STARS_PER_FIELD * 2);
   glDisableClientState(GL_VERTEX_ARRAY);
-  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }
 
 // update a shape's visual representation

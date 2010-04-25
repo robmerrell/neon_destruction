@@ -26,7 +26,6 @@
 class Scene {
 
   protected:
-    GLuint background_texture;
     int score;
     bool in_loop;
     SDL_Event event;
@@ -35,6 +34,10 @@ class Scene {
     // frame capping
     int frame;
     Timer fps;
+    
+    GLuint background_texture;
+    cpVect starfield1[STARS_PER_FIELD];
+    cpVect starfield2[STARS_PER_FIELD];
     
     // physics
     cpSpace *space;
