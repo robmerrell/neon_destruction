@@ -58,10 +58,15 @@ void Scene::scheduleLoop(int ticks_per_sec) {
   in_loop = true;
   float angle, radians;
   cpVect ball_start_coords, calc_vect;
+
+  // timestepping
+  float accumulator = 0.0f;
+  int millistep = 16;
+  float timeStep = float(millistep)/1000;
+  fps.start();
     
   while (in_loop) {
     glClear(GL_COLOR_BUFFER_BIT);
-    fps.start();
     
     // capture the events and send the relevent tap events to the game scene
     while (SDL_PollEvent(&event)) {
@@ -102,9 +107,16 @@ void Scene::scheduleLoop(int ticks_per_sec) {
       }
     }
     
+    accumulator += fps.get_ticks();
+    fps.start();
+    
+    while (accumulator >= millistep) {
+      cpSpaceStep(space, timeStep);
+      cpSpaceHashEach(space->activeShapes, &updateShape, NULL);
+      accumulator -= millistep;
+    }
+    
     // move
-    cpSpaceStep(space, 1.0f/ticks_per_sec);
-    cpSpaceHashEach(space->activeShapes, &updateShape, NULL);
     gameLoop();
     
     glDisable(GL_BLEND);
@@ -129,11 +141,6 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     SDL_GL_SwapBuffers();
     
     frame++;
-    
-    // delay to have a consistent framerate
-    if (fps.get_ticks() < 1000 / ticks_per_sec) {
-      SDL_Delay((1000/ticks_per_sec) - fps.get_ticks());
-    }
   }
 }
 
