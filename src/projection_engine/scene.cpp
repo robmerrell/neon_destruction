@@ -235,11 +235,13 @@ void Scene::drawBackground() {
 
 void Scene::moveBackground(int ticks) {
   for (int i = 0; i < STARS_PER_FIELD; i++) {
-    starfield1[i].x -= (100.0 * (ticks * 0.001));
+    starfield1[i].x -= (STAR_FIELD1_SPEED * (ticks * 0.001));
+    starfield2[i].x -= (STAR_FIELD2_SPEED * (ticks * 0.001));
 
-    if (starfield1[i].x < 0) {
+    if (starfield1[i].x < 0)
       starfield1[i].x = SCREEN_WIDTH;
-    }
+    if (starfield2[i].x < 0)
+      starfield2[i].x = SCREEN_WIDTH;
   }
 }
 
