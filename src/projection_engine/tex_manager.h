@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "GLES/gl.h"
+#include "PDL.h"
 #include "../soil/SOIL.h"
 #include "../game_const.h"
 

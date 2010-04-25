@@ -19,10 +19,19 @@ void TexManager::loadTexture(string filename, bool alpha) {
   unsigned int flags = SOIL_FLAG_MIPMAPS;
   if (alpha)
     flags = flags | SOIL_FLAG_MULTIPLY_ALPHA;
+    
+  #ifdef DEVICE
+    char app_dir[256];
+    PDL_GetCallingPath(app_dir, 256);
+    string full_path(app_dir);
+    full_path.append(filename);
+  #else
+    string full_path = filename;
+  #endif
   
   inst->texture[inst->texture_ref] = SOIL_load_OGL_texture
     (   
-      filename.c_str(),
+      full_path.c_str(),
       SOIL_LOAD_AUTO,
       SOIL_CREATE_NEW_ID,
       flags

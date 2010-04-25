@@ -36,7 +36,7 @@ const int SCREEN_BPP = 32;
 ** Graphics **
 **************/
 const int TEXTURE_COUNT = 7;
-const int STARS_PER_FIELD = 256;
+const int STARS_PER_FIELD = 128;
 const float STAR_FIELD1_SPEED = 100.0f;
 const float STAR_FIELD2_SPEED = 50.0f;
 

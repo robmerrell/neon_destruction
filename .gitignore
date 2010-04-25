@@ -2,3 +2,4 @@ main
 *.dSYM
 build
 *.ipk
+neon_blaster/assets
