@@ -38,6 +38,8 @@ class Scene {
     
     GLuint background_texture;
     cpVect starfield1[STARS_PER_FIELD];
+    float starfield1_colors[(STARS_PER_FIELD * 2) * 4];
+    
     cpVect starfield2[STARS_PER_FIELD];
     
     // physics

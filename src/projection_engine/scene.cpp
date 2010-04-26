@@ -23,18 +23,30 @@ Scene::Scene() {
   cpSpaceAddCollisionHandler(space, GRAVITY_SWITCH_COLLISION, BALL_COLLISION, gravity_switch_solver, NULL, NULL, NULL, NULL);
   
   // generate the backgrounds
-  int x, y = 0;
+  int x, y, color_index = 0;
   srand((unsigned)time(0)); 
   for (int i = 0; i < STARS_PER_FIELD; i++) {
     x = 1 + rand() % (SCREEN_WIDTH);
     y = 1 + rand() % (SCREEN_HEIGHT);
 
     starfield1[i] = cpv(x, y);
+    
+    // colors for starfield 1
+    starfield1_colors[color_index] = 1.0f;
+    starfield1_colors[color_index+1] = 0.0f;
+    starfield1_colors[color_index+2] = 0.0f;
+    starfield1_colors[color_index+3] = 1.0f;
+    
+    starfield1_colors[color_index+4] = 0.0f;
+    starfield1_colors[color_index+5] = 0.0f;
+    starfield1_colors[color_index+6] = 1.0f;
+    starfield1_colors[color_index+7] = 1.0f;
 
     x = 1 + rand() % (SCREEN_WIDTH);
     y = 1 + rand() % (SCREEN_HEIGHT);
 
     starfield2[i] = cpv(x, y);
+    color_index += 8;
   }
 }
 
@@ -228,8 +240,11 @@ void Scene::drawBackground() {
   glTranslatef(0, 0, 0);
 
   glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_COLOR_ARRAY);
   glVertexPointer(2, GL_FLOAT, 0, star_verts);
+  glColorPointer(4, GL_FLOAT, 0, starfield1_colors);
   glDrawArrays(GL_POINTS, 0, STARS_PER_FIELD * 2);
+  glDisableClientState(GL_COLOR_ARRAY);
   glDisableClientState(GL_VERTEX_ARRAY);
 }
 
