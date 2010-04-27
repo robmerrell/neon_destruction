@@ -11,12 +11,14 @@ const int BALL_TAG = 2;
 const int PLATFORM_TAG = 3;
 const int GOAL_TAG = 4;
 const int GRAVITY_SWITCH_TAG = 5;
+const int BOX_TAG = 6;
 
 const int CANNON_COLLISION = 1;
 const int BALL_COLLISION = 2;
 const int PLATFORM_COLLISION = 3;
 const int GOAL_COLLISION = 4;
 const int GRAVITY_SWITCH_COLLISION = 5;
+const int BOX_COLLISION = 6;
 
 const int GRAVITY_UP = 1;
 const int GRAVITY_DOWN = 2;

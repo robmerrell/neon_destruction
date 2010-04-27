@@ -15,6 +15,7 @@
 #include "../objects/platform.h"
 #include "../objects/gravity_switch.h"
 #include "../objects/cannon.h"
+#include "../objects/box.h"
 
 // engine
 #include "sprite.h"
