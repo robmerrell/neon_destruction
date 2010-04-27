@@ -40,7 +40,7 @@ Scene::Scene() {
   defineStarColors();
   
   for (int i = 0; i < STARS_PER_FIELD * 2; i++) {
-    starfield1_sizes[i] = 1 + rand() % (2);
+    starfield_sizes[i] = 1 + rand() % (2);
   }
 }
 
@@ -240,7 +240,7 @@ void Scene::drawBackground() {
   
   glVertexPointer(2, GL_FLOAT, 0, star_verts);
   glColorPointer(4, GL_FLOAT, 0, starfield_colors);
-  glPointSizePointerOES(GL_FLOAT, 0, starfield1_sizes);
+  glPointSizePointerOES(GL_FLOAT, 0, starfield_sizes);
   glDrawArrays(GL_POINTS, 0, STARS_PER_FIELD * 2);
   
   glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
