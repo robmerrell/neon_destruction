@@ -264,13 +264,13 @@ void Scene::defineStarColors() {
   int random_num, color_index = 0;
   float r,g,b = 1.0f;
   for (int i = 0; i < STARS_PER_FIELD*2; i++) {
-    random_num = 1 + rand() % (4);
+    random_num = 1 + rand() % (10);
 
     // yellow
     if (random_num == 1) {
       r = 1.0f;
-      g = 1.0f;
-      b = 0.9f;
+      g = 0.99f;
+      b = 0.94f;
     }
     // blue
     else if (random_num == 2) { 
@@ -285,7 +285,7 @@ void Scene::defineStarColors() {
       b = 0.9f;
     }
     // white
-    else if (random_num == 4) {
+    else {
       r = 1.0f;
       g = 1.0f;
       b = 1.0f;
