@@ -23,30 +23,24 @@ Scene::Scene() {
   cpSpaceAddCollisionHandler(space, GRAVITY_SWITCH_COLLISION, BALL_COLLISION, gravity_switch_solver, NULL, NULL, NULL, NULL);
   
   // generate the backgrounds
-  int x, y, color_index = 0;
+  int x, y = 0;
   srand((unsigned)time(0)); 
   for (int i = 0; i < STARS_PER_FIELD; i++) {
     x = 1 + rand() % (SCREEN_WIDTH);
     y = 1 + rand() % (SCREEN_HEIGHT);
 
     starfield1[i] = cpv(x, y);
-    
-    // colors for starfield 1
-    starfield1_colors[color_index] = 1.0f;
-    starfield1_colors[color_index+1] = 0.0f;
-    starfield1_colors[color_index+2] = 0.0f;
-    starfield1_colors[color_index+3] = 1.0f;
-    
-    starfield1_colors[color_index+4] = 0.0f;
-    starfield1_colors[color_index+5] = 0.0f;
-    starfield1_colors[color_index+6] = 1.0f;
-    starfield1_colors[color_index+7] = 1.0f;
-
+  
     x = 1 + rand() % (SCREEN_WIDTH);
     y = 1 + rand() % (SCREEN_HEIGHT);
 
     starfield2[i] = cpv(x, y);
-    color_index += 8;
+  }
+  
+  defineStarColors();
+  
+  for (int i = 0; i < STARS_PER_FIELD * 2; i++) {
+    starfield1_sizes[i] = 1 + rand() % (2);
   }
 }
 
@@ -161,6 +155,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     // display
     vector<Sprite*>::iterator sprite;
     for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
+      glColor4f(1.0, 1.0, 1.0, 1.0);
       (*sprite)->display();
       
       if (draw_physics)
@@ -241,9 +236,14 @@ void Scene::drawBackground() {
 
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_COLOR_ARRAY);
+  glEnableClientState(GL_POINT_SIZE_ARRAY_OES);
+  
   glVertexPointer(2, GL_FLOAT, 0, star_verts);
-  glColorPointer(4, GL_FLOAT, 0, starfield1_colors);
+  glColorPointer(4, GL_FLOAT, 0, starfield_colors);
+  glPointSizePointerOES(GL_FLOAT, 0, starfield1_sizes);
   glDrawArrays(GL_POINTS, 0, STARS_PER_FIELD * 2);
+  
+  glDisableClientState(GL_POINT_SIZE_ARRAY_OES);
   glDisableClientState(GL_COLOR_ARRAY);
   glDisableClientState(GL_VERTEX_ARRAY);
 }
@@ -257,6 +257,46 @@ void Scene::moveBackground(int ticks) {
       starfield1[i].x = SCREEN_WIDTH;
     if (starfield2[i].x < 0)
       starfield2[i].x = SCREEN_WIDTH;
+  }
+}
+
+void Scene::defineStarColors() {
+  int random_num, color_index = 0;
+  float r,g,b = 1.0f;
+  for (int i = 0; i < STARS_PER_FIELD*2; i++) {
+    random_num = 1 + rand() % (4);
+
+    // yellow
+    if (random_num == 1) {
+      r = 1.0f;
+      g = 1.0f;
+      b = 0.9f;
+    }
+    // blue
+    else if (random_num == 2) { 
+      r = 0.9f;
+      g = 0.99f;
+      b = 1.0f;
+    }
+    // red
+    else if (random_num == 3) {
+      r = 1.0f;
+      g = 0.9f;
+      b = 0.9f;
+    }
+    // white
+    else if (random_num == 4) {
+      r = 1.0f;
+      g = 1.0f;
+      b = 1.0f;
+    }
+    
+    starfield_colors[color_index] = r;
+    starfield_colors[color_index + 1] = g;
+    starfield_colors[color_index + 2] = b;
+    starfield_colors[color_index + 3] = 1.0f;
+    
+    color_index += 4;
   }
 }
 
