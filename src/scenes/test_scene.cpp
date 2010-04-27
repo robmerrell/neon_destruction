@@ -4,7 +4,7 @@ void TestScene::setup() {
   defineBorder(true, true, true, true);
   defineBackground(2);
   
-  cannon = new Cannon(150, 150);
+  cannon = new Cannon(140, 106);
   cannon->definePhysics(space);
   addObject(cannon);
   

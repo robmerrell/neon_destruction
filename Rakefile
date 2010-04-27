@@ -138,7 +138,12 @@ task :build => :arch_settings do
   end
   
   # compile all of the files
-  files = Dir.glob("src/**/*.cpp")
+  if ENV["FILE"]
+    files = []
+    files << ENV["FILE"]
+  else
+    files = Dir.glob("src/**/*.cpp")
+  end
   files.each do |file|
     # make sure the dir exists for the object file
     dir_name = file.gsub(File.basename(file), '')
