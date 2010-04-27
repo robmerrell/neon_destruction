@@ -123,7 +123,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
           // add an ammo object and give it an impulse
           Ball *ball = new Ball(ball_start_coords.x, ball_start_coords.y);
           ball->definePhysics(space);
-          ball->applyImpulse(event_coords, cpv(cannon->getX(), cannon->getY()));
+          ball->applyImpulse(event_coords, ball_start_coords);
           addObject(ball);
         }
       }
