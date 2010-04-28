@@ -15,7 +15,7 @@ Engine::Engine(bool _draw_physics) {
   #endif
   
   // setup openGL
-  glClearColor(0, 0, 0, 0);
+  glClearColor(0, 0, 0, 1.0f);
   
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
