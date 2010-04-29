@@ -199,7 +199,7 @@ task :pkg do
   
   # copy the executable and asset file to the package dir
   system("cp main neon_blaster")
-  system("cp -r assets neon_blaster/assets")
+  system("cp -r assets/* neon_blaster/assets")
 
   puts "packaging..."
   system("#{pdk_bin}/pdk-package neon_blaster")

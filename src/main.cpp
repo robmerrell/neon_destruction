@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
   
   // load the textures
   TexManager::Instance()->loadTexture("assets/ball.png", true);
-  TexManager::Instance()->loadTexture("assets/ball_glow.png", true);
+  TexManager::Instance()->loadTexture("assets/ball.png", true); // TODO: remove me
   TexManager::Instance()->loadTexture("assets/star_background.png", false);
   TexManager::Instance()->loadTexture("assets/cannon_top.png", true);
   TexManager::Instance()->loadTexture("assets/cannon_top_glow.png", true);
