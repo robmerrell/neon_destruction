@@ -28,9 +28,11 @@ void TestScene::setup() {
   platform3->definePhysics(space);
   addObject(platform3);
   
+  /*
   Box *box = new Box(250, 150, 100, 100);
   box->definePhysics(space);
   addObject(box);
+  */
   
   // start the game loop
   scheduleLoop(60);
