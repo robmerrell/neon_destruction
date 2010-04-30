@@ -22,6 +22,7 @@ void Platform::definePhysics(cpSpace *space) {
 }
 
 void Platform::display() {
+  /*
   // draw the frakkin line
   glLineWidth(4.0);
   glDisable(GL_TEXTURE_2D);
@@ -38,20 +39,20 @@ void Platform::display() {
   glDisableClientState(GL_VERTEX_ARRAY);
   
   glEnable(GL_TEXTURE_2D);
-
+*/
 
   // draw the glow
   float dx = end_x - start_x;
   float dy = start_y - end_y;
-  float distance = sqrt((dx*dx) + (dy * dy));
+  float distance = sqrt((dx*dx) + (dy * dy)) + 5;
   
   GLfloat shadow_vertices[] = {0,32,0, distance,32,0, 0,0,0, distance,0,0};
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
-  TexManager::Instance()->bindTexture(7);
+  TexManager::Instance()->bindTexture(6);
   
   glLoadIdentity();
-  glTranslatef(start_x, start_y, 0.0);
+  glTranslatef(start_x, start_y - 13, 0.0);
   
   // rotate if needed
   if (dy != 0) {
