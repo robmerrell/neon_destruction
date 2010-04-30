@@ -71,5 +71,34 @@ void Platform::display() {
   glDisableClientState(GL_VERTEX_ARRAY);
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
   
+  
+  
+  GLfloat right_vertices[] = {0,32,0, 32,32,0, 0,0,0, 32,0,0};
+  GLfloat right_tex[] = {0,1,0, 0.9,1,0, 0,0,0, 0.9,0,0};
+  
+  TexManager::Instance()->bindTexture(7);
+  
+  glLoadIdentity();
+  glTranslatef(end_x - 4, end_y - 15, 0.0);
+  
+  // rotate if needed
+  if (dy != 0) {
+    float angle = getInvertedMouseAngle(cpv(start_x, start_y), cpv(end_x, end_y));
+    glRotatef(angle, 0.0, 0.0, 1.0);
+  }
+  
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+  
+  glVertexPointer(3, GL_FLOAT, 0, right_vertices);
+  glTexCoordPointer(3, GL_FLOAT, 0, right_tex);
+  
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
+  glDisableClientState(GL_VERTEX_ARRAY);
+  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+  
+  
+  
   TexManager::Instance()->unbindTexture();
 }
