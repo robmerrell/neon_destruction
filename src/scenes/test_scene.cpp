@@ -12,9 +12,11 @@ void TestScene::setup() {
   goal->definePhysics(space);
   addObject(goal);
   
+  /*
   GravitySwitch *gs = new GravitySwitch(100, 100, GRAVITY_UP);
   gs->definePhysics(space);
   addObject(gs);
+  */
 
   Platform *platform1 = new Platform(155, 150, 180, 150);
   platform1->definePhysics(space);

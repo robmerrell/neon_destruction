@@ -70,6 +70,7 @@ static void draw_poly(cpBody *body, cpPolyShape *poly)
 	
 	glLoadIdentity();
   glTranslatef(poly->tVerts[0].x, poly->tVerts[0].y, 0);
+  glRotatef(body->a, 0.0f, 0.0f, 1.0f);
 
   for (int i = 0; i < count; i++) {
     vertices[v_count] = poly->verts[i].x;

@@ -10,14 +10,14 @@ Box::Box(float _x, float _y, float _width, float _height) : Sprite("", 64, 64, B
 
 void Box::definePhysics(cpSpace *space) {
   // body
-  body = cpBodyNew(1.0f, INFINITY);
+  cpVect verts[] = { cpv(0.0, 0.0), cpv(width, 0.0), cpv(width, -height), cpv(0.0, -height) };
+  body = cpBodyNew(1.0f, cpMomentForPoly(1.0f, 4, verts, cpvzero));
   body->p = cpv(x, y);
   cpSpaceAddBody(space, body);
   
   // poly shape box
-  cpVect verts[] = { cpv(0.0, 0.0), cpv(width, 0.0), cpv(width, -height), cpv(0.0, -height) };
   cpShape *boxShape = cpPolyShapeNew(body, 4, verts, cpvzero);
-  boxShape->e = 0.2;
+  boxShape->e = 0.1;
   boxShape->u = 0.3;
   boxShape->data = this;
   boxShape->collision_type = BOX_COLLISION;
