@@ -10,8 +10,6 @@ class Box : public Sprite {
 
   private:
     cpBody *body;
-    float x;
-    float y;
     float width;
     float height;
 

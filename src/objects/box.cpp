@@ -1,6 +1,6 @@
 #include "box.h"
 
-Box::Box(float _x, float _y, float _width, float _height) : Sprite("", 64, 64, PLATFORM_TAG) {
+Box::Box(float _x, float _y, float _width, float _height) : Sprite("", 64, 64, BOX_TAG) {
   x = _x;
   y = _y;
   
@@ -14,14 +14,9 @@ void Box::definePhysics(cpSpace *space) {
   body->p = cpv(x, y);
   cpSpaceAddBody(space, body);
   
-  float start_x = x;
-  float start_y = y;
-  
-  float end_x = start_x + width;
-  float end_y = start_y - height;
-
-  // segment
-  cpShape *boxShape = cpSegmentShapeNew(body, cpv(start_x, start_y), cpv(end_x, end_y), 3.0f);
+  // poly shape box
+  cpVect verts[] = { cpv(0.0, 0.0), cpv(width, 0.0), cpv(width, -height), cpv(0.0, -height) };
+  cpShape *boxShape = cpPolyShapeNew(body, 4, verts, cpvzero);
   boxShape->e = 0.2;
   boxShape->u = 0.3;
   boxShape->data = this;
@@ -31,6 +26,7 @@ void Box::definePhysics(cpSpace *space) {
 }
 
 void Box::display() {
+  // std::cout << y << std::endl;
   float start_x = x;
   float start_y = y;
   
@@ -48,6 +44,7 @@ void Box::display() {
   
   glLoadIdentity();
   glTranslatef(start_x, start_y, 0.0);
+  glRotatef(angle, 0.0f, 0.0f, 1.0f);
   
   // rotate if needed
   // if (dy != 0) {

@@ -72,14 +72,14 @@ void Platform::display() {
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
   
   
-  
+  /*
   GLfloat right_vertices[] = {0,32,0, 32,32,0, 0,0,0, 32,0,0};
-  GLfloat right_tex[] = {0,1,0, 0.9,1,0, 0,0,0, 0.9,0,0};
+  GLfloat right_tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
   TexManager::Instance()->bindTexture(7);
   
   glLoadIdentity();
-  glTranslatef(end_x - 4, end_y - 15, 0.0);
+  glTranslatef(end_x + 5, end_y - 13, 0.0);
   
   // rotate if needed
   if (dy != 0) {
@@ -97,7 +97,7 @@ void Platform::display() {
   
   glDisableClientState(GL_VERTEX_ARRAY);
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-  
+  */
   
   
   TexManager::Instance()->unbindTexture();

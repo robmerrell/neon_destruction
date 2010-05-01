@@ -314,6 +314,11 @@ void updateShape(void *ptr, void* unused) {
   
   sprite->setX(shape->body->p.x);
   sprite->setY(shape->body->p.y);
+  
+  // rotate certain objects
+  if (sprite->getTag() == BOX_TAG) {
+    sprite->setAngle(RAD2DEG(shape->body->a));
+  }
 }
 
 static int ignore_pre_solve(cpArbiter *arb, cpSpace *space, void *ignore) {

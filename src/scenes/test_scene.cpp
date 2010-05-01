@@ -7,7 +7,7 @@ void TestScene::setup() {
   cannon = new Cannon(140, 106);
   cannon->definePhysics(space);
   addObject(cannon);
-  
+
   Goal *goal = new Goal(400, 225);
   goal->definePhysics(space);
   addObject(goal);
@@ -27,12 +27,14 @@ void TestScene::setup() {
   Platform *platform3 = new Platform(50, 150, 200, 250);
   platform3->definePhysics(space);
   addObject(platform3);
+
+  Platform *platform4 = new Platform(250, 15, 250, 200);
+  platform4->definePhysics(space);
+  addObject(platform4);
   
-  /*
-  Box *box = new Box(250, 150, 100, 100);
+  Box *box = new Box(50, 150, 40, 40);
   box->definePhysics(space);
   addObject(box);
-  */
   
   // start the game loop
   scheduleLoop(60);

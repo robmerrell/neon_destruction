@@ -12,6 +12,7 @@ class Sprite : public GameObject {
   protected:
     float width;
     float height;
+    float angle;
     int tag;
     
   public:
@@ -30,6 +31,8 @@ class Sprite : public GameObject {
      */
     float getWidth();
     float getHeight();
+    float getAngle();
+    void setAngle(float);
     int getTag();
     
     virtual void definePhysics(cpSpace*) {};
