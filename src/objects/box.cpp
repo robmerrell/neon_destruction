@@ -11,7 +11,7 @@ Box::Box(float _x, float _y, float _width, float _height) : Sprite("", 64, 64, B
 void Box::definePhysics(cpSpace *space) {
   // body
   cpVect verts[] = { cpv(0.0, 0.0), cpv(width, 0.0), cpv(width, -height), cpv(0.0, -height) };
-  body = cpBodyNew(1.0f, cpMomentForPoly(1.0f, 4, verts, cpvzero));
+  body = cpBodyNew(20.0f, cpMomentForPoly(20.0f, 4, verts, cpvzero));
   body->p = cpv(x, y);
   cpSpaceAddBody(space, body);
   

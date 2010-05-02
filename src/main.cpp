@@ -1,8 +1,6 @@
 #include "projection_engine/engine.h"
 #include "projection_engine/tex_manager.h"
-
-// scenes
-#include "scenes/test_scene.h"
+#include "levels.h"
 
 int main(int argc, char* argv[]) {
   Engine engine(false);
@@ -18,10 +16,10 @@ int main(int argc, char* argv[]) {
   TexManager::Instance()->loadTexture("assets/line_cap.png", true);
 
   // show the title scene and start the game loop
-  TestScene *test_scene = new TestScene();
-  engine.showScene(test_scene);
+  BoxTumble *box_tumble = new BoxTumble();
+  engine.showScene(box_tumble);
   
-  delete test_scene;
+  delete box_tumble;
 
   return 0;
 }
