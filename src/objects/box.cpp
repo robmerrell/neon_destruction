@@ -26,7 +26,6 @@ void Box::definePhysics(cpSpace *space) {
 }
 
 void Box::display() {
-  // std::cout << y << std::endl;
   float start_x = x;
   float start_y = y;
   
@@ -40,7 +39,7 @@ void Box::display() {
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
   
-  TexManager::Instance()->bindTexture(6);
+  TexManager::Instance()->bindTexture(8);
   
   glLoadIdentity();
   glTranslatef(start_x - width/2, start_y + height/2, 0.0);

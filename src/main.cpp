@@ -14,6 +14,7 @@ int main(int argc, char* argv[]) {
   TexManager::Instance()->loadTexture("assets/cannon_base.png", true);
   TexManager::Instance()->loadTexture("assets/platform.png", true);
   TexManager::Instance()->loadTexture("assets/line_cap.png", true);
+  TexManager::Instance()->loadTexture("assets/white.png", true);
 
   // show the title scene and start the game loop
   BoxTumble *box_tumble = new BoxTumble();

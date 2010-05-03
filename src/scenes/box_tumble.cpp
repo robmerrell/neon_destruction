@@ -7,15 +7,15 @@ void BoxTumble::setup() {
   cannon->definePhysics(space);
   addObject(cannon);
   
-  Box *base = new Box(200, 320, 100, 100);
+  Box *base = new Box(200, 270, 100, 100);
   base->definePhysics(space);
   addObject(base);
   
-  Box *middle = new Box(220, 220, 60, 60);
+  Box *middle = new Box(220, 190, 60, 60);
   middle->definePhysics(space);
   addObject(middle);
   
-  Box *middle_smaller = new Box(230, 160, 20, 150);
+  Box *middle_smaller = new Box(230, 85, 20, 150);
   middle_smaller->definePhysics(space);
   addObject(middle_smaller);
   
