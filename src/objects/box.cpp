@@ -10,8 +10,8 @@ Box::Box(float _x, float _y, float _width, float _height) : Sprite("", 64, 64, B
 
 void Box::definePhysics(cpSpace *space) {
   // body
-  cpVect verts[] = { cpv(0.0, 0.0), cpv(width, 0.0), cpv(width, -height), cpv(0.0, -height) };
-  body = cpBodyNew(20.0f, cpMomentForPoly(20.0f, 4, verts, cpvzero));
+  cpVect verts[] = { cpv(-width/2, -height/2), cpv(-width/2, height/2), cpv(width/2, height/2), cpv(width/2, -height/2) };
+  body = cpBodyNew(10.0f, cpMomentForPoly(10.0f, 4, verts, cpvzero));
   body->p = cpv(x, y);
   cpSpaceAddBody(space, body);
   
@@ -43,15 +43,11 @@ void Box::display() {
   TexManager::Instance()->bindTexture(6);
   
   glLoadIdentity();
-  glTranslatef(start_x, start_y, 0.0);
+  glTranslatef(start_x - width/2, start_y + height/2, 0.0);
+  glTranslatef(width/2, -height/2, 0.0);
   glRotatef(angle, 0.0f, 0.0f, 1.0f);
-  
-  // rotate if needed
-  // if (dy != 0) {
-  //   float angle = getInvertedMouseAngle(cpv(start_x, start_y), cpv(end_x, end_y));
-  //   glRotatef(angle, 0.0, 0.0, 1.0);
-  // }
-  
+  glTranslatef(-width/2, height/2, 0.0);
+
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
   
