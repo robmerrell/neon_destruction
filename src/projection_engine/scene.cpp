@@ -79,6 +79,10 @@ void Scene::scheduleLoop(int ticks_per_sec) {
   in_loop = true;
   float angle, radians;
   cpVect ball_start_coords, calc_vect;
+  
+  // add a blank crosshair
+  CrossHair *crosshair = new CrossHair(-100, -100);
+  addObject(crosshair);
 
   // timestepping
   float accumulator = 0.0f;
@@ -107,6 +111,10 @@ void Scene::scheduleLoop(int ticks_per_sec) {
         }
       } else if (event.type == SDL_MOUSEBUTTONUP) {
         cpVect event_coords = translatedMouseCoords(event.button.x, event.button.y);
+        
+        // reposition the crosshair
+        crosshair->setX(event_coords.x);
+        crosshair->setY(event_coords.y);
         
         // find the cannon game object
         Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
