@@ -18,10 +18,10 @@ int main(int argc, char* argv[]) {
   TexManager::Instance()->loadTexture("assets/crosshairs.png", true);
 
   // show the title scene and start the game loop
-  BoxTumble *box_tumble = new BoxTumble();
-  engine.showScene(box_tumble);
+  GameplayScene *gameplay_scene = new GameplayScene();
+  engine.showScene(gameplay_scene);
   
-  delete box_tumble;
+  delete gameplay_scene;
 
   return 0;
 }
