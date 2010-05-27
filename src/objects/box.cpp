@@ -1,5 +1,17 @@
 #include "box.h"
 
+Box::Box(int type, int sim_type) : Sprite("", 64, 64, BOX_TAG) {
+  box_type = type;
+  simulation_type = sim_type;
+
+  x = 0.0f;
+  y = 0.0f;
+  
+  // based on the box type determine width and height
+  width = 100;
+  height = 100;
+}
+
 Box::Box(float _x, float _y, float _width, float _height) : Sprite("", 64, 64, BOX_TAG) {
   x = _x;
   y = _y;

@@ -3,10 +3,11 @@
 void GameplayScene::setup() {
   defineBorder(true, true, true, true);
   
-  Box *box = new Box(BOX_TYPE, STATIC);
-  box->position(cpv(100.0f, 100.0f));
-  box->angle(30.0f);
-  base->definePhysics(space);
+  Box *box = new Box(BOX_TALL_SKINNY, SIMULATION_STATIC);
+  box->setX(100.0f);
+  box->setY(100.0f);
+  box->setAngle(30.0f);
+  box->definePhysics(space);
   addObject(box);
   
   /*

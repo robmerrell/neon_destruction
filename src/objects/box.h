@@ -12,8 +12,18 @@ class Box : public Sprite {
     cpBody *body;
     float width;
     float height;
+    
+    int box_type;
+    int simulation_type;
 
   public:
+    /**
+     * Load the box onto the scene
+     * int box type
+     * int simulation (STATIC or DYNAMIC)
+     */
+    Box(int, int);
+    
     /**
      * Load the box onto the scene
      * float x

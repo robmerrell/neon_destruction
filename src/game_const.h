@@ -44,6 +44,16 @@ const float STAR_FIELD1_SPEED = 100.0f;
 const float STAR_FIELD2_SPEED = 50.0f;
 
 
+/*****************
+** Game Objects **
+******************/
+const int SIMULATION_STATIC = 1;
+const int SIMULATION_DYNAMIC = 2;
+
+const int BOX_TALL_SKINNY = 1;
+
+
+
 #include <Math.h>
 #define RAD2DEG(Rad) ((180.0 * Rad) / M_PI)
 
