@@ -3,21 +3,21 @@
 void GameplayScene::setup() {
   defineBorder(true, true, true, true);
   
-  Box *box = new Box(BOX_TALL_SKINNY, SIMULATION_STATIC);
+  Box *box = new Box(BOX_SMALL_SQUARE, SIMULATION_STATIC);
   box->setX(100.0f);
   box->setY(100.0f);
   box->setAngle(60.0f);
   box->definePhysics(space);
   addObject(box);
   
-  Box *box2 = new Box(BOX_TALL_MEDIUM, SIMULATION_STATIC);
+  Box *box2 = new Box(BOX_MEDIUM_SQUARE, SIMULATION_STATIC);
   box2->setX(230.0f);
   box2->setY(100.0f);
   box2->setAngle(60.0f);
   box2->definePhysics(space);
   addObject(box2);
   
-  Box *box3 = new Box(BOX_TALL_WIDE, SIMULATION_STATIC);
+  Box *box3 = new Box(BOX_LARGE_SQUARE, SIMULATION_STATIC);
   box3->setX(400.0f);
   box3->setY(100.0f);
   box3->setAngle(60.0f);

@@ -54,7 +54,9 @@ const int BOX_TALL_SKINNY = 1;
 const int BOX_TALL_MEDIUM = 2;
 const int BOX_TALL_WIDE = 3;
 
-
+const int BOX_SMALL_SQUARE = 4;
+const int BOX_MEDIUM_SQUARE = 5;
+const int BOX_LARGE_SQUARE = 6;
 
 #include <Math.h>
 #define RAD2DEG(Rad) ((180.0 * Rad) / M_PI)

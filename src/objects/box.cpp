@@ -23,6 +23,21 @@ Box::Box(int type, int sim_type) : Sprite("", 64, 64, BOX_TAG) {
       width = 100.0f;
       height = 150.0f;
       break;
+      
+    case BOX_SMALL_SQUARE:
+      width = 25.0f;
+      height = 25.0f;
+      break;
+
+    case BOX_MEDIUM_SQUARE:
+      width = 60.0f;
+      height = 60.0f;
+      break;
+
+    case BOX_LARGE_SQUARE:
+      width = 120.0f;
+      height = 120.0f;
+      break;
     
     default:
       width = 100.0f;
