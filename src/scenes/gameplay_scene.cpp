@@ -3,6 +3,7 @@
 void GameplayScene::setup() {
   defineBorder(true, true, true, true);
   
+  /*
   Box *box = new Box(BOX_SMALL_SQUARE, SIMULATION_STATIC);
   box->setX(100.0f);
   box->setY(100.0f);
@@ -23,6 +24,7 @@ void GameplayScene::setup() {
   box3->setAngle(60.0f);
   box3->definePhysics(space);
   addObject(box3);
+  */
   
   /*
   Cannon *cannon = new Cannon(20.0f, 276.0f);
