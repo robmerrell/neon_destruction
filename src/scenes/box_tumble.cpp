@@ -2,6 +2,7 @@
 
 void BoxTumble::setup() {
   defineBorder(true, true, true, true);
+  /*
   
   Cannon *cannon = new Cannon(20.0f, 276.0f);
   cannon->definePhysics(space);
@@ -22,7 +23,7 @@ void BoxTumble::setup() {
   Platform *platform = new Platform(400, 100, 480, 100);
   platform->definePhysics(space);
   addObject(platform);
-
+*/
 /*  
   cannon = new Cannon(140, 106);
   cannon->definePhysics(space);

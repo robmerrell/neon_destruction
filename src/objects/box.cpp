@@ -12,19 +12,12 @@ Box::Box(int type, int sim_type) : Sprite("", 64, 64, BOX_TAG) {
   height = 100;
 }
 
-Box::Box(float _x, float _y, float _width, float _height) : Sprite("", 64, 64, BOX_TAG) {
-  x = _x;
-  y = _y;
-  
-  width = _width;
-  height = _height;
-}
-
 void Box::definePhysics(cpSpace *space) {
   // body
   cpVect verts[] = { cpv(-width/2, -height/2), cpv(-width/2, height/2), cpv(width/2, height/2), cpv(width/2, -height/2) };
   body = cpBodyNew(10.0f, cpMomentForPoly(10.0f, 4, verts, cpvzero));
   body->p = cpv(x, y);
+  cpBodySetAngle(body, angle);
   cpSpaceAddBody(space, body);
   
   // poly shape box
