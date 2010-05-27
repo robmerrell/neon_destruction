@@ -25,15 +25,6 @@ class Box : public Sprite {
     Box(int, int);
     
     /**
-     * Load the box onto the scene
-     * float x
-     * float y
-     * float width
-     * float height
-     */
-    Box(float, float, float, float);
-    
-    /**
      * Define the physics properties of the box
      */
     void definePhysics(cpSpace*);

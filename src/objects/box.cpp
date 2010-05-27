@@ -8,8 +8,26 @@ Box::Box(int type, int sim_type) : Sprite("", 64, 64, BOX_TAG) {
   y = 0.0f;
   
   // based on the box type determine width and height
-  width = 100;
-  height = 100;
+  switch (type) {
+    case BOX_TALL_SKINNY:
+      width = 20.0f;
+      height = 150.0f;
+      break;
+      
+    case BOX_TALL_MEDIUM:
+      width = 60.0f;
+      height = 150.0f;
+      break;
+      
+    case BOX_TALL_WIDE:
+      width = 100.0f;
+      height = 150.0f;
+      break;
+    
+    default:
+      width = 100.0f;
+      height = 100.0f;
+  }
 }
 
 void Box::definePhysics(cpSpace *space) {

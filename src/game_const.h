@@ -51,6 +51,8 @@ const int SIMULATION_STATIC = 1;
 const int SIMULATION_DYNAMIC = 2;
 
 const int BOX_TALL_SKINNY = 1;
+const int BOX_TALL_MEDIUM = 2;
+const int BOX_TALL_WIDE = 3;
 
 
 

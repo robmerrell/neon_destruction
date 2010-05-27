@@ -10,6 +10,20 @@ void GameplayScene::setup() {
   box->definePhysics(space);
   addObject(box);
   
+  Box *box2 = new Box(BOX_TALL_MEDIUM, SIMULATION_STATIC);
+  box2->setX(230.0f);
+  box2->setY(100.0f);
+  box2->setAngle(60.0f);
+  box2->definePhysics(space);
+  addObject(box2);
+  
+  Box *box3 = new Box(BOX_TALL_WIDE, SIMULATION_STATIC);
+  box3->setX(400.0f);
+  box3->setY(100.0f);
+  box3->setAngle(60.0f);
+  box3->definePhysics(space);
+  addObject(box3);
+  
   /*
   Cannon *cannon = new Cannon(20.0f, 276.0f);
   cannon->definePhysics(space);
