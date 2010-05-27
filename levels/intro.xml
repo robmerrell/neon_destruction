@@ -1,0 +1,5 @@
+<?xml version="1.0" standalone=no>
+<level name="Introduction">
+  <object type="BOX" size="LARGE_SQUARE" x="100.0f" y="100.0f" angle="65.0f" physics="DYNAMIC" />
+  <object type="BOX" size="SMALL_SQUARE" x="300.0f" y="200.0f" angle="0.0f" physics="STATIC" />
+</level>

@@ -1,52 +1,38 @@
 #include "gameplay_scene.h"
 
+#include <iostream>
+
 void GameplayScene::setup() {
   defineBorder(true, true, true, true);
   
-  /*
-  Box *box = new Box(BOX_SMALL_SQUARE, SIMULATION_STATIC);
-  box->setX(100.0f);
-  box->setY(100.0f);
-  box->setAngle(60.0f);
-  box->definePhysics(space);
-  addObject(box);
+  TiXmlDocument level_data("levels/intro.xml");
+  level_data.LoadFile();
+
+  string size, x, y, angle, type, physics;
+  Box *box;
   
-  Box *box2 = new Box(BOX_MEDIUM_SQUARE, SIMULATION_STATIC);
-  box2->setX(230.0f);
-  box2->setY(100.0f);
-  box2->setAngle(60.0f);
-  box2->definePhysics(space);
-  addObject(box2);
+  TiXmlNode* level = level_data.FirstChild("level");
+  TiXmlNode* object_node;
   
-  Box *box3 = new Box(BOX_LARGE_SQUARE, SIMULATION_STATIC);
-  box3->setX(400.0f);
-  box3->setY(100.0f);
-  box3->setAngle(60.0f);
-  box3->definePhysics(space);
-  addObject(box3);
-  */
-  
-  /*
-  Cannon *cannon = new Cannon(20.0f, 276.0f);
-  cannon->definePhysics(space);
-  addObject(cannon);
-  
-  Box *base = new Box(200, 270, 100, 100);
-  base->definePhysics(space);
-  addObject(base);
-  
-  Box *middle = new Box(220, 190, 60, 60);
-  middle->definePhysics(space);
-  addObject(middle);
-  
-  Box *middle_smaller = new Box(230, 85, 20, 150);
-  middle_smaller->definePhysics(space);
-  addObject(middle_smaller);
-  
-  Platform *platform = new Platform(400, 100, 480, 100);
-  platform->definePhysics(space);
-  addObject(platform);
-  */
+  for (object_node = level->FirstChild(); object_node != 0; object_node = object_node->NextSibling() ) {
+    if (object_node->ToElement()->Attribute("type") == string("BOX")) {
+      // extract data from XML
+      size = object_node->ToElement()->Attribute("size");
+      physics = object_node->ToElement()->Attribute("physics");
+      x = object_node->ToElement()->Attribute("x");
+      y = object_node->ToElement()->Attribute("y");
+      angle = object_node->ToElement()->Attribute("angle");
+      type = "BOX_" + size;
+
+      // create the actual box
+      box = new Box(type, physics);
+      box->setX(strtof(x.c_str(), NULL));
+      box->setY(strtof(y.c_str(), NULL));
+      box->setAngle(strtof(angle.c_str(), NULL));
+      box->definePhysics(space);
+      addObject(box);
+    }
+  }
   
   // start the game loop
   scheduleLoop(60);
