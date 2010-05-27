@@ -13,8 +13,8 @@ class Box : public Sprite {
     float width;
     float height;
     
-    int box_type;
-    int simulation_type;
+    string box_type;
+    string simulation_type;
 
   public:
     /**
@@ -22,7 +22,7 @@ class Box : public Sprite {
      * int box type
      * int simulation (STATIC or DYNAMIC)
      */
-    Box(int, int);
+    Box(string, string);
     
     /**
      * Define the physics properties of the box

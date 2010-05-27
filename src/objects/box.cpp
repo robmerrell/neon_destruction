@@ -1,6 +1,6 @@
 #include "box.h"
 
-Box::Box(int type, int sim_type) : Sprite("", 64, 64, BOX_TAG) {
+Box::Box(string type, string sim_type) : Sprite("", 64, 64, BOX_TAG) {
   box_type = type;
   simulation_type = sim_type;
 
@@ -8,41 +8,26 @@ Box::Box(int type, int sim_type) : Sprite("", 64, 64, BOX_TAG) {
   y = 0.0f;
   
   // based on the box type determine width and height
-  switch (type) {
-    case BOX_TALL_SKINNY:
-      width = 20.0f;
-      height = 150.0f;
-      break;
-      
-    case BOX_TALL_MEDIUM:
-      width = 60.0f;
-      height = 150.0f;
-      break;
-      
-    case BOX_TALL_WIDE:
-      width = 100.0f;
-      height = 150.0f;
-      break;
-      
-    case BOX_SMALL_SQUARE:
-      width = 25.0f;
-      height = 25.0f;
-      break;
-
-    case BOX_MEDIUM_SQUARE:
-      width = 60.0f;
-      height = 60.0f;
-      break;
-
-    case BOX_LARGE_SQUARE:
-      width = 120.0f;
-      height = 120.0f;
-      break;
-    
-    default:
-      width = 100.0f;
-      height = 100.0f;
+  if (type == "BOX_TALL_SKINNY") {
+    width = 20.0f;
+    height = 150.0f;
+  } else if (type == "BOX_TALL_MEDIUM") {
+    width = 60.0f;
+    height = 150.0f;
+  } else if (type == "BOX_TALL_WIDE") {
+    width = 100.0f;
+    height = 150.0f;
+  } else if (type == "BOX_SMALL_SQUARE") {
+    width = 25.0f;
+    height = 25.0f;
+  } else if (type == "BOX_MEDIUM_SQUARE") {
+    width = 60.0f;
+    height = 60.0f;
+  } else {
+    width = 120.0f;
+    height = 120.0f;
   }
+  
 }
 
 void Box::definePhysics(cpSpace *space) {
