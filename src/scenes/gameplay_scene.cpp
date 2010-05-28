@@ -31,6 +31,7 @@ void GameplayScene::setup() {
       box->setAngle(strtof(angle.c_str(), NULL));
       box->definePhysics(space);
       addObject(box);
+    } else if (object_node->ToElement()->Attribute("type") == string("PLATFORM")) {
     }
   }
   

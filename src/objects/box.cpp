@@ -33,10 +33,13 @@ Box::Box(string type, string sim_type) : Sprite("", 64, 64, BOX_TAG) {
 void Box::definePhysics(cpSpace *space) {
   // body
   cpVect verts[] = { cpv(-width/2, -height/2), cpv(-width/2, height/2), cpv(width/2, height/2), cpv(width/2, -height/2) };
-  body = cpBodyNew(10.0f, cpMomentForPoly(10.0f, 4, verts, cpvzero));
+  if (simulation_type == "DYNAMIC")
+    body = cpBodyNew(10.0f, cpMomentForPoly(10.0f, 4, verts, cpvzero));
+  else
+    body = cpBodyNew(INFINITY, INFINITY);
   body->p = cpv(x, y);
   cpBodySetAngle(body, angle);
-  cpSpaceAddBody(space, body);
+  if (simulation_type == "DYNAMIC") cpSpaceAddBody(space, body);
   
   // poly shape box
   cpShape *boxShape = cpPolyShapeNew(body, 4, verts, cpvzero);
@@ -45,7 +48,10 @@ void Box::definePhysics(cpSpace *space) {
   boxShape->data = this;
   boxShape->collision_type = BOX_COLLISION;
   
-  cpSpaceAddShape(space, boxShape);
+  if (simulation_type == "DYNAMIC")
+    cpSpaceAddShape(space, boxShape);
+  else
+    cpSpaceAddStaticShape(space, boxShape);
 }
 
 void Box::display() {
