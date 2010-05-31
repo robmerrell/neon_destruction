@@ -10,7 +10,7 @@ Sprite::Sprite(std::string filename, float _width, float _height, int _tag) {
 }
 
 void Sprite::setAngle(float _angle) {
-  angle = _angle;
+  angle = 360.0f - _angle;
 }
 
 float Sprite::getAngle() {
