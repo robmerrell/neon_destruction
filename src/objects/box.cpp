@@ -38,7 +38,7 @@ void Box::definePhysics(cpSpace *space) {
   else
     body = cpBodyNew(INFINITY, INFINITY);
   body->p = cpv(x, y);
-  cpBodySetAngle(body, angle);
+  cpBodySetAngle(body, DEG2RAD(angle));
   if (simulation_type == "DYNAMIC") cpSpaceAddBody(space, body);
   
   // poly shape box

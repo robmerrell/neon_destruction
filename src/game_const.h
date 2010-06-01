@@ -46,5 +46,6 @@ const float STAR_FIELD2_SPEED = 50.0f;
 
 #include <Math.h>
 #define RAD2DEG(Rad) ((180.0 * Rad) / M_PI)
+#define DEG2RAD(Deg) ((Deg)*((M_PI)/(180.0)))
 
 #endif
