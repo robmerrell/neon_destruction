@@ -10,20 +10,16 @@ class Platform : public Sprite {
 
   private:
     cpBody *body;
-    float start_x;
-    float start_y;
-    float end_x;
-    float end_y;
+    
+    float width;
+    float height;
 
   public:
     /**
      * Load the platform onto the scene
-     * float start_x
-     * float start_y
-     * float end_x
-     * float end_y
+     * string type
      */
-    Platform(float, float, float, float);
+    Platform(string);
     
     /**
      * Define the physics properties of the platform

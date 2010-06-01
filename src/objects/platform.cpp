@@ -1,104 +1,71 @@
 #include "platform.h"
+#include <iostream>
 
-Platform::Platform(float sx, float sy, float ex, float ey) : Sprite("", 64, 64, PLATFORM_TAG) {
-  start_x = sx;
-  start_y = sy;
+Platform::Platform(string type) : Sprite("", 64, 64, PLATFORM_TAG) {  
+  height = 32.0f; // always 32 so that it matches our sprite
+  width = 0.0f;
   
-  end_x = ex;
-  end_y = ey;
+  if (type == "PLATFORM_EXTRA_SMALL") {
+    width = 20.0f;
+  } else if (type == "PLATFORM_SMALL") {
+    width = 50.0f;
+  } else if (type == "PLATFORM_MEDIUM") {
+    width = 100.0f;
+  } else if (type == "PLATFORM_LONG") {
+    width = 150.0f;
+  } else if (type == "PLATFORM_EXTRA_LONG") {
+    width = 200.0f;
+  }
 }
 
-void Platform::definePhysics(cpSpace *space) {
+void Platform::definePhysics(cpSpace *space) {  
   // body
+  cpVect verts[] = { cpv(-width/2, -height/2), cpv(-width/2, height/2), cpv(width/2, height/2), cpv(width/2, -height/2) };
   body = cpBodyNew(INFINITY, INFINITY);
-
-  // segment
-  cpShape *platformShape = cpSegmentShapeNew(body, cpv(start_x, start_y), cpv(end_x, end_y), 3.0f);
-  platformShape->e = 0.5;
-  platformShape->u = 0.3;
-  platformShape->collision_type = PLATFORM_COLLISION;
+  body->p = cpv(x, y);
+  cpBodySetAngle(body, DEG2RAD(angle));
   
-  cpSpaceAddStaticShape(space, platformShape);
+  // poly shape box
+  cpShape *boxShape = cpPolyShapeNew(body, 4, verts, cpvzero);
+  boxShape->e = 0.1;
+  boxShape->u = 0.3;
+  boxShape->data = this;
+  boxShape->collision_type = PLATFORM_COLLISION;
+  
+  cpSpaceAddStaticShape(space, boxShape);
 }
 
 void Platform::display() {
-  /*
-  // draw the frakkin line
-  glLineWidth(4.0);
-  glDisable(GL_TEXTURE_2D);
-
-  glEnable(GL_LINE_SMOOTH);
-  glLoadIdentity();
-  glTranslatef(0, 0, 0);
+  float start_x = x;
+  float start_y = y;
   
-  GLfloat vertices[] = {start_x, start_y, end_x, end_y};
-  glVertexPointer(2, GL_FLOAT, 0, vertices);
-  glEnableClientState(GL_VERTEX_ARRAY);
-
-  glDrawArrays(GL_LINES, 0, 2);
-  glDisableClientState(GL_VERTEX_ARRAY);
+  float end_x = start_x + width;
+  float end_y = start_y - height;
   
-  glEnable(GL_TEXTURE_2D);
-*/
-
-  // draw the glow
   float dx = end_x - start_x;
-  float dy = start_y - end_y;
-  float distance = sqrt((dx*dx) + (dy * dy)) + 5;
+  float dy = end_y - start_y;
   
-  GLfloat shadow_vertices[] = {0,32,0, distance,32,0, 0,0,0, distance,0,0};
+  GLfloat vertices[] = {0,dy,0, dx,dy,0, 0,0,0, dx,0,0};
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
   TexManager::Instance()->bindTexture(6);
   
   glLoadIdentity();
-  glTranslatef(start_x, start_y - 13, 0.0);
-  
-  // rotate if needed
-  if (dy != 0) {
-    float angle = getInvertedMouseAngle(cpv(start_x, start_y), cpv(end_x, end_y));
-    glRotatef(angle, 0.0, 0.0, 1.0);
-  }
-  
+  glTranslatef(start_x - width/2, start_y + height/2, 0.0);
+  glTranslatef(width/2, -height/2, 0.0);
+  glRotatef(angle, 0.0f, 0.0f, 1.0f);
+  glTranslatef(-width/2, height/2, 0.0);
+
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
   
-  glVertexPointer(3, GL_FLOAT, 0, shadow_vertices);
+  glVertexPointer(3, GL_FLOAT, 0, vertices);
   glTexCoordPointer(3, GL_FLOAT, 0, tex);
   
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   
   glDisableClientState(GL_VERTEX_ARRAY);
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-  
-  
-  /*
-  GLfloat right_vertices[] = {0,32,0, 32,32,0, 0,0,0, 32,0,0};
-  GLfloat right_tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
-  
-  TexManager::Instance()->bindTexture(7);
-  
-  glLoadIdentity();
-  glTranslatef(end_x + 5, end_y - 13, 0.0);
-  
-  // rotate if needed
-  if (dy != 0) {
-    float angle = getInvertedMouseAngle(cpv(start_x, start_y), cpv(end_x, end_y));
-    glRotatef(angle, 0.0, 0.0, 1.0);
-  }
-  
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-  
-  glVertexPointer(3, GL_FLOAT, 0, right_vertices);
-  glTexCoordPointer(3, GL_FLOAT, 0, right_tex);
-  
-  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-  
-  glDisableClientState(GL_VERTEX_ARRAY);
-  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-  */
-  
   
   TexManager::Instance()->unbindTexture();
 }

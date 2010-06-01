@@ -10,9 +10,14 @@ void GameplayScene::setup() {
 
   string size, x, y, angle, type, physics;
   Box *box;
+  Platform *platform;
   
   TiXmlNode* level = level_data.FirstChild("level");
   TiXmlNode* object_node;
+  
+  Cannon *cannon = new Cannon(400, 100);
+  cannon->definePhysics(space);
+  addObject(cannon);
   
   for (object_node = level->FirstChild(); object_node != 0; object_node = object_node->NextSibling() ) {
     if (object_node->ToElement()->Attribute("type") == string("BOX")) {
@@ -32,6 +37,20 @@ void GameplayScene::setup() {
       box->definePhysics(space);
       addObject(box);
     } else if (object_node->ToElement()->Attribute("type") == string("PLATFORM")) {
+      // extract data from XML
+      size = object_node->ToElement()->Attribute("size");
+      x = object_node->ToElement()->Attribute("x");
+      y = object_node->ToElement()->Attribute("y");
+      angle = object_node->ToElement()->Attribute("angle");
+      type = "PLATFORM_" + size;
+      
+      // create the platform
+      platform = new Platform(type);
+      platform->setX(strtof(x.c_str(), NULL));
+      platform->setY(strtof(y.c_str(), NULL));
+      platform->setAngle(strtof(angle.c_str(), NULL));
+      platform->definePhysics(space);
+      addObject(platform);
     }
   }
   
