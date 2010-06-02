@@ -5,6 +5,8 @@
 void GameplayScene::setup() {
   defineBorder(true, true, true, true);
   
+  has_cannon = false;
+  
   TiXmlDocument level_data("levels/intro.xml");
   level_data.LoadFile();
 
@@ -15,12 +17,16 @@ void GameplayScene::setup() {
   TiXmlNode* level = level_data.FirstChild("level");
   TiXmlNode* object_node;
   
-  Cannon *cannon = new Cannon(400, 100);
-  cannon->definePhysics(space);
-  addObject(cannon);
-  
   for (object_node = level->FirstChild(); object_node != 0; object_node = object_node->NextSibling() ) {
-    if (object_node->ToElement()->Attribute("type") == string("BOX")) {
+    if (object_node->ToElement()->Attribute("type") == string("CANNON") && !has_cannon) {
+      x = object_node->ToElement()->Attribute("x");
+      y = object_node->ToElement()->Attribute("y");
+      
+      Cannon *cannon = new Cannon(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL));
+      cannon->definePhysics(space);
+      addObject(cannon);
+      has_cannon = true;
+    } if (object_node->ToElement()->Attribute("type") == string("BOX")) {
       // extract data from XML
       size = object_node->ToElement()->Attribute("size");
       physics = object_node->ToElement()->Attribute("physics");

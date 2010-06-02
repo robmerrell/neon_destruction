@@ -6,6 +6,9 @@
 
 class GameplayScene : public Scene {
   
+  private:
+    bool has_cannon;
+  
   public:
     GameplayScene() {};
     
