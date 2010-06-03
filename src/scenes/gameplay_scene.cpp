@@ -23,7 +23,6 @@ void GameplayScene::setup() {
       y = object_node->ToElement()->Attribute("y");
       
       Cannon *cannon = new Cannon(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL));
-      cannon->definePhysics(space);
       addObject(cannon);
       has_cannon = true;
     } if (object_node->ToElement()->Attribute("type") == string("BOX")) {

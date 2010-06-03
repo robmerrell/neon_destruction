@@ -22,7 +22,7 @@ class Cannon : public Sprite {
     /**
      * Define the physics properties of the cannon
      */
-    void definePhysics(cpSpace*);
+    void definePhysics(cpSpace*) {};
     
     /**
      * Display the cannon
