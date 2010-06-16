@@ -13,16 +13,14 @@ class Box : public Sprite {
     float width;
     float height;
     
-    string box_type;
     string simulation_type;
 
   public:
     /**
      * Load the box onto the scene
-     * int box type
      * int simulation (STATIC or DYNAMIC)
      */
-    Box(string, string);
+    Box(string);
     
     /**
      * Define the physics properties of the box
@@ -33,6 +31,12 @@ class Box : public Sprite {
      * Display the box
      */
     void display();
+    
+    /**
+     * size
+     */
+     void setWidth(float);
+     void setHeight(float);
 };
 
 #endif
