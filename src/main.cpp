@@ -16,6 +16,7 @@ int main(int argc, char* argv[]) {
   TexManager::Instance()->loadTexture("assets/line_cap.png", true);
   TexManager::Instance()->loadTexture("assets/white.png", true); // TODO: remove me
   TexManager::Instance()->loadTexture("assets/crosshairs.png", true);
+  TexManager::Instance()->loadTexture("assets/circle.png", true);
 
   // show the title scene and start the game loop
   GameplayScene *gameplay_scene = new GameplayScene();

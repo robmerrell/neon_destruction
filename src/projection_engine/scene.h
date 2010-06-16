@@ -17,6 +17,7 @@
 #include "../objects/cannon.h"
 #include "../objects/box.h"
 #include "../objects/crosshair.h"
+#include "../objects/circle.h"
 
 // engine
 #include "sprite.h"

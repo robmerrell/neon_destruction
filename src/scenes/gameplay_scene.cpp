@@ -10,9 +10,10 @@ void GameplayScene::setup() {
   TiXmlDocument level_data("levels/intro.xml");
   level_data.LoadFile();
 
-  string size, x, y, angle, type, physics, width, height;
+  string size, x, y, angle, type, physics, width, height, radius;
   Box *box;
   Platform *platform;
+  Circle *circle;
   
   TiXmlNode* level = level_data.FirstChild("level");
   TiXmlNode* object_node;
@@ -58,6 +59,20 @@ void GameplayScene::setup() {
       platform->setAngle(strtof(angle.c_str(), NULL));
       platform->definePhysics(space);
       addObject(platform);
+    } else if (object_node->ToElement()->Attribute("type") == string("CIRCLE")) {
+      // extract data from XML
+      physics = object_node->ToElement()->Attribute("physics");
+      x = object_node->ToElement()->Attribute("x");
+      y = object_node->ToElement()->Attribute("y");
+      radius = object_node->ToElement()->Attribute("radius");
+
+      // create the 
+      circle = new Circle(physics);
+      circle->setX(strtof(x.c_str(), NULL));
+      circle->setY(strtof(y.c_str(), NULL));
+      circle->setRadius(strtof(radius.c_str(), NULL));
+      circle->definePhysics(space);
+      addObject(circle);
     }
   }
   

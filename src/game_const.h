@@ -13,6 +13,7 @@ const int GOAL_TAG = 4;
 const int GRAVITY_SWITCH_TAG = 5;
 const int BOX_TAG = 6;
 const int CROSSHAIR_TAG = 100;
+const int CIRCLE_TAG = 8;
 
 const int CANNON_COLLISION = 1;
 const int BALL_COLLISION = 2;
@@ -20,6 +21,7 @@ const int PLATFORM_COLLISION = 3;
 const int GOAL_COLLISION = 4;
 const int GRAVITY_SWITCH_COLLISION = 5;
 const int BOX_COLLISION = 6;
+const int CIRCLE_COLLISION = 7;
 
 const int GRAVITY_UP = 1;
 const int GRAVITY_DOWN = 2;
@@ -38,7 +40,7 @@ const int SCREEN_BPP = 32;
 /*************
 ** Graphics **
 **************/
-const int TEXTURE_COUNT = 10;
+const int TEXTURE_COUNT = 11;
 const int STARS_PER_FIELD = 170;
 const float STAR_FIELD1_SPEED = 100.0f;
 const float STAR_FIELD2_SPEED = 50.0f;
