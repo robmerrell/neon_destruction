@@ -6,29 +6,7 @@ Box::Box(string sim_type) : Sprite("", 64, 64, BOX_TAG) {
   x = 0.0f;
   y = 0.0f;
   width = 0.0f;
-  height = 0.0f;
-  
-  // based on the box type determine width and height
-  // if (type == "BOX_TALL_SKINNY") {
-  //   width = 20.0f;
-  //   height = 150.0f;
-  // } else if (type == "BOX_TALL_MEDIUM") {
-  //   width = 60.0f;
-  //   height = 150.0f;
-  // } else if (type == "BOX_TALL_WIDE") {
-  //   width = 100.0f;
-  //   height = 150.0f;
-  // } else if (type == "BOX_SMALL_SQUARE") {
-  //   width = 25.0f;
-  //   height = 25.0f;
-  // } else if (type == "BOX_MEDIUM_SQUARE") {
-  //   width = 60.0f;
-  //   height = 60.0f;
-  // } else {
-  //   width = 120.0f;
-  //   height = 120.0f;
-  // }
-  
+  height = 0.0f;  
 }
 
 void Box::setWidth(float _width) {
