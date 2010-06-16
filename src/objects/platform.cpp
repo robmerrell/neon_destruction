@@ -1,21 +1,13 @@
 #include "platform.h"
 #include <iostream>
 
-Platform::Platform(string type) : Sprite("", 64, 64, PLATFORM_TAG) {  
+Platform::Platform() : Sprite("", 64, 64, PLATFORM_TAG) {  
   height = 32.0f; // always 32 so that it matches our sprite
   width = 0.0f;
-  
-  if (type == "PLATFORM_EXTRA_SMALL") {
-    width = 20.0f;
-  } else if (type == "PLATFORM_SMALL") {
-    width = 50.0f;
-  } else if (type == "PLATFORM_MEDIUM") {
-    width = 100.0f;
-  } else if (type == "PLATFORM_LONG") {
-    width = 150.0f;
-  } else if (type == "PLATFORM_EXTRA_LONG") {
-    width = 200.0f;
-  }
+}
+
+void Platform::setWidth(float _width) {
+  width = _width;
 }
 
 void Platform::definePhysics(cpSpace *space) {  

@@ -17,9 +17,8 @@ class Platform : public Sprite {
   public:
     /**
      * Load the platform onto the scene
-     * string type
      */
-    Platform(string);
+    Platform();
     
     /**
      * Define the physics properties of the platform
@@ -30,6 +29,11 @@ class Platform : public Sprite {
      * Display the platform
      */
     void display();
+    
+    /**
+     * Size
+     */
+    void setWidth(float);
 };
 
 #endif

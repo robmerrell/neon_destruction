@@ -45,16 +45,16 @@ void GameplayScene::setup() {
       addObject(box);
     } else if (object_node->ToElement()->Attribute("type") == string("PLATFORM")) {
       // extract data from XML
-      size = object_node->ToElement()->Attribute("size");
       x = object_node->ToElement()->Attribute("x");
       y = object_node->ToElement()->Attribute("y");
+      width = object_node->ToElement()->Attribute("width");
       angle = object_node->ToElement()->Attribute("angle");
-      type = "PLATFORM_" + size;
-      
+
       // create the platform
-      platform = new Platform(type);
+      platform = new Platform();
       platform->setX(strtof(x.c_str(), NULL));
       platform->setY(strtof(y.c_str(), NULL));
+      platform->setWidth(strtof(width.c_str(), NULL));
       platform->setAngle(strtof(angle.c_str(), NULL));
       platform->definePhysics(space);
       addObject(platform);

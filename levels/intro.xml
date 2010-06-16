@@ -2,7 +2,7 @@
 <level name="Introduction">
   <object type="BOX" x="100.0f" y="50.0f" width="100.0f" height="100.0f" angle="65.0f" physics="DYNAMIC" />
   <object type="BOX" x="300.0f" y="100.0f" width="30.0f" height="100.0f" angle="30.0f" physics="DYNAMIC" />
-  <object type="PLATFORM" size="LONG" x="100.0f" y="200.0f" angle="60.0f" />
+  <object type="PLATFORM" x="100.0f" y="200.0f" width="100.0f" angle="0.0f" />
   
   <object type="CANNON" x="100.0f" y="200.0f" />
 </level>
