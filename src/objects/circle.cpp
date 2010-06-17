@@ -24,15 +24,15 @@ void Circle::definePhysics(cpSpace *space) {
 }
 
 void Circle::display() {
-  float diameter = radius * radius;
-  
+  float diameter = radius * 2.0f;
+
   GLfloat circle_vertices[] = {0,diameter,0, diameter,diameter,0, 0,0,0, diameter,0,0};
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
   TexManager::Instance()->bindTexture(10);
   
   glLoadIdentity();
-  glTranslatef(body->p.x, body->p.y, 0.0);
+  glTranslatef(body->p.x - radius, body->p.y - radius, 0.0);
   
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
