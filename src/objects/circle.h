@@ -11,6 +11,7 @@ class Circle : public Sprite {
     cpBody *body;
     float radius;
 
+    string simulation_type;
   public:
     /**
      * Load the circle onto the scene

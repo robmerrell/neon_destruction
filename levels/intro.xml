@@ -4,6 +4,7 @@
   <object type="BOX" x="300.0f" y="100.0f" width="30.0f" height="100.0f" angle="30.0f" physics="DYNAMIC" />
   <object type="PLATFORM" x="100.0f" y="200.0f" width="100.0f" angle="0.0f" />
   <object type="CIRCLE" x="300.0f" y="200.0f" radius="48.0f" physics="DYNAMIC" />
+  <object type="CIRCLE" x="300.0f" y="50.0f" radius="16.0f" physics="STATIC" />
   
   <object type="CANNON" x="100.0f" y="200.0f" />
 </level>

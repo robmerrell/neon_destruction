@@ -2,6 +2,7 @@
 #include <Math.h>
 
 Circle::Circle(string sim_type) : Sprite("", 64, 64, CIRCLE_TAG) {
+  simulation_type = sim_type;
 }
 
 void Circle::setRadius(float _rad) {
@@ -10,9 +11,13 @@ void Circle::setRadius(float _rad) {
 
 void Circle::definePhysics(cpSpace *space) {
   // body
-  body = cpBodyNew(10.0f, INFINITY);
+  if (simulation_type == "DYNAMIC")
+    body = cpBodyNew(10.0f, cpMomentForCircle(10.0f, 0.0f, radius, cpvzero));
+  else
+    body = cpBodyNew(INFINITY, INFINITY);
+    
   body->p = cpv(x, y);
-  cpSpaceAddBody(space, body);
+  if (simulation_type == "DYNAMIC") cpSpaceAddBody(space, body);
 
   // ball shape
   cpShape *ballShape = cpCircleShapeNew(body, radius, cpvzero);
@@ -20,7 +25,11 @@ void Circle::definePhysics(cpSpace *space) {
   ballShape->u = 0.2;
   ballShape->data = this;
   ballShape->collision_type = CIRCLE_COLLISION;
-  cpSpaceAddShape(space, ballShape);
+  
+  if (simulation_type == "DYNAMIC")
+    cpSpaceAddShape(space, ballShape);
+  else
+    cpSpaceAddStaticShape(space, ballShape);
 }
 
 void Circle::display() {
