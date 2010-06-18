@@ -195,15 +195,19 @@ end
 
 desc "Create and install a package to the device"
 task :pkg do
-  pdk_bin = "/opt/PalmPDK/bin"
+  pdk_bin = "/opt/PalmSDK/Current/bin/"
   
   # copy the executable and asset file to the package dir
   system("cp main neon_blaster")
   system("cp -r assets/* neon_blaster/assets")
 
   puts "packaging..."
-  system("#{pdk_bin}/pdk-package neon_blaster")
+  cmd = "#{pdk_bin}/palm-package neon_blaster"
+  puts cmd
+  system(cmd)
   
   puts "installing..."
-  system("#{pdk_bin}/pdk-install com.trackera.neonblaster_1.0.0_all.ipk")
+  cmd = "#{pdk_bin}/palm-install com.trackera.neonblaster_1.0.0_all.ipk"
+  puts cmd
+  system(cmd)
 end
