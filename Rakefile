@@ -200,6 +200,7 @@ task :pkg do
   # copy the executable and asset file to the package dir
   system("cp main neon_blaster")
   system("cp -r assets/* neon_blaster/assets")
+  system("cp -r levels/* neon_blaster/levels")
 
   puts "packaging..."
   cmd = "#{pdk_bin}/palm-package neon_blaster"
