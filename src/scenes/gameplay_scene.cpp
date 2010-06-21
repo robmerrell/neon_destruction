@@ -14,6 +14,7 @@ void GameplayScene::setup() {
   Box *box;
   Platform *platform;
   Circle *circle;
+  Triangle *triangle;
   
   TiXmlNode* level = level_data.FirstChild("level");
   TiXmlNode* object_node;
@@ -44,6 +45,24 @@ void GameplayScene::setup() {
       box->setAngle(strtof(angle.c_str(), NULL));
       box->definePhysics(space);
       addObject(box);
+    } else if (object_node->ToElement()->Attribute("type") == string("TRIANGLE")) {
+      // extract data from XML
+      physics = object_node->ToElement()->Attribute("physics");
+      x = object_node->ToElement()->Attribute("x");
+      y = object_node->ToElement()->Attribute("y");
+      width = object_node->ToElement()->Attribute("width");
+      height = object_node->ToElement()->Attribute("height");
+      angle = object_node->ToElement()->Attribute("angle");
+      
+      // create the actual triangle
+      triangle = new Triangle(physics);
+      triangle->setX(strtof(x.c_str(), NULL));
+      triangle->setY(strtof(y.c_str(), NULL));
+      triangle->setWidth(strtof(width.c_str(), NULL));
+      triangle->setHeight(strtof(height.c_str(), NULL));
+      triangle->setAngle(strtof(angle.c_str(), NULL));
+      triangle->definePhysics(space);
+      addObject(triangle);
     } else if (object_node->ToElement()->Attribute("type") == string("PLATFORM")) {
       // extract data from XML
       x = object_node->ToElement()->Attribute("x");

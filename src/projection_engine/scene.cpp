@@ -324,7 +324,7 @@ void updateShape(void *ptr, void* unused) {
   sprite->setY(shape->body->p.y);
   
   // rotate certain objects
-  if (sprite->getTag() == BOX_TAG) {
+  if (sprite->getTag() == BOX_TAG || sprite->getTag() == TRIANGLE_TAG) {
     sprite->setAngle(RAD2DEG(shape->body->a));
   }
 }
