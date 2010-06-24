@@ -1,5 +1,7 @@
 #include "../projection_engine/sprite.h"
 #include "../game_const.h"
+#include "../projection_engine/tex_manager.h"
+#include "../projection_engine/event_translations.h"
 
 #ifndef GOAL_H
 #define GOAL_H

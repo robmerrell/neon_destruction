@@ -12,6 +12,7 @@ class GameplayScene : public Scene {
   
   private:
     bool has_cannon;
+    bool has_goal;
   
   public:
     GameplayScene() {};

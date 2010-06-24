@@ -6,4 +6,6 @@
   <object type="TRIANGLE" x="300.0f" y="70.0f" width="64.0f" height="64.0f" angle="0.0f" physics="DYNAMIC" />
   
   <object type="CANNON" x="100.0f" y="270.0f" />
+  
+  <object type="GOAL" x="400.0f" y="270.0f" />
 </level>

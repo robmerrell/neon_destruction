@@ -16,6 +16,7 @@ void GameplayScene::setup() {
 
 void GameplayScene::loadLevel(string level_file) {
   has_cannon = false;
+  has_goal = false;
   string path = "levels/";
   
   TiXmlDocument level_data(path.append(level_file).c_str());
@@ -38,6 +39,13 @@ void GameplayScene::loadLevel(string level_file) {
       Cannon *cannon = new Cannon(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL));
       addObject(cannon);
       has_cannon = true;
+    } if (object_node->ToElement()->Attribute("type") == string("GOAL")) {
+      x = object_node->ToElement()->Attribute("x");
+      y = object_node->ToElement()->Attribute("y");
+      
+      Goal *goal = new Goal(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL));
+      addObject(goal);
+      has_goal = true;
     } if (object_node->ToElement()->Attribute("type") == string("BOX")) {
       // extract data from XML
       physics = object_node->ToElement()->Attribute("physics");
