@@ -38,6 +38,8 @@ void Circle::display() {
   GLfloat circle_vertices[] = {0,diameter,0, diameter,diameter,0, 0,0,0, diameter,0,0};
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
+  glColor4f(alpha, alpha, alpha, alpha);
+  
   TexManager::Instance()->bindTexture(10);
   
   glLoadIdentity();

@@ -1,9 +1,8 @@
 <?xml version="1.0" standalone=no>
-<level name="Introduction">
-  <object type="BOX" x="100.0f" y="50.0f" width="100.0f" height="100.0f" angle="65.0f" physics="DYNAMIC" />
+<level name="Stack">
   <object type="PLATFORM" x="100.0f" y="200.0f" width="100.0f" angle="0.0f" />
   
   <object type="TRIANGLE" x="300.0f" y="70.0f" width="64.0f" height="64.0f" angle="0.0f" physics="DYNAMIC" />
   
-  <object type="CANNON" x="100.0f" y="270.0f" />
+  <object type="CANNON" x="150.0f" y="300.0f" />
 </level>

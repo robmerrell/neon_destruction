@@ -3,6 +3,9 @@
 CrossHair::CrossHair(float x, float y) : Sprite("", 64, 64, CROSSHAIR_TAG) {
   setX(x);
   setY(y);
+  
+  alpha = 1.0f;
+  animation_state = ANIMATE_NONE;
 }
 
 void CrossHair::display() {

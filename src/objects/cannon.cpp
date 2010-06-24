@@ -10,6 +10,8 @@ void Cannon::display() {
   GLfloat base_vertices[] = {0,64,0, 64,64,0, 0,0,0, 64,0,0};
   GLfloat base_tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
 
+  glColor4f(alpha, alpha, alpha, alpha);
+
   TexManager::Instance()->bindTexture(5);
   
   // place and rotate the turret

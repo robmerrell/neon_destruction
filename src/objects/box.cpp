@@ -54,6 +54,7 @@ void Box::display() {
   GLfloat vertices[] = {0,dy,0, dx,dy,0, 0,0,0, dx,0,0};
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
+  glColor4f(alpha, alpha, alpha, alpha);
   
   TexManager::Instance()->bindTexture(8);
   

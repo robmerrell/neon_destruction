@@ -26,5 +26,5 @@ int GravitySwitch::getDirection() {
 }
 
 void GravitySwitch::display() {
-  
+  glColor4f(alpha, alpha, alpha, alpha);
 }

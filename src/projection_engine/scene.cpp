@@ -154,6 +154,7 @@ void Scene::scheduleLoop(int ticks_per_sec) {
     
     // draw the background
     moveBackground(animation_ticks);
+    updateAnimation(animation_ticks);
     drawBackground();
     
     // blending
@@ -305,6 +306,23 @@ void Scene::defineStarColors() {
     starfield_colors[color_index + 3] = 1.0f;
     
     color_index += 4;
+  }
+}
+
+void Scene::updateAnimation(int ticks) {
+  vector<Sprite*>::iterator sprite;
+  float val = 0.0f;
+  
+  for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
+    
+    if ((*sprite)->getAnimationState() == ANIMATE_FADE_IN) {
+      val = (*sprite)->getAlpha() + (ANIMATE_FADE_SPEED * (ticks * 0.001));
+      (*sprite)->setAlpha(val);
+      
+      if (val >= 1.0f) {
+        (*sprite)->setAnimationState(ANIMATE_NONE);
+      }
+    }
   }
 }
 

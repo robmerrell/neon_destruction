@@ -120,6 +120,11 @@ class Scene {
      * Moves the star fields
      */
     void moveBackground(int);
+    
+    /**
+     * Update the animation for all objects
+     */
+    void updateAnimation(int);
 };
 
 void updateShape(void*, void*);

@@ -6,7 +6,8 @@ Sprite::Sprite(std::string filename, float _width, float _height, int _tag) {
   tag = _tag;
   angle = 0.0;
   
-  alpha = 1;
+  alpha = 0.0f;
+  animation_state = ANIMATE_FADE_IN;
 }
 
 void Sprite::setAngle(float _angle) {
@@ -27,4 +28,12 @@ float Sprite::getHeight() {
 
 int Sprite::getTag() {
   return tag;
+}
+
+int Sprite::getAnimationState() {
+  return animation_state;
+}
+
+void Sprite::setAnimationState(int state) {
+  animation_state = state;
 }

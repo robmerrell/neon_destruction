@@ -5,9 +5,20 @@
 void GameplayScene::setup() {
   defineBorder(true, true, true, true);
   
-  has_cannon = false;
+  // load a level
+  loadLevel("intro.xml");
+  // replaceLevel("stack.xml");
   
-  TiXmlDocument level_data("levels/intro.xml");
+  // start the game loop
+  scheduleLoop(60);
+}
+
+
+void GameplayScene::loadLevel(string level_file) {
+  has_cannon = false;
+  string path = "levels/";
+  
+  TiXmlDocument level_data(path.append(level_file).c_str());
   level_data.LoadFile();
 
   string size, x, y, angle, type, physics, width, height, radius;
@@ -94,7 +105,18 @@ void GameplayScene::setup() {
       addObject(circle);
     }
   }
+}
+
+
+void GameplayScene::replaceLevel(string level_file) {
+  // free all of the sprites
+  vector<Sprite*>::iterator iter;
+  for (iter = objects.begin(); iter != objects.end(); iter++) {
+    delete (*iter);
+    (*iter) = NULL;
+  }
+
+  objects.clear();
   
-  // start the game loop
-  scheduleLoop(60);
+  loadLevel(level_file);
 }

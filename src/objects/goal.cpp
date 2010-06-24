@@ -21,5 +21,5 @@ void Goal::definePhysics(cpSpace *space) {
 }
 
 void Goal::display() {
-  
+  glColor4f(alpha, alpha, alpha, alpha);
 }

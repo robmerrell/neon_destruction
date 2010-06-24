@@ -1,5 +1,6 @@
 #include <iostream>
 #include "game_object.h"
+#include "../game_const.h"
 #include "GLES/gl.h"
 
 #include "../chipmunk/headers/chipmunk.h"
@@ -14,6 +15,7 @@ class Sprite : public GameObject {
     float height;
     float angle;
     int tag;
+    int animation_state;
     
   public:
     /**
@@ -34,6 +36,9 @@ class Sprite : public GameObject {
     float getAngle();
     void setAngle(float);
     int getTag();
+    
+    void setAnimationState(int);
+    int getAnimationState();
     
     virtual void definePhysics(cpSpace*) {};
 };
