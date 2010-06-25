@@ -44,6 +44,7 @@ void GameplayScene::loadLevel(string level_file) {
       y = object_node->ToElement()->Attribute("y");
       
       Goal *goal = new Goal(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL));
+      goal->definePhysics(space);
       addObject(goal);
       has_goal = true;
     } if (object_node->ToElement()->Attribute("type") == string("BOX")) {
