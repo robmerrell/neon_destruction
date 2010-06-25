@@ -19,7 +19,6 @@ GameplayScene::GameplayScene() {
   staticBody = cpBodyNew(INFINITY, INFINITY);
   
   // by default ignore collisions between the cannon and the balls and goals
-  cpSpaceAddCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION, NULL, pre_solve_goal, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, GRAVITY_SWITCH_COLLISION, BALL_COLLISION, gravity_switch_solver, NULL, NULL, NULL, NULL);
   
   // generate the backgrounds
@@ -262,6 +261,8 @@ void GameplayScene::loadLevel(string level_file) {
       addObject(circle);
     }
   }
+  
+  cpSpaceAddCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION, NULL, pre_solve_goal, NULL, NULL, NULL);
 }
 
 
@@ -430,6 +431,7 @@ static int ignore_pre_solve(cpArbiter *arb, cpSpace *space, void *ignore) {
 
 static int pre_solve_goal(cpArbiter *arb, cpSpace *space, void *ignore) {
   cout << "passed" << endl;
+  cpSpaceRemoveCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION);
   return 0;
 }
 
