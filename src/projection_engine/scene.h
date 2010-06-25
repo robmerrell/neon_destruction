@@ -35,28 +35,13 @@ class Scene {
     SDL_Event event;
     std::vector<Sprite*> objects;
     
-    // frame capping
-    int frame;
-    Timer fps;
-    float animation_ticks;
-    
-    GLuint background_texture;
-    cpVect starfield1[STARS_PER_FIELD];
-    cpVect starfield2[STARS_PER_FIELD];
-    
-    float starfield_colors[(STARS_PER_FIELD * 2) * 4];
-    float starfield_sizes[STARS_PER_FIELD * 2];
-    
-    // physics
-    cpSpace *space;
-    cpBody *staticBody;
     bool draw_physics;
   
   public:
     /**
      * Constructor
      */
-    Scene();
+    Scene() {};
     ~Scene();
     
     /**
@@ -79,13 +64,6 @@ class Scene {
     Sprite* findObject(int);
     
     /**
-     * Schedules a loop that calls the param method every count seconds
-     *
-     * int ticks per second: ex 60
-     */
-    void scheduleLoop(int);
-    
-    /**
      * The actual method called in each scene that contains the looping logic
      */
     virtual void gameLoop() {};
@@ -96,41 +74,10 @@ class Scene {
     void setDrawPhysics(bool);
     
     /**
-     * Add static shape segment borders to the scene.
-     * The arguments go in order of top, right, bottom, left
-     */
-    void defineBorder(bool, bool, bool, bool);
-    
-    /**
-     * Defines which texture should be used for the background
-     */
-    void defineBackground(GLuint);
-    
-    /**
-     * Defines the colors used for the star background
-     */
-    void defineStarColors();
-    
-    /**
-     * Add the level background to a scene
-     */
-    void drawBackground();
-    
-    /**
-     * Moves the star fields
-     */
-    void moveBackground(int);
-    
-    /**
      * Update the animation for all objects
      */
     void updateAnimation(int);
 };
 
-void updateShape(void*, void*);
-
-static int ignore_pre_solve(cpArbiter*, cpSpace*, void*);
-static int pre_solve_goal(cpArbiter*, cpSpace*, void*);
-static int gravity_switch_solver(cpArbiter*, cpSpace*, void*);
 
 #endif
