@@ -3,6 +3,7 @@
 #include <iostream>
 
 GameplayScene::GameplayScene() {
+  current_level = 1;
   score = 0;
   draw_physics = false;
   in_loop = false;
@@ -53,7 +54,7 @@ void GameplayScene::setup() {
   defineBorder(true, true, true, true);
   
   // load a level
-  loadLevel("intro.xml");
+  loadLevel(GAME_LEVELS[current_level-1]);
   // replaceLevel("stack.xml");
   
   // start the game loop

@@ -1,3 +1,5 @@
+#include <string>
+
 #ifndef GAME_CONST_H
 #define GAME_CONST_H
 
@@ -52,6 +54,16 @@ const int ANIMATE_FADE_IN = 1;
 const int ANIMATE_FADE_OUT = 2;
 
 const float ANIMATE_FADE_SPEED = 0.75f;
+
+
+
+/***************
+** Levels ******
+****************/
+const std::string GAME_LEVELS[] = {
+  "intro.xml",
+  "stack.xml"
+};
 
 
 #include <Math.h>

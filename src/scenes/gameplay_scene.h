@@ -14,6 +14,8 @@ class GameplayScene : public Scene {
     bool has_cannon;
     bool has_goal;
     
+    int current_level;
+    
     // frame capping
     int frame;
     Timer fps;

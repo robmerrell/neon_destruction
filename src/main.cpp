@@ -1,6 +1,6 @@
 #include "projection_engine/engine.h"
 #include "projection_engine/tex_manager.h"
-#include "levels.h"
+#include "scenes/gameplay_scene.h"
 
 int main(int argc, char* argv[]) {
   Engine engine(false);
