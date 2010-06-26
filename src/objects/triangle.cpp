@@ -9,6 +9,17 @@ Triangle::Triangle(string sim_type) : Sprite("", 64, 64, BOX_TAG) {
   height = 0.0f;  
 }
 
+void Triangle::destroy(cpSpace *space) {
+  if (simulation_type == "DYNAMIC")
+    cpSpaceRemoveShape(space, triangleShape);
+  else
+    cpSpaceRemoveStaticShape(space, triangleShape);
+    
+  cpSpaceRemoveBody(space, body);
+  cpShapeFree(triangleShape);
+  cpBodyFree(body);
+}
+
 void Triangle::setWidth(float _width) {
   width = _width;
 }
@@ -19,9 +30,6 @@ void Triangle::setHeight(float _height) {
 
 void Triangle::definePhysics(cpSpace *space) {
   // body
-  // cpVect verts[] = { cpv(-width/2, -height/2), cpv(-width/2, height/2), cpv(width/2, height/2), cpv(width/2, -height/2) };
-  // cpVect verts[] = { cpv((-width/2)/2, (-height/2)/2), cpv(-width/2, height/2), cpv(width/2, height/2) };
-  // cpVect verts[] = { cpv(-width/2, -height/2), cpv((width/2)/2, (height/2)/2),cpv(width/2, -height/2) };
   cpVect verts[] = { cpv(-width/2, -height/2), cpv((width/2)/4, (height/2)),cpv(width/2, -height/2) };
   if (simulation_type == "DYNAMIC")
     body = cpBodyNew(10.0f, cpMomentForPoly(10.0f, 3, verts, cpvzero));
@@ -32,7 +40,7 @@ void Triangle::definePhysics(cpSpace *space) {
   if (simulation_type == "DYNAMIC") cpSpaceAddBody(space, body);
   
   // poly shape triangle
-  cpShape *triangleShape = cpPolyShapeNew(body, 3, verts, cpvzero);
+  triangleShape = cpPolyShapeNew(body, 3, verts, cpvzero);
   triangleShape->e = 0.1;
   triangleShape->u = 0.3;
   triangleShape->data = this;

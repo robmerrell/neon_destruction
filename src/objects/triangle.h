@@ -10,6 +10,7 @@ class Triangle : public Sprite {
 
   private:
     cpBody *body;
+    cpShape *triangleShape;
     float width;
     float height;
     
@@ -21,6 +22,7 @@ class Triangle : public Sprite {
      * int simulation (STATIC or DYNAMIC)
      */
     Triangle(string);
+    void destroy(cpSpace*);
     
     /**
      * Define the physics properties of the triangle

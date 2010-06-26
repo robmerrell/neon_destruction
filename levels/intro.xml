@@ -5,10 +5,12 @@
   
   <object type="PLATFORM" x="100.0f" y="200.0f" width="100.0f" angle="0.0f" />
   
-  <object type="CANNON" x="100.0f" y="270.0f" />
+  <object type="CANNON" x="130.0f" y="270.0f" />
   
   <object type="GOAL" x="400.0f" y="270.0f" />
   
   <object type="GRAVITY_SWTICH" x="150.0f" y="30.0f" />
+  
+  <object type="TRIANGLE" x="400.0f" y="70.0f" width="64.0f" height="64.0f" angle="0.0f" physics="DYNAMIC" />
   
 </level>
