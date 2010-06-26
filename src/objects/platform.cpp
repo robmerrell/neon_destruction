@@ -6,6 +6,13 @@ Platform::Platform() : Sprite("", 64, 64, PLATFORM_TAG) {
   width = 0.0f;
 }
 
+void Platform::destroy(cpSpace *space) {
+  cpSpaceRemoveStaticShape(space, platformShape);
+  cpSpaceRemoveBody(space, body);
+  cpShapeFree(platformShape);
+  cpBodyFree(body);
+}
+
 void Platform::setWidth(float _width) {
   width = _width;
 }
@@ -18,13 +25,13 @@ void Platform::definePhysics(cpSpace *space) {
   cpBodySetAngle(body, DEG2RAD(angle));
   
   // poly shape box
-  cpShape *boxShape = cpPolyShapeNew(body, 4, verts, cpvzero);
-  boxShape->e = 0.1;
-  boxShape->u = 0.3;
-  boxShape->data = this;
-  boxShape->collision_type = PLATFORM_COLLISION;
+  platformShape = cpPolyShapeNew(body, 4, verts, cpvzero);
+  platformShape->e = 0.1;
+  platformShape->u = 0.3;
+  platformShape->data = this;
+  platformShape->collision_type = PLATFORM_COLLISION;
   
-  cpSpaceAddStaticShape(space, boxShape);
+  cpSpaceAddStaticShape(space, platformShape);
 }
 
 void Platform::display() {

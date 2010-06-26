@@ -10,6 +10,7 @@ class Platform : public Sprite {
 
   private:
     cpBody *body;
+    cpShape *platformShape;
     
     float width;
     float height;
@@ -19,6 +20,7 @@ class Platform : public Sprite {
      * Load the platform onto the scene
      */
     Platform();
+    void destroy(cpSpace*);
     
     /**
      * Define the physics properties of the platform
