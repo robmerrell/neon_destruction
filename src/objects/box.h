@@ -10,6 +10,7 @@ class Box : public Sprite {
 
   private:
     cpBody *body;
+    cpShape *boxShape;
     float width;
     float height;
     
@@ -21,6 +22,7 @@ class Box : public Sprite {
      * int simulation (STATIC or DYNAMIC)
      */
     Box(string);
+    void destroy(cpSpace*);
     
     /**
      * Define the physics properties of the box

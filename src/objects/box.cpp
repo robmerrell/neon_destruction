@@ -9,6 +9,17 @@ Box::Box(string sim_type) : Sprite("", 64, 64, BOX_TAG) {
   height = 0.0f;  
 }
 
+void Box::destroy(cpSpace *space) {
+  if (simulation_type == "DYNAMIC")
+    cpSpaceRemoveShape(space, boxShape);
+  else
+    cpSpaceRemoveStaticShape(space, boxShape);
+    
+  cpSpaceRemoveBody(space, body);
+  cpShapeFree(boxShape);
+  cpBodyFree(body);
+}
+
 void Box::setWidth(float _width) {
   width = _width;
 }
@@ -29,7 +40,7 @@ void Box::definePhysics(cpSpace *space) {
   if (simulation_type == "DYNAMIC") cpSpaceAddBody(space, body);
   
   // poly shape box
-  cpShape *boxShape = cpPolyShapeNew(body, 4, verts, cpvzero);
+  boxShape = cpPolyShapeNew(body, 4, verts, cpvzero);
   boxShape->e = 0.1;
   boxShape->u = 0.3;
   boxShape->data = this;
