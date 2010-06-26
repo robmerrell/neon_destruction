@@ -187,6 +187,7 @@ void GameplayScene::loadLevel(string level_file) {
   Platform *platform;
   Circle *circle;
   Triangle *triangle;
+  GravitySwitch *gravity_switch;
   
   TiXmlNode* level = level_data.FirstChild("level");
   TiXmlNode* object_node;
@@ -207,7 +208,14 @@ void GameplayScene::loadLevel(string level_file) {
       goal->definePhysics(space);
       addObject(goal);
       has_goal = true;
-    } if (object_node->ToElement()->Attribute("type") == string("BOX")) {
+    } if (object_node->ToElement()->Attribute("type") == string("GRAVITY_SWTICH")) {
+      x = object_node->ToElement()->Attribute("x");
+      y = object_node->ToElement()->Attribute("y");
+
+      gravity_switch = new GravitySwitch(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL), GRAVITY_DOWN);
+      gravity_switch->definePhysics(space);
+      addObject(gravity_switch);
+    } else if (object_node->ToElement()->Attribute("type") == string("BOX")) {
       // extract data from XML
       physics = object_node->ToElement()->Attribute("physics");
       x = object_node->ToElement()->Attribute("x");

@@ -1,5 +1,6 @@
 #include "../projection_engine/sprite.h"
 #include "../game_const.h"
+#include "../projection_engine/tex_manager.h"
 
 #ifndef GRAVITY_SWITCH_H
 #define GRAVITY_SWITCH_H
@@ -8,6 +9,7 @@ class GravitySwitch : public Sprite {
 
   private:
     cpBody *body;
+    cpShape *switchShape;
     int direction;
 
   public:
@@ -18,6 +20,7 @@ class GravitySwitch : public Sprite {
      * int direction
      */
     GravitySwitch(float, float, int);
+    void destroy(cpSpace*);
     
     /**
      * Define the physics properties of the object

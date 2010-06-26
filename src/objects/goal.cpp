@@ -65,6 +65,4 @@ void Goal::display() {
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
   
   TexManager::Instance()->unbindTexture();
-  
-  
 }
