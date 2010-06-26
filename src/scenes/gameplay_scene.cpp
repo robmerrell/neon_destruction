@@ -5,6 +5,7 @@
 bool GameplayScene::finished_level = false;
 
 GameplayScene::GameplayScene() {
+  quit = false;
   current_level = 1;
   score = 0;
   draw_physics = false;
@@ -57,14 +58,12 @@ void GameplayScene::setup() {
   
   // load a level
   loadLevel(GAME_LEVELS[current_level-1]);
-  // replaceLevel("stack.xml");
   
   // start the game loop
-  gameLoop();
-  
-  replaceLevel("intro.xml");
-  
-  gameLoop();
+  while(!quit) {
+    gameLoop();
+    replaceLevel(GAME_LEVELS[current_level-1]);
+  }
 }
 
 
@@ -89,9 +88,10 @@ void GameplayScene::gameLoop() {
     
     // capture the events and send the relevent tap events to the game scene
     while (SDL_PollEvent(&event)) {
-      if (event.type == SDL_QUIT)
+      if (event.type == SDL_QUIT) {
         in_loop = false;
-      else if (event.type == SDL_MOUSEMOTION) {
+        quit = true;
+      } else if (event.type == SDL_MOUSEMOTION) {
         // rotate the turret
         cpVect event_coords = translatedMouseCoords(event.motion.x, event.motion.y);
         

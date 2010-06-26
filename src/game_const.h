@@ -62,7 +62,7 @@ const float ANIMATE_FADE_SPEED = 0.75f;
 ****************/
 const std::string GAME_LEVELS[] = {
   "intro.xml",
-  "stack.xml"
+  "intro.xml"
 };
 
 

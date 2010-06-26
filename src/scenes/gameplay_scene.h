@@ -15,6 +15,7 @@ class GameplayScene : public Scene {
     bool has_goal;
     
     int current_level;
+    bool quit;
     
     // frame capping
     int frame;
