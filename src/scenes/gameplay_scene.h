@@ -35,6 +35,8 @@ class GameplayScene : public Scene {
     GameplayScene();
     ~GameplayScene();
     
+    static bool finished_level;
+    
     void setup();
     void gameLoop();
     void loadLevel(string);

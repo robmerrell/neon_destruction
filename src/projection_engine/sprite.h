@@ -41,6 +41,7 @@ class Sprite : public GameObject {
     int getAnimationState();
     
     virtual void definePhysics(cpSpace*) {};
+    virtual void destroy(cpSpace*) {};
 };
 
 #endif

@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+bool GameplayScene::finished_level = false;
+
 GameplayScene::GameplayScene() {
   current_level = 1;
   score = 0;
@@ -20,6 +22,7 @@ GameplayScene::GameplayScene() {
   
   // by default ignore collisions between the cannon and the balls and goals
   cpSpaceAddCollisionHandler(space, GRAVITY_SWITCH_COLLISION, BALL_COLLISION, gravity_switch_solver, NULL, NULL, NULL, NULL);
+  cpSpaceAddCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION, pre_solve_goal, NULL, NULL, NULL, NULL);
   
   // generate the backgrounds
   int x, y = 0;
@@ -58,6 +61,10 @@ void GameplayScene::setup() {
   
   // start the game loop
   gameLoop();
+  
+  replaceLevel("intro.xml");
+  
+  gameLoop();
 }
 
 
@@ -65,11 +72,11 @@ void GameplayScene::gameLoop() {
   in_loop = true;
   float angle, radians;
   cpVect ball_start_coords, calc_vect;
-  
+
   // add a blank crosshair
   CrossHair *crosshair = new CrossHair(-100, -100);
   addObject(crosshair);
-
+  
   // timestepping
   float accumulator = 0.0f;
   int millistep = 16;
@@ -143,7 +150,7 @@ void GameplayScene::gameLoop() {
     // blending
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-    
+
     // display
     vector<Sprite*>::iterator sprite;
     for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
@@ -155,6 +162,12 @@ void GameplayScene::gameLoop() {
     
     // update the screen
     SDL_GL_SwapBuffers();
+   
+    if (finished_level) {
+      finished_level = false;
+      in_loop = false;
+      current_level++;
+    }
     
     frame++;
   }
@@ -261,8 +274,6 @@ void GameplayScene::loadLevel(string level_file) {
       addObject(circle);
     }
   }
-  
-  cpSpaceAddCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION, NULL, pre_solve_goal, NULL, NULL, NULL);
 }
 
 
@@ -270,6 +281,7 @@ void GameplayScene::replaceLevel(string level_file) {
   // free all of the sprites
   vector<Sprite*>::iterator iter;
   for (iter = objects.begin(); iter != objects.end(); iter++) {
+    (*iter)->destroy(space);
     delete (*iter);
     (*iter) = NULL;
   }
@@ -431,7 +443,8 @@ static int ignore_pre_solve(cpArbiter *arb, cpSpace *space, void *ignore) {
 
 static int pre_solve_goal(cpArbiter *arb, cpSpace *space, void *ignore) {
   cout << "passed" << endl;
-  cpSpaceRemoveCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION);
+  GameplayScene::finished_level = true;
+  // cpSpaceRemoveCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION);
   return 0;
 }
 
