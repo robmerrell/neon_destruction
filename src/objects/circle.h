@@ -9,6 +9,7 @@ class Circle : public Sprite {
 
   private:
     cpBody *body;
+    cpShape *circleShape;
     float radius;
 
     string simulation_type;
@@ -18,6 +19,7 @@ class Circle : public Sprite {
      * string physics simulation type
      */
     Circle(string);
+    void destroy(cpSpace*);
     
     /**
      * Define the physics properties of the circle

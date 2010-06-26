@@ -5,6 +5,17 @@ Circle::Circle(string sim_type) : Sprite("", 64, 64, CIRCLE_TAG) {
   simulation_type = sim_type;
 }
 
+void Circle::destroy(cpSpace *space) {
+  if (simulation_type == "DYNAMIC")
+    cpSpaceRemoveShape(space, circleShape);
+  else
+    cpSpaceRemoveStaticShape(space, circleShape);
+    
+  cpSpaceRemoveBody(space, body);
+  cpShapeFree(circleShape);
+  cpBodyFree(body);
+}
+
 void Circle::setRadius(float _rad) {
   radius = _rad;
 }
@@ -20,16 +31,16 @@ void Circle::definePhysics(cpSpace *space) {
   if (simulation_type == "DYNAMIC") cpSpaceAddBody(space, body);
 
   // ball shape
-  cpShape *ballShape = cpCircleShapeNew(body, radius, cpvzero);
-  ballShape->e = 0.8;
-  ballShape->u = 0.2;
-  ballShape->data = this;
-  ballShape->collision_type = CIRCLE_COLLISION;
+  circleShape = cpCircleShapeNew(body, radius, cpvzero);
+  circleShape->e = 0.8;
+  circleShape->u = 0.2;
+  circleShape->data = this;
+  circleShape->collision_type = CIRCLE_COLLISION;
   
   if (simulation_type == "DYNAMIC")
-    cpSpaceAddShape(space, ballShape);
+    cpSpaceAddShape(space, circleShape);
   else
-    cpSpaceAddStaticShape(space, ballShape);
+    cpSpaceAddStaticShape(space, circleShape);
 }
 
 void Circle::display() {
