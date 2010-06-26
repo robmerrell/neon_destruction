@@ -10,6 +10,7 @@ class Goal : public Sprite {
 
   private:
     cpBody *body;
+    cpShape *goalShape;
 
   public:
     /**
@@ -18,6 +19,7 @@ class Goal : public Sprite {
      * float y
      */
     Goal(float, float);
+    void destroy(cpSpace*);
     
     /**
      * Define the physics properties of the goal

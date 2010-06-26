@@ -12,6 +12,13 @@ Ball::Ball(float x, float y) : Sprite("", 64, 64, BALL_TAG) {
   animation_state = ANIMATE_NONE;
 }
 
+void Ball::destroy(cpSpace *space) {
+  cpSpaceRemoveShape(space, ballShape);
+  cpSpaceRemoveBody(space, body);
+  cpShapeFree(ballShape);
+  cpBodyFree(body);
+}
+
 void Ball::definePhysics(cpSpace *space) {
   // body
   body = cpBodyNew(1.0f, INFINITY);
@@ -19,7 +26,7 @@ void Ball::definePhysics(cpSpace *space) {
   cpSpaceAddBody(space, body);
 
   // ball shape
-  cpShape *ballShape = cpCircleShapeNew(body, 10.0, cpvzero);
+  ballShape = cpCircleShapeNew(body, 10.0, cpvzero);
   ballShape->e = 0.8;
   ballShape->u = 0.2;
   ballShape->data = this;

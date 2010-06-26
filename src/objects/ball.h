@@ -9,6 +9,7 @@ class Ball : public Sprite {
 
   private:
     cpBody *body;
+    cpShape *ballShape;
 
   public:
     /**
@@ -17,6 +18,7 @@ class Ball : public Sprite {
      * float y
      */
     Ball(float, float);
+    void destroy(cpSpace*);
     
     /**
      * Define the physics properties of the ball

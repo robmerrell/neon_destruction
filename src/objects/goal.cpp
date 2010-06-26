@@ -5,6 +5,13 @@ Goal::Goal(float x, float y) : Sprite("", 64, 64, GOAL_TAG) {
   setY(y);
 }
 
+void Goal::destroy(cpSpace *space) {
+  cpSpaceRemoveShape(space, goalShape);
+  cpSpaceRemoveBody(space, body);
+  cpShapeFree(goalShape);
+  cpBodyFree(body);
+}
+
 void Goal::definePhysics(cpSpace *space) {
   // body
   body = cpBodyNew(20.0f, INFINITY);
@@ -12,7 +19,7 @@ void Goal::definePhysics(cpSpace *space) {
   cpSpaceAddBody(space, body);
 
   // goal shape
-  cpShape *goalShape = cpCircleShapeNew(body, 20.0, cpvzero);
+  goalShape = cpCircleShapeNew(body, 20.0, cpvzero);
   goalShape->e = 0.5;
   goalShape->u = 0.3;
   goalShape->data = this;
