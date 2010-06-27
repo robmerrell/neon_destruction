@@ -5,11 +5,32 @@
 #ifndef BALL_H
 #define BALL_H
 
+struct Particle {
+  float x;
+  float y;
+  int birth;
+  float direction;
+  int color;
+  bool dead;
+};
+
+static GLfloat colors[12][3]=
+{
+	{1.0f,0.5f,0.5f},{1.0f,0.75f,0.5f},{1.0f,1.0f,0.5f},{0.75f,1.0f,0.5f},
+	{0.5f,1.0f,0.5f},{0.5f,1.0f,0.75f},{0.5f,1.0f,1.0f},{0.5f,0.75f,1.0f},
+	{0.5f,0.5f,1.0f},{0.75f,0.5f,1.0f},{1.0f,0.5f,1.0f},{1.0f,0.5f,0.75f}
+};
+
 class Ball : public Sprite {
 
   private:
     cpBody *body;
     cpShape *ballShape;
+    
+    Particle **particles;
+    
+    float last_particle_x;
+    float last_particle_y;
 
   public:
     /**
@@ -18,6 +39,7 @@ class Ball : public Sprite {
      * float y
      */
     Ball(float, float);
+    ~Ball();
     void destroy(cpSpace*);
     
     /**
@@ -36,6 +58,21 @@ class Ball : public Sprite {
      * cpv(mouse coords), cpv(originating coords)
      */
     void applyImpulse(cpVect, cpVect);
+
+    /**
+     * Emit a burst of particles
+     *
+     * int timestep birth
+     */
+    void emitParticles(int);
+    
+    /**
+     * Clean up and move particles
+     *
+     * int current timestemp
+     * int delta timestep
+     */
+    void manageParticles(int, int);
 };
 
 #endif

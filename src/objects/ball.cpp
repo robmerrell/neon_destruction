@@ -8,8 +8,26 @@ Ball::Ball(float x, float y) : Sprite("", 64, 64, BALL_TAG) {
   setX(x);
   setY(y);
   
+  last_particle_x = x;
+  last_particle_y = y;
+  
+  particles = new Particle *[PARTICLE_TOTAL];
+  
+  for (int j=0; j < PARTICLE_TOTAL; j++) {
+    Particle* p = new Particle;
+    p->dead = true;
+    particles[j] = p;
+  }
+  
   alpha = 1.0f;
   animation_state = ANIMATE_NONE;
+}
+
+Ball::~Ball() {
+  for (int j=0; j < PARTICLE_TOTAL; j++) {
+    delete particles[j];
+    particles[j] = NULL;
+  }
 }
 
 void Ball::destroy(cpSpace *space) {
@@ -68,6 +86,7 @@ void Ball::applyImpulse(cpVect mouse, cpVect originating) {
 
 void Ball::display() {
   GLfloat ball_vertices[] = {0,64,0, 64,64,0, 0,0,0, 64,0,0};
+  GLfloat particle_vertices[] = {0,32,0, 32,32,0, 0,0,0, 32,0,0};
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
   TexManager::Instance()->bindTexture(0);
@@ -87,4 +106,72 @@ void Ball::display() {
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
   
   TexManager::Instance()->unbindTexture();
+  
+  TexManager::Instance()->bindTexture(12);
+  
+  // draw the particles
+  for (int i=0; i < PARTICLE_TOTAL; i++) {
+    if (!particles[i]->dead) {
+      glLoadIdentity();
+      glTranslatef(particles[i]->x - 16, particles[i]->y - 16, 0.0);
+      
+      glColor4f(colors[particles[i]->color][0], colors[particles[i]->color][1], colors[particles[i]->color][2], 1.0f);
+  
+      glEnableClientState(GL_VERTEX_ARRAY);
+      glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+  
+      glVertexPointer(3, GL_FLOAT, 0, particle_vertices);
+      glTexCoordPointer(3, GL_FLOAT, 0, tex);
+  
+      glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
+      glDisableClientState(GL_VERTEX_ARRAY);
+      glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    }
+  }
+}
+
+void Ball::emitParticles(int timestep) {
+  srand(time(0));
+  // cout << cpBodyGetVel(body).y << "\n";
+  // bool x_vel_slow = (cpBodyGetVel(body).x >= -4.0f && cpBodyGetVel(body).x <= 4.0f);
+  // bool y_vel_slow = (cpBodyGetVel(body).y >= -4.0f && cpBodyGetVel(body).y <= 4.0f);
+  
+  float dx = x - last_particle_x;
+  float dy = y - last_particle_y;
+  float distance = sqrt(dx * dx + dy * dy);
+  
+  if (distance <= 2) return;
+  
+  last_particle_x = x;
+  last_particle_y = y;
+  
+  // emit 3 particles at a time
+  for (int i=0; i < 1; i++) {
+    for (int j=0; j < PARTICLE_TOTAL; j++) {
+      if (particles[j]->dead) {
+        particles[j]->x = x;
+        particles[j]->y = y;
+        particles[j]->birth = timestep;
+        particles[j]->direction = DEG2RAD(((rand() % 16)) * 30);
+        particles[j]->color = (rand() % 12);
+        particles[j]->dead = false;
+        break;
+      }
+    }
+  }
+}
+
+void Ball::manageParticles(int timestep, int timediff) {
+  for (int i=0; i < PARTICLE_TOTAL; i++) {
+    if ((timestep - particles[i]->birth) >= 750) {
+      particles[i]->dead = true;
+    }
+    
+    if (!particles[i]->dead) {
+      cpVect diff = cpvmult(cpvforangle(particles[i]->direction), 1.0f);
+      // particles[i]->x += (diff.x * (timediff * 0.01));
+      // particles[i]->y += (diff.y * (timediff * 0.01));
+    }
+  }
 }

@@ -20,6 +20,7 @@ class GameplayScene : public Scene {
     // frame capping
     int frame;
     Timer fps;
+    Timer particle_timer;
     float animation_ticks;
     
     cpVect starfield1[STARS_PER_FIELD];

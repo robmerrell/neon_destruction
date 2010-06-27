@@ -81,6 +81,7 @@ void GameplayScene::gameLoop() {
   int millistep = 16;
   float timeStep = float(millistep)/1000;
   fps.start();
+  particle_timer.start();
   animation_ticks = 0;
     
   while (in_loop) {
@@ -154,6 +155,11 @@ void GameplayScene::gameLoop() {
     // display
     vector<Sprite*>::iterator sprite;
     for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
+      if ((*sprite)->getTag() == BALL_TAG) {
+         (*sprite)->emitParticles(particle_timer.get_ticks());
+         (*sprite)->manageParticles(particle_timer.get_ticks(), fps.get_ticks());
+      }
+      
       (*sprite)->display();
       
       if (draw_physics)

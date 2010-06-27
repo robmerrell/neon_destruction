@@ -44,7 +44,7 @@ const int SCREEN_BPP = 32;
 /*************
 ** Graphics **
 **************/
-const int TEXTURE_COUNT = 12;
+const int TEXTURE_COUNT = 13;
 const int STARS_PER_FIELD = 170;
 const float STAR_FIELD1_SPEED = 100.0f;
 const float STAR_FIELD2_SPEED = 50.0f;
@@ -55,13 +55,15 @@ const int ANIMATE_FADE_OUT = 2;
 
 const float ANIMATE_FADE_SPEED = 0.75f;
 
+const int PARTICLE_TOTAL = 60;
+
 
 
 /***************
 ** Levels ******
 ****************/
 const std::string GAME_LEVELS[] = {
-  "intro.xml",
+  "steps.xml",
   "intro.xml"
 };
 
