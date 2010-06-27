@@ -14,6 +14,7 @@ class Platform : public Sprite {
     
     float width;
     float height;
+    float physics_height;
 
   public:
     /**

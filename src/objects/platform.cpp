@@ -3,6 +3,7 @@
 
 Platform::Platform() : Sprite("", 64, 64, PLATFORM_TAG) {  
   height = 32.0f; // always 32 so that it matches our sprite
+  physics_height = 12.0f;
   width = 0.0f;
 }
 
@@ -19,7 +20,7 @@ void Platform::setWidth(float _width) {
 
 void Platform::definePhysics(cpSpace *space) {  
   // body
-  cpVect verts[] = { cpv(-width/2, -height/2), cpv(-width/2, height/2), cpv(width/2, height/2), cpv(width/2, -height/2) };
+  cpVect verts[] = { cpv(-width/2, -physics_height/2), cpv(-width/2, physics_height/2), cpv(width/2, physics_height/2), cpv(width/2, -physics_height/2) };
   body = cpBodyNew(INFINITY, INFINITY);
   body->p = cpv(x, y);
   cpBodySetAngle(body, DEG2RAD(angle));
