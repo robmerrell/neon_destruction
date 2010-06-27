@@ -164,9 +164,16 @@ void GameplayScene::gameLoop() {
     SDL_GL_SwapBuffers();
    
     if (finished_level) {
-      finished_level = false;
-      in_loop = false;
-      current_level++;
+      for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
+        (*sprite)->setAnimationState(ANIMATE_FADE_OUT);
+      }
+      
+      Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
+      if (cannon->getAlpha() <= 0.0f) {
+        finished_level = false;
+        in_loop = false;
+        current_level++;        
+      }
     }
     
     frame++;

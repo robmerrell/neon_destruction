@@ -46,6 +46,13 @@ void Scene::updateAnimation(int ticks) {
       if (val >= 1.0f) {
         (*sprite)->setAnimationState(ANIMATE_NONE);
       }
+    } else if ((*sprite)->getAnimationState() == ANIMATE_FADE_OUT) {
+      val = (*sprite)->getAlpha() - (ANIMATE_FADE_SPEED * (ticks * 0.001));
+      (*sprite)->setAlpha(val);
+      
+      if (val <= 0.0f) {
+        (*sprite)->setAnimationState(ANIMATE_NONE);
+      }
     }
   }
 }
