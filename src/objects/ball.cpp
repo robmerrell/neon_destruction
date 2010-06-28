@@ -5,6 +5,7 @@
 using namespace std;
 
 Ball::Ball(float x, float y) : Sprite("", 64, 64, BALL_TAG) {
+  srand(time(0));
   setX(x);
   setY(y);
   
@@ -85,8 +86,8 @@ void Ball::applyImpulse(cpVect mouse, cpVect originating) {
 }
 
 void Ball::display() {
-  GLfloat ball_vertices[] = {0,64,0, 64,64,0, 0,0,0, 64,0,0};
-  GLfloat particle_vertices[] = {0,32,0, 32,32,0, 0,0,0, 32,0,0};
+  GLfloat ball_vertices[] = {0,64,1, 64,64,1, 0,0,1, 64,0,1};
+  GLfloat particle_vertices[] = {0,16,0, 16,16,0, 0,0,0, 16,0,0};
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
   TexManager::Instance()->bindTexture(0);
@@ -131,29 +132,26 @@ void Ball::display() {
   }
 }
 
-void Ball::emitParticles(int timestep) {
-  srand(time(0));
-  // cout << cpBodyGetVel(body).y << "\n";
-  // bool x_vel_slow = (cpBodyGetVel(body).x >= -4.0f && cpBodyGetVel(body).x <= 4.0f);
-  // bool y_vel_slow = (cpBodyGetVel(body).y >= -4.0f && cpBodyGetVel(body).y <= 4.0f);
-  
+void Ball::emitParticles(int timestep) {  
   float dx = x - last_particle_x;
   float dy = y - last_particle_y;
   float distance = sqrt(dx * dx + dy * dy);
   
-  if (distance <= 2) return;
+  if (distance <= 10) return;
   
   last_particle_x = x;
   last_particle_y = y;
   
   // emit 3 particles at a time
-  for (int i=0; i < 1; i++) {
+  for (int i=0; i < 6; i++) {
     for (int j=0; j < PARTICLE_TOTAL; j++) {
       if (particles[j]->dead) {
         particles[j]->x = x;
-        particles[j]->y = y;
+        particles[j]->y = y + 10.0f;
+        particles[j]->x_speed = float((rand() % 10)-6.0f);
+        particles[j]->y_speed = float((rand() % 20)-5.0f);
+        particles[j]->ttl = rand()%(1250-750)+750;
         particles[j]->birth = timestep;
-        particles[j]->direction = DEG2RAD(((rand() % 16)) * 30);
         particles[j]->color = (rand() % 12);
         particles[j]->dead = false;
         break;
@@ -164,14 +162,15 @@ void Ball::emitParticles(int timestep) {
 
 void Ball::manageParticles(int timestep, int timediff) {
   for (int i=0; i < PARTICLE_TOTAL; i++) {
-    if ((timestep - particles[i]->birth) >= 750) {
+    if ((timestep - particles[i]->birth) >= particles[i]->ttl) {
       particles[i]->dead = true;
     }
     
     if (!particles[i]->dead) {
-      cpVect diff = cpvmult(cpvforangle(particles[i]->direction), 1.0f);
-      // particles[i]->x += (diff.x * (timediff * 0.01));
-      // particles[i]->y += (diff.y * (timediff * 0.01));
+      particles[i]->x += (particles[i]->x_speed * (timediff * 0.01));
+      particles[i]->y += (particles[i]->y_speed * (timediff * 0.01));
+      
+      // cout << x << " -- " << particles[i]->x << "\n";
     }
   }
 }

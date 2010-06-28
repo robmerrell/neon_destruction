@@ -55,7 +55,7 @@ const int ANIMATE_FADE_OUT = 2;
 
 const float ANIMATE_FADE_SPEED = 0.75f;
 
-const int PARTICLE_TOTAL = 60;
+const int PARTICLE_TOTAL = 120;
 
 
 

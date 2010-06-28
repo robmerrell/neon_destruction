@@ -8,8 +8,10 @@
 struct Particle {
   float x;
   float y;
+  float x_speed;
+  float y_speed;
   int birth;
-  float direction;
+  int ttl;
   int color;
   bool dead;
 };
