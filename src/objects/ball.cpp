@@ -132,7 +132,7 @@ void Ball::display() {
   }
 }
 
-void Ball::emitParticles(int timestep) {  
+void Ball::emitParticles(int timestep) {
   float dx = x - last_particle_x;
   float dy = y - last_particle_y;
   float distance = sqrt(dx * dx + dy * dy);
@@ -146,10 +146,10 @@ void Ball::emitParticles(int timestep) {
   for (int i=0; i < 6; i++) {
     for (int j=0; j < PARTICLE_TOTAL; j++) {
       if (particles[j]->dead) {
-        particles[j]->x = x;
-        particles[j]->y = y + 10.0f;
+        particles[j]->x = x + 5.0f + i;
+        particles[j]->y = y + 5.0f + i;
         particles[j]->x_speed = float((rand() % 10)-6.0f);
-        particles[j]->y_speed = float((rand() % 20)-5.0f);
+        particles[j]->y_speed = float((rand() % 30)-5.0f);
         particles[j]->ttl = rand()%(1250-750)+750;
         particles[j]->birth = timestep;
         particles[j]->color = (rand() % 12);
@@ -169,8 +169,6 @@ void Ball::manageParticles(int timestep, int timediff) {
     if (!particles[i]->dead) {
       particles[i]->x += (particles[i]->x_speed * (timediff * 0.01));
       particles[i]->y += (particles[i]->y_speed * (timediff * 0.01));
-      
-      // cout << x << " -- " << particles[i]->x << "\n";
     }
   }
 }
