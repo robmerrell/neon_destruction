@@ -234,7 +234,6 @@ task :gen_images do
     img.composite!(middle_image, 11, 5, Magick::OverCompositeOp)
     img.composite!(right_image, size-11, 5, Magick::OverCompositeOp)
 
-
     # white line
     line = Magick::Image.new(size-24, 6) { self.background_color = "white" }
     gc = Magick::Draw.new
@@ -274,5 +273,25 @@ task :gen_img_testsheet do
     end
   end
   
+end
+
+desc "generate a texture atlas for the platform images"
+task :gen_atlas do
+  require "rmagick"
+  
+  sizes = [48, 64, 96, 128, 192, 256, 384, 512]
+  
+  sheet = Magick::Image.new(512, 512) { self.background_color = "black" }
+  
+  cn = 0
+  sizes.each do |size|
+    ind = sizes.index(size)
+    img = Magick::Image.read("utils/img/gen/#{size}.png").first
+    
+    sheet.composite!(img, 0, cn * 35, Magick::OverCompositeOp)
+    cn += 1
+  end
+  
+  sheet.write("utils/img/atlas/blue_atlas.png")
 end
 
