@@ -2,7 +2,7 @@
 #include <iostream>
 
 Platform::Platform() : Sprite("", 64, 64, PLATFORM_TAG) {  
-  height = 32.0f; // always 32 so that it matches our sprite
+  height = 25.0f; // always 25 so that it matches our sprite
   physics_height = 12.0f;
   width = 0.0f;
 }
@@ -45,12 +45,20 @@ void Platform::display() {
   float dx = end_x - start_x;
   float dy = end_y - start_y;
   
+  int ti = 0; // texture index
+  
+  // get the points in the texture map
+  for (int i = 0; i < sizeof(PLATFORM_SIZES)/sizeof(int); i++) {
+    if (PLATFORM_SIZES[i] == width)
+      ti = i;
+  }
+  
   GLfloat vertices[] = {0,dy,0, dx,dy,0, 0,0,0, dx,0,0};
-  GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
+  GLfloat tex[] = {0,PLATFORM_BOTTOM[ti],0, PLATFORM_RIGHT[ti],PLATFORM_BOTTOM[ti],0, 0,PLATFORM_TOP[ti],0, PLATFORM_RIGHT[ti],PLATFORM_TOP[ti],0};
   
   glColor4f(alpha, alpha, alpha, alpha);
   
-  TexManager::Instance()->bindTexture(6);
+  TexManager::Instance()->bindTexture(13);
   
   glLoadIdentity();
   glTranslatef(start_x - width/2, start_y + height/2, 0.0);
