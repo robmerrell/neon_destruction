@@ -1,14 +1,20 @@
 #include "platform.h"
 #include <iostream>
 
-Platform::Platform() : Sprite("", 64, 64, PLATFORM_TAG) {  
+Platform::Platform(string sim_type) : Sprite("", 64, 64, PLATFORM_TAG) {  
+  simulation_type = sim_type;
+  
   height = 25.0f; // always 25 so that it matches our sprite
   physics_height = 12.0f;
   width = 0.0f;
 }
 
 void Platform::destroy(cpSpace *space) {
-  cpSpaceRemoveStaticShape(space, platformShape);
+  if (simulation_type == "DYNAMIC")
+    cpSpaceRemoveShape(space, platformShape);
+  else
+    cpSpaceRemoveStaticShape(space, platformShape);
+    
   cpSpaceRemoveBody(space, body);
   cpShapeFree(platformShape);
   cpBodyFree(body);
@@ -21,9 +27,13 @@ void Platform::setWidth(float _width) {
 void Platform::definePhysics(cpSpace *space) {  
   // body
   cpVect verts[] = { cpv(-width/2, -physics_height/2), cpv(-width/2, physics_height/2), cpv(width/2, physics_height/2), cpv(width/2, -physics_height/2) };
-  body = cpBodyNew(INFINITY, INFINITY);
+  if (simulation_type == "DYNAMIC")
+    body = cpBodyNew(10.0f, cpMomentForPoly(10.0f, 4, verts, cpvzero));
+  else
+    body = cpBodyNew(INFINITY, INFINITY);
   body->p = cpv(x, y);
   cpBodySetAngle(body, DEG2RAD(angle));
+  if (simulation_type == "DYNAMIC") cpSpaceAddBody(space, body);
   
   // poly shape box
   platformShape = cpPolyShapeNew(body, 4, verts, cpvzero);
@@ -32,7 +42,10 @@ void Platform::definePhysics(cpSpace *space) {
   platformShape->data = this;
   platformShape->collision_type = PLATFORM_COLLISION;
   
-  cpSpaceAddStaticShape(space, platformShape);
+  if (simulation_type == "DYNAMIC")
+    cpSpaceAddShape(space, platformShape);
+  else
+    cpSpaceAddStaticShape(space, platformShape);
 }
 
 void Platform::display() {
@@ -58,7 +71,10 @@ void Platform::display() {
   
   glColor4f(alpha, alpha, alpha, alpha);
   
-  TexManager::Instance()->bindTexture(14);
+  if (simulation_type == "DYNAMIC")
+    TexManager::Instance()->bindTexture(14);
+  else
+    TexManager::Instance()->bindTexture(13);
   
   glLoadIdentity();
   glTranslatef(start_x - width/2, start_y + height/2, 0.0);

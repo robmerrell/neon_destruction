@@ -266,13 +266,14 @@ void GameplayScene::loadLevel(string level_file) {
       addObject(triangle);
     } else if (object_node->ToElement()->Attribute("type") == string("PLATFORM")) {
       // extract data from XML
+      physics = object_node->ToElement()->Attribute("physics");
       x = object_node->ToElement()->Attribute("x");
       y = object_node->ToElement()->Attribute("y");
       width = object_node->ToElement()->Attribute("width");
       angle = object_node->ToElement()->Attribute("angle");
 
       // create the platform
-      platform = new Platform();
+      platform = new Platform(physics);
       platform->setX(strtof(x.c_str(), NULL));
       platform->setY(strtof(y.c_str(), NULL));
       platform->setWidth(strtof(width.c_str(), NULL));
@@ -453,7 +454,7 @@ void updateShape(void *ptr, void* unused) {
   sprite->setY(shape->body->p.y);
   
   // rotate certain objects
-  if (sprite->getTag() == BOX_TAG || sprite->getTag() == TRIANGLE_TAG) {
+  if (sprite->getTag() == BOX_TAG || sprite->getTag() == TRIANGLE_TAG || sprite->getTag() == PLATFORM_TAG) {
     sprite->setAngle(RAD2DEG(shape->body->a));
   }
 }

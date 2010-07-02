@@ -15,12 +15,14 @@ class Platform : public Sprite {
     float width;
     float height;
     float physics_height;
+    
+    string simulation_type;
 
   public:
     /**
      * Load the platform onto the scene
      */
-    Platform();
+    Platform(string);
     void destroy(cpSpace*);
     
     /**
