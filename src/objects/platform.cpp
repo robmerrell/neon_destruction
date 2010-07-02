@@ -58,7 +58,7 @@ void Platform::display() {
   
   glColor4f(alpha, alpha, alpha, alpha);
   
-  TexManager::Instance()->bindTexture(13);
+  TexManager::Instance()->bindTexture(14);
   
   glLoadIdentity();
   glTranslatef(start_x - width/2, start_y + height/2, 0.0);

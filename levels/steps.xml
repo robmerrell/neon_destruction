@@ -1,10 +1,7 @@
 <?xml version="1.0" standalone=no>
 <level name="Steps">
-  <object type="PLATFORM" x="250.0f" y="200.0f" width="200.0f" angle="40.0f" />
   
-  <object type="PLATFORM" x="20.0f" y="200.0f" width="50.0f" angle="0.0f" />
-  
-  <object type="PLATFORM" x="380.0f" y="300.0f" width="50.0f" angle="0.0f" />
+  <object type="PLATFORM" x="215.0f" y="200.0f" width="401.0f" angle="0.0f" />
   
   <object type="CANNON" x="-5.0f" y="153.0f" />
 </level>

@@ -218,80 +218,58 @@ desc "Generate platform images for both dynamic and static"
 task :gen_images do
   require "rmagick"
   
+  colors = %w(blue green)
   sizes =      [48, 64, 96, 128, 150, 192, 225, 256, 300, 384, 425]
   draw_width = [64, 64, 128, 128, 256, 256, 256, 256, 512, 512, 512]
   
-  sizes.each do |size|
-    ind = sizes.index(size)
-    left_image = Magick::Image.read("utils/img/blue/left.png").first
-    middle_image = Magick::Image.read("utils/img/blue/body.png").first.scale(size-22, 25)
-    right_image = Magick::Image.read("utils/img/blue/right.png").first
+  colors.each do |color|
+    sizes.each do |size|
+      ind = sizes.index(size)
+      left_image = Magick::Image.read("utils/img/#{color}/left.png").first
+      middle_image = Magick::Image.read("utils/img/#{color}/body.png").first.scale(size-22, 25)
+      right_image = Magick::Image.read("utils/img/#{color}/right.png").first
 
-    img = Magick::Image.new(draw_width[ind], 32) { self.background_color = "transparent" }
+      img = Magick::Image.new(draw_width[ind], 32) { self.background_color = "transparent" }
 
-    # add the glows
-    img.composite!(left_image, 0, 5, Magick::OverCompositeOp)
-    img.composite!(middle_image, 11, 5, Magick::OverCompositeOp)
-    img.composite!(right_image, size-11, 5, Magick::OverCompositeOp)
+      # add the glows
+      img.composite!(left_image, 0, 5, Magick::OverCompositeOp)
+      img.composite!(middle_image, 11, 5, Magick::OverCompositeOp)
+      img.composite!(right_image, size-11, 5, Magick::OverCompositeOp)
 
-    # white line
-    line = Magick::Image.new(size-24, 6) { self.background_color = "white" }
-    gc = Magick::Draw.new
-    gc.stroke("white")
+      # white line
+      line = Magick::Image.new(size-24, 6) { self.background_color = "white" }
+      gc = Magick::Draw.new
+      gc.stroke("white")
 
-    gc.draw(line)
-    img.composite!(line, 12, 14, Magick::OverCompositeOp)
+      gc.draw(line)
+      img.composite!(line, 12, 14, Magick::OverCompositeOp)
 
-    img.write("utils/img/gen/#{size}.png")
-  end
-end
-
-
-desc "generate test sheets for the platform images"
-task :gen_img_testsheet do
-  require "rmagick"
-  
-  sizes = [48, 64, 96, 128, 150, 192, 225, 256, 300, 384, 425]
-  draw_width = [64, 64, 128, 128, 256, 256, 256, 256, 512, 512, 512]
-  
-  sizes.each do |size|
-    ind = sizes.index(size)
-    img = Magick::Image.read("utils/img/gen/#{size}.png").first
-
-    if ind > 0
-      height = sizes[ind] - sizes[ind-1]+1
-      sheet = Magick::Image.new(600, height * 32) { self.background_color = "black" }
-
-      cn = 0
-      for i in sizes[ind-1]+1..sizes[ind]
-        comp = img.resize(i, 32)
-        sheet.composite!(comp, 10, cn * 32, Magick::OverCompositeOp)
-        cn += 1
-      end
-
-      sheet.write("utils/img/test/#{size}.png")
+      img.write("utils/img/gen/#{color}_#{size}.png")
     end
   end
-  
 end
 
+
 desc "generate a texture atlas for the platform images"
-task :gen_atlas do
+task :gen_platform_atlas do
   require "rmagick"
   
+  colors = %w(blue green)
   sizes = [48, 64, 96, 128, 150, 192, 225, 256, 300, 384, 425]
   
   sheet = Magick::Image.new(512, 512) { self.background_color = "transparent"; self.depth = 8 }
   
-  cn = 0
-  sizes.each do |size|
-    ind = sizes.index(size)
-    img = Magick::Image.read("utils/img/gen/#{size}.png").first
+  colors.each do |color|
+    cn = 0
+    sizes.each do |size|
+      ind = sizes.index(size)
+      img = Magick::Image.read("utils/img/gen/#{color}_#{size}.png").first
     
-    sheet.composite!(img, 0, cn * 35, Magick::OverCompositeOp)
-    cn += 1
-  end
+      sheet.composite!(img, 0, cn * 35, Magick::OverCompositeOp)
+      cn += 1
+    end
   
-  sheet.write("utils/img/atlas/blue_atlas.png")
+    sheet.write("utils/img/atlas/#{color}_platform_atlas.png")
+  end
 end
 
