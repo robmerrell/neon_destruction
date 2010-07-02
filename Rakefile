@@ -218,8 +218,8 @@ desc "Generate platform images for both dynamic and static"
 task :gen_images do
   require "rmagick"
   
-  sizes = [48, 64, 96, 128, 192, 256, 384, 512]
-  draw_width = [64, 64, 128, 128, 256, 256, 512, 512]
+  sizes =      [48, 64, 96, 128, 150, 192, 225, 256, 300, 384, 425]
+  draw_width = [64, 64, 128, 128, 256, 256, 256, 256, 512, 512, 512]
   
   sizes.each do |size|
     ind = sizes.index(size)
@@ -251,8 +251,8 @@ desc "generate test sheets for the platform images"
 task :gen_img_testsheet do
   require "rmagick"
   
-  sizes = [48, 64, 96, 128, 192, 256, 384, 512]
-  draw_width = [64, 64, 128, 128, 256, 256, 512, 512]
+  sizes = [48, 64, 96, 128, 150, 192, 225, 256, 300, 384, 425]
+  draw_width = [64, 64, 128, 128, 256, 256, 256, 256, 512, 512, 512]
   
   sizes.each do |size|
     ind = sizes.index(size)
@@ -279,9 +279,9 @@ desc "generate a texture atlas for the platform images"
 task :gen_atlas do
   require "rmagick"
   
-  sizes = [48, 64, 96, 128, 192, 256, 384, 512]
+  sizes = [48, 64, 96, 128, 150, 192, 225, 256, 300, 384, 425]
   
-  sheet = Magick::Image.new(512, 512) { self.background_color = "black" }
+  sheet = Magick::Image.new(512, 512) { self.background_color = "transparent"; self.depth = 8 }
   
   cn = 0
   sizes.each do |size|
