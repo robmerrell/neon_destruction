@@ -1,8 +1,9 @@
 <?xml version="1.0" standalone=no>
 <level name="Steps">
-  
   <object type="PLATFORM" x="215.0f" y="200.0f" width="401.0f" angle="0.0f" physics="DYNAMIC" />
-  <object type="PLATFORM" x="300.0f" y="300.0f" width="72.0f" angle="90.0f" physics="STATIC" />
+  <object type="PLATFORM" x="0.0f" y="0.0f" width="72.0f" angle="90.0f" physics="STATIC" />
+  
+  <object type="BOX" x="250.0f" y="50.0f" width="72.0f" height="126.0f" angle="0.0f" physics="DYNAMIC" />
   
   <object type="CANNON" x="-5.0f" y="153.0f" />
 </level>

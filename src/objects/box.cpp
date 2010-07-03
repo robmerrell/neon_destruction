@@ -62,13 +62,32 @@ void Box::display() {
   float dx = end_x - start_x;
   float dy = end_y - start_y;
   
-  GLfloat vertices[] = {0,dy,0, dx,dy,0, 0,0,0, dx,0,0};
-  GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
+  int hti = 0; // texture index
+  int vti = 0;
+  
+  // get the points in the texture map
+  for (int i = 0; i < sizeof(PLATFORM_SIZES)/sizeof(int); i++) {
+    if (PLATFORM_SIZES[i] == width)
+      hti = i;
+      
+    if (PLATFORM_SIZES[i] == height)
+      vti = i;
+  }
+  
+  GLfloat vertices_hor[] = {0,-25.0f,0, dx,-25.0f,0, 0,0,0, dx,0,0};
+  GLfloat tex_hor[] = {0,PLATFORM_BOTTOM[hti],0, PLATFORM_RIGHT[hti],PLATFORM_BOTTOM[hti],0, 0,PLATFORM_TOP[hti],0, PLATFORM_RIGHT[hti],PLATFORM_TOP[hti],0};
+  
+  GLfloat vertices_vert[] = {0,-25.0f,0, dy,-25.0f,0, 0,0,0, dy,0,0};
+  GLfloat tex_vert[] = {0,PLATFORM_BOTTOM[vti],0, PLATFORM_RIGHT[vti],PLATFORM_BOTTOM[vti],0, 0,PLATFORM_TOP[vti],0, PLATFORM_RIGHT[vti],PLATFORM_TOP[vti],0};
   
   glColor4f(alpha, alpha, alpha, alpha);
   
-  TexManager::Instance()->bindTexture(8);
-  
+  if (simulation_type == "DYNAMIC")
+    TexManager::Instance()->bindTexture(14);
+  else
+    TexManager::Instance()->bindTexture(13);
+      
+  // bottom
   glLoadIdentity();
   glTranslatef(start_x - width/2, start_y + height/2, 0.0);
   glTranslatef(width/2, -height/2, 0.0);
@@ -78,9 +97,29 @@ void Box::display() {
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
   
-  glVertexPointer(3, GL_FLOAT, 0, vertices);
-  glTexCoordPointer(3, GL_FLOAT, 0, tex);
+  glVertexPointer(3, GL_FLOAT, 0, vertices_hor);
+  glTexCoordPointer(3, GL_FLOAT, 0, tex_hor);
   
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
+
+  // bottom
+  glTranslatef(0, dy + 25.0f, 0.0);
+  glVertexPointer(3, GL_FLOAT, 0, vertices_hor);
+  glTexCoordPointer(3, GL_FLOAT, 0, tex_hor);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+  // left
+  glTranslatef(25.0f, -25.0f, 0.0f);
+  glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
+  glVertexPointer(3, GL_FLOAT, 0, vertices_vert);
+  glTexCoordPointer(3, GL_FLOAT, 0, tex_vert);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
+  // right
+  glTranslatef(0.0f, dx - 25.0f, 0.0f);
+  glVertexPointer(3, GL_FLOAT, 0, vertices_vert);
+  glTexCoordPointer(3, GL_FLOAT, 0, tex_vert);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   
   glDisableClientState(GL_VERTEX_ARRAY);
