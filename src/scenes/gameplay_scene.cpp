@@ -226,11 +226,39 @@ void GameplayScene::loadLevel(string level_file) {
       x = object_node->ToElement()->Attribute("x");
       y = object_node->ToElement()->Attribute("y");
       dir = object_node->ToElement()->Attribute("default_direction");
+    
+      if (dir == string("up")) {
+        gravity_direction = GRAVITY_UP;
+        space->gravity = cpv(0, -GRAVITY_RATE);
+      } else if (dir == string("down")) {
+        gravity_direction = GRAVITY_DOWN;
+        space->gravity = cpv(0, GRAVITY_RATE);
+      } else if (dir == string("left")) {
+        gravity_direction = GRAVITY_LEFT;
+        space->gravity = cpv(-GRAVITY_RATE, 0);
+      } else if (dir == string("right")) {
+        gravity_direction = GRAVITY_RIGHT;
+        space->gravity = cpv(GRAVITY_RATE, 0);
+      }
       
-      if (dir == string("up")) gravity_direction = GRAVITY_UP;
-      else if (dir == string("down")) gravity_direction = GRAVITY_DOWN;
-      else if (dir == string("left")) gravity_direction = GRAVITY_LEFT;
-      else if (dir == string("right")) gravity_direction = GRAVITY_RIGHT;
+      
+      
+      /*
+      if (gravity_direction == GRAVITY_UP || gravity_direction == GRAVITY_DOWN) {
+        if (space->gravity.y < 0)
+          space->gravity = cpv(0, GRAVITY_RATE);
+        else
+          space->gravity = cpv(0, -GRAVITY_RATE);
+      }
+
+      // left and right
+      if (gravity_direction == GRAVITY_LEFT || gravity_direction == GRAVITY_RIGHT) {
+        if (space->gravity.x <= 0)
+          space->gravity = cpv(GRAVITY_RATE, 0);
+        else
+          space->gravity = cpv(-GRAVITY_RATE, 0);
+      }
+      */
 
       gravity_switch = new GravitySwitch(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL), gravity_direction);
       gravity_switch->definePhysics(space);
