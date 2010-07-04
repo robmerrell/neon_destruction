@@ -112,7 +112,7 @@ const float PLATFORM_RIGHT[] = {
 ****************/
 const std::string GAME_LEVELS[] = {
   "steps.xml",
-  "intro.xml"
+  "steps.xml"
 };
 
 

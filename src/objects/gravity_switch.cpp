@@ -24,6 +24,7 @@ void GravitySwitch::definePhysics(cpSpace *space) {
   
   // poly shape
   switchShape = cpPolyShapeNew(body, 4, verts, cpvzero);
+  switchShape->sensor = 1;
   switchShape->e = 0.1;
   switchShape->u = 0.3;
   switchShape->data = this;
