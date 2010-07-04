@@ -15,16 +15,20 @@ void GravitySwitch::destroy(cpSpace *space) {
 }
 
 void GravitySwitch::definePhysics(cpSpace *space) {
-  // body
+  float width = 36.0f;
+  float height = 36.0f;
+  
+  cpVect verts[] = { cpv(-width/2, -height/2), cpv(-width/2, height/2), cpv(width/2, height/2), cpv(width/2, -height/2) };
   body = cpBodyNew(INFINITY, INFINITY);
   body->p = cpv(x, y);
-
-  // goal shape
-  switchShape = cpCircleShapeNew(body, 15.0, cpvzero);
-  switchShape->e = 0.5;
+  
+  // poly shape
+  switchShape = cpPolyShapeNew(body, 4, verts, cpvzero);
+  switchShape->e = 0.1;
   switchShape->u = 0.3;
   switchShape->data = this;
   switchShape->collision_type = GRAVITY_SWITCH_COLLISION;
+  
   cpSpaceAddStaticShape(space, switchShape);
 }
 
@@ -36,8 +40,8 @@ void GravitySwitch::display() {
   float start_x = x;
   float start_y = y;
   
-  float width = 32.0f;
-  float height = 32.0f;
+  float width = 48.0f;
+  float height = 48.0f;
   
   float end_x = start_x + width;
   float end_y = start_y - height;
@@ -50,12 +54,15 @@ void GravitySwitch::display() {
   
   glColor4f(alpha, alpha, alpha, alpha);
   
-  TexManager::Instance()->bindTexture(8);
+  TexManager::Instance()->bindTexture(16);
   
   glLoadIdentity();
   glTranslatef(start_x - width/2, start_y + height/2, 0.0);
+  
   glTranslatef(width/2, -height/2, 0.0);
-  glRotatef(angle, 0.0f, 0.0f, 1.0f);
+  if (direction == GRAVITY_UP) glRotatef(180.0f, 0.0f, 0.0f, 1.0f);
+  if (direction == GRAVITY_LEFT) glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+  if (direction == GRAVITY_RIGHT) glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
   glTranslatef(-width/2, height/2, 0.0);
 
   glEnableClientState(GL_VERTEX_ARRAY);

@@ -4,9 +4,11 @@
   <object type="PLATFORM" x="100.0f" y="300.0f" width="72.0f" angle="90.0f" physics="STATIC" />
   
   <object type="BOX" x="250.0f" y="50.0f" width="72.0f" height="126.0f" angle="0.0f" physics="DYNAMIC" />
-  <object type="BOX" x="150.0f" y="150.0f" width="72.0f" height="126.0f" angle="0.0f" physics="STATIC" />
+  <object type="BOX" x="150.0f" y="150.0f" width="72.0f" height="126.0f" angle="0.0f" physics="DYNAMIC" />
   
   <object type="GOAL" x="25.0f" y="10.0f" />
   
   <object type="CANNON" x="-5.0f" y="153.0f" />
+  
+  <object type="GRAVITY_SWTICH" x="350.0f" y="130.0f" default_direction="down" />
 </level>

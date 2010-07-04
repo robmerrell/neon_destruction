@@ -195,12 +195,13 @@ void GameplayScene::loadLevel(string level_file) {
   TiXmlDocument level_data(path.append(level_file).c_str());
   level_data.LoadFile();
 
-  string size, x, y, angle, type, physics, width, height, radius;
+  string size, x, y, angle, type, physics, width, height, radius, dir;
   Box *box;
   Platform *platform;
   Circle *circle;
   Triangle *triangle;
   GravitySwitch *gravity_switch;
+  int gravity_direction = GRAVITY_DOWN;
   
   TiXmlNode* level = level_data.FirstChild("level");
   TiXmlNode* object_node;
@@ -224,8 +225,14 @@ void GameplayScene::loadLevel(string level_file) {
     } if (object_node->ToElement()->Attribute("type") == string("GRAVITY_SWTICH")) {
       x = object_node->ToElement()->Attribute("x");
       y = object_node->ToElement()->Attribute("y");
+      dir = object_node->ToElement()->Attribute("default_direction");
+      
+      if (dir == string("up")) gravity_direction = GRAVITY_UP;
+      else if (dir == string("down")) gravity_direction = GRAVITY_DOWN;
+      else if (dir == string("left")) gravity_direction = GRAVITY_LEFT;
+      else if (dir == string("right")) gravity_direction = GRAVITY_RIGHT;
 
-      gravity_switch = new GravitySwitch(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL), GRAVITY_DOWN);
+      gravity_switch = new GravitySwitch(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL), gravity_direction);
       gravity_switch->definePhysics(space);
       addObject(gravity_switch);
     } else if (object_node->ToElement()->Attribute("type") == string("BOX")) {

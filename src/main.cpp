@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
   TexManager::Instance()->loadTexture("assets/blue_platform_atlas.png", true);
   TexManager::Instance()->loadTexture("assets/green_platform_atlas.png", true);
   TexManager::Instance()->loadTexture("assets/goal.png", true);
+  TexManager::Instance()->loadTexture("assets/gravity_switch.png", true);
 
   // show the title scene and start the game loop
   GameplayScene *gameplay_scene = new GameplayScene();
