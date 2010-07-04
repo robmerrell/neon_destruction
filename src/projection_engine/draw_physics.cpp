@@ -68,9 +68,11 @@ static void draw_poly(cpBody *body, cpPolyShape *poly)
   int v_count = 0;
   GLfloat vertices[count * 2];
 	
+  float width = (poly->tVerts[2].x - poly->tVerts[0].x) / 2.0f;
+  float height = (poly->tVerts[2].y - poly->tVerts[0].y) / 2.0f;
+	
 	glLoadIdentity();
-  glTranslatef(poly->tVerts[0].x, poly->tVerts[0].y, 0);
-  glRotatef(body->a, 0.0f, 0.0f, 1.0f);
+  glTranslatef(poly->tVerts[0].x + width, poly->tVerts[0].y + height, 0);
 
   for (int i = 0; i < count; i++) {
     vertices[v_count] = poly->verts[i].x;
