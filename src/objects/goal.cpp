@@ -19,7 +19,7 @@ void Goal::definePhysics(cpSpace *space) {
   cpSpaceAddBody(space, body);
 
   // goal shape
-  goalShape = cpCircleShapeNew(body, 20.0, cpvzero);
+  goalShape = cpCircleShapeNew(body, 19.0f, cpvzero);
   goalShape->e = 0.5;
   goalShape->u = 0.3;
   goalShape->data = this;
@@ -31,8 +31,8 @@ void Goal::display() {
   float start_x = x;
   float start_y = y;
   
-  float width = 32.0f;
-  float height = 32.0f;
+  float width = 48.0f;
+  float height = 48.0f;
   
   float end_x = start_x + width;
   float end_y = start_y - height;
@@ -45,7 +45,7 @@ void Goal::display() {
   
   glColor4f(alpha, alpha, alpha, alpha);
   
-  TexManager::Instance()->bindTexture(8);
+  TexManager::Instance()->bindTexture(15);
   
   glLoadIdentity();
   glTranslatef(start_x - width/2, start_y + height/2, 0.0);
