@@ -10,11 +10,13 @@ class Platform : public Sprite {
 
   private:
     cpBody *body;
+    cpBody *pbody;
     cpShape *platformShape;
     
     float width;
     float height;
     float physics_height;
+    bool fixed;
     
     string simulation_type;
 
@@ -39,6 +41,11 @@ class Platform : public Sprite {
      * Size
      */
     void setWidth(float);
+    
+    /**
+     * Fix the platform in place with a pivot joint
+     */
+    void fix(cpSpace*);
 };
 
 #endif

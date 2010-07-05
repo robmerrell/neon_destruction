@@ -3,6 +3,7 @@
 
 Platform::Platform(string sim_type) : Sprite("", 64, 64, PLATFORM_TAG) {  
   simulation_type = sim_type;
+  fixed = false;
   
   height = 25.0f; // always 25 so that it matches our sprite
   physics_height = 12.0f;
@@ -46,6 +47,14 @@ void Platform::definePhysics(cpSpace *space) {
     cpSpaceAddShape(space, platformShape);
   else
     cpSpaceAddStaticShape(space, platformShape);
+}
+
+void Platform::fix(cpSpace *space) {
+  pbody = cpBodyNew(INFINITY, INFINITY);
+  pbody->p = cpv(x, y);
+
+  cpSpaceAddConstraint(space, cpPivotJointNew(body, pbody, cpv(x,y)));
+  fixed = true;
 }
 
 void Platform::display() {

@@ -196,6 +196,7 @@ void GameplayScene::loadLevel(string level_file) {
   level_data.LoadFile();
 
   string size, x, y, angle, type, physics, width, height, radius, dir;
+  string fixed = "";
   Box *box;
   Platform *platform;
   Circle *circle;
@@ -240,25 +241,6 @@ void GameplayScene::loadLevel(string level_file) {
         gravity_direction = GRAVITY_RIGHT;
         space->gravity = cpv(GRAVITY_RATE, 0);
       }
-      
-      
-      
-      /*
-      if (gravity_direction == GRAVITY_UP || gravity_direction == GRAVITY_DOWN) {
-        if (space->gravity.y < 0)
-          space->gravity = cpv(0, GRAVITY_RATE);
-        else
-          space->gravity = cpv(0, -GRAVITY_RATE);
-      }
-
-      // left and right
-      if (gravity_direction == GRAVITY_LEFT || gravity_direction == GRAVITY_RIGHT) {
-        if (space->gravity.x <= 0)
-          space->gravity = cpv(GRAVITY_RATE, 0);
-        else
-          space->gravity = cpv(-GRAVITY_RATE, 0);
-      }
-      */
 
       gravity_switch = new GravitySwitch(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL), gravity_direction);
       gravity_switch->definePhysics(space);
@@ -306,6 +288,9 @@ void GameplayScene::loadLevel(string level_file) {
       y = object_node->ToElement()->Attribute("y");
       width = object_node->ToElement()->Attribute("width");
       angle = object_node->ToElement()->Attribute("angle");
+      
+      if (object_node->ToElement()->Attribute("fixed") != NULL)
+        fixed = object_node->ToElement()->Attribute("fixed");
 
       // create the platform
       platform = new Platform(physics);
@@ -314,7 +299,10 @@ void GameplayScene::loadLevel(string level_file) {
       platform->setWidth(strtof(width.c_str(), NULL));
       platform->setAngle(strtof(angle.c_str(), NULL));
       platform->definePhysics(space);
+      if (fixed != "") platform->fix(space);
       addObject(platform);
+      
+      fixed = "";
     } else if (object_node->ToElement()->Attribute("type") == string("CIRCLE")) {
       // extract data from XML
       physics = object_node->ToElement()->Attribute("physics");
