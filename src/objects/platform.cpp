@@ -4,6 +4,7 @@
 Platform::Platform(string sim_type) : Sprite("", 64, 64, PLATFORM_TAG) {  
   simulation_type = sim_type;
   fixed = false;
+  id = "";
   
   height = 25.0f; // always 25 so that it matches our sprite
   physics_height = 12.0f;
@@ -23,6 +24,18 @@ void Platform::destroy(cpSpace *space) {
 
 void Platform::setWidth(float _width) {
   width = _width;
+}
+
+void Platform::setId(string _id) {
+  id = _id;
+}
+
+string Platform::getId() {
+  return id;
+}
+
+cpBody* Platform::getBody() {
+  return body;
 }
 
 void Platform::definePhysics(cpSpace *space) {  

@@ -4,8 +4,6 @@
   
   <object type="PLATFORM" x="100.0f" y="100.0f" width="72.0f" angle="90.0f" physics="DYNAMIC" />
   
-
-  
   <object type="GOAL" x="215.0f" y="10.0f" />
   
   <object type="CANNON" x="-5.0f" y="153.0f" />

@@ -194,9 +194,13 @@ void GameplayScene::loadLevel(string level_file) {
   
   TiXmlDocument level_data(path.append(level_file).c_str());
   level_data.LoadFile();
+  
+  vector<Sprite*> pinned;
 
-  string size, x, y, angle, type, physics, width, height, radius, dir;
+  string id, size, x, y, angle, type, physics, width, height, radius, dir;
   string fixed = "";
+  string body1, body2, body1_x, body1_y, body2_x, body2_y;
+  cpBody *pinbody1, *pinbody2;
   Box *box;
   Platform *platform;
   Circle *circle;
@@ -291,7 +295,7 @@ void GameplayScene::loadLevel(string level_file) {
       
       if (object_node->ToElement()->Attribute("fixed") != NULL)
         fixed = object_node->ToElement()->Attribute("fixed");
-
+        
       // create the platform
       platform = new Platform(physics);
       platform->setX(strtof(x.c_str(), NULL));
@@ -301,6 +305,10 @@ void GameplayScene::loadLevel(string level_file) {
       platform->definePhysics(space);
       if (fixed != "") platform->fix(space);
       addObject(platform);
+      
+      if (object_node->ToElement()->Attribute("id") != NULL) {
+        platform->setId(object_node->ToElement()->Attribute("id"));
+      }
       
       fixed = "";
     } else if (object_node->ToElement()->Attribute("type") == string("CIRCLE")) {
@@ -317,7 +325,30 @@ void GameplayScene::loadLevel(string level_file) {
       circle->setRadius(strtof(radius.c_str(), NULL));
       circle->definePhysics(space);
       addObject(circle);
+    } else if (object_node->ToElement()->Attribute("type") == string("PIN")) {
+      body1 = object_node->ToElement()->Attribute("body1");
+      body1_x = object_node->ToElement()->Attribute("body1_x");
+      body1_y = object_node->ToElement()->Attribute("body1_y");
+      
+      body2 = object_node->ToElement()->Attribute("body2");
+      body2_x = object_node->ToElement()->Attribute("body2_x");
+      body2_y = object_node->ToElement()->Attribute("body2_y");
+      
+      vector<Sprite*>::iterator iter;
+      for (iter = objects.begin(); iter != objects.end(); iter++) {
+        platform = (Platform*)(*iter);
+        if (platform->getId() == body1) pinbody1 = platform->getBody();
+        if (platform->getId() == body2) pinbody2 = platform->getBody();
+      }
+      
+      cpSpaceAddConstraint(space, cpPinJointNew(
+        pinbody1,
+        pinbody2,
+        cpv(strtof(body1_x.c_str(), NULL), strtof(body1_y.c_str(), NULL)),
+        cpv(strtof(body2_x.c_str(), NULL), strtof(body2_y.c_str(), NULL))
+      ));
     }
+    
   }
 }
 
