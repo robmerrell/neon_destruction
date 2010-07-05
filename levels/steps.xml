@@ -5,9 +5,9 @@
   
   <object type="CANNON" x="-5.0f" y="153.0f" />
   
-  <object type="GEAR" x="150.0f" y="100.0f" width="126.0f" angle="0.0f" />
+  <object type="GEAR" x="150.0f" y="200.0f" width="126.0f" angle="0.0f" impulse_x="300.0f" impulse_y="-150.0f" />
   
-  <object type="GEAR" x="230.0f" y="100.0f" width="126.0f" angle="2.0f" />
+  <object type="GEAR" x="277.0f" y="200.0f" width="126.0f" angle="2.0f" />
   
 
 </level>

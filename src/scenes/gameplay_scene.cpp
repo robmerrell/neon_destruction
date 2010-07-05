@@ -197,7 +197,7 @@ void GameplayScene::loadLevel(string level_file) {
   
   vector<Sprite*> pinned;
 
-  string id, size, x, y, angle, type, physics, width, height, radius, dir;
+  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y;
   string fixed = "";
   string body1, body2, body1_x, body1_y, body2_x, body2_y;
   cpBody *pinbody1, *pinbody2;
@@ -241,6 +241,13 @@ void GameplayScene::loadLevel(string level_file) {
       gear->setAngle(strtof(angle.c_str(), NULL));
       gear->definePhysics(space);
       addObject(gear);
+
+      if (object_node->ToElement()->Attribute("impulse_x") != NULL) {
+        impulse_x = object_node->ToElement()->Attribute("impulse_x");
+        impulse_y = object_node->ToElement()->Attribute("impulse_y");
+        gear->applyImpulse(strtof(impulse_x.c_str(), NULL), strtof(impulse_y.c_str(), NULL));
+      }
+      
     } if (object_node->ToElement()->Attribute("type") == string("GRAVITY_SWTICH")) {
       x = object_node->ToElement()->Attribute("x");
       y = object_node->ToElement()->Attribute("y");

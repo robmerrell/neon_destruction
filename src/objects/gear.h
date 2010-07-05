@@ -39,6 +39,11 @@ class Gear : public Sprite {
      * Size
      */
     void setWidth(float);
+    
+    /**
+     * Apply an impulse to the body at coordinates
+     */
+    void applyImpulse(float, float);
 };
 
 #endif

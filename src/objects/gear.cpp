@@ -47,6 +47,12 @@ void Gear::definePhysics(cpSpace *space) {
   cpSpaceAddConstraint(space, cpPivotJointNew(body, pbody, cpv(x,y)));
 }
 
+void Gear::applyImpulse(float impx, float impy) {
+  cout << impx << "  " << impy << "\n";
+  
+  cpBodyApplyImpulse(body, cpv(impx, impy), cpv(x - impx, y - impy));
+}
+
 void Gear::display() {
   float start_x = x;
   float start_y = y;
