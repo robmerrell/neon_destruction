@@ -44,6 +44,11 @@ class Platform : public Sprite {
     void setWidth(float);
     
     /**
+     * Apply an impulse to the body at coordinates
+     */
+    void applyImpulse(float, float);
+    
+    /**
      * Fix the platform in place with a pivot joint
      */
     void fix(cpSpace*);

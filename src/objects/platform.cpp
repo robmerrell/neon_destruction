@@ -62,6 +62,10 @@ void Platform::definePhysics(cpSpace *space) {
     cpSpaceAddStaticShape(space, platformShape);
 }
 
+void Platform::applyImpulse(float impx, float impy) {
+  cpBodyApplyImpulse(body, cpv(impx, impy), cpv(x - impx, y - impy));
+}
+
 void Platform::fix(cpSpace *space) {
   pbody = cpBodyNew(INFINITY, INFINITY);
   pbody->p = cpv(x, y);

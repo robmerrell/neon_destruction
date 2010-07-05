@@ -331,6 +331,12 @@ void GameplayScene::loadLevel(string level_file) {
         platform->setId(object_node->ToElement()->Attribute("id"));
       }
       
+      if (object_node->ToElement()->Attribute("impulse_x") != NULL) {
+        impulse_x = object_node->ToElement()->Attribute("impulse_x");
+        impulse_y = object_node->ToElement()->Attribute("impulse_y");
+        platform->applyImpulse(strtof(impulse_x.c_str(), NULL), strtof(impulse_y.c_str(), NULL));
+      }
+      
       fixed = "";
     } else if (object_node->ToElement()->Attribute("type") == string("CIRCLE")) {
       // extract data from XML

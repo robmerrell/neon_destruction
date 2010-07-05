@@ -48,8 +48,6 @@ void Gear::definePhysics(cpSpace *space) {
 }
 
 void Gear::applyImpulse(float impx, float impy) {
-  cout << impx << "  " << impy << "\n";
-  
   cpBodyApplyImpulse(body, cpv(impx, impy), cpv(x - impx, y - impy));
 }
 
