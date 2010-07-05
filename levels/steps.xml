@@ -1,13 +1,12 @@
 <?xml version="1.0" standalone=no>
 <level name="Steps">
 
-  <object type="PLATFORM" x="300.0f" y="100.0f" width="126.0f" angle="0.0f" physics="DYNAMIC" fixed="true" impulse_x="300.0f" impulse_y="-150.0f" />
+  <object type="PLATFORM" x="300.0f" y="100.0f" width="126.0f" angle="0.0f" physics="DYNAMIC" fixed="true" />
   
   <object type="CANNON" x="-5.0f" y="153.0f" />
   
-  <object type="GEAR" x="150.0f" y="200.0f" width="126.0f" angle="0.0f" impulse_x="300.0f" impulse_y="-150.0f" />
+  <object type="GEAR" x="150.0f" y="200.0f" width="126.0f" angle="0.0f" />
   
   <object type="GEAR" x="277.0f" y="200.0f" width="126.0f" angle="2.0f" />
-  
 
 </level>

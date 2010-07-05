@@ -2,7 +2,7 @@
 	"id": "com.trackera.neonblaster",
 	"version": "1.0.0",
 	"vendor": "Rob Merrell",
-	"type": "game",
+	"type": "pdk",
 	"main": "main",
 	"title": "Neon Blaster",
 	"icon": "icon.png",

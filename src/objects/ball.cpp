@@ -93,7 +93,7 @@ void Ball::display() {
   TexManager::Instance()->bindTexture(0);
   
   glLoadIdentity();
-  glTranslatef(body->p.x - 32, body->p.y - 32, 0.0);
+  glTranslatef(body->p.x - 32, body->p.y - 32, 0.0f);
   
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -101,6 +101,7 @@ void Ball::display() {
   glVertexPointer(3, GL_FLOAT, 0, ball_vertices);
   glTexCoordPointer(3, GL_FLOAT, 0, tex);
   
+  glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   
   glDisableClientState(GL_VERTEX_ARRAY);
@@ -114,7 +115,7 @@ void Ball::display() {
   for (int i=0; i < PARTICLE_TOTAL; i++) {
     if (!particles[i]->dead) {
       glLoadIdentity();
-      glTranslatef(particles[i]->x - 16, particles[i]->y - 16, 0.0);
+      glTranslatef(particles[i]->x - 16, particles[i]->y - 16, 0.0f);
       
       glColor4f(colors[particles[i]->color][0], colors[particles[i]->color][1], colors[particles[i]->color][2], 1.0f);
   
