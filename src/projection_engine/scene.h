@@ -19,6 +19,7 @@
 #include "../objects/crosshair.h"
 #include "../objects/circle.h"
 #include "../objects/triangle.h"
+#include "../objects/gear.h"
 
 // engine
 #include "sprite.h"

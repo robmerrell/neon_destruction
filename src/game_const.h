@@ -17,6 +17,7 @@ const int BOX_TAG = 6;
 const int CROSSHAIR_TAG = 7;
 const int CIRCLE_TAG = 8;
 const int TRIANGLE_TAG = 9;
+const int GEAR_TAG = 10;
 
 const int CANNON_COLLISION = 1;
 const int BALL_COLLISION = 2;

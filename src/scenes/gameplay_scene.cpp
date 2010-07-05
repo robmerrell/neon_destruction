@@ -205,6 +205,7 @@ void GameplayScene::loadLevel(string level_file) {
   Platform *platform;
   Circle *circle;
   Triangle *triangle;
+  Gear *gear;
   GravitySwitch *gravity_switch;
   int gravity_direction = GRAVITY_DOWN;
   
@@ -227,6 +228,19 @@ void GameplayScene::loadLevel(string level_file) {
       goal->definePhysics(space);
       addObject(goal);
       has_goal = true;
+    } if (object_node->ToElement()->Attribute("type") == string("GEAR")) {
+      x = object_node->ToElement()->Attribute("x");
+      y = object_node->ToElement()->Attribute("y");
+      width = object_node->ToElement()->Attribute("width");
+      angle = object_node->ToElement()->Attribute("angle");
+      
+      gear = new Gear();
+      gear->setX(strtof(x.c_str(), NULL));
+      gear->setY(strtof(y.c_str(), NULL));
+      gear->setWidth(strtof(width.c_str(), NULL));
+      gear->setAngle(strtof(angle.c_str(), NULL));
+      gear->definePhysics(space);
+      addObject(gear);
     } if (object_node->ToElement()->Attribute("type") == string("GRAVITY_SWTICH")) {
       x = object_node->ToElement()->Attribute("x");
       y = object_node->ToElement()->Attribute("y");
@@ -508,7 +522,7 @@ void updateShape(void *ptr, void* unused) {
   sprite->setY(shape->body->p.y);
   
   // rotate certain objects
-  if (sprite->getTag() == BOX_TAG || sprite->getTag() == TRIANGLE_TAG || sprite->getTag() == PLATFORM_TAG) {
+  if (sprite->getTag() == BOX_TAG || sprite->getTag() == GEAR_TAG || sprite->getTag() == PLATFORM_TAG) {
     sprite->setAngle(RAD2DEG(shape->body->a));
   }
 }
