@@ -24,16 +24,18 @@ int main(int argc, char* argv[]) {
   TexManager::Instance()->loadTexture("assets/green_platform_atlas.png", true);
   TexManager::Instance()->loadTexture("assets/goal.png", true);
   TexManager::Instance()->loadTexture("assets/gravity_switch.png", true);
+  TexManager::Instance()->loadTexture("assets/loading.png", true);
 
   // show the title scene and start the game loop
   TitleScene *title_scene = new TitleScene();
-  engine.showScene(title_scene);
+  bool quit = engine.showScene(title_scene);
+  // delete title_scene;
   
-  GameplayScene *gameplay_scene = new GameplayScene();
-  engine.showScene(gameplay_scene);
-
-  delete title_scene;
-  delete gameplay_scene;
+  if (!quit) {
+    GameplayScene *gameplay_scene = new GameplayScene();
+    engine.showScene(gameplay_scene);
+    delete gameplay_scene;
+  }
 
   return 0;
 }

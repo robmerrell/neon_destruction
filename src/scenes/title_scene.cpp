@@ -6,7 +6,7 @@ TitleScene::TitleScene() {
 
 TitleScene::~TitleScene() {}
 
-void TitleScene::setup() {
+bool TitleScene::setup() {
   int x, y = 0;
   srand((unsigned)time(0)); 
   for (int i = 0; i < STARS_PER_FIELD; i++) {
@@ -28,10 +28,16 @@ void TitleScene::setup() {
   }
   
   
-  // add a couple of textures to the screen
-  
+  Image *image;
+
+  image = new Image(112.0f, 32.0f, 256.0f, 256.0f, 17);
+  addObject(image);
   
   gameLoop();
+  
+  delete image;
+  
+  return quit;
 }
 
 
@@ -42,6 +48,7 @@ void TitleScene::gameLoop() {
   int millistep = 16;
   float timeStep = float(millistep)/1000;
   fps.start();
+  animation.start();
   animation_ticks = 0;
     
   while (in_loop) {
@@ -57,6 +64,9 @@ void TitleScene::gameLoop() {
     }
     
     animation_ticks = fps.get_ticks();
+    
+    if (animation_ticks > 32) animation_ticks = 32;
+    
     accumulator += animation_ticks;
     fps.start();
     
@@ -67,9 +77,9 @@ void TitleScene::gameLoop() {
     glDisable(GL_BLEND);
     
     // draw the background
-    moveBackground(animation_ticks);
+    // moveBackground(animation_ticks);
     updateAnimation(animation_ticks);
-    drawBackground();
+    // drawBackground();
     
     // blending
     glEnable(GL_BLEND);
@@ -83,6 +93,16 @@ void TitleScene::gameLoop() {
     
     // update the screen
     SDL_GL_SwapBuffers();
+    
+    if (animation.get_ticks() >= 3000) {
+      for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
+        (*sprite)->setAnimationState(ANIMATE_FADE_OUT);
+      }
+      
+      if (animation.get_ticks() >= 5000) {
+        in_loop = false;
+      }
+    }
   }
 }
 

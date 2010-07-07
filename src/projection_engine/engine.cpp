@@ -45,7 +45,7 @@ Engine::~Engine() {
 
 bool Engine::showScene(Scene *scene) {
   scene->setDrawPhysics(draw_physics);
-  scene->setup();
+  bool results = scene->setup();
   
-  return true;
+  return results;
 }

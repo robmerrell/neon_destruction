@@ -14,6 +14,7 @@ class TitleScene : public Scene {
     
     int frame;
     Timer fps;
+    Timer animation;
     float animation_ticks;
     
     cpVect starfield1[STARS_PER_FIELD];
@@ -26,7 +27,7 @@ class TitleScene : public Scene {
     TitleScene();
     ~TitleScene();
     
-    void setup();
+    bool setup();
     void gameLoop();
     
     /**

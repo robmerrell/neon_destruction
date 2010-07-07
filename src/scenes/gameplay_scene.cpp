@@ -53,7 +53,7 @@ GameplayScene::~GameplayScene() {
   cpSpaceFree(space);
 }
 
-void GameplayScene::setup() {
+bool GameplayScene::setup() {
   defineBorder(true, true, true, true);
   
   // load a level
@@ -64,6 +64,8 @@ void GameplayScene::setup() {
     gameLoop();
     replaceLevel(GAME_LEVELS[current_level-1]);
   }
+  
+  return quit;
 }
 
 

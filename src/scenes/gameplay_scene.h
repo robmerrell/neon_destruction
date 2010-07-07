@@ -39,7 +39,7 @@ class GameplayScene : public Scene {
     
     static bool finished_level;
     
-    void setup();
+    bool setup();
     void gameLoop();
     void loadLevel(string);
     void replaceLevel(string);

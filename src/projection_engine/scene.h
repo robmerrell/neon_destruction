@@ -20,6 +20,7 @@
 #include "../objects/circle.h"
 #include "../objects/triangle.h"
 #include "../objects/gear.h"
+#include "../objects/image.h"
 
 // engine
 #include "sprite.h"
@@ -48,7 +49,7 @@ class Scene {
     /**
      * Handle setup of game objects for the scene in preparation for the game loop
      */
-    virtual void setup() {};
+    virtual bool setup() {};
     
     /**
      * Add a sprite to the scene
