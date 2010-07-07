@@ -1,6 +1,7 @@
 #include "projection_engine/engine.h"
 #include "projection_engine/tex_manager.h"
 #include "scenes/gameplay_scene.h"
+#include "scenes/title_scene.h"
 
 int main(int argc, char* argv[]) {
   Engine engine(false);
@@ -25,9 +26,13 @@ int main(int argc, char* argv[]) {
   TexManager::Instance()->loadTexture("assets/gravity_switch.png", true);
 
   // show the title scene and start the game loop
+  TitleScene *title_scene = new TitleScene();
+  engine.showScene(title_scene);
+  
   GameplayScene *gameplay_scene = new GameplayScene();
   engine.showScene(gameplay_scene);
-  
+
+  delete title_scene;
   delete gameplay_scene;
 
   return 0;
