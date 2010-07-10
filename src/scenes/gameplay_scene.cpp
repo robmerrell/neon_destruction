@@ -205,7 +205,7 @@ void GameplayScene::loadLevel(string level_file) {
   
   vector<Sprite*> pinned;
 
-  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y;
+  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num;
   string fixed = "";
   string body1, body2, body1_x, body1_y, body2_x, body2_y;
   cpBody *pinbody1, *pinbody2;
@@ -240,7 +240,7 @@ void GameplayScene::loadLevel(string level_file) {
       Cannon *cannon = new Cannon(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL));
       addObject(cannon);
       has_cannon = true;
-    } if (object_node->ToElement()->Attribute("type") == string("GOAL")) {
+    } else if (object_node->ToElement()->Attribute("type") == string("GOAL")) {
       x = object_node->ToElement()->Attribute("x");
       y = object_node->ToElement()->Attribute("y");
       
@@ -248,7 +248,16 @@ void GameplayScene::loadLevel(string level_file) {
       goal->definePhysics(space);
       addObject(goal);
       has_goal = true;
-    } if (object_node->ToElement()->Attribute("type") == string("GEAR")) {
+    } else if (object_node->ToElement()->Attribute("type") == string("TEXTURE")) {
+      x = object_node->ToElement()->Attribute("x");
+      y = object_node->ToElement()->Attribute("y");
+      width = object_node->ToElement()->Attribute("width");
+      height = object_node->ToElement()->Attribute("height");
+      num = object_node->ToElement()->Attribute("tex");
+      
+      Image *image = new Image(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL), strtof(width.c_str(), NULL), strtof(height.c_str(), NULL), atoi(num.c_str()));
+      addObject(image);
+    } else if (object_node->ToElement()->Attribute("type") == string("GEAR")) {
       x = object_node->ToElement()->Attribute("x");
       y = object_node->ToElement()->Attribute("y");
       width = object_node->ToElement()->Attribute("width");
@@ -268,7 +277,7 @@ void GameplayScene::loadLevel(string level_file) {
         gear->applyImpulse(strtof(impulse_x.c_str(), NULL), strtof(impulse_y.c_str(), NULL));
       }
       
-    } if (object_node->ToElement()->Attribute("type") == string("GRAVITY_SWTICH")) {
+    } else if (object_node->ToElement()->Attribute("type") == string("GRAVITY_SWTICH")) {
       x = object_node->ToElement()->Attribute("x");
       y = object_node->ToElement()->Attribute("y");
       dir = object_node->ToElement()->Attribute("default_direction");
