@@ -30,6 +30,10 @@ int Sprite::getTag() {
   return tag;
 }
 
+void Sprite::setTag(int _t) {
+  tag = _t;
+}
+
 int Sprite::getAnimationState() {
   return animation_state;
 }

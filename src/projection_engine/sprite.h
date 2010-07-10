@@ -36,6 +36,7 @@ class Sprite : public GameObject {
     float getAngle();
     void setAngle(float);
     int getTag();
+    void setTag(int);
     
     void setAnimationState(int);
     int getAnimationState();

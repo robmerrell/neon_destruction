@@ -59,11 +59,13 @@ bool GameplayScene::setup() {
   // load a level
   loadLevel(GAME_LEVELS[current_level-1]);
 
-  TextureString *st1 = new TextureString(0.0f, 0.0f, "Bet you can't");
-  addObject(st1);
+  TextureString *level_name = new TextureString(0.0f, 0.0f, "Bet you can't");
+  level_name->setTag(LEVEL_STRING_TAG);
+  addObject(level_name);
 
-  TextureString *st = new TextureString(350.0f, 300.0f, "Score: 100");
-  addObject(st);
+  TextureString *score_string = new TextureString(350.0f, 0.0f, "Shots: 0");
+  score_string->setTag(SCORE_STRING_TAG);
+  addObject(score_string);
   
   // start the game loop
   while(!quit) {
@@ -122,6 +124,12 @@ void GameplayScene::gameLoop() {
         Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
         if (cannon != NULL) {
           score++;
+          
+          stringstream ss;
+          ss << score;
+          TextureString *score_string = (TextureString*)findObject(SCORE_STRING_TAG);
+          score_string->setMessage(string("Shots: " + ss.str()));
+          
           radians = getMouseRadians(cpv(cannon->getX(), cannon->getY()), event_coords);
           
           // calculate the starting coordinates for the ball

@@ -6,6 +6,10 @@ TextureString::TextureString(float x, float y, string _m) : Sprite("", 64, 64, T
   message = _m;
 }
 
+void TextureString::setMessage(string m) {
+  message = m;
+}
+
 void TextureString::display() {
   TexManager::Instance()->bindTexture(18);
   

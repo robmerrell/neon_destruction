@@ -2,6 +2,7 @@
 #include "../tinyxml/tinyxml.h"
 
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 

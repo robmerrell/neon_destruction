@@ -20,6 +20,8 @@ const int TRIANGLE_TAG = 9;
 const int GEAR_TAG = 10;
 const int IMAGE_TAG = 11;
 const int TEXTURE_STRING_TAG = 12;
+const int LEVEL_STRING_TAG = 13;
+const int SCORE_STRING_TAG = 14;
 
 const int CANNON_COLLISION = 1;
 const int BALL_COLLISION = 2;

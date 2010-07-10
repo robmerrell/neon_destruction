@@ -18,6 +18,8 @@ class TextureString : public Sprite {
      */
     TextureString(float, float, string);
     
+    void setMessage(string);
+    
     /**
      * Define the physics properties of the object
      */
