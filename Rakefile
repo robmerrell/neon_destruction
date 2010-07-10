@@ -123,6 +123,7 @@ task :build => :arch_settings do
     "-lchipmunk",
     "-lSOIL",
     "-lSDL",
+    "-lSDL_Mixer",
     "-lGLES_CM",
     "-lpdl"
   ]

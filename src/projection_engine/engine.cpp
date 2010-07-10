@@ -40,6 +40,7 @@ Engine::Engine(bool _draw_physics) {
 
 Engine::~Engine() {
   TexManager::Instance()->deleteAllTextures();
+  SoundManager::Instance()->destroyRefs();
   SDL_Quit();
 }
 

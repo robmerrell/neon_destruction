@@ -1,5 +1,6 @@
 #include "projection_engine/engine.h"
 #include "projection_engine/tex_manager.h"
+#include "projection_engine/sound_manager.h"
 #include "scenes/gameplay_scene.h"
 #include "scenes/title_scene.h"
 
@@ -26,6 +27,9 @@ int main(int argc, char* argv[]) {
   TexManager::Instance()->loadTexture("assets/gravity_switch.png", true);
   TexManager::Instance()->loadTexture("assets/loading.png", true);
   TexManager::Instance()->loadTexture("assets/font.png", true);
+  
+  SoundManager::Instance()->loadMusic("assets/music.mp3");
+  SoundManager::Instance()->playMusic();
 
   // show the title scene and start the game loop
   TitleScene *title_scene = new TitleScene();
@@ -37,6 +41,6 @@ int main(int argc, char* argv[]) {
     engine.showScene(gameplay_scene);
     delete gameplay_scene;
   }
-
+  
   return 0;
 }

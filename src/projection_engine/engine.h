@@ -8,6 +8,8 @@
 #include "sprite.h"
 #include "timer.h"
 
+#include "sound_manager.h"
+
 #include "../game_const.h"
 
 #ifndef ENGINE_H
