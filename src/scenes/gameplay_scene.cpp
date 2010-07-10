@@ -58,14 +58,6 @@ bool GameplayScene::setup() {
   
   // load a level
   loadLevel(GAME_LEVELS[current_level-1]);
-
-  TextureString *level_name = new TextureString(0.0f, 0.0f, "Bet you can't");
-  level_name->setTag(LEVEL_STRING_TAG);
-  addObject(level_name);
-
-  TextureString *score_string = new TextureString(350.0f, 0.0f, "Shots: 0");
-  score_string->setTag(SCORE_STRING_TAG);
-  addObject(score_string);
   
   // start the game loop
   while(!quit) {
@@ -227,6 +219,18 @@ void GameplayScene::loadLevel(string level_file) {
   
   TiXmlNode* level = level_data.FirstChild("level");
   TiXmlNode* object_node;
+  
+  TextureString *level_name = new TextureString(0.0f, 0.0f, "");
+  level_name->setTag(LEVEL_STRING_TAG);
+  addObject(level_name);
+  
+  TextureString *score_string = new TextureString(350.0f, 0.0f, "Shots: 0");
+  score_string->setTag(SCORE_STRING_TAG);
+  addObject(score_string);
+
+  if (level->ToElement()->Attribute("name") != NULL) {
+    level_name->setMessage(level->ToElement()->Attribute("name"));
+  }
   
   for (object_node = level->FirstChild(); object_node != 0; object_node = object_node->NextSibling() ) {
     if (object_node->ToElement()->Attribute("type") == string("CANNON") && !has_cannon) {
