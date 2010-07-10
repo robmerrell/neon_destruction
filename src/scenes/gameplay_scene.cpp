@@ -58,6 +58,12 @@ bool GameplayScene::setup() {
   
   // load a level
   loadLevel(GAME_LEVELS[current_level-1]);
+
+  TextureString *st1 = new TextureString(0.0f, 0.0f, "Bet you can't");
+  addObject(st1);
+
+  TextureString *st = new TextureString(350.0f, 300.0f, "Score: 100");
+  addObject(st);
   
   // start the game loop
   while(!quit) {

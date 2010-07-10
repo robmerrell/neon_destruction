@@ -21,6 +21,7 @@
 #include "../objects/triangle.h"
 #include "../objects/gear.h"
 #include "../objects/image.h"
+#include "../objects/texture_string.h"
 
 // engine
 #include "sprite.h"
