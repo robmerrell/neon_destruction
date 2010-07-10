@@ -19,7 +19,11 @@ class SoundManager {
     
     static SoundManager* inst;
     
+    bool loaded_effects;
+    
     Mix_Music *music;
+    Mix_Chunk *cannon;
+    int cannon_channel;
     
   public:
     static SoundManager* Instance();
@@ -29,6 +33,12 @@ class SoundManager {
      */
     void loadMusic(string);
     void playMusic();
+    
+    /**
+     * Load and play the sound effects
+     */
+    void loadEffects();
+    void playCannon();
     
     /**
      * Stop all sounds and unload them

@@ -106,6 +106,7 @@ void GameplayScene::gameLoop() {
             cannon->rotateTurret(angle);
         }
       } else if (event.type == SDL_MOUSEBUTTONUP) {
+        SoundManager::Instance()->playCannon();
         cpVect event_coords = translatedMouseCoords(event.button.x, event.button.y);
         
         // reposition the crosshair
@@ -129,7 +130,7 @@ void GameplayScene::gameLoop() {
           cpVect cannon_coords = cannon->translatedCoords();
           ball_start_coords.x = cannon_coords.x + calc_vect.x;
           ball_start_coords.y = cannon_coords.y - calc_vect.y;
-                    
+        
           // add an ammo object and give it an impulse
           Ball *ball = new Ball(ball_start_coords.x, ball_start_coords.y);
           ball->definePhysics(space);
