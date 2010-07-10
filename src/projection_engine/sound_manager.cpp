@@ -24,7 +24,7 @@ void SoundManager::loadMusic(string _music) {
 }
 
 void SoundManager::playMusic() {
-  Mix_PlayMusic(music, 0);
+  Mix_PlayMusic(music, -1);
 }
 
 void SoundManager::destroyRefs() {
