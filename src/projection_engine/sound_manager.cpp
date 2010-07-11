@@ -17,7 +17,7 @@ SoundManager* SoundManager::Instance() {
     int audio_rate = 44100;
     Uint16 audio_format = AUDIO_S16; /* 16-bit stereo */
     int audio_channels = 2;
-    int audio_buffers = 2048;
+    int audio_buffers = 1124;
 
     Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers);
   }
