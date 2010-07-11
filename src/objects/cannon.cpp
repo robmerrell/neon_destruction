@@ -7,7 +7,7 @@ Cannon::Cannon(float x, float y) : Sprite("", 64, 64, CANNON_TAG) {
 }
 
 void Cannon::display() {
-  GLfloat base_vertices[] = {0,64,0, 64,64,0, 0,0,0, 64,0,0};
+  GLfloat base_vertices[] = {0,128,0, 128,128,0, 0,0,0, 128,0,0};
   GLfloat base_tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
 
   glColor4f(alpha, alpha, alpha, alpha);
@@ -35,10 +35,10 @@ void Cannon::display() {
   
   // place and rotate the turret
   glLoadIdentity();
-  glTranslatef(x - 11, y - 61, 0);
-  glTranslatef(42, 67, 0.0);
+  glTranslatef(x, y, 0);
+  glTranslatef(64.0f, 51.0f, 0.0);
   glRotatef(turret_angle, 0.0, 0.0, 1.0);
-  glTranslatef(-42, -67, 0.0);
+  glTranslatef(-64.0f, -51.0f, 0.0);
   
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);

@@ -100,9 +100,9 @@ void GameplayScene::gameLoop() {
         
         Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
         if (cannon != NULL) {
-          angle = getInvertedMouseAngle(cpv(cannon->getX(), cannon->getY()), event_coords);
+          angle = getInvertedMouseAngle(cpv(cannon->getX() + 64.0f, cannon->getY() + 51.0f), event_coords);
           
-          if (angle < 17 || angle > 144)
+          // if (angle < 17 || angle > 144)
             cannon->rotateTurret(angle);
         }
       } else if (event.type == SDL_MOUSEBUTTONUP) {

@@ -30,12 +30,14 @@ int main(int argc, char* argv[]) {
   
   SoundManager::Instance()->loadMusic("assets/music.mp3");
   SoundManager::Instance()->loadEffects();
-  SoundManager::Instance()->playMusic();
+  // SoundManager::Instance()->playMusic();
 
   // show the title scene and start the game loop
-  TitleScene *title_scene = new TitleScene();
-  bool quit = engine.showScene(title_scene);
+  // TitleScene *title_scene = new TitleScene();
+  // bool quit = engine.showScene(title_scene);
   // delete title_scene;
+  
+  bool quit = false;
   
   if (!quit) {
     GameplayScene *gameplay_scene = new GameplayScene();
