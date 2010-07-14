@@ -124,15 +124,20 @@ void GameplayScene::gameLoop() {
           score_string->setMessage(string("Shots: " + ss.str()));
           
           radians = getMouseRadians(cpv(cannon->getX() + 64.0f, cannon->getY() + 51.0f), event_coords);
-          
-          // calculate the starting coordinates for the ball
-          calc_vect = cpvmult(cpvforangle(radians), 30);
-          cpVect cannon_coords = cannon->translatedCoords();
-          ball_start_coords.x = cannon_coords.x + calc_vect.x;
-          ball_start_coords.y = cannon_coords.y - calc_vect.y;
-          
+
           ball_start_coords.x = cannon->getX() + 64.0f;
           ball_start_coords.y = cannon->getY() + 51.0f;
+          
+          // calculate the starting coordinates for the ball
+          calc_vect = cpvmult(cpvforangle(radians), 50);
+          ball_start_coords.x += calc_vect.x;
+          ball_start_coords.y -= calc_vect.y;
+          // cpVect cannon_coords = cannon->translatedCoords();
+          // ball_start_coords.x = cannon_coords.x + calc_vect.x;
+          // ball_start_coords.y = cannon_coords.y - calc_vect.y;
+
+          
+          // ball_start_coords = cpvadd(ball_start_coords, );
         
           // add an ammo object and give it an impulse
           Ball *ball = new Ball(ball_start_coords.x, ball_start_coords.y);
