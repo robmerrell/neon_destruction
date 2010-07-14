@@ -94,6 +94,13 @@ void GameplayScene::gameLoop() {
       if (event.type == SDL_QUIT) {
         in_loop = false;
         quit = true;
+      } else if (event.type == SDL_KEYDOWN) {
+        if (event.key.keysym.sym == PDLK_GESTURE_BACK) {
+          TextureString *something = new TextureString(200.0f, 150.0f, "Back gesture");
+          addObject(something);
+        }
+        
+        // cout << "back\n";
       } else if (event.type == SDL_MOUSEMOTION) {
         // rotate the turret
         cpVect event_coords = translatedMouseCoords(event.motion.x, event.motion.y);
