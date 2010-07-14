@@ -58,9 +58,9 @@ class Ball : public Sprite {
     /**
      * Apply an impulse to the ball
      *
-     * cpv(mouse coords), cpv(originating coords)
+     * cpv(mouse coords), cpv(originating coords), gravity
      */
-    void applyImpulse(cpVect, cpVect);
+    void applyImpulse(cpVect, cpVect, float);
 
     /**
      * Emit a burst of particles

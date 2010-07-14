@@ -53,36 +53,35 @@ void Ball::definePhysics(cpSpace *space) {
   cpSpaceAddShape(space, ballShape);
 }
 
-void Ball::applyImpulse(cpVect mouse, cpVect originating) {
-  float delta_x, delta_y, vect_x, vect_y;
-  bool negate;
+void Ball::applyImpulse(cpVect mouse, cpVect originating, float g) {
+  float x, y;
   
-  // get dx and dy
-  delta_x = mouse.x - originating.x;
-  if (mouse.y < originating.y) {
-    delta_y = originating.y - mouse.y;
-    negate = true;
+  if (g < 0) {
+    x = originating.x - mouse.x;
+    y = originating.y - mouse.y;    
   } else {
-    delta_y = mouse.y - originating.y;
-    negate = false;
+    x = mouse.x - originating.x;
+    y = originating.y - mouse.y;
   }
   
-  // figure out our impulse vector
-  vect_y = sqrt(2 * GRAVITY_RATE * delta_y);
-  vect_x = (delta_x * GRAVITY_RATE) / vect_y;
+  float angle1, angle2;
+  float diff = sqrt(x*x  + y*y);
+  float vel = 200 + diff;
+
+  float tmp = sqrt(pow(vel,4) - g * (g * pow(x, 2) + 2 * y * pow(vel,2)));
   
-  // Because we are using a TL coordinate system we need
-  // to invert our y vector when shooting up
-  if (negate)
-    vect_y = vect_y * -1;
-    
-  // only allow our x vector to be so fast
-  if (vect_x > 650)
-    vect_x = 650;
-  if (vect_x < -650)
-    vect_x = -650;
+  angle2 = atan2(pow(vel,2) - tmp, g*x);
   
-  cpBodyApplyImpulse(body, cpv(vect_x, vect_y), cpvzero);
+  float d2 = RAD2DEG(angle2);
+  float d3;
+  
+  if (g > 0)
+    d3 = 360 - d2;
+  else
+    d3 = d2;
+  
+  cpVect f = cpvmult(cpvforangle(DEG2RAD(d3)), vel);
+  cpBodyApplyImpulse(body, cpv(f.x, f.y), cpvzero);
 }
 
 void Ball::display() {
