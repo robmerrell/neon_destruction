@@ -25,6 +25,9 @@ class SoundManager {
     Mix_Chunk *cannon;
     int cannon_channel;
     
+    Mix_Chunk *level_end;
+    int level_end_channel;
+    
   public:
     static SoundManager* Instance();
     
@@ -39,6 +42,7 @@ class SoundManager {
      */
     void loadEffects();
     void playCannon();
+    void playLevelEnd();
     
     /**
      * Stop all sounds and unload them

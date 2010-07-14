@@ -12,6 +12,7 @@ SoundManager* SoundManager::Instance() {
     inst = new SoundManager;
     
     inst->cannon_channel = -1;
+    inst->level_end_channel = -1;
     inst->loaded_effects = false;
     
     int audio_rate = 44100;
@@ -31,6 +32,7 @@ void SoundManager::loadMusic(string _music) {
 
 void SoundManager::loadEffects() {
   cannon = Mix_LoadWAV("assets/cannon.wav");
+  level_end = Mix_LoadWAV("assets/level_end.wav");
   if(cannon == NULL) {
   	fprintf(stderr, "Unable to load WAV file: %s\n", Mix_GetError());
   }
@@ -45,6 +47,10 @@ void SoundManager::playCannon() {
   cannon_channel = Mix_PlayChannel(-1, cannon, 0);
 }
 
+void SoundManager::playLevelEnd() {
+  level_end_channel = Mix_PlayChannel(-1, level_end, 0);
+}
+
 void SoundManager::destroyRefs() {
   if (music != NULL) {
     Mix_HaltMusic();
@@ -53,6 +59,7 @@ void SoundManager::destroyRefs() {
   
   if (loaded_effects) {
     Mix_HaltChannel(cannon_channel);
+    Mix_HaltChannel(level_end_channel);
   }
   
   music = NULL;

@@ -187,6 +187,8 @@ void GameplayScene::gameLoop() {
     SDL_GL_SwapBuffers();
    
     if (finished_level) {
+      SoundManager::Instance()->playLevelEnd();
+      
       for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
         (*sprite)->setAnimationState(ANIMATE_FADE_OUT);
       }
