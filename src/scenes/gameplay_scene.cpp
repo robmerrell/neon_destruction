@@ -5,6 +5,7 @@
 bool GameplayScene::finished_level = false;
 
 GameplayScene::GameplayScene() {
+  menu_open = false;
   quit = false;
   current_level = 1;
   score = 0;
@@ -96,6 +97,11 @@ void GameplayScene::gameLoop() {
         quit = true;
       } else if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == PDLK_GESTURE_BACK) {
+          if (menu_open)
+            menu_open = false;
+          else
+            menu_open = true;
+            
           TextureString *something = new TextureString(200.0f, 150.0f, "Back gesture");
           addObject(something);
         }
@@ -160,8 +166,10 @@ void GameplayScene::gameLoop() {
     fps.start();
     
     while (accumulator >= millistep) {
-      cpSpaceStep(space, timeStep);
-      cpSpaceHashEach(space->activeShapes, &updateShape, NULL);
+      if (!menu_open) {
+        cpSpaceStep(space, timeStep);
+        cpSpaceHashEach(space->activeShapes, &updateShape, NULL);
+      }
       accumulator -= millistep;
     }
     

@@ -19,6 +19,8 @@ class GameplayScene : public Scene {
     int current_level;
     bool quit;
     
+    bool menu_open;
+    
     // frame capping
     int frame;
     Timer fps;
