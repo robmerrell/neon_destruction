@@ -429,6 +429,8 @@ void GameplayScene::replaceLevel(string level_file) {
 
   objects.clear();
   
+  score = 0;
+  
   loadLevel(level_file);
 }
 
