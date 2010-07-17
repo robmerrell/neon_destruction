@@ -156,11 +156,21 @@ void GameplayScene::gameLoop() {
             addObject(ball);
           } 
         } else {
-          // cout << "x: " << event_coords.x << "  y: " << event_coords.y << "\n";
+          cout << "x: " << event_coords.x << "  y: " << event_coords.y << "\n";
           // reset button
           if (event_coords.x >= 59 && event_coords.x <= 231 && event_coords.y >= 26 && event_coords.y <= 78) {
             finished_level = true;
             level_reset = true;
+          }
+          
+          // go to level button
+          if (event_coords.x >= 250 && event_coords.x <= 423 && event_coords.y >= 26 && event_coords.y <= 78) {
+            cout << "load level\n";
+          }
+          
+          // resume
+          if (event_coords.x >= 136 && event_coords.x <= 329 && event_coords.y >= 236 && event_coords.y <= 289) {
+            menu_open = false;
           }
         }
       }
