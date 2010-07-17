@@ -22,7 +22,7 @@ const int IMAGE_TAG = 11;
 const int TEXTURE_STRING_TAG = 12;
 const int LEVEL_STRING_TAG = 13;
 const int SCORE_STRING_TAG = 14;
-const int MENU_STRING_TAG = 15;
+const int MENU_TAG = 15;
 
 const int CANNON_COLLISION = 1;
 const int BALL_COLLISION = 2;
@@ -50,7 +50,7 @@ const int SCREEN_BPP = 32;
 /*************
 ** Graphics **
 **************/
-const int TEXTURE_COUNT = 19;
+const int TEXTURE_COUNT = 20;
 const int STARS_PER_FIELD = 170;
 const float STAR_FIELD1_SPEED = 100.0f;
 const float STAR_FIELD2_SPEED = 50.0f;

@@ -101,12 +101,8 @@ void GameplayScene::gameLoop() {
             menu_open = false;
           else
             menu_open = true;
-            
-          TextureString *something = new TextureString(200.0f, 150.0f, "Back gesture");
-          addObject(something);
         }
         
-        // cout << "back\n";
       } else if (event.type == SDL_MOUSEMOTION) {
         // rotate the turret
         cpVect event_coords = translatedMouseCoords(event.motion.x, event.motion.y);
@@ -145,12 +141,6 @@ void GameplayScene::gameLoop() {
           calc_vect = cpvmult(cpvforangle(radians), 50);
           ball_start_coords.x += calc_vect.x;
           ball_start_coords.y -= calc_vect.y;
-          // cpVect cannon_coords = cannon->translatedCoords();
-          // ball_start_coords.x = cannon_coords.x + calc_vect.x;
-          // ball_start_coords.y = cannon_coords.y - calc_vect.y;
-
-          
-          // ball_start_coords = cpvadd(ball_start_coords, );
         
           // add an ammo object and give it an impulse
           Ball *ball = new Ball(ball_start_coords.x, ball_start_coords.y);
@@ -192,10 +182,16 @@ void GameplayScene::gameLoop() {
          (*sprite)->manageParticles(particle_timer.get_ticks(), fps.get_ticks());
       }
       
-      (*sprite)->display();
-      
+      if (!menu_open)
+        (*sprite)->display();
+                  
       if (draw_physics)
         draw_chipmunk(space);
+    }
+    
+    if (menu_open) {
+      Menu *menu = new Menu();
+      menu->display();
     }
     
     // update the screen

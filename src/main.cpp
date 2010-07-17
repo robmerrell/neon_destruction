@@ -27,10 +27,11 @@ int main(int argc, char* argv[]) {
   TexManager::Instance()->loadTexture("assets/gravity_switch.png", true);
   TexManager::Instance()->loadTexture("assets/loading.png", true);
   TexManager::Instance()->loadTexture("assets/font.png", true);
+  TexManager::Instance()->loadTexture("assets/menu.png", true);
   
   SoundManager::Instance()->loadMusic("assets/music.mp3");
   SoundManager::Instance()->loadEffects();
-  SoundManager::Instance()->playMusic();
+  // SoundManager::Instance()->playMusic();
 
   // show the title scene and start the game loop
   // TitleScene *title_scene = new TitleScene();

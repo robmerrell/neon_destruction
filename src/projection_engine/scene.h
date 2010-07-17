@@ -22,6 +22,7 @@
 #include "../objects/gear.h"
 #include "../objects/image.h"
 #include "../objects/texture_string.h"
+#include "../objects/menu.h"
 
 // engine
 #include "sprite.h"
