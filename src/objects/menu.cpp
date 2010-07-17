@@ -32,14 +32,12 @@ void Menu::display() {
   GLfloat vertices_back[] = {0,length,0, bottom_length,length,0, 0,0,0, bottom_length,0,0};
   GLfloat tex_back[] = {0,length/512.0f,0, bottom_length/512.0f,length/512.0f,0, 0,0,0, bottom_length/512.0f,0,0};
   
-  glDisable(GL_BLEND);  
   glLoadIdentity();
   glColor4f(1.0f, 1.0f, 1.0f, alpha);
   glTranslatef(x, y, 0.0f);
   glVertexPointer(3, GL_FLOAT, 0, vertices_back);
   glTexCoordPointer(3, GL_FLOAT, 0, tex_back);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-  glEnable(GL_BLEND);
   
   GLfloat sound_vertices[] = {0,64,0, 64,64,0, 0,0,0, 64,0,0};
   GLfloat sound_tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
