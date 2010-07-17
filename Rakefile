@@ -118,6 +118,8 @@ task :build => :arch_settings do
     "-I#{$pdk_path}/include/SDL"
   ]
   
+  cflags << "-g" if ENV["DEBUG"]
+  
   libs = [
     "-Lbuild",
     "-lchipmunk",

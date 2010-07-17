@@ -5,7 +5,9 @@
 bool GameplayScene::finished_level = false;
 
 GameplayScene::GameplayScene() {
+  menu = new Menu();
   menu_open = false;
+  level_reset = false;
   quit = false;
   current_level = 1;
   score = 0;
@@ -52,6 +54,9 @@ GameplayScene::~GameplayScene() {
   // free all of the physics simulation items
   cpSpaceFreeChildren(space);
   cpSpaceFree(space);
+  
+  delete menu;
+  menu = NULL;
 }
 
 bool GameplayScene::setup() {
@@ -115,38 +120,48 @@ void GameplayScene::gameLoop() {
             cannon->rotateTurret(angle);
         }
       } else if (event.type == SDL_MOUSEBUTTONUP) {
-        SoundManager::Instance()->playCannon();
         cpVect event_coords = translatedMouseCoords(event.button.x, event.button.y);
-        
-        // reposition the crosshair
-        crosshair->setX(event_coords.x);
-        crosshair->setY(event_coords.y);
-        
-        // find the cannon game object
-        Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
-        if (cannon != NULL) {
-          score++;
-          
-          stringstream ss;
-          ss << score;
-          TextureString *score_string = (TextureString*)findObject(SCORE_STRING_TAG);
-          score_string->setMessage(string("Shots: " + ss.str()));
-          
-          radians = getMouseRadians(cpv(cannon->getX() + 64.0f, cannon->getY() + 51.0f), event_coords);
 
-          ball_start_coords.x = cannon->getX() + 64.0f;
-          ball_start_coords.y = cannon->getY() + 51.0f;
-          
-          // calculate the starting coordinates for the ball
-          calc_vect = cpvmult(cpvforangle(radians), 50);
-          ball_start_coords.x += calc_vect.x;
-          ball_start_coords.y -= calc_vect.y;
+        if (!menu_open) {
+          SoundManager::Instance()->playCannon();
         
-          // add an ammo object and give it an impulse
-          Ball *ball = new Ball(ball_start_coords.x, ball_start_coords.y);
-          ball->definePhysics(space);
-          ball->applyImpulse(event_coords, ball_start_coords, space->gravity.y);
-          addObject(ball);
+          // reposition the crosshair
+          crosshair->setX(event_coords.x);
+          crosshair->setY(event_coords.y);
+        
+          // find the cannon game object
+          Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
+          if (cannon != NULL) {
+            score++;
+          
+            stringstream ss;
+            ss << score;
+            TextureString *score_string = (TextureString*)findObject(SCORE_STRING_TAG);
+            score_string->setMessage(string("Shots: " + ss.str()));
+          
+            radians = getMouseRadians(cpv(cannon->getX() + 64.0f, cannon->getY() + 51.0f), event_coords);
+
+            ball_start_coords.x = cannon->getX() + 64.0f;
+            ball_start_coords.y = cannon->getY() + 51.0f;
+          
+            // calculate the starting coordinates for the ball
+            calc_vect = cpvmult(cpvforangle(radians), 50);
+            ball_start_coords.x += calc_vect.x;
+            ball_start_coords.y -= calc_vect.y;
+        
+            // add an ammo object and give it an impulse
+            Ball *ball = new Ball(ball_start_coords.x, ball_start_coords.y);
+            ball->definePhysics(space);
+            ball->applyImpulse(event_coords, ball_start_coords, space->gravity.y);
+            addObject(ball);
+          } 
+        } else {
+          // cout << "x: " << event_coords.x << "  y: " << event_coords.y << "\n";
+          // reset button
+          if (event_coords.x >= 59 && event_coords.x <= 231 && event_coords.y >= 26 && event_coords.y <= 78) {
+            finished_level = true;
+            level_reset = true;
+          }
         }
       }
     }
@@ -190,7 +205,6 @@ void GameplayScene::gameLoop() {
     }
     
     if (menu_open) {
-      Menu *menu = new Menu();
       menu->display();
     }
     
@@ -208,7 +222,10 @@ void GameplayScene::gameLoop() {
       if (cannon->getAlpha() <= 0.0f) {
         finished_level = false;
         in_loop = false;
-        current_level++;        
+        if (!level_reset)
+          current_level++;
+        else
+          level_reset = false;
       }
     }
     
@@ -443,6 +460,7 @@ void GameplayScene::replaceLevel(string level_file) {
   objects.clear();
   
   score = 0;
+  menu_open = false;
   
   loadLevel(level_file);
 }

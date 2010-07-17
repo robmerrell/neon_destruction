@@ -20,6 +20,8 @@ class GameplayScene : public Scene {
     bool quit;
     
     bool menu_open;
+    bool level_reset;
+    Menu *menu;
     
     // frame capping
     int frame;
