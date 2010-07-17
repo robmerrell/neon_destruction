@@ -41,6 +41,20 @@ void Menu::display() {
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   glEnable(GL_BLEND);
   
+  GLfloat sound_vertices[] = {0,64,0, 64,64,0, 0,0,0, 64,0,0};
+  GLfloat sound_tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
+
+  TexManager::Instance()->bindTexture(20);
+  
+  glLoadIdentity();
+  if (SoundManager::Instance()->soundOn())
+    glTranslatef(206.0f, 126.0f, 0.0f);
+  else
+    glTranslatef(318.0f, 126.0f, 0.0f);
+  glVertexPointer(3, GL_FLOAT, 0, sound_vertices);
+  glTexCoordPointer(3, GL_FLOAT, 0, sound_tex);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
   glDisableClientState(GL_VERTEX_ARRAY);
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 }

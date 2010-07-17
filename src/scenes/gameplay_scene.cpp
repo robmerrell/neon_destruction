@@ -154,9 +154,8 @@ void GameplayScene::gameLoop() {
             ball->definePhysics(space);
             ball->applyImpulse(event_coords, ball_start_coords, space->gravity.y);
             addObject(ball);
-          } 
+          }
         } else {
-          cout << "x: " << event_coords.x << "  y: " << event_coords.y << "\n";
           // reset button
           if (event_coords.x >= 59 && event_coords.x <= 231 && event_coords.y >= 26 && event_coords.y <= 78) {
             finished_level = true;
@@ -171,6 +170,16 @@ void GameplayScene::gameLoop() {
           // resume
           if (event_coords.x >= 136 && event_coords.x <= 329 && event_coords.y >= 236 && event_coords.y <= 289) {
             menu_open = false;
+          }
+          
+          // sound on
+          if (event_coords.x >= 218 && event_coords.x <= 262 && event_coords.y >= 140 && event_coords.y <= 181) {
+            SoundManager::Instance()->soundOn(true);
+          }
+          
+          // sound off
+          if (event_coords.x >= 325 && event_coords.x <= 378 && event_coords.y >= 140 && event_coords.y <= 181) {
+            SoundManager::Instance()->soundOn(false);
           }
         }
       }

@@ -28,6 +28,8 @@ class SoundManager {
     Mix_Chunk *level_end;
     int level_end_channel;
     
+    bool sound_on;
+    
   public:
     static SoundManager* Instance();
     
@@ -36,6 +38,9 @@ class SoundManager {
      */
     void loadMusic(string);
     void playMusic();
+    
+    void soundOn(bool);
+    bool soundOn();
     
     /**
      * Load and play the sound effects

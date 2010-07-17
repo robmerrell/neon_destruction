@@ -26,6 +26,25 @@ SoundManager* SoundManager::Instance() {
   return inst;
 }
 
+void SoundManager::soundOn(bool _s) {
+  sound_on = _s;
+  
+  if (sound_on) {
+    Mix_HaltMusic();
+    playMusic();
+  }
+  
+  if (!sound_on) {
+    Mix_HaltMusic();
+    Mix_HaltChannel(cannon_channel);
+    Mix_HaltChannel(level_end_channel);
+  }
+}
+
+bool SoundManager::soundOn() {
+  return sound_on;
+}
+
 void SoundManager::loadMusic(string _music) {
   music = Mix_LoadMUS(_music.c_str());
 }
@@ -40,15 +59,18 @@ void SoundManager::loadEffects() {
 }
 
 void SoundManager::playMusic() {
-  Mix_PlayMusic(music, -1);
+  if (sound_on)
+    Mix_PlayMusic(music, -1);
 }
 
 void SoundManager::playCannon() {
-  cannon_channel = Mix_PlayChannel(-1, cannon, 0);
+  if (sound_on)
+    cannon_channel = Mix_PlayChannel(-1, cannon, 0);
 }
 
 void SoundManager::playLevelEnd() {
-  level_end_channel = Mix_PlayChannel(-1, level_end, 0);
+  if (sound_on)
+    level_end_channel = Mix_PlayChannel(-1, level_end, 0);
 }
 
 void SoundManager::destroyRefs() {
