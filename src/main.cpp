@@ -29,6 +29,7 @@ int main(int argc, char* argv[]) {
   TexManager::Instance()->loadTexture("assets/font.png", true);
   TexManager::Instance()->loadTexture("assets/menu.png", true);
   TexManager::Instance()->loadTexture("assets/sound_highlight.png", true);
+  TexManager::Instance()->loadTexture("assets/go_to_level.png", true);
   
   SoundManager::Instance()->loadMusic("assets/music.mp3");
   SoundManager::Instance()->loadEffects();

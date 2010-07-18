@@ -50,7 +50,7 @@ const int SCREEN_BPP = 32;
 /*************
 ** Graphics **
 **************/
-const int TEXTURE_COUNT = 21;
+const int TEXTURE_COUNT = 22;
 const int STARS_PER_FIELD = 170;
 const float STAR_FIELD1_SPEED = 100.0f;
 const float STAR_FIELD2_SPEED = 50.0f;
@@ -116,9 +116,18 @@ const float PLATFORM_RIGHT[] = {
 /***************
 ** Levels ******
 ****************/
+const int LEVEL_COUNT = 4;
 const std::string GAME_LEVELS[] = {
   "steps.xml",
-  "steps.xml"
+  "steps.xml",
+  "thisisareallylongname.xml",
+  "anotherlevel.xml"
+};
+const std::string LEVEL_NAMES[] = {
+  "1. Steps",
+  "2. Steps 23",
+  "3. This is a really long name",
+  "4. This is the next one"
 };
 
 

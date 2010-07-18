@@ -21,6 +21,7 @@ class GameplayScene : public Scene {
     
     bool menu_open;
     bool level_reset;
+    bool go_to_level;
     Menu *menu;
     
     // frame capping

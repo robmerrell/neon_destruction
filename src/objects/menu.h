@@ -3,11 +3,16 @@
 #include "../projection_engine/tex_manager.h"
 #include "../projection_engine/sound_manager.h"
 #include "../projection_engine/event_translations.h"
+#include "../objects/texture_string.h"
 
 #ifndef MENU_H
 #define MENU_H
 
 class Menu : public Sprite {
+
+  private:
+    bool level_picker;
+    int page;
 
   public:
     /**
@@ -16,6 +21,13 @@ class Menu : public Sprite {
     Menu();
     void destroy(cpSpace*) {};
     void definePhysics(cpSpace*) {};
+    
+    void setLevelPicker(bool);
+    bool getLevelPicker();
+    
+    void nextPage();
+    void prevPage();
+    int getPage();
     
     /**
      * Display the platform

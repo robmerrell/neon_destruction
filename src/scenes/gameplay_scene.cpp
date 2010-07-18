@@ -8,6 +8,7 @@ GameplayScene::GameplayScene() {
   menu = new Menu();
   menu_open = false;
   level_reset = false;
+  go_to_level = false;
   quit = false;
   current_level = 1;
   score = 0;
@@ -102,9 +103,10 @@ void GameplayScene::gameLoop() {
         quit = true;
       } else if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == PDLK_GESTURE_BACK) {
-          if (menu_open)
+          if (menu_open) {
             menu_open = false;
-          else
+            menu->setLevelPicker(false);
+          } else
             menu_open = true;
         }
         
@@ -156,30 +158,73 @@ void GameplayScene::gameLoop() {
             addObject(ball);
           }
         } else {
-          // reset button
-          if (event_coords.x >= 59 && event_coords.x <= 231 && event_coords.y >= 26 && event_coords.y <= 78) {
-            finished_level = true;
-            level_reset = true;
-          }
+          cout << "x: " << event_coords.x << " y: " << event_coords.y << "\n";
           
-          // go to level button
-          if (event_coords.x >= 250 && event_coords.x <= 423 && event_coords.y >= 26 && event_coords.y <= 78) {
-            cout << "load level\n";
+          if (!menu->getLevelPicker()) {
+            // reset button
+            if (event_coords.x >= 59 && event_coords.x <= 231 && event_coords.y >= 26 && event_coords.y <= 78) {
+              finished_level = true;
+              level_reset = true;
+            }
+          
+            // go to level button
+            if (event_coords.x >= 250 && event_coords.x <= 423 && event_coords.y >= 26 && event_coords.y <= 78) {
+              menu->setLevelPicker(true);
+            }
+          
+            // sound on
+            if (event_coords.x >= 218 && event_coords.x <= 262 && event_coords.y >= 140 && event_coords.y <= 181) {
+              SoundManager::Instance()->soundOn(true);
+            }
+          
+            // sound off
+            if (event_coords.x >= 325 && event_coords.x <= 378 && event_coords.y >= 140 && event_coords.y <= 181) {
+              SoundManager::Instance()->soundOn(false);
+            }
+          } else {
+            // first
+            if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 16 && event_coords.y <= 54) {
+              finished_level = true;
+              go_to_level = true;
+              current_level = menu->getPage()*3 + 1;
+            }
+            
+            // second
+            if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 82 && event_coords.y <= 120) {
+              if (menu->getPage()*3+2 < LEVEL_COUNT) {
+                finished_level = true;
+                go_to_level = true;
+                            
+                current_level = menu->getPage()*3 + 2;
+              }
+            }
+            
+            // third
+            if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 147 && event_coords.y <= 185) {
+              if (menu->getPage()*3+3 < LEVEL_COUNT) {
+                finished_level = true;
+                go_to_level = true;
+            
+                current_level = menu->getPage()*3 + 3;
+              }            
+            }
+            
+            // previous
+            if (event_coords.x >= 70 && event_coords.x <= 111 && event_coords.y >= 239 && event_coords.y <= 281) {
+              menu->prevPage();
+            }
+            
+            // next
+            if (event_coords.x >= 348 && event_coords.x <= 392 && event_coords.y >= 239 && event_coords.y <= 281) {
+              menu->nextPage();
+            }
+            
           }
           
           // resume
           if (event_coords.x >= 136 && event_coords.x <= 329 && event_coords.y >= 236 && event_coords.y <= 289) {
             menu_open = false;
-          }
-          
-          // sound on
-          if (event_coords.x >= 218 && event_coords.x <= 262 && event_coords.y >= 140 && event_coords.y <= 181) {
-            SoundManager::Instance()->soundOn(true);
-          }
-          
-          // sound off
-          if (event_coords.x >= 325 && event_coords.x <= 378 && event_coords.y >= 140 && event_coords.y <= 181) {
-            SoundManager::Instance()->soundOn(false);
+            menu->setLevelPicker(false);
           }
         }
       }
@@ -241,7 +286,7 @@ void GameplayScene::gameLoop() {
       if (cannon->getAlpha() <= 0.0f) {
         finished_level = false;
         in_loop = false;
-        if (!level_reset)
+        if (!level_reset && !go_to_level)
           current_level++;
         else
           level_reset = false;
@@ -254,6 +299,7 @@ void GameplayScene::gameLoop() {
 
 
 void GameplayScene::loadLevel(string level_file) {
+  cout << "loading: " << level_file << "\n";
   has_cannon = false;
   has_goal = false;
   string path = "levels/";
