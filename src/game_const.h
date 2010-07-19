@@ -50,7 +50,7 @@ const int SCREEN_BPP = 32;
 /*************
 ** Graphics **
 **************/
-const int TEXTURE_COUNT = 22;
+const int TEXTURE_COUNT = 24;
 const int STARS_PER_FIELD = 170;
 const float STAR_FIELD1_SPEED = 100.0f;
 const float STAR_FIELD2_SPEED = 50.0f;
@@ -111,6 +111,40 @@ const float PLATFORM_RIGHT[] = {
   PLATFORM_TEX_SIZES[10] / PLATFORM_TEX_SIZE
 };
 
+
+/*****************
+** Circle Atlas **
+******************/
+const float CIRCLE_SIZES[] = {50.0f, 40.0f, 30.0f, 20.0f};
+const float CIRCLE_TEX_SIZE = 256.0F;
+
+const float CIRCLE_TOP[] = {
+  7.0f / CIRCLE_TEX_SIZE,
+  16.0f / CIRCLE_TEX_SIZE,
+  145.0f / CIRCLE_TEX_SIZE,
+  155.0f / CIRCLE_TEX_SIZE
+};
+
+const float CIRCLE_BOTTOM[] = {
+  130.0f / CIRCLE_TEX_SIZE,
+  125.0f / CIRCLE_TEX_SIZE,
+  230.0f / CIRCLE_TEX_SIZE,
+  218.0f / CIRCLE_TEX_SIZE
+};
+
+const float CIRCLE_LEFT[] = {
+  3.0f / CIRCLE_TEX_SIZE,
+  133.0f / CIRCLE_TEX_SIZE,
+  2.0f / CIRCLE_TEX_SIZE,
+  94.0f / CIRCLE_TEX_SIZE
+};
+
+const float CIRCLE_RIGHT[] = {
+  127.0f / CIRCLE_TEX_SIZE,
+  242.0f / CIRCLE_TEX_SIZE,
+  87.0f / CIRCLE_TEX_SIZE,
+  158.0f / CIRCLE_TEX_SIZE
+};
 
 
 /***************

@@ -45,16 +45,30 @@ void Circle::definePhysics(cpSpace *space) {
 
 void Circle::display() {
   float diameter = radius * 2.0f;
-
-  GLfloat circle_vertices[] = {0,diameter,0, diameter,diameter,0, 0,0,0, diameter,0,0};
-  GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
+  
+  // get the points in the texture map
+  int ti = 0;
+  for (int i = 0; i < 4; i++) {
+    if (CIRCLE_SIZES[i] == radius)
+      ti = i;
+  }
+  
+  float dx = (CIRCLE_RIGHT[ti]*CIRCLE_TEX_SIZE) - (CIRCLE_LEFT[ti]*CIRCLE_TEX_SIZE);
+  float dy = (CIRCLE_TOP[ti]*CIRCLE_TEX_SIZE) - (CIRCLE_BOTTOM[ti]*CIRCLE_TEX_SIZE);
+  
+  GLfloat circle_vertices[] = {0,dy,0, dx,dy,0, 0,0,0, dx,0,0};
+  GLfloat tex[] = {CIRCLE_LEFT[ti],CIRCLE_BOTTOM[ti],0, CIRCLE_RIGHT[ti],CIRCLE_BOTTOM[ti],0, CIRCLE_LEFT[ti],CIRCLE_TOP[ti],0, CIRCLE_RIGHT[ti],CIRCLE_TOP[ti],0};
   
   glColor4f(alpha, alpha, alpha, alpha);
   
-  TexManager::Instance()->bindTexture(10);
+  
+  if (simulation_type == "DYNAMIC")
+    TexManager::Instance()->bindTexture(23);
+  else
+    TexManager::Instance()->bindTexture(22);
   
   glLoadIdentity();
-  glTranslatef(body->p.x - radius, body->p.y - radius, 0.0);
+  glTranslatef(body->p.x - dx/2.0f, body->p.y - dy/2.0f, 0.0);
   
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);

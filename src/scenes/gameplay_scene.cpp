@@ -263,10 +263,10 @@ void GameplayScene::gameLoop() {
       
       if (!menu_open)
         (*sprite)->display();
-                  
-      if (draw_physics)
-        draw_chipmunk(space);
     }
+    
+    if (draw_physics)
+      draw_chipmunk(space);
     
     if (menu_open) {
       menu->display();

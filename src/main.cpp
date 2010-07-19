@@ -30,6 +30,8 @@ int main(int argc, char* argv[]) {
   TexManager::Instance()->loadTexture("assets/menu.png", true);
   TexManager::Instance()->loadTexture("assets/sound_highlight.png", true);
   TexManager::Instance()->loadTexture("assets/go_to_level.png", true);
+  TexManager::Instance()->loadTexture("assets/blue_circle_atlas.png", true);
+  TexManager::Instance()->loadTexture("assets/green_circle_atlas.png", true);
   
   SoundManager::Instance()->loadMusic("assets/music.mp3");
   SoundManager::Instance()->loadEffects();
