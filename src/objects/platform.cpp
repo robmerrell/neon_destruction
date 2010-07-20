@@ -40,7 +40,7 @@ cpBody* Platform::getBody() {
 
 void Platform::definePhysics(cpSpace *space) {  
   // body
-  cpVect verts[] = { cpv(-width/2, -physics_height/2), cpv(-width/2, physics_height/2), cpv(width/2, physics_height/2), cpv(width/2, -physics_height/2) };
+  cpVect verts[] = { cpv(-width/2 + 9, -3), cpv(-width/2 + 9, 3), cpv(width/2 - 9, 3), cpv(width/2 - 9, -3) };
   if (simulation_type == "DYNAMIC")
     body = cpBodyNew(10.0f, cpMomentForPoly(10.0f, 4, verts, cpvzero));
   else
