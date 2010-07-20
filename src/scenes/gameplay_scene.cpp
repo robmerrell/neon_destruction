@@ -309,7 +309,7 @@ void GameplayScene::loadLevel(string level_file) {
   
   vector<Sprite*> pinned;
 
-  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num;
+  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num, text;
   string fixed = "";
   string body1, body2, body1_x, body1_y, body2_x, body2_y;
   cpBody *pinbody1, *pinbody2;
@@ -361,6 +361,13 @@ void GameplayScene::loadLevel(string level_file) {
       
       Image *image = new Image(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL), strtof(width.c_str(), NULL), strtof(height.c_str(), NULL), atoi(num.c_str()));
       addObject(image);
+    } else if (object_node->ToElement()->Attribute("type") == string("STRING")) {
+      x = object_node->ToElement()->Attribute("x");
+      y = object_node->ToElement()->Attribute("y");
+      text = object_node->ToElement()->Attribute("text");
+
+      TextureString *string = new TextureString(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL), text);
+      addObject(string);
     } else if (object_node->ToElement()->Attribute("type") == string("GEAR")) {
       x = object_node->ToElement()->Attribute("x");
       y = object_node->ToElement()->Attribute("y");
