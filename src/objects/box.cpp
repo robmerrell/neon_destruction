@@ -30,7 +30,7 @@ void Box::setHeight(float _height) {
 
 void Box::definePhysics(cpSpace *space) {
   // body
-  cpVect verts[] = { cpv(-width/2, -height/2), cpv(-width/2, height/2), cpv(width/2, height/2), cpv(width/2, -height/2) };
+  cpVect verts[] = { cpv(-width/2 + 3, -height/2 + 9), cpv(-width/2 + 3, height/2 - 9), cpv(width/2 - 3, height/2 - 9), cpv(width/2 - 3, -height/2 + 9) };
   if (simulation_type == "DYNAMIC")
     body = cpBodyNew(10.0f, cpMomentForPoly(10.0f, 4, verts, cpvzero));
   else
@@ -86,41 +86,84 @@ void Box::display() {
     TexManager::Instance()->bindTexture(14);
   else
     TexManager::Instance()->bindTexture(13);
-      
+    
+  glEnableClientState(GL_VERTEX_ARRAY);
+  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
   // bottom
   glLoadIdentity();
   glTranslatef(start_x - width/2, start_y + height/2, 0.0);
   glTranslatef(width/2, -height/2, 0.0);
   glRotatef(angle, 0.0f, 0.0f, 1.0f);
   glTranslatef(-width/2, height/2, 0.0);
-
-  glEnableClientState(GL_VERTEX_ARRAY);
-  glEnableClientState(GL_TEXTURE_COORD_ARRAY);
   
   glVertexPointer(3, GL_FLOAT, 0, vertices_hor);
   glTexCoordPointer(3, GL_FLOAT, 0, tex_hor);
   
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   
-
-  // bottom
-  glTranslatef(0, dy + 25.0f, 0.0);
-  glVertexPointer(3, GL_FLOAT, 0, vertices_hor);
-  glTexCoordPointer(3, GL_FLOAT, 0, tex_hor);
-  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-  // left
-  glTranslatef(25.0f, -25.0f, 0.0f);
+  
+  // right
+  glTranslatef(width, -height, 0.0f);
   glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
   glVertexPointer(3, GL_FLOAT, 0, vertices_vert);
   glTexCoordPointer(3, GL_FLOAT, 0, tex_vert);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   
-  // right
-  glTranslatef(0.0f, dx - 25.0f, 0.0f);
+  
+  // top
+  glTranslatef(0.0f, 0.0f, 0.0f);
+  glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
+  glVertexPointer(3, GL_FLOAT, 0, vertices_hor);
+  glTexCoordPointer(3, GL_FLOAT, 0, tex_hor);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
+  
+  // left
+  glTranslatef(width, -height, 0.0f);
+  glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
   glVertexPointer(3, GL_FLOAT, 0, vertices_vert);
   glTexCoordPointer(3, GL_FLOAT, 0, tex_vert);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+  
+  // bottom
+  /*
+  glLoadIdentity();
+  glTranslatef(start_x - width/2, start_y + height/2, 0.0);
+  glTranslatef(width/2, -height/2, 0.0);
+  glRotatef(angle, 0.0f, 0.0f, 1.0f);
+  glTranslatef(-width/2, height/2, 0.0);
+  
+  glVertexPointer(3, GL_FLOAT, 0, vertices_hor);
+  glTexCoordPointer(3, GL_FLOAT, 0, tex_hor);
+  
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
+  
+  // right
+  glTranslatef(width + 5.5f, -height + 1.0f, 0.0f);
+  glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
+  glVertexPointer(3, GL_FLOAT, 0, vertices_vert);
+  glTexCoordPointer(3, GL_FLOAT, 0, tex_vert);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
+  
+  // top
+  glTranslatef(-1.0f, -5.5f, 0.0f);
+  glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
+  glVertexPointer(3, GL_FLOAT, 0, vertices_hor);
+  glTexCoordPointer(3, GL_FLOAT, 0, tex_hor);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
+  
+  // left
+  glTranslatef(width + 5.5f, -height + 1.0f, 0.0f);
+  glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
+  glVertexPointer(3, GL_FLOAT, 0, vertices_vert);
+  glTexCoordPointer(3, GL_FLOAT, 0, tex_vert);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  */
   
   glDisableClientState(GL_VERTEX_ARRAY);
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);
