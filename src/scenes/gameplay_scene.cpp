@@ -10,7 +10,7 @@ GameplayScene::GameplayScene() {
   level_reset = false;
   go_to_level = false;
   quit = false;
-  current_level = 1;
+  current_level = 2;
   score = 0;
   draw_physics = false;
   in_loop = false;
@@ -123,6 +123,8 @@ void GameplayScene::gameLoop() {
         }
       } else if (event.type == SDL_MOUSEBUTTONUP) {
         cpVect event_coords = translatedMouseCoords(event.button.x, event.button.y);
+        
+        cout << "x: " << event_coords.x << "  y: " << event_coords.y << "\n";
 
         if (!menu_open) {
           SoundManager::Instance()->playCannon();
@@ -309,7 +311,7 @@ void GameplayScene::loadLevel(string level_file) {
   
   vector<Sprite*> pinned;
 
-  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num, text;
+  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num, text, mass;
   string fixed = "";
   string body1, body2, body1_x, body1_y, body2_x, body2_y;
   cpBody *pinbody1, *pinbody2;
@@ -454,11 +456,17 @@ void GameplayScene::loadLevel(string level_file) {
       width = object_node->ToElement()->Attribute("width");
       angle = object_node->ToElement()->Attribute("angle");
       
+      platform = new Platform(physics);
+      
+      if (object_node->ToElement()->Attribute("mass") != NULL) {
+        mass = object_node->ToElement()->Attribute("mass");
+        platform->setMass(strtof(mass.c_str(), NULL));
+      } 
+      
       if (object_node->ToElement()->Attribute("fixed") != NULL)
         fixed = object_node->ToElement()->Attribute("fixed");
         
       // create the platform
-      platform = new Platform(physics);
       platform->setX(strtof(x.c_str(), NULL));
       platform->setY(strtof(y.c_str(), NULL));
       platform->setWidth(strtof(width.c_str(), NULL));

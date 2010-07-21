@@ -9,6 +9,7 @@ Platform::Platform(string sim_type) : Sprite("", 64, 64, PLATFORM_TAG) {
   height = 25.0f; // always 25 so that it matches our sprite
   physics_height = 12.0f;
   width = 0.0f;
+  mass = 10.0f;
 }
 
 void Platform::destroy(cpSpace *space) {
@@ -24,6 +25,10 @@ void Platform::destroy(cpSpace *space) {
 
 void Platform::setWidth(float _width) {
   width = _width;
+}
+
+void Platform::setMass(float _m) {
+  mass = _m;
 }
 
 void Platform::setId(string _id) {
@@ -42,7 +47,7 @@ void Platform::definePhysics(cpSpace *space) {
   // body
   cpVect verts[] = { cpv(-width/2 + 9, -3), cpv(-width/2 + 9, 3), cpv(width/2 - 9, 3), cpv(width/2 - 9, -3) };
   if (simulation_type == "DYNAMIC")
-    body = cpBodyNew(10.0f, cpMomentForPoly(10.0f, 4, verts, cpvzero));
+    body = cpBodyNew(mass, cpMomentForPoly(mass, 4, verts, cpvzero));
   else
     body = cpBodyNew(INFINITY, INFINITY);
   body->p = cpv(x, y);
