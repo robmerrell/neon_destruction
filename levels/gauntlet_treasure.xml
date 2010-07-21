@@ -1,0 +1,22 @@
+<?xml version="1.0">
+<level>
+  <object type="CANNON" x="350.0f" y="146.0f" />
+  
+  <object type="PLATFORM" x="385.0f" y="231.0f" width="126.0f" angle="0.0f" physics="STATIC" />
+  
+  <object type="PLATFORM" x="150.0f" y="231.0f" width="232.0f" angle="0.0f" physics="STATIC" />
+  
+  <object type="PLATFORM" x="150.0f" y="231.0f" width="168.0f" angle="90.0f" physics="STATIC" />
+  <object type="PLATFORM" x="250.0f" y="231.0f" width="168.0f" angle="90.0f" physics="STATIC" />
+  <object type="PLATFORM" x="50.0f" y="231.0f" width="168.0f" angle="90.0f" physics="STATIC" />
+
+  <object type="PLATFORM" x="150.0f" y="150.0f" width="232.0f" angle="0.0f" physics="DYNAMIC" />
+  <object type="PLATFORM" x="150.0f" y="126.0f" width="232.0f" angle="0.0f" physics="DYNAMIC" />
+  
+  <object type="GOAL" x="100.0f" y="200.0f" />  
+  
+  <object type="GRAVITY_SWTICH" x="450.0f" y="80.0f" default_direction="down" />
+  
+  <object type="STRING" x="0.0f" y="70.0f" text="Shoot the switch to reverse gravity" />
+  
+</level>
