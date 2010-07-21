@@ -37,6 +37,10 @@ int GravitySwitch::getDirection() {
   return direction;
 }
 
+void GravitySwitch::setDirection(int d) {
+  direction = d;
+}
+
 void GravitySwitch::display() {
   float start_x = x;
   float start_y = y;

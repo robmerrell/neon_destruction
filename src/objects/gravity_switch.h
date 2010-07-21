@@ -36,6 +36,7 @@ class GravitySwitch : public Sprite {
      * Get the direction
      */
     int getDirection();
+    void setDirection(int);
 };
 
 #endif

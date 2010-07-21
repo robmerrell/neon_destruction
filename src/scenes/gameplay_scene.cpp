@@ -10,7 +10,7 @@ GameplayScene::GameplayScene() {
   level_reset = false;
   go_to_level = false;
   quit = false;
-  current_level = 2;
+  current_level = 3;
   score = 0;
   draw_physics = false;
   in_loop = false;
@@ -709,10 +709,13 @@ static int gravity_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
   
   // up and down
   if (sprite->getDirection() == GRAVITY_UP || sprite->getDirection() == GRAVITY_DOWN) {
-    if (space->gravity.y < 0)
+    if (space->gravity.y < 0) {
       space->gravity = cpv(0, GRAVITY_RATE);
-    else
+      sprite->setDirection(GRAVITY_DOWN);
+    } else {
       space->gravity = cpv(0, -GRAVITY_RATE);
+      sprite->setDirection(GRAVITY_UP);
+    }
   }
   
   // left and right
