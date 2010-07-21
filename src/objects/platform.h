@@ -12,7 +12,8 @@ class Platform : public Sprite {
     cpBody *body;
     cpBody *pbody;
     cpShape *platformShape;
-    
+
+    float mass;
     float width;
     float height;
     float physics_height;
@@ -55,6 +56,8 @@ class Platform : public Sprite {
     
     void setId(string);
     string getId();
+    
+    void setMass(float);
     
     cpBody* getBody();
 };
