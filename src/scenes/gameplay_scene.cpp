@@ -10,7 +10,7 @@ GameplayScene::GameplayScene() {
   level_reset = false;
   go_to_level = false;
   quit = false;
-  current_level = 3;
+  current_level = 4;
   score = 0;
   draw_physics = false;
   in_loop = false;

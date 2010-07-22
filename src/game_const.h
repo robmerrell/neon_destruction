@@ -155,13 +155,13 @@ const std::string GAME_LEVELS[] = {
   "intro.xml",
   "green_vs_blue.xml",
   "gauntlet_treasure.xml",
-  "anotherlevel.xml"
+  "clock_tower.xml"
 };
 const std::string LEVEL_NAMES[] = {
   "1. Introduction",
   "2. Green vs Blue",
   "3. Gauntlet Treasure",
-  "4. This is the next one"
+  "4. Clock Tower"
 };
 
 
