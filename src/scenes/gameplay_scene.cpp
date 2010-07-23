@@ -530,6 +530,8 @@ void GameplayScene::loadLevel(string level_file) {
 
 void GameplayScene::replaceLevel(string level_file) {
   space->gravity = cpv(0, GRAVITY_RATE);
+  level_reset = false;
+  go_to_level = false;
   
   // free all of the sprites
   vector<Sprite*>::iterator iter;
