@@ -10,7 +10,7 @@ GameplayScene::GameplayScene() {
   level_reset = false;
   go_to_level = false;
   quit = false;
-  current_level = 4;
+  current_level = 1;
   score = 0;
   draw_physics = false;
   in_loop = false;
@@ -529,6 +529,8 @@ void GameplayScene::loadLevel(string level_file) {
 
 
 void GameplayScene::replaceLevel(string level_file) {
+  space->gravity = cpv(0, GRAVITY_RATE);
+  
   // free all of the sprites
   vector<Sprite*>::iterator iter;
   for (iter = objects.begin(); iter != objects.end(); iter++) {
