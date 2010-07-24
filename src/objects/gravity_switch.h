@@ -1,6 +1,7 @@
 #include "../projection_engine/sprite.h"
 #include "../game_const.h"
 #include "../projection_engine/tex_manager.h"
+#include "../projection_engine/timer.h"
 
 #ifndef GRAVITY_SWITCH_H
 #define GRAVITY_SWITCH_H
@@ -11,6 +12,8 @@ class GravitySwitch : public Sprite {
     cpBody *body;
     cpShape *switchShape;
     int direction;
+    
+    Timer available;
 
   public:
     /**
@@ -37,6 +40,9 @@ class GravitySwitch : public Sprite {
      */
     int getDirection();
     void setDirection(int);
+    
+    bool processCollision();
+    void startTimer();
 };
 
 #endif

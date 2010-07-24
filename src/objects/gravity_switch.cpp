@@ -41,7 +41,28 @@ void GravitySwitch::setDirection(int d) {
   direction = d;
 }
 
+void GravitySwitch::startTimer() {
+  if (!available.is_started())
+    available.start();
+}
+
+bool GravitySwitch::processCollision() {
+  if (available.is_started()) {
+    if (available.get_ticks() < 3000) {
+      return false;
+    }
+  }
+  
+  return true;
+}
+
 void GravitySwitch::display() {
+  if (available.is_started()) {
+    if (available.get_ticks() >= 3000) {
+      available.stop();
+    }
+  }
+  
   float start_x = x;
   float start_y = y;
   
@@ -57,7 +78,10 @@ void GravitySwitch::display() {
   GLfloat vertices[] = {0,dy,0, dx,dy,0, 0,0,0, dx,0,0};
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
-  glColor4f(alpha, alpha, alpha, alpha);
+  if (!processCollision())
+    glColor4f(0.3f, 0.3f, 0.3f, alpha);
+  else
+    glColor4f(alpha, alpha, alpha, alpha);
   
   TexManager::Instance()->bindTexture(16);
   
