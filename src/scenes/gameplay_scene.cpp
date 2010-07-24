@@ -10,7 +10,7 @@ GameplayScene::GameplayScene() {
   level_reset = false;
   go_to_level = false;
   quit = false;
-  current_level = 3;
+  current_level = 1;
   score = 0;
   draw_physics = false;
   in_loop = false;
@@ -61,15 +61,16 @@ GameplayScene::~GameplayScene() {
 }
 
 bool GameplayScene::setup() {
+  bool stop = false;
   defineBorder(true, true, true, true);
   
   // load a level
   loadLevel(GAME_LEVELS[current_level-1]);
   
   // start the game loop
-  while(!quit) {
+  while(!quit && !stop) {
     gameLoop();
-    replaceLevel(GAME_LEVELS[current_level-1]);
+    stop = replaceLevel(GAME_LEVELS[current_level-1]);
   }
   
   return quit;
@@ -529,7 +530,7 @@ void GameplayScene::loadLevel(string level_file) {
 }
 
 
-void GameplayScene::replaceLevel(string level_file) {
+bool GameplayScene::replaceLevel(string level_file) {
   space->gravity = cpv(0, GRAVITY_RATE);
   level_reset = false;
   go_to_level = false;
@@ -547,7 +548,11 @@ void GameplayScene::replaceLevel(string level_file) {
   score = 0;
   menu_open = false;
   
-  loadLevel(level_file);
+  if (current_level <= LEVEL_COUNT) {
+    loadLevel(level_file);
+  }
+    
+  return true;
 }
 
 void GameplayScene::drawBackground() {

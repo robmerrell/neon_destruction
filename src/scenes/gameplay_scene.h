@@ -49,7 +49,7 @@ class GameplayScene : public Scene {
     bool setup();
     void gameLoop();
     void loadLevel(string);
-    void replaceLevel(string);
+    bool replaceLevel(string);
     
     /**
      * Defines the colors used for the star background

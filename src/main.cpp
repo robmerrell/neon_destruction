@@ -3,6 +3,7 @@
 #include "projection_engine/sound_manager.h"
 #include "scenes/gameplay_scene.h"
 #include "scenes/title_scene.h"
+#include "scenes/thank_you_scene.h"
 
 int main(int argc, char* argv[]) {
   Engine engine(false);
@@ -39,16 +40,20 @@ int main(int argc, char* argv[]) {
   SoundManager::Instance()->playMusic();
 
   // show the title scene and start the game loop
-  // TitleScene *title_scene = new TitleScene();
-  // bool quit = engine.showScene(title_scene);
+  TitleScene *title_scene = new TitleScene();
+  bool quit = engine.showScene(title_scene);
   // delete title_scene;
-  
-  bool quit = false;
   
   if (!quit) {
     GameplayScene *gameplay_scene = new GameplayScene();
-    engine.showScene(gameplay_scene);
+    quit = engine.showScene(gameplay_scene);
     delete gameplay_scene;
+  }
+  
+  if (!quit) {
+    ThankYouScene *thank_you_scene = new ThankYouScene();
+    engine.showScene(thank_you_scene);
+    // delete thank_you_scene;
   }
   
   return 0;
