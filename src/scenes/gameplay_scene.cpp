@@ -233,6 +233,7 @@ void GameplayScene::gameLoop() {
     }
     
     animation_ticks = fps.get_ticks();
+    if (animation_ticks > 32) animation_ticks = 32;
     accumulator += animation_ticks;
     fps.start();
     
