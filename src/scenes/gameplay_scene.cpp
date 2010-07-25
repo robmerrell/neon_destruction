@@ -550,6 +550,7 @@ bool GameplayScene::replaceLevel(string level_file) {
   
   if (current_level <= LEVEL_COUNT) {
     loadLevel(level_file);
+    return false;
   }
     
   return true;
