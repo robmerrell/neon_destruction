@@ -150,18 +150,20 @@ const float CIRCLE_RIGHT[] = {
 /***************
 ** Levels ******
 ****************/
-const int LEVEL_COUNT = 4;
+const int LEVEL_COUNT = 5;
 const std::string GAME_LEVELS[] = {
   "intro.xml",
   "green_vs_blue.xml",
   "gauntlet_treasure.xml",
-  "clock_tower.xml"
+  "clock_tower.xml",
+  "steps.xml"
 };
 const std::string LEVEL_NAMES[] = {
   "1. Introduction",
   "2. Green vs Blue",
   "3. Gauntlet Treasure",
-  "4. Clock Tower"
+  "4. Clock Tower",
+  "5. Steps"
 };
 
 

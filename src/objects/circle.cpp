@@ -23,7 +23,7 @@ void Circle::setRadius(float _rad) {
 void Circle::definePhysics(cpSpace *space) {
   // body
   if (simulation_type == "DYNAMIC")
-    body = cpBodyNew(10.0f, cpMomentForCircle(10.0f, 0.0f, radius, cpvzero));
+    body = cpBodyNew(5.0f, cpMomentForCircle(5.0f, 0.0f, radius, cpvzero));
   else
     body = cpBodyNew(INFINITY, INFINITY);
     
