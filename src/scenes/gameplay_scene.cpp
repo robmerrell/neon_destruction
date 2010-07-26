@@ -280,14 +280,16 @@ void GameplayScene::gameLoop() {
     SDL_GL_SwapBuffers();
    
     if (finished_level) {
-      SoundManager::Instance()->playLevelEnd();
+      if (!level_reset)
+        SoundManager::Instance()->playLevelEnd();
       
       for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
         (*sprite)->setAnimationState(ANIMATE_FADE_OUT);
       }
       
       Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
-      if (cannon->getAlpha() <= 0.0f) {
+      
+      if (cannon->getAlpha() <= 0.0f || level_reset) {
         finished_level = false;
         in_loop = false;
         if (!level_reset && !go_to_level)
@@ -425,6 +427,12 @@ void GameplayScene::loadLevel(string level_file) {
 
       // create the actual box
       box = new Box(physics);
+      
+      if (object_node->ToElement()->Attribute("mass") != NULL) {
+        mass = object_node->ToElement()->Attribute("mass");
+        box->setMass(strtof(mass.c_str(), NULL));
+      }
+      
       box->setX(strtof(x.c_str(), NULL));
       box->setY(strtof(y.c_str(), NULL));
       box->setWidth(strtof(width.c_str(), NULL));

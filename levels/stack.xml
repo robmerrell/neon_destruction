@@ -1,8 +1,20 @@
-<?xml version="1.0" standalone=no>
-<level name="Stack">
-  <object type="PLATFORM" x="100.0f" y="200.0f" width="100.0f" angle="0.0f" />
+<?xml version="1.0">
+<level>
+  <object type="CANNON" x="-5.0f" y="236.0f" />
   
-  <object type="TRIANGLE" x="300.0f" y="70.0f" width="64.0f" height="64.0f" angle="0.0f" physics="DYNAMIC" />
+  <object type="BOX" x="250.0f" y="292.0f" width="72.0f" height="72.0f" angle="0.0f" mass="7.0f" physics="DYNAMIC" />
   
-  <object type="CANNON" x="150.0f" y="300.0f" />
+  <object type="BOX" x="250.0f" y="237.0f" width="72.0f" height="72.0f" angle="0.0f" mass="7.0f" physics="DYNAMIC" />
+  
+  <object type="BOX" x="250.0f" y="182.0f" width="72.0f" height="72.0f" angle="0.0f" mass="7.0f" physics="DYNAMIC" />
+  
+  <object type="BOX" x="250.0f" y="127.0f" width="72.0f" height="72.0f" angle="0.0f" mass="7.0f" physics="DYNAMIC" />
+  
+  <object type="BOX" x="250.0f" y="72.0f" width="72.0f" height="72.0f" angle="0.0f" mass="7.0f" physics="DYNAMIC" />
+  
+  <object type="PLATFORM" x="250.0f" y="42.0f" width="360.0f" angle="0.0f" physics="DYNAMIC" />
+  
+  <object type="GOAL" x="100.0f" y="20.0f" />
+  
+  <object type="CIRCLE" x="420.0f" y="20.0f" radius="20.0f" physics="STATIC" />
 </level>

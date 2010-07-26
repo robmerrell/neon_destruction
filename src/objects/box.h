@@ -13,6 +13,7 @@ class Box : public Sprite {
     cpShape *boxShape;
     float width;
     float height;
+    float mass;
     
     string simulation_type;
 
@@ -39,6 +40,8 @@ class Box : public Sprite {
      */
      void setWidth(float);
      void setHeight(float);
+     
+     void setMass(float);
 };
 
 #endif

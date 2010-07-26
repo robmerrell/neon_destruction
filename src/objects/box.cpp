@@ -7,6 +7,7 @@ Box::Box(string sim_type) : Sprite("", 64, 64, BOX_TAG) {
   y = 0.0f;
   width = 0.0f;
   height = 0.0f;  
+  mass = 10.0f;
 }
 
 void Box::destroy(cpSpace *space) {
@@ -28,11 +29,15 @@ void Box::setHeight(float _height) {
   height = _height;
 }
 
+void Box::setMass(float _m) {
+  mass = _m;
+}
+
 void Box::definePhysics(cpSpace *space) {
   // body
   cpVect verts[] = { cpv(-width/2 + 3, -height/2 + 9), cpv(-width/2 + 3, height/2 - 9), cpv(width/2 - 3, height/2 - 9), cpv(width/2 - 3, -height/2 + 9) };
   if (simulation_type == "DYNAMIC")
-    body = cpBodyNew(10.0f, cpMomentForPoly(10.0f, 4, verts, cpvzero));
+    body = cpBodyNew(mass, cpMomentForPoly(mass, 4, verts, cpvzero));
   else
     body = cpBodyNew(INFINITY, INFINITY);
   body->p = cpv(x, y);
@@ -42,7 +47,7 @@ void Box::definePhysics(cpSpace *space) {
   // poly shape box
   boxShape = cpPolyShapeNew(body, 4, verts, cpvzero);
   boxShape->e = 0.1;
-  boxShape->u = 0.3;
+  boxShape->u = 0.15;
   boxShape->data = this;
   boxShape->collision_type = BOX_COLLISION;
   
