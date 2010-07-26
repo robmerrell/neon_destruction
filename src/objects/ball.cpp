@@ -16,6 +16,13 @@ Ball::Ball(float x, float y) : Sprite("", 64, 64, BALL_TAG) {
   
   for (int j=0; j < PARTICLE_TOTAL; j++) {
     Particle* p = new Particle;
+    p->color = 0;
+    p->x = 0;
+    p->y = 0;
+    p->x_speed = 0;
+    p->y_speed = 0;
+    p->birth = 0;
+    p->ttl = 0;
     p->dead = true;
     particles[j] = p;
   }
@@ -25,6 +32,7 @@ Ball::Ball(float x, float y) : Sprite("", 64, 64, BALL_TAG) {
 }
 
 Ball::~Ball() {
+  cout << "del\n";
   for (int j=0; j < PARTICLE_TOTAL; j++) {
     delete particles[j];
     particles[j] = NULL;
