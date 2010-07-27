@@ -18,7 +18,7 @@ void Platform::destroy(cpSpace *space) {
   else
     cpSpaceRemoveStaticShape(space, platformShape);
     
-  cpSpaceRemoveBody(space, body);
+  if (simulation_type == "DYNAMIC") cpSpaceRemoveBody(space, body);
   cpShapeFree(platformShape);
   cpBodyFree(body);
 }
