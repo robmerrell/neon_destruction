@@ -10,10 +10,13 @@ Gear::Gear() : Sprite("", 64, 64, GEAR_TAG) {
 void Gear::destroy(cpSpace *space) {
   cpSpaceRemoveShape(space, platformShape);
   cpSpaceRemoveShape(space, platformShape2);
+  cpSpaceRemoveConstraint(space, constraint);
+  cpConstraintFree(constraint);
   cpSpaceRemoveBody(space, body);
   cpShapeFree(platformShape);
   cpShapeFree(platformShape2);
   cpBodyFree(body);
+  cpBodyFree(pbody);
 }
 
 void Gear::setWidth(float _width) {
@@ -44,7 +47,7 @@ void Gear::definePhysics(cpSpace *space) {
 
   pbody = cpBodyNew(INFINITY, INFINITY);
   pbody->p = cpv(x, y);
-  cpSpaceAddConstraint(space, cpPivotJointNew(body, pbody, cpv(x,y)));
+  constraint = cpSpaceAddConstraint(space, cpPivotJointNew(body, pbody, cpv(x,y)));
 }
 
 void Gear::applyImpulse(float impx, float impy) {

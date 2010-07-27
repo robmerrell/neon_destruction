@@ -11,7 +11,7 @@ void Circle::destroy(cpSpace *space) {
   else
     cpSpaceRemoveStaticShape(space, circleShape);
     
-  cpSpaceRemoveBody(space, body);
+  if (simulation_type == "DYNAMIC") cpSpaceRemoveBody(space, body);
   cpShapeFree(circleShape);
   cpBodyFree(body);
 }

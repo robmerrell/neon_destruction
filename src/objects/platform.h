@@ -12,6 +12,7 @@ class Platform : public Sprite {
     cpBody *body;
     cpBody *pbody;
     cpShape *platformShape;
+    cpConstraint *constraint;
 
     float mass;
     float width;

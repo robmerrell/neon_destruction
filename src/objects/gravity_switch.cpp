@@ -9,7 +9,6 @@ GravitySwitch::GravitySwitch(float _x, float _y, int _direction) : Sprite("", 64
 
 void GravitySwitch::destroy(cpSpace *space) {
   cpSpaceRemoveStaticShape(space, switchShape);
-  cpSpaceRemoveBody(space, body);
   cpShapeFree(switchShape);
   cpBodyFree(body);
 }

@@ -18,9 +18,16 @@ void Platform::destroy(cpSpace *space) {
   else
     cpSpaceRemoveStaticShape(space, platformShape);
     
+  if (fixed) {
+    cpSpaceRemoveConstraint(space, constraint);
+    cpConstraintFree(constraint);
+  }
+    
   if (simulation_type == "DYNAMIC") cpSpaceRemoveBody(space, body);
   cpShapeFree(platformShape);
   cpBodyFree(body);
+  
+  if (fixed) cpBodyFree(pbody);
 }
 
 void Platform::setWidth(float _width) {
@@ -75,7 +82,7 @@ void Platform::fix(cpSpace *space) {
   pbody = cpBodyNew(INFINITY, INFINITY);
   pbody->p = cpv(x, y);
 
-  cpSpaceAddConstraint(space, cpPivotJointNew(body, pbody, cpv(x,y)));
+  constraint = cpSpaceAddConstraint(space, cpPivotJointNew(body, pbody, cpv(x,y)));
   fixed = true;
 }
 

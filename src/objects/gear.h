@@ -13,6 +13,7 @@ class Gear : public Sprite {
     cpBody *pbody;
     cpShape *platformShape;
     cpShape *platformShape2;
+    cpConstraint *constraint;
     
     float width;
     float height;
