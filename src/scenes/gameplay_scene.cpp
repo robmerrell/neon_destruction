@@ -195,7 +195,7 @@ void GameplayScene::gameLoop() {
             
             // second
             if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 82 && event_coords.y <= 120) {
-              if (menu->getPage()*3+2 < LEVEL_COUNT) {
+              if (menu->getPage()*3+1 < LEVEL_COUNT) {
                 finished_level = true;
                 go_to_level = true;
                             
@@ -206,7 +206,7 @@ void GameplayScene::gameLoop() {
             
             // third
             if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 147 && event_coords.y <= 185) {
-              if (menu->getPage()*3+3 < LEVEL_COUNT) {
+              if (menu->getPage()*3+2 < LEVEL_COUNT) {
                 finished_level = true;
                 go_to_level = true;
             

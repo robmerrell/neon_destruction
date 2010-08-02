@@ -168,7 +168,7 @@ const std::string LEVEL_NAMES[] = {
   "4. Clock Tower",
   "5. Steps",
   "6. Stack",
-  "7. Elevator"
+  "7. Elevator",
   "8. Bottoms up"
 };
 

@@ -126,7 +126,7 @@ void Menu::display() {
 
     int count = 0;
     for (int i = 3*page; i < 3*page + 3; i++) {
-      if (i+1 <= LEVEL_COUNT) {
+      if (i < LEVEL_COUNT) {
         TextureString *tx = new TextureString(50.0f, 20.0f + count*65.0f, LEVEL_NAMES[i]);
         tx->display();
         tx = new TextureString(50.0f, 20.0f + count*65.0f + 16.0f, "Best score: --");
