@@ -125,7 +125,7 @@ void GameplayScene::gameLoop() {
       } else if (event.type == SDL_MOUSEBUTTONUP) {
         cpVect event_coords = translatedMouseCoords(event.button.x, event.button.y);
         
-        cout << "x: " << event_coords.x << "  y: " << event_coords.y << "\n";
+        // cout << "x: " << event_coords.x << "  y: " << event_coords.y << "\n";
 
         if (!menu_open) {
           SoundManager::Instance()->playCannon();
@@ -716,7 +716,7 @@ static int ignore_pre_solve(cpArbiter *arb, cpSpace *space, void *ignore) {
 }
 
 static int pre_solve_goal(cpArbiter *arb, cpSpace *space, void *ignore) {
-  cout << "passed" << endl;
+  // cout << "passed" << endl;
   GameplayScene::finished_level = true;
   // cpSpaceRemoveCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION);
   return 0;
