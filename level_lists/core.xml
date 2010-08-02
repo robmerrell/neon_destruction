@@ -1,0 +1,11 @@
+<?xml version="1.0">
+<levels name="Main Levels">
+  <level id="1" name="Intro" filename="intro.xml" />
+  <level id="2" name="Green vs Blue" filename="green_vs_blue.xml" />
+  <level id="3" name="Gauntlet Treasure" filename="gauntlet_treasure.xml" />
+  <level id="4" name="Clock Tower" filename="clock_tower.xml" />
+  <level id="5" name="Steps" filename="steps.xml" />
+  <level id="6" name="Stack" filename="stack.xml" />
+  <level id="7" name="Elevator" filename="elevator.xml" />
+  <level id="8" name="Bottoms Up" filename="bottoms_up.xml" />
+</levels>

@@ -1,0 +1,8 @@
+(inp)
+core:3
+
+(lvl)
+id,score,completed,skipped
+1:0:0:1
+2:0:1:0
+3:0:0:0

@@ -1,6 +1,7 @@
 #include "projection_engine/engine.h"
 #include "projection_engine/tex_manager.h"
 #include "projection_engine/sound_manager.h"
+#include "projection_engine/level_data.h"
 #include "scenes/gameplay_scene.h"
 #include "scenes/title_scene.h"
 #include "scenes/thank_you_scene.h"
@@ -37,8 +38,10 @@ int main(int argc, char* argv[]) {
   
   SoundManager::Instance()->loadMusic("assets/music.mp3");
   SoundManager::Instance()->loadEffects();
-  SoundManager::Instance()->soundOn(true);
+  SoundManager::Instance()->soundOn(false);
   SoundManager::Instance()->playMusic();
+  
+  LevelData::Instance()->parseLevelList("core.xml");
 
   // show the title scene and start the game loop
   TitleScene *title_scene = new TitleScene();

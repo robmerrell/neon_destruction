@@ -1,0 +1,70 @@
+#include "level_data.h"
+
+LevelData* LevelData::inst = NULL; 
+
+LevelData::LevelData() {}
+
+LevelData* LevelData::Instance() {
+  if (!inst) {
+    inst = new LevelData;
+    
+    inst->core_level_count = 0;
+    inst->current_level = "1";
+  }
+    
+  return inst;
+}
+
+
+void LevelData::parseLevelList(string set) {
+  string path = "level_lists/";
+  
+  TiXmlDocument level_details(path.append(set).c_str());
+  level_details.LoadFile();
+  
+  TiXmlNode* list = level_details.FirstChild("levels");
+  TiXmlNode* level_node;
+  
+  for (level_node = list->FirstChild(); level_node != 0; level_node = level_node->NextSibling() ) {
+    LevelDetails details;
+    details.id = level_node->ToElement()->Attribute("id");
+    details.name = level_node->ToElement()->Attribute("name");
+    details.filename = level_node->ToElement()->Attribute("filename");
+    
+    if (set == "core.xml") {
+      core_levels.push_back(details);
+      core_level_count++;
+    }
+  }
+
+  cout << core_levels[0].filename;
+}
+
+
+LevelDetails LevelData::getDetailsByPosition(int level_index) {
+  level_index -= 1;
+  
+  return core_levels[level_index];
+}
+
+
+LevelDetails LevelData::getDetailsById(string id) {
+  vector<LevelDetails>::iterator iter;
+  
+  for (iter = core_levels.begin(); iter != core_levels.end(); iter++) {
+    cout << iter->id;
+    // cout << (LevelDetails)iterator.id;
+    // if ((*iterator).id == id)
+      // return iterator;
+  }
+}
+
+
+string LevelData::getCurrentLevel() {
+  return current_level;
+}
+
+
+void LevelData::setCurrentLevel(string _id) {
+  current_level = _id;
+}
