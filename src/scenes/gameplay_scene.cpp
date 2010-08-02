@@ -161,7 +161,7 @@ void GameplayScene::gameLoop() {
             addObject(ball);
           }
         } else {
-          cout << "x: " << event_coords.x << " y: " << event_coords.y << "\n";
+          // cout << "x: " << event_coords.x << " y: " << event_coords.y << "\n";
           
           if (!menu->getLevelPicker()) {
             // reset button
@@ -190,6 +190,7 @@ void GameplayScene::gameLoop() {
               finished_level = true;
               go_to_level = true;
               current_level = menu->getPage()*3 + 1;
+              menu->setLevelPicker(false);
             }
             
             // second
@@ -199,6 +200,7 @@ void GameplayScene::gameLoop() {
                 go_to_level = true;
                             
                 current_level = menu->getPage()*3 + 2;
+                menu->setLevelPicker(false);
               }
             }
             
@@ -209,6 +211,7 @@ void GameplayScene::gameLoop() {
                 go_to_level = true;
             
                 current_level = menu->getPage()*3 + 3;
+                menu->setLevelPicker(false);
               }            
             }
             
@@ -221,7 +224,6 @@ void GameplayScene::gameLoop() {
             if (event_coords.x >= 348 && event_coords.x <= 392 && event_coords.y >= 239 && event_coords.y <= 281) {
               menu->nextPage();
             }
-            
           }
           
           // resume
@@ -280,8 +282,7 @@ void GameplayScene::gameLoop() {
     SDL_GL_SwapBuffers();
    
     if (finished_level) {
-      if (!level_reset)
-        SoundManager::Instance()->playLevelEnd();
+      SoundManager::Instance()->playLevelEnd();
       
       for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
         (*sprite)->setAnimationState(ANIMATE_FADE_OUT);
@@ -289,7 +290,7 @@ void GameplayScene::gameLoop() {
       
       Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
       
-      if (cannon->getAlpha() <= 0.0f || level_reset) {
+      if (cannon->getAlpha() <= 0.0f || level_reset || go_to_level) {
         finished_level = false;
         in_loop = false;
         if (!level_reset && !go_to_level)
