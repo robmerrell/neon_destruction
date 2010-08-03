@@ -50,6 +50,11 @@ class LevelData {
     void setCurrentLevel(string);
     string getNextLevel();
     bool canLoadNextLevel();
+    
+    /**
+     * Get the count of all core levels
+     */
+    int getCoreLevelCount();
 };
 
 #endif

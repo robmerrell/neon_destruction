@@ -17,7 +17,6 @@ class GameplayScene : public Scene {
     bool has_cannon;
     bool has_goal;
     
-    int current_level;
     bool quit;
     
     bool menu_open;

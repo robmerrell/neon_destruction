@@ -92,3 +92,8 @@ bool LevelData::canLoadNextLevel() {
   else
     return true;
 }
+
+
+int LevelData::getCoreLevelCount() {
+  return core_level_count;
+}

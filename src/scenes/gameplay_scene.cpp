@@ -14,7 +14,6 @@ GameplayScene::GameplayScene() {
   draw_physics = false;
   in_loop = false;
   frame = 0;
-  current_level = 1;
   
   // set up the Chipmunk physics space
   cpInitChipmunk();
@@ -189,32 +188,35 @@ void GameplayScene::gameLoop() {
             if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 16 && event_coords.y <= 54) {
               finished_level = true;
               go_to_level = true;
-              // current_level = menu->getPage()*3 + 1;
-              // current_level = menu->getPage()*3+1
-              current_level = LevelData::Instance()->getDetailsByPosition(menu->getPage()*3 + 1).id();
+              
+              int pos = menu->getPage()*3 + 1;
+              string level_id = LevelData::Instance()->getDetailsByPosition(pos).id;
+              LevelData::Instance()->setCurrentLevel(level_id);
               menu->setLevelPicker(false);
             }
             
             // second
             if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 82 && event_coords.y <= 120) {
-              if (menu->getPage()*3+1 < LEVEL_COUNT) {
+              if (menu->getPage()*3+1 < LevelData::Instance()->getCoreLevelCount()) {
                 finished_level = true;
                 go_to_level = true;
                             
-                // current_level = menu->getPage()*3 + 2;
-                current_level = LevelData::Instance()->getDetailsByPosition(menu->getPage()*3 + 2).id();
+                int pos = menu->getPage()*3 + 2;
+                string level_id = LevelData::Instance()->getDetailsByPosition(pos).id;
+                LevelData::Instance()->setCurrentLevel(level_id);
                 menu->setLevelPicker(false);
               }
             }
             
             // third
             if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 147 && event_coords.y <= 185) {
-              if (menu->getPage()*3+2 < LEVEL_COUNT) {
+              if (menu->getPage()*3+2 < LevelData::Instance()->getCoreLevelCount()) {
                 finished_level = true;
                 go_to_level = true;
             
-                // current_level = menu->getPage()*3 + 3;
-                current_level = LevelData::Instance()->getDetailsByPosition(menu->getPage()*3 + 3).id();
+                int pos = menu->getPage()*3 + 3;
+                string level_id = LevelData::Instance()->getDetailsByPosition(pos).id;
+                LevelData::Instance()->setCurrentLevel(level_id);
                 menu->setLevelPicker(false);
               }            
             }
