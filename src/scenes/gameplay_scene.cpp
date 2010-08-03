@@ -10,11 +10,11 @@ GameplayScene::GameplayScene() {
   level_reset = false;
   go_to_level = false;
   quit = false;
-  current_level = 1;
   score = 0;
   draw_physics = false;
   in_loop = false;
   frame = 0;
+  current_level = 1;
   
   // set up the Chipmunk physics space
   cpInitChipmunk();
@@ -65,12 +65,12 @@ bool GameplayScene::setup() {
   defineBorder(true, true, true, true);
   
   // load a level
-  loadLevel(GAME_LEVELS[current_level-1]);
+  loadLevel(LevelData::Instance()->getCurrentDetails().filename);
   
   // start the game loop
   while(!quit && !stop) {
     gameLoop();
-    stop = replaceLevel(GAME_LEVELS[current_level-1]);
+    stop = replaceLevel(LevelData::Instance()->getCurrentDetails().filename);
   }
   
   return quit;
@@ -294,7 +294,7 @@ void GameplayScene::gameLoop() {
         finished_level = false;
         in_loop = false;
         if (!level_reset && !go_to_level)
-          current_level++;
+          LevelData::Instance()->setCurrentLevel(LevelData::Instance()->getNextLevel());
         else
           level_reset = false;
       }
@@ -557,7 +557,7 @@ bool GameplayScene::replaceLevel(string level_file) {
   score = 0;
   menu_open = false;
   
-  if (current_level <= LEVEL_COUNT) {
+  if (!LevelData::Instance()->getCurrentLevel().empty()) {
     loadLevel(level_file);
     return false;
   }
@@ -716,9 +716,7 @@ static int ignore_pre_solve(cpArbiter *arb, cpSpace *space, void *ignore) {
 }
 
 static int pre_solve_goal(cpArbiter *arb, cpSpace *space, void *ignore) {
-  // cout << "passed" << endl;
   GameplayScene::finished_level = true;
-  // cpSpaceRemoveCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION);
   return 0;
 }
 

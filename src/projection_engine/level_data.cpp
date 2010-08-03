@@ -36,8 +36,6 @@ void LevelData::parseLevelList(string set) {
       core_level_count++;
     }
   }
-
-  cout << core_levels[0].filename;
 }
 
 
@@ -52,11 +50,14 @@ LevelDetails LevelData::getDetailsById(string id) {
   vector<LevelDetails>::iterator iter;
   
   for (iter = core_levels.begin(); iter != core_levels.end(); iter++) {
-    cout << iter->id;
-    // cout << (LevelDetails)iterator.id;
-    // if ((*iterator).id == id)
-      // return iterator;
+    if (iter->id == id)
+      return *iter;
   }
+}
+
+
+LevelDetails LevelData::getCurrentDetails() {
+  return getDetailsById(current_level);
 }
 
 
@@ -67,4 +68,27 @@ string LevelData::getCurrentLevel() {
 
 void LevelData::setCurrentLevel(string _id) {
   current_level = _id;
+}
+
+
+string LevelData::getNextLevel() {
+  bool found_current = false;
+  vector<LevelDetails>::iterator iter;
+  
+  for (iter = core_levels.begin(); iter != core_levels.end(); iter++) {
+    if (found_current) return iter->id;
+    if (iter->id == current_level) found_current = true;
+  }
+  
+  return "";
+}
+
+
+bool LevelData::canLoadNextLevel() {
+  string next_level = getNextLevel();
+  
+  if (next_level.empty())
+    return false;
+  else
+    return true;
 }

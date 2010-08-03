@@ -1,6 +1,7 @@
 #include "../projection_engine/scene.h"
 #include "../tinyxml/tinyxml.h"
 #include "../projection_engine/sound_manager.h"
+#include "../projection_engine/level_data.h"
 
 #include <iostream>
 #include <sstream>

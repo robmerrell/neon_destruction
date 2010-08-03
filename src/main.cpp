@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
   
   SoundManager::Instance()->loadMusic("assets/music.mp3");
   SoundManager::Instance()->loadEffects();
-  SoundManager::Instance()->soundOn(false);
+  SoundManager::Instance()->soundOn(true);
   SoundManager::Instance()->playMusic();
   
   LevelData::Instance()->parseLevelList("core.xml");

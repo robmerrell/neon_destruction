@@ -41,12 +41,15 @@ class LevelData {
      */
     LevelDetails getDetailsByPosition(int);
     LevelDetails getDetailsById(string);
+    LevelDetails getCurrentDetails();
     
     /**
      * Get and set the current level id
      */
     string getCurrentLevel();
     void setCurrentLevel(string);
+    string getNextLevel();
+    bool canLoadNextLevel();
 };
 
 #endif
