@@ -189,7 +189,9 @@ void GameplayScene::gameLoop() {
             if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 16 && event_coords.y <= 54) {
               finished_level = true;
               go_to_level = true;
-              current_level = menu->getPage()*3 + 1;
+              // current_level = menu->getPage()*3 + 1;
+              // current_level = menu->getPage()*3+1
+              current_level = LevelData::Instance()->getDetailsByPosition(menu->getPage()*3 + 1).id();
               menu->setLevelPicker(false);
             }
             
@@ -199,7 +201,8 @@ void GameplayScene::gameLoop() {
                 finished_level = true;
                 go_to_level = true;
                             
-                current_level = menu->getPage()*3 + 2;
+                // current_level = menu->getPage()*3 + 2;
+                current_level = LevelData::Instance()->getDetailsByPosition(menu->getPage()*3 + 2).id();
                 menu->setLevelPicker(false);
               }
             }
@@ -210,7 +213,8 @@ void GameplayScene::gameLoop() {
                 finished_level = true;
                 go_to_level = true;
             
-                current_level = menu->getPage()*3 + 3;
+                // current_level = menu->getPage()*3 + 3;
+                current_level = LevelData::Instance()->getDetailsByPosition(menu->getPage()*3 + 3).id();
                 menu->setLevelPicker(false);
               }            
             }
