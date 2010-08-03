@@ -4,6 +4,7 @@
 #include "../projection_engine/sound_manager.h"
 #include "../projection_engine/event_translations.h"
 #include "../objects/texture_string.h"
+#include "../projection_engine/level_data.h"
 
 #ifndef MENU_H
 #define MENU_H

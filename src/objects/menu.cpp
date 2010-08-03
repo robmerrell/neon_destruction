@@ -25,7 +25,7 @@ void Menu::prevPage() {
 }
 
 void Menu::nextPage() {
-  if ((page+1)*3 <= LEVEL_COUNT)
+  if ((page+1)*3 <= LevelData::Instance()->getCoreLevelCount())
     page++;
 }
 
@@ -110,7 +110,7 @@ void Menu::display() {
     }
     
     // next
-    if ((page+1)*3 <= LEVEL_COUNT) {
+    if ((page+1)*3 <= LevelData::Instance()->getCoreLevelCount()) {
       glLoadIdentity();
       glTranslatef(396.0f, 285.0f, 0.0);
 
@@ -126,7 +126,7 @@ void Menu::display() {
 
     int count = 0;
     for (int i = 3*page; i < 3*page + 3; i++) {
-      if (i < LEVEL_COUNT) {
+      if (i < LevelData::Instance()->getCoreLevelCount()) {
         TextureString *tx = new TextureString(50.0f, 20.0f + count*65.0f, LEVEL_NAMES[i]);
         tx->display();
         tx = new TextureString(50.0f, 20.0f + count*65.0f + 16.0f, "Best score: --");
