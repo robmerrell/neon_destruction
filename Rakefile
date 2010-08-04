@@ -171,7 +171,7 @@ task :clean do
   puts "removing build files..."
   FileUtils.rmtree "build"
   FileUtils.rm "main" if File.exists?("main")
-  FileUtils.rm "com.trackera.neonblaster_1.0.0_all.ipk" if File.exists?("com.trackera.neonblaster_1.0.0_all.ipk")
+  FileUtils.rm "com.trackera.cannonglowalpha_0.0.1_all.ipk" if File.exists?("com.trackera.cannonglowalpha_0.0.1_all.ipk")
 end
 
 
@@ -204,6 +204,7 @@ task :pkg do
   system("cp main neon_blaster")
   system("cp -r assets/* neon_blaster/assets")
   system("cp -r levels/* neon_blaster/levels")
+  system("cp -r level_lists/* neon_blaster/level_lists")
 
   puts "packaging..."
   cmd = "#{pdk_bin}/palm-package neon_blaster"
@@ -211,7 +212,7 @@ task :pkg do
   system(cmd)
   
   puts "installing..."
-  cmd = "#{pdk_bin}/palm-install com.trackera.neonblaster_1.0.0_all.ipk"
+  cmd = "#{pdk_bin}/palm-install *.ipk"
   puts cmd
   system(cmd)
 end

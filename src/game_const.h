@@ -146,32 +146,6 @@ const float CIRCLE_RIGHT[] = {
   158.0f / CIRCLE_TEX_SIZE
 };
 
-
-/***************
-** Levels ******
-****************/
-const std::string GAME_LEVELS[] = {
-  "intro.xml",
-  "green_vs_blue.xml",
-  "gauntlet_treasure.xml",
-  "clock_tower.xml",
-  "steps.xml",
-  "stack.xml",
-  "elevator.xml",
-  "bottoms_up.xml"
-};
-const std::string LEVEL_NAMES[] = {
-  "1. Introduction",
-  "2. Green vs Blue",
-  "3. Gauntlet Treasure",
-  "4. Clock Tower",
-  "5. Steps",
-  "6. Stack",
-  "7. Elevator",
-  "8. Bottoms up"
-};
-
-
 #include <Math.h>
 #define RAD2DEG(Rad) ((180.0 * Rad) / M_PI)
 #define DEG2RAD(Deg) ((Deg)*((M_PI)/(180.0)))

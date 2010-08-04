@@ -1,5 +1,8 @@
 #include "menu.h"
 #include <iostream>
+#include <sstream>
+
+using namespace std;
 
 Menu::Menu() : Sprite("", 64, 64, MENU_TAG) {  
   level_picker = false;
@@ -127,7 +130,12 @@ void Menu::display() {
     int count = 0;
     for (int i = 3*page; i < 3*page + 3; i++) {
       if (i < LevelData::Instance()->getCoreLevelCount()) {
-        TextureString *tx = new TextureString(50.0f, 20.0f + count*65.0f, LEVEL_NAMES[i]);
+        LevelDetails level = LevelData::Instance()->getDetailsByPosition(i+1);
+        
+        stringstream name;
+        name << i+1 << "." << level.name;
+        
+        TextureString *tx = new TextureString(50.0f, 20.0f + count*65.0f, name.str());
         tx->display();
         tx = new TextureString(50.0f, 20.0f + count*65.0f + 16.0f, "Best score: --");
         tx->display();
