@@ -21,13 +21,10 @@ Engine::Engine(bool _draw_physics) {
   glLoadIdentity();
   
   #ifdef DEVICE
-    glRotatef(-270, 0, 0, 1);
-    glRotatef(180, 1, 0, 0);
-    glScalef(-1.0, -1.0, 1.0);
-    glOrthof(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT, -1, 1);
-  #else
-    glOrthof(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, -1, 1);
+    glRotatef(-90, 0, 0, 1);
   #endif
+  
+  glOrthof(0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, -1, 1);
   
   glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
