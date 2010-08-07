@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include "../tinyxml/tinyxml.h"
 
@@ -14,6 +15,9 @@ struct LevelDetails {
   string name;
   string filename;
   string id;
+  string completed;
+  string score;
+  string skipped;
 };
 
 class LevelData {
@@ -35,6 +39,11 @@ class LevelData {
      * Parse the level list in the (string) file
      */
     void parseLevelList(string);
+    
+    /**
+     * Parse the user data
+     */
+    void parseUserData();
     
     /**
      * Get the level details

@@ -337,13 +337,18 @@ void GameplayScene::loadLevel(string level_file) {
   TiXmlNode* level = level_data.FirstChild("level");
   TiXmlNode* object_node;
   
-  TextureString *level_name = new TextureString(0.0f, 0.0f, "");
+  TextureString *level_name = new TextureString(0.0f, 0.0f, LevelData::Instance()->getCurrentDetails().name);
   level_name->setTag(LEVEL_STRING_TAG);
   addObject(level_name);
   
   TextureString *score_string = new TextureString(350.0f, 0.0f, "Shots: 0");
   score_string->setTag(SCORE_STRING_TAG);
   addObject(score_string);
+  
+  string best = "Best: ";
+  best.append(LevelData::Instance()->getCurrentDetails().score);
+  TextureString *best_score_string = new TextureString(350.0f, 20.0f, best);
+  addObject(best_score_string);
 
   if (level->ToElement()->Attribute("name") != NULL) {
     level_name->setMessage(level->ToElement()->Attribute("name"));

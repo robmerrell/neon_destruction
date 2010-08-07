@@ -135,9 +135,12 @@ void Menu::display() {
         stringstream name;
         name << i+1 << "." << level.name;
         
+        string score = "Best score: ";
+        score.append(level.score);
+        
         TextureString *tx = new TextureString(50.0f, 20.0f + count*65.0f, name.str());
         tx->display();
-        tx = new TextureString(50.0f, 20.0f + count*65.0f + 16.0f, "Best score: --");
+        tx = new TextureString(50.0f, 20.0f + count*65.0f + 16.0f, score);
         tx->display();
         count++;
       }
