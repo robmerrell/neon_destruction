@@ -65,8 +65,18 @@ void LevelData::parseUserData() {
   string state="none"; // none, level_data, inprocess
   
   while (getline(config_file, line)) {
+    if (line == "(inp)") state = "inprocess";
+    if (line == "(endinp)") state = "none";
     if (line == "(lvl)") state = "level_data";
     if (line == "(endlvl)") state = "none";
+    
+    if (state == "inprocess" && line != "(inp)") {
+      // list,id
+      vector<string> parsed_level;
+      string_explode(line, ":", &parsed_level);
+      
+      current_level = parsed_level[1];
+    }
     
     if (state == "level_data" && line != "(lvl)") {
       // id,score,completed,skipped
