@@ -46,6 +46,11 @@ class LevelData {
     void parseUserData();
     
     /**
+     * Write the user data
+     */
+    void writeUserData();
+    
+    /**
      * Get the level details
      */
     LevelDetails getDetailsByPosition(int);
@@ -59,6 +64,11 @@ class LevelData {
     void setCurrentLevel(string);
     string getNextLevel();
     bool canLoadNextLevel();
+    
+    /**
+     * Update data for the current level
+     */
+    void updateCurrentScore(string);
     
     /**
      * Get the count of all core levels

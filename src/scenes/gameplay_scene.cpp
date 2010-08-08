@@ -299,9 +299,14 @@ void GameplayScene::gameLoop() {
       if (cannon->getAlpha() <= 0.0f || level_reset || go_to_level) {
         finished_level = false;
         in_loop = false;
-        if (!level_reset && !go_to_level)
+        if (!level_reset && !go_to_level) {
+          stringstream score_stream;
+          score_stream << score;
+          
+          LevelData::Instance()->updateCurrentScore(score_stream.str());
           LevelData::Instance()->setCurrentLevel(LevelData::Instance()->getNextLevel());
-        else
+          LevelData::Instance()->writeUserData();
+        } else
           level_reset = false;
       }
     }

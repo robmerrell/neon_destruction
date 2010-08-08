@@ -98,6 +98,28 @@ void LevelData::parseUserData() {
 }
 
 
+void LevelData::writeUserData() {
+  ofstream config_file("user_data.mja");
+  
+  if (config_file.is_open()) {
+    config_file << "(inp)" << endl;
+    config_file << "core:" << current_level << endl;
+    config_file << "(endinp)" << endl;
+    
+    config_file << "(lvl)" << endl;
+    vector<LevelDetails>::iterator iter;
+
+    for (iter = core_levels.begin(); iter != core_levels.end(); iter++) {
+      string score = iter->score;
+      if (score == "--") score = "0";
+      
+      config_file << iter->id << ":" << score << ":" << iter->completed << ":" << iter->skipped << endl;
+    }
+    config_file << "(endlvl)";
+  }
+}
+
+
 LevelDetails LevelData::getDetailsByPosition(int level_index) {
   level_index -= 1;
   
@@ -127,6 +149,18 @@ string LevelData::getCurrentLevel() {
 
 void LevelData::setCurrentLevel(string _id) {
   current_level = _id;
+}
+
+
+void LevelData::updateCurrentScore(string new_score) {
+  vector<LevelDetails>::iterator iter;
+  
+  for (iter = core_levels.begin(); iter != core_levels.end(); iter++) {
+    if (iter->id == current_level) {
+      if ((atoi(new_score.c_str()) < atoi(iter->score.c_str())) || iter->score == "--")
+        iter->score = new_score;
+    }
+  } 
 }
 
 
