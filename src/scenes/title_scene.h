@@ -11,6 +11,7 @@ class TitleScene : public Scene {
   
   private:
     bool quit;
+    bool loaded;
     
     int frame;
     Timer fps;
