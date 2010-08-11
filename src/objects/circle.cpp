@@ -63,9 +63,9 @@ void Circle::display() {
   
   
   if (simulation_type == "DYNAMIC")
-    TexManager::Instance()->bindTexture(23);
+    TexManager::Instance()->bindTexture(16);
   else
-    TexManager::Instance()->bindTexture(22);
+    TexManager::Instance()->bindTexture(15);
   
   glLoadIdentity();
   glTranslatef(body->p.x - dx/2.0f, body->p.y - dy/2.0f, 0.0);

@@ -11,7 +11,7 @@ void TextureString::setMessage(string m) {
 }
 
 void TextureString::display() {
-  TexManager::Instance()->bindTexture(18);
+  TexManager::Instance()->bindTexture(11);
   
   GLfloat vertices[] = {0,18,0, 11,18,0, 0,0,0, 11,0,0};
 

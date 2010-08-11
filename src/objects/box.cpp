@@ -88,9 +88,9 @@ void Box::display() {
   glColor4f(alpha, alpha, alpha, alpha);
   
   if (simulation_type == "DYNAMIC")
-    TexManager::Instance()->bindTexture(14);
+    TexManager::Instance()->bindTexture(8);
   else
-    TexManager::Instance()->bindTexture(13);
+    TexManager::Instance()->bindTexture(7);
     
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);

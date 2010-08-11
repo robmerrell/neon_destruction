@@ -12,7 +12,7 @@ void CrossHair::display() {
   GLfloat vertices[] = {0,64,0, 64,64,0, 0,0,0, 64,0,0};
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
-  TexManager::Instance()->bindTexture(9);
+  TexManager::Instance()->bindTexture(4);
   
   glLoadIdentity();
   glTranslatef(x - 32, y - 32, 0.0);

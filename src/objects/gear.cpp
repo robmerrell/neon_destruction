@@ -77,7 +77,7 @@ void Gear::display() {
   
   glColor4f(alpha, alpha, alpha, alpha);
   
-  TexManager::Instance()->bindTexture(14);
+  TexManager::Instance()->bindTexture(8);
   
   glLoadIdentity();
   glTranslatef(start_x - width/2, start_y + height/2, 0.0);

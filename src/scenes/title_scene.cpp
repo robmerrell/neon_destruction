@@ -30,7 +30,7 @@ bool TitleScene::setup() {
   
   Image *image;
 
-  image = new Image(0.0f, 0.0f, 512.0f, 512.0f, 17);
+  image = new Image(0.0f, 0.0f, 512.0f, 512.0f, 0);
   addObject(image);
   
   gameLoop();

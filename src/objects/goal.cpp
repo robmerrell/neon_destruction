@@ -45,7 +45,7 @@ void Goal::display() {
   
   glColor4f(alpha, alpha, alpha, alpha);
   
-  TexManager::Instance()->bindTexture(15);
+  TexManager::Instance()->bindTexture(9);
   
   glLoadIdentity();
   glTranslatef(start_x - width/2, start_y + height/2, 0.0);

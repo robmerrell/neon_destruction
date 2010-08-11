@@ -8,7 +8,7 @@
   <object type="STRING" x="10.0f" y="55.0f" text="Hit the target using as few" />
   <object type="STRING" x="10.0f" y="80.0f" text="shots as possible." />
   
-  <object type="TEXTURE" x="220.0f" y="120.0f" width="256.0f" height="200.0f" tex="24" />
+  <object type="TEXTURE" x="220.0f" y="120.0f" width="256.0f" height="200.0f" tex="17" />
   
   <object type="STRING" x="210.0f" y="250.0f" text="Swipe gesture area" />
   <object type="STRING" x="270.0f" y="275.0f" text="for menu" />

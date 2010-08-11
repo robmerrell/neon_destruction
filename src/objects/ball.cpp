@@ -97,7 +97,7 @@ void Ball::display() {
   GLfloat particle_vertices[] = {0,16,0, 16,16,0, 0,0,0, 16,0,0};
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   
-  TexManager::Instance()->bindTexture(0);
+  TexManager::Instance()->bindTexture(1);
   
   glLoadIdentity();
   glTranslatef(body->p.x - 32, body->p.y - 32, 0.0f);
@@ -116,7 +116,7 @@ void Ball::display() {
   
   TexManager::Instance()->unbindTexture();
   
-  TexManager::Instance()->bindTexture(12);
+  TexManager::Instance()->bindTexture(6);
   
   // draw the particles
   for (int i=0; i < PARTICLE_TOTAL; i++) {

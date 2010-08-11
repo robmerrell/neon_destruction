@@ -12,7 +12,7 @@ void Cannon::display() {
 
   glColor4f(alpha, alpha, alpha, alpha);
 
-  TexManager::Instance()->bindTexture(5);
+  TexManager::Instance()->bindTexture(3);
   
   // place and rotate the turret
   glLoadIdentity();
@@ -31,7 +31,7 @@ void Cannon::display() {
   GLfloat turret_vertices[] = {0,128,0, 128,128,0, 0,0,0, 128,0,0};
   GLfloat tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
 
-  TexManager::Instance()->bindTexture(3);
+  TexManager::Instance()->bindTexture(2);
   
   // place and rotate the turret
   glLoadIdentity();
