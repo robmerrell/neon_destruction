@@ -7,7 +7,7 @@ ThankYouScene::ThankYouScene() {
 ThankYouScene::~ThankYouScene() {}
 
 bool ThankYouScene::setup() {
-  TextureString *string = new TextureString(10.0f, 30.0f, "Thank you for beta testing Cannon Glow");
+  TextureString *string = new TextureString(10.0f, 30.0f, "Thank you for beta testing!");
   addObject(string);
   
   TextureString *feed = new TextureString(100.0f, 100.0f, "Please send feedback to:");

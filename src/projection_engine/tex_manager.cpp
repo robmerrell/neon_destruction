@@ -49,14 +49,14 @@ void TexManager::loadTexture(string filename, bool alpha) {
 }
 
 void TexManager::bindTexture(int ref) {
-  if (current_ref != ref) {
+  // if (current_ref != ref) {
     glBindTexture(GL_TEXTURE_2D, inst->texture[ref]);
-    current_ref = ref;
-  }
+    // current_ref = ref;
+  // }
 }
 
 void TexManager::unbindTexture() {
-  // glBindTexture(GL_TEXTURE_2D, 0);
+  glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 int TexManager::getTextureRef() {
