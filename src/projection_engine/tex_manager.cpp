@@ -7,8 +7,10 @@ TexManager::TexManager() {
 }
 
 TexManager* TexManager::Instance() {
-  if (!inst)
+  if (!inst) {
     inst = new TexManager;
+    inst->current_ref = 0;
+  }
   
   // glGenTextures(TEXTURE_COUNT, inst->texture);
     
@@ -47,11 +49,14 @@ void TexManager::loadTexture(string filename, bool alpha) {
 }
 
 void TexManager::bindTexture(int ref) {
-  glBindTexture(GL_TEXTURE_2D, inst->texture[ref]);
+  if (current_ref != ref) {
+    glBindTexture(GL_TEXTURE_2D, inst->texture[ref]);
+    current_ref = ref;
+  }
 }
 
 void TexManager::unbindTexture() {
-  glBindTexture(GL_TEXTURE_2D, 0);
+  // glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 int TexManager::getTextureRef() {

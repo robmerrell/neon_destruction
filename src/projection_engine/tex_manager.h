@@ -21,6 +21,7 @@ class TexManager {
     
     GLuint texture[TEXTURE_COUNT];
     int texture_ref;
+    int current_ref;
     
   public:
     static TexManager* Instance();
