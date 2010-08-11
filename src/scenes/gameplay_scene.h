@@ -19,6 +19,7 @@ class GameplayScene : public Scene {
     
     bool quit;
     
+    bool dialog_open;
     bool menu_open;
     bool level_reset;
     bool go_to_level;

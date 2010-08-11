@@ -7,6 +7,7 @@ bool GameplayScene::finished_level = false;
 GameplayScene::GameplayScene() {
   menu = new Menu();
   menu_open = false;
+  dialog_open = false;
   level_reset = false;
   go_to_level = false;
   quit = false;
@@ -102,7 +103,7 @@ void GameplayScene::gameLoop() {
         in_loop = false;
         quit = true;
       } else if (event.type == SDL_KEYDOWN) {
-        if (event.key.keysym.sym == PDLK_GESTURE_BACK) {
+        if (event.key.keysym.sym == PDLK_GESTURE_BACK && !dialog_open) {
           if (menu_open) {
             menu_open = false;
             menu->setLevelPicker(false);
@@ -126,7 +127,7 @@ void GameplayScene::gameLoop() {
         
         // cout << "x: " << event_coords.x << "  y: " << event_coords.y << "\n";
 
-        if (!menu_open) {
+        if (!menu_open && !dialog_open) {
           SoundManager::Instance()->playCannon();
         
           // reposition the crosshair
@@ -159,7 +160,27 @@ void GameplayScene::gameLoop() {
             ball->applyImpulse(event_coords, ball_start_coords, space->gravity.y);
             addObject(ball);
           }
-        } else {
+        } else if (dialog_open) {
+          // resume
+          if (event_coords.x >= 136 && event_coords.x <= 329 && event_coords.y >= 236 && event_coords.y <= 289) {
+            dialog_open = false;
+            
+            // delete the menu
+            vector<Sprite*>::iterator sprite;
+            for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
+              if ((*sprite)->getTag() == DIALOG_TAG) {
+                // TODO: delete the thing
+              }
+            }
+            /*
+            (*iter)->destroy(space);
+            delete (*iter);
+            (*iter) = NULL;
+            */
+            
+          
+          }
+        } else if (menu_open) {
           // cout << "x: " << event_coords.x << " y: " << event_coords.y << "\n";
           
           if (!menu->getLevelPicker()) {
@@ -247,7 +268,7 @@ void GameplayScene::gameLoop() {
     fps.start();
     
     while (accumulator >= millistep) {
-      if (!menu_open) {
+      if (!menu_open && !dialog_open) {
         cpSpaceStep(space, timeStep);
         cpSpaceHashEach(space->activeShapes, &updateShape, NULL);
       }
@@ -273,8 +294,13 @@ void GameplayScene::gameLoop() {
          (*sprite)->manageParticles(particle_timer.get_ticks(), fps.get_ticks());
       }
       
-      if (!menu_open)
+      if (!menu_open && !dialog_open)
         (*sprite)->display();
+      else if (dialog_open) {
+        if ((*sprite)->getTag() == DIALOG_TAG) {
+          (*sprite)->display();
+        }
+      }
     }
     
     if (draw_physics)
@@ -342,10 +368,22 @@ void GameplayScene::loadLevel(string level_file) {
   TiXmlNode* level = level_data.FirstChild("level");
   TiXmlNode* object_node;
   
+  if (LevelData::Instance()->getCurrentDetails().id == "1" || LevelData::Instance()->getCurrentDetails().id == "2") {
+    Dialog *testd = new Dialog(LevelData::Instance()->getCurrentDetails().id);
+    addObject(testd);
+    dialog_open = true;
+  }
+  
   TextureString *level_name = new TextureString(0.0f, 0.0f, LevelData::Instance()->getCurrentDetails().name);
   level_name->setTag(LEVEL_STRING_TAG);
   addObject(level_name);
   
+  if (LevelData::Instance()->getCurrentDetails().id == "1" || LevelData::Instance()->getCurrentDetails().id == "2") {
+    Dialog *testd = new Dialog(LevelData::Instance()->getCurrentDetails().id);
+    addObject(testd);
+    dialog_open = true;
+  }
+    
   TextureString *score_string = new TextureString(350.0f, 0.0f, "Shots: 0");
   score_string->setTag(SCORE_STRING_TAG);
   addObject(score_string);

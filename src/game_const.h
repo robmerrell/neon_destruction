@@ -23,6 +23,7 @@ const int TEXTURE_STRING_TAG = 12;
 const int LEVEL_STRING_TAG = 13;
 const int SCORE_STRING_TAG = 14;
 const int MENU_TAG = 15;
+const int DIALOG_TAG = 16;
 
 const int CANNON_COLLISION = 1;
 const int BALL_COLLISION = 2;

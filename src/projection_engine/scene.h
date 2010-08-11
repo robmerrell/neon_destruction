@@ -23,6 +23,7 @@
 #include "../objects/image.h"
 #include "../objects/texture_string.h"
 #include "../objects/menu.h"
+#include "../objects/dialog.h"
 
 // engine
 #include "sprite.h"
