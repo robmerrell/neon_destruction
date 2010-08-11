@@ -102,9 +102,11 @@ void LevelData::writeUserData() {
   ofstream config_file("user_data.mja");
   
   if (config_file.is_open()) {
-    config_file << "(inp)" << endl;
-    config_file << "core:" << current_level << endl;
-    config_file << "(endinp)" << endl;
+    if (!current_level.empty()) {
+      config_file << "(inp)" << endl;
+      config_file << "core:" << current_level << endl;
+      config_file << "(endinp)" << endl;
+    }
     
     config_file << "(lvl)" << endl;
     vector<LevelDetails>::iterator iter;
