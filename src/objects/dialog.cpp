@@ -42,7 +42,7 @@ void Dialog::display() {
     tx = new TextureString(80.0f, 80.0f, "shots as possible.");
     tx->display();
     
-    tx = new TextureString(80.0f, 150.0f, "The further away you tap");
+    tx = new TextureString(80.0f, 150.0f, "The farther away you tap");
     tx->display();
     
     tx = new TextureString(80.0f, 175.0f, "from the cannon, the stronger");
