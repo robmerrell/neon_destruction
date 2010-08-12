@@ -159,7 +159,7 @@ void LevelData::updateCurrentScore(string new_score) {
   
   for (iter = core_levels.begin(); iter != core_levels.end(); iter++) {
     if (iter->id == current_level) {
-      if ((atoi(new_score.c_str()) < atoi(iter->score.c_str())) || iter->score == "--")
+      if ((atoi(new_score.c_str()) < atoi(iter->score.c_str())) || iter->score == "--" || iter->score == "0")
         iter->score = new_score;
     }
   } 
