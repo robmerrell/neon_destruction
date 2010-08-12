@@ -108,7 +108,7 @@ void TitleScene::gameLoop() {
       }
       
       if (!playing_music && animation.get_ticks() >= 4000) {
-        SoundManager::Instance()->soundOn(false);
+        SoundManager::Instance()->soundOn(true);
         playing_music = true;
       }
       
