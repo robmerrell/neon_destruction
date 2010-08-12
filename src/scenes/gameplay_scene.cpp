@@ -70,7 +70,10 @@ bool GameplayScene::setup() {
   // start the game loop
   while(!quit && !stop) {
     gameLoop();
-    stop = replaceLevel(LevelData::Instance()->getCurrentDetails().filename);
+    if (!LevelData::Instance()->getCurrentLevel().empty())
+      stop = replaceLevel(LevelData::Instance()->getCurrentDetails().filename);
+    else
+      stop = true;
   }
   
   return quit;
