@@ -1,10 +1,10 @@
 {
-	"id": "com.trackera.cannonglowalpha",
-	"version": "0.0.1",
+	"id": "com.trackera.namemebeta",
+	"version": "0.0.2",
 	"vendor": "Rob Merrell",
 	"type": "pdk",
 	"main": "main",
-	"title": "Cannon Glow",
+	"title": "Name Me Beta",
 	"icon": "icon.png",
 	"requiredMemory": "32"
 }
