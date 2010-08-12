@@ -169,20 +169,15 @@ void GameplayScene::gameLoop() {
             vector<Sprite*>::iterator sprite;
             for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
               if ((*sprite)->getTag() == DIALOG_TAG) {
-                // TODO: delete the thing
+                (*sprite)->destroy(space);
+                delete (*sprite);
+                (*sprite) = NULL;
+                
+                objects.erase(sprite);
               }
             }
-            /*
-            (*iter)->destroy(space);
-            delete (*iter);
-            (*iter) = NULL;
-            */
-            
-          
           }
         } else if (menu_open) {
-          // cout << "x: " << event_coords.x << " y: " << event_coords.y << "\n";
-          
           if (!menu->getLevelPicker()) {
             // reset button
             if (event_coords.x >= 59 && event_coords.x <= 231 && event_coords.y >= 26 && event_coords.y <= 78) {
@@ -419,8 +414,14 @@ void GameplayScene::loadLevel(string level_file) {
       width = object_node->ToElement()->Attribute("width");
       height = object_node->ToElement()->Attribute("height");
       num = object_node->ToElement()->Attribute("tex");
-      
+          
       Image *image = new Image(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL), strtof(width.c_str(), NULL), strtof(height.c_str(), NULL), atoi(num.c_str()));
+      
+      if (object_node->ToElement()->Attribute("angle") != NULL) {
+        angle = object_node->ToElement()->Attribute("angle");
+        image->setAngle(strtof(angle.c_str(), NULL));
+      }
+  
       addObject(image);
     } else if (object_node->ToElement()->Attribute("type") == string("STRING")) {
       x = object_node->ToElement()->Attribute("x");

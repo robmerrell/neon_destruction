@@ -15,22 +15,11 @@ void Dialog::display() {
   float length = 300.0f;
   float bottom_length = 384.0f;
   
-  // draw the border
-  int ti = 8;
-  GLfloat vertices[] = {0,25.0f,0, length,25.0f,0, 0,0,0, length,0,0};
-  GLfloat tex[] = {0,PLATFORM_BOTTOM[ti],0, PLATFORM_RIGHT[ti],PLATFORM_BOTTOM[ti],0, 0,PLATFORM_TOP[ti],0, PLATFORM_RIGHT[ti],PLATFORM_TOP[ti],0};  
-  
-  int bi = 9;
-  GLfloat vertices_hor[] = {0,25.0f,0, bottom_length,25.0f,0, 0,0,0, bottom_length,0,0};
-  GLfloat tex_hor[] = {0,PLATFORM_BOTTOM[bi],0, PLATFORM_RIGHT[bi],PLATFORM_BOTTOM[bi],0, 0,PLATFORM_TOP[bi],0, PLATFORM_RIGHT[bi],PLATFORM_TOP[bi],0};
-  
   glColor4f(alpha, alpha, alpha, alpha);
   
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-   
-   
-   
+        
   TexManager::Instance()->bindTexture(14);
 
   GLfloat vertices_back[] = {0,length,0, bottom_length,length,0, 0,0,0, bottom_length,0,0};
@@ -42,11 +31,41 @@ void Dialog::display() {
   glVertexPointer(3, GL_FLOAT, 0, vertices_back);
   glTexCoordPointer(3, GL_FLOAT, 0, tex_back);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-  GLfloat sound_vertices[] = {0,64,0, 64,64,0, 0,0,0, 64,0,0};
-  GLfloat sound_tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
-
+  
+  if (level_id == "1") {
+    TextureString *tx = new TextureString(80.0f, 30.0f, "Tap to shoot the cannon.");
+    tx->display();
     
+    tx = new TextureString(80.0f, 55.0f, "Hit the target using as few");
+    tx->display();
+    
+    tx = new TextureString(80.0f, 80.0f, "shots as possible.");
+    tx->display();
+    
+    tx = new TextureString(80.0f, 150.0f, "The further away you tap");
+    tx->display();
+    
+    tx = new TextureString(80.0f, 175.0f, "from the cannon, the stronger");
+    tx->display();
+    
+    tx = new TextureString(80.0f, 200.0f, "your shot will be.");
+    tx->display();
+  } else if (level_id == "2") {
+    TextureString *tx = new TextureString(80.0f, 30.0f, "You can move green shapes");
+    tx->display();
+    
+    tx = new TextureString(80.0f, 55.0f, "by shooting them.");
+    tx->display();
+    
+    tx = new TextureString(80.0f, 100.0f, "Blue shapes are stuck. You");
+    tx->display();
+    
+    tx = new TextureString(80.0f, 125.0f, "can't move them no matter");
+    tx->display();
+    
+    tx = new TextureString(80.0f, 150.0f, "how hard you try.");
+    tx->display();
+  }
 
   glDisableClientState(GL_VERTEX_ARRAY);
   glDisableClientState(GL_TEXTURE_COORD_ARRAY);

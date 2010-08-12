@@ -13,12 +13,6 @@
   <object type="PLATFORM" x="380.0f" y="151.0f" width="126.0f" angle="90.0f" mass="8.0f" physics="DYNAMIC" />
   <object type="PLATFORM" x="335.0f" y="91.0f" width="126.0f" angle="0.0f"   mass="8.0f" physics="DYNAMIC" />
   
-  <object type="STRING" x="0.0f" y="40.0f" text="Green glow" />
-  <object type="STRING" x="0.0f" y="55.0f" text="= moveable" />
-  
-  <object type="STRING" x="145.0f" y="40.0f" text="Blue glow" />
-  <object type="STRING" x="145.0f" y="55.0f" text="= static" />
-  
   <object type="GOAL" x="335.0f" y="70.0f" />
   
 </level>

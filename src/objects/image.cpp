@@ -21,6 +21,9 @@ void Image::display() {
   // place and rotate the turret
   glLoadIdentity();
   glTranslatef(x, y, 0.0f);
+  glTranslatef(width/2, -height/2, 0.0);
+  glRotatef(angle, 0.0f, 0.0f, 1.0f);
+  glTranslatef(-width/2, height/2, 0.0);
   
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
