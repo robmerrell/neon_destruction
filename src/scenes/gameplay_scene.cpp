@@ -162,6 +162,7 @@ void GameplayScene::gameLoop() {
             ball->definePhysics(space);
             ball->applyImpulse(event_coords, ball_start_coords, space->gravity.y);
             addObject(ball);
+            ball_count++;
           }
         } else if (dialog_open) {
           // resume
@@ -310,6 +311,22 @@ void GameplayScene::gameLoop() {
     
     // update the screen
     SDL_GL_SwapBuffers();
+    
+    if (ball_count > 15) {
+      for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
+        if ((*sprite)->getTag() == BALL_TAG) {
+          ball_count--;
+          
+          (*sprite)->destroy(space);
+          delete (*sprite);
+          (*sprite) = NULL;
+          
+          objects.erase(sprite);
+          
+          break;
+        }
+      }
+    }
    
     if (finished_level) {
       SoundManager::Instance()->playLevelEnd();
@@ -342,6 +359,7 @@ void GameplayScene::gameLoop() {
 
 void GameplayScene::loadLevel(string level_file) {
   cout << "loading: " << level_file << "\n";
+  ball_count = 0;
   has_cannon = false;
   has_goal = false;
   string path = "levels/";

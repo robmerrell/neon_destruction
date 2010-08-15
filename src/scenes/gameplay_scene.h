@@ -19,6 +19,8 @@ class GameplayScene : public Scene {
     
     bool quit;
     
+    int ball_count;
+    
     bool dialog_open;
     bool menu_open;
     bool level_reset;
