@@ -65,6 +65,21 @@ void Dialog::display() {
     
     tx = new TextureString(80.0f, 150.0f, "how hard you try.");
     tx->display();
+  } else if (level_id == "8") {
+    TextureString *tx = new TextureString(80.0f, 30.0f, "Sometimes you get yourself");
+    tx->display();
+    
+    tx = new TextureString(80.0f, 55.0f, "into a situation that");
+    tx->display();
+    
+    tx = new TextureString(80.0f, 80.0f, "you can't fix.");
+    tx->display();
+    
+    tx = new TextureString(80.0f, 150.0f, "Slide down on the gesture");
+    tx->display();
+    
+    tx = new TextureString(80.0f, 175.0f, "area and tap 'restart level'.");
+    tx->display();
   }
 
   glDisableClientState(GL_VERTEX_ARRAY);

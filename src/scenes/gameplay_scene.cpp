@@ -366,7 +366,7 @@ void GameplayScene::loadLevel(string level_file) {
   TiXmlNode* level = level_data.FirstChild("level");
   TiXmlNode* object_node;
   
-  if (LevelData::Instance()->getCurrentDetails().id == "1" || LevelData::Instance()->getCurrentDetails().id == "2") {
+  if (LevelData::Instance()->getCurrentDetails().id == "1" || LevelData::Instance()->getCurrentDetails().id == "2" || LevelData::Instance()->getCurrentDetails().id == "8") {
     Dialog *testd = new Dialog(LevelData::Instance()->getCurrentDetails().id);
     addObject(testd);
     dialog_open = true;
