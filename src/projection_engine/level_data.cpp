@@ -99,7 +99,7 @@ void LevelData::parseUserData() {
 
 
 void LevelData::writeUserData() {
-  ofstream config_file("user_data.mja");
+  ofstream config_file("tmp_save.mja");
   
   if (config_file.is_open()) {
     if (!current_level.empty()) {
@@ -119,6 +119,9 @@ void LevelData::writeUserData() {
     }
     config_file << "(endlvl)";
   }
+  
+  // rename tmp_save.mja to user_data.mja
+  rename("tmp_save.mja", "user_data.mja");
 }
 
 
