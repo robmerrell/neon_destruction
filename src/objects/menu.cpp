@@ -132,13 +132,26 @@ void Menu::display() {
       if (i < LevelData::Instance()->getCoreLevelCount()) {
         LevelDetails level = LevelData::Instance()->getDetailsByPosition(i+1);
         
+        bool can_show = false;
+        if (level.completed == "1") can_show = true;
+        if (i != 0) {
+          LevelDetails prev_level = LevelData::Instance()->getDetailsByPosition(i);
+          if (prev_level.completed == "1") can_show = true;
+        }
+        
         stringstream name;
+        string final_name;
         name << i+1 << "." << level.name;
+        
+        if (can_show) {
+          final_name = name.str();
+        } else
+          final_name = "???????";
         
         string score = "Best score: ";
         score.append(level.score);
         
-        TextureString *tx = new TextureString(50.0f, 20.0f + count*65.0f, name.str());
+        TextureString *tx = new TextureString(50.0f, 20.0f + count*65.0f, final_name);
         tx->display();
         tx = new TextureString(50.0f, 20.0f + count*65.0f + 16.0f, score);
         tx->display();

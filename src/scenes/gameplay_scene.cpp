@@ -206,38 +206,64 @@ void GameplayScene::gameLoop() {
           } else {
             // first
             if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 16 && event_coords.y <= 54) {
-              finished_level = true;
-              go_to_level = true;
-              
               int pos = menu->getPage()*3 + 1;
-              string level_id = LevelData::Instance()->getDetailsByPosition(pos).id;
-              LevelData::Instance()->setCurrentLevel(level_id);
-              menu->setLevelPicker(false);
+              LevelDetails details = LevelData::Instance()->getDetailsByPosition(pos);
+              
+              bool can_show = false;
+              if (details.completed == "1") can_show = true;
+              if (pos != 1) {
+                LevelDetails prev_level = LevelData::Instance()->getDetailsByPosition(pos-1);
+                if (prev_level.completed == "1") can_show = true;
+              }
+                            
+              if (can_show) {              
+                finished_level = true;
+                go_to_level = true;
+              
+                LevelData::Instance()->setCurrentLevel(details.id);
+                menu->setLevelPicker(false);
+              }
             }
             
             // second
             if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 82 && event_coords.y <= 120) {
               if (menu->getPage()*3+1 < LevelData::Instance()->getCoreLevelCount()) {
-                finished_level = true;
-                go_to_level = true;
-                            
                 int pos = menu->getPage()*3 + 2;
-                string level_id = LevelData::Instance()->getDetailsByPosition(pos).id;
-                LevelData::Instance()->setCurrentLevel(level_id);
-                menu->setLevelPicker(false);
+                LevelDetails details = LevelData::Instance()->getDetailsByPosition(pos);
+                
+                bool can_show = false;
+                if (details.completed == "1") can_show = true;
+                LevelDetails prev_level = LevelData::Instance()->getDetailsByPosition(pos-1);
+                if (prev_level.completed == "1") can_show = true;
+                
+                if (can_show) {
+                  finished_level = true;
+                  go_to_level = true;
+                  
+                  LevelData::Instance()->setCurrentLevel(details.id);
+                  menu->setLevelPicker(false);
+                }
               }
             }
             
             // third
             if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 147 && event_coords.y <= 185) {
               if (menu->getPage()*3+2 < LevelData::Instance()->getCoreLevelCount()) {
-                finished_level = true;
-                go_to_level = true;
-            
                 int pos = menu->getPage()*3 + 3;
-                string level_id = LevelData::Instance()->getDetailsByPosition(pos).id;
-                LevelData::Instance()->setCurrentLevel(level_id);
-                menu->setLevelPicker(false);
+                LevelDetails details = LevelData::Instance()->getDetailsByPosition(pos);
+                
+                bool can_show = false;
+                if (details.completed == "1") can_show = true;
+                LevelDetails prev_level = LevelData::Instance()->getDetailsByPosition(pos-1);
+                if (prev_level.completed == "1") can_show = true;
+                
+                if (can_show) {
+                  finished_level = true;
+                  go_to_level = true;
+                
+                  LevelData::Instance()->setCurrentLevel(details.id);
+                  menu->setLevelPicker(false);
+                }
               }            
             }
             
