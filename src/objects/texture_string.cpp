@@ -4,10 +4,20 @@ TextureString::TextureString(float x, float y, string _m) : Sprite("", 64, 64, T
   setX(x);
   setY(y);
   message = _m;
+  
+  r = 1.0f;
+  g = 1.0f;
+  b = 1.0f;
 }
 
 void TextureString::setMessage(string m) {
   message = m;
+}
+
+void TextureString::color(float _r, float _g, float _b) {
+  r = _r;
+  g = _g;
+  b = _b;
 }
 
 void TextureString::display() {
@@ -21,7 +31,7 @@ void TextureString::display() {
   glLoadIdentity();
   glTranslatef(x, y, 0.0);
   
-  glColor4f(1.0f, 1.0f, 1.0f, alpha);
+  glColor4f(r, g, b, alpha);
     
   for (int i = 0; i < message.size(); i++) {
     int ind = int(message[i]) - 32;

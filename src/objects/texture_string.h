@@ -9,6 +9,9 @@ class TextureString : public Sprite {
 
   private:
     string message;
+    float r;
+    float g;
+    float b;
 
   public:
     /**
@@ -19,6 +22,8 @@ class TextureString : public Sprite {
     TextureString(float, float, string);
     
     void setMessage(string);
+    
+    void color(float, float, float);
     
     /**
      * Define the physics properties of the object

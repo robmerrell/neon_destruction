@@ -143,17 +143,20 @@ void Menu::display() {
         string final_name;
         name << i+1 << "." << level.name;
         
-        if (can_show) {
-          final_name = name.str();
-        } else
-          final_name = "???????";
+        if (!can_show)
+          name << "(N/A)";
+        
+        final_name = name.str();
         
         string score = "Best score: ";
         score.append(level.score);
         
         TextureString *tx = new TextureString(50.0f, 20.0f + count*65.0f, final_name);
+        if (!can_show) tx->color(0.5f, 0.5f, 0.5f);
         tx->display();
+        
         tx = new TextureString(50.0f, 20.0f + count*65.0f + 16.0f, score);
+        if (!can_show) tx->color(0.5f, 0.5f, 0.5f);
         tx->display();
         count++;
       }
