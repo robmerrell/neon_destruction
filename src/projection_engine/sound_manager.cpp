@@ -32,12 +32,14 @@ void SoundManager::soundOn(bool _s) {
   if (sound_on) {
     Mix_HaltMusic();
     playMusic();
+    PDL_NotifyMusicPlaying(PDL_TRUE); 
   }
   
   if (!sound_on) {
     Mix_HaltMusic();
     Mix_HaltChannel(cannon_channel);
     Mix_HaltChannel(level_end_channel);
+    PDL_NotifyMusicPlaying(PDL_FALSE); 
   }
 }
 
