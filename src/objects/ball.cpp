@@ -32,11 +32,6 @@ Ball::Ball(float x, float y) : Sprite("", 64, 64, BALL_TAG) {
 }
 
 Ball::~Ball() {
-  cout << "del\n";
-  for (int j=0; j < PARTICLE_TOTAL; j++) {
-    delete particles[j];
-    particles[j] = NULL;
-  }
 }
 
 void Ball::destroy(cpSpace *space) {
@@ -44,6 +39,13 @@ void Ball::destroy(cpSpace *space) {
   cpSpaceRemoveBody(space, body);
   cpShapeFree(ballShape);
   cpBodyFree(body);
+  
+  for (int j=0; j < PARTICLE_TOTAL; j++) {
+    delete particles[j];
+    particles[j] = NULL;
+  }
+  
+  delete [] particles;
 }
 
 void Ball::definePhysics(cpSpace *space) {
