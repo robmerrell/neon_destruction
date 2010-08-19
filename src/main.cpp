@@ -9,6 +9,9 @@
 int main(int argc, char* argv[]) {
   Engine engine(false);
   
+  // turn off banners
+  PDL_BannerMessagesEnable(PDL_FALSE);
+  
   // loading screen texture
   TexManager::Instance()->loadTexture("assets/loading.png", true);
 

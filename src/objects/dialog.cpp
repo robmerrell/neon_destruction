@@ -35,51 +35,67 @@ void Dialog::display() {
   if (level_id == "1") {
     TextureString *tx = new TextureString(80.0f, 30.0f, "Tap to shoot the cannon.");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 55.0f, "Hit the target using as few");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 80.0f, "shots as possible.");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 150.0f, "The farther away you tap");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 175.0f, "from the cannon, the stronger");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 200.0f, "your shot will be.");
     tx->display();
+    delete tx;
   } else if (level_id == "2") {
     TextureString *tx = new TextureString(80.0f, 30.0f, "You can move green shapes");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 55.0f, "by shooting them.");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 100.0f, "Blue shapes are stuck. You");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 125.0f, "can't move them no matter");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 150.0f, "how hard you try.");
     tx->display();
+    delete tx;
   } else if (level_id == "8") {
     TextureString *tx = new TextureString(80.0f, 30.0f, "Sometimes you get yourself");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 55.0f, "into a situation that");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 80.0f, "you can't fix.");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 150.0f, "Slide down on the gesture");
     tx->display();
+    delete tx;
     
     tx = new TextureString(80.0f, 175.0f, "area and tap 'restart level'.");
     tx->display();
+    delete tx;
   }
 
   glDisableClientState(GL_VERTEX_ARRAY);
