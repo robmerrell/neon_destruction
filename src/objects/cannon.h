@@ -10,6 +10,7 @@ class Cannon : public Sprite {
   private:
     cpBody *body;
     float turret_angle;
+    string orientation;
 
   public:
     /**
@@ -34,6 +35,12 @@ class Cannon : public Sprite {
      * float angle
      */
     void rotateTurret(float);
+    
+    /**
+     * Set the orientation for the bannon base
+     * string N,S,E,W
+     */
+    void setOrientation(string);
     
     /**
      * Return the coordinates that have been translated along with the textures

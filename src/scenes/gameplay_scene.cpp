@@ -445,6 +445,12 @@ void GameplayScene::loadLevel(string level_file) {
       y = object_node->ToElement()->Attribute("y");
       
       Cannon *cannon = new Cannon(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL));
+      
+      if (object_node->ToElement()->Attribute("orientation") != NULL) {
+        angle = object_node->ToElement()->Attribute("orientation");
+        cannon->setOrientation(angle);
+      }
+      
       addObject(cannon);
       has_cannon = true;
     } else if (object_node->ToElement()->Attribute("type") == string("GOAL")) {
