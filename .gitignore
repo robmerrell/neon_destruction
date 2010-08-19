@@ -4,3 +4,4 @@ build
 *.ipk
 neon_blaster/assets
 .DS_Store
+user_data.mja
