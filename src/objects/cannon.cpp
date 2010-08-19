@@ -28,13 +28,18 @@ void Cannon::display() {
 
   TexManager::Instance()->bindTexture(3);
   
+  float bx = x;
   float by = y;
   
   if (angle == 180.0f) by -= 26.0f;
+  else if (angle == 90.0f) {
+    bx -= 12.0f;
+    by -= 12.0f;
+  }
   
   // place and rotate the base
   glLoadIdentity();
-  glTranslatef(x, by, 0);
+  glTranslatef(bx, by, 0);
   glTranslatef(64.0f, 64.0f, 0.0f);
   glRotatef(angle, 0.0f, 0.0f, 1.0f);
   glTranslatef(-64.0f, -64.0f, 0.0f);
