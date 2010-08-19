@@ -16,8 +16,10 @@ void Cannon::setOrientation(string _o) {
     angle = 180.0f;
   else if (_o == string("W"))
     angle = 90.0f;
-  else if (_o == string("E"))
+  else if (_o == string("E")) {
     angle = 270.0f;
+    turret_angle = 180.0f;
+  }
 }
 
 void Cannon::display() {
@@ -34,6 +36,9 @@ void Cannon::display() {
   if (angle == 180.0f) by -= 26.0f;
   else if (angle == 90.0f) {
     bx -= 12.0f;
+    by -= 12.0f;
+  } else if (angle == 270.0f) {
+    bx += 12.0f;
     by -= 12.0f;
   }
   
