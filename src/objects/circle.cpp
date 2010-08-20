@@ -19,17 +19,21 @@ void Circle::destroy(cpSpace *space) {
 
 void Circle::setRadius(float _rad) {
   radius = _rad;
+  mass = radius/7.0f;
 }
 
 void Circle::setElasticity(float _el) {
   elasticity = _el;
-  cout << _el << "\n";
+}
+
+void Circle::setMass(float _m) {
+  mass = _m;
 }
 
 void Circle::definePhysics(cpSpace *space) {
   // body
   if (simulation_type == "DYNAMIC")
-    body = cpBodyNew(5.0f, cpMomentForCircle(5.0f, 0.0f, radius, cpvzero));
+    body = cpBodyNew(mass, cpMomentForCircle(mass, 0.0f, radius, cpvzero));
   else
     body = cpBodyNew(INFINITY, INFINITY);
     

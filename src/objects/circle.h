@@ -12,6 +12,7 @@ class Circle : public Sprite {
     cpShape *circleShape;
     float radius;
     float elasticity;
+    float mass;
 
     string simulation_type;
   public:
@@ -34,6 +35,7 @@ class Circle : public Sprite {
     
     void setRadius(float);
     void setElasticity(float);
+    void setMass(float);
 };
 
 #endif

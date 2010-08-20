@@ -616,7 +616,6 @@ void GameplayScene::loadLevel(string level_file) {
       circle = new Circle(physics);
       
       if (object_node->ToElement()->Attribute("elasticity") != NULL) {
-        cout << "passes\n";
         elasticity = object_node->ToElement()->Attribute("elasticity");
         circle->setElasticity(strtof(elasticity.c_str(), NULL));
       }
@@ -624,6 +623,12 @@ void GameplayScene::loadLevel(string level_file) {
       circle->setX(strtof(x.c_str(), NULL));
       circle->setY(strtof(y.c_str(), NULL));
       circle->setRadius(strtof(radius.c_str(), NULL));
+      
+      if (object_node->ToElement()->Attribute("mass") != NULL) {
+        mass = object_node->ToElement()->Attribute("mass");
+        circle->setMass(strtof(mass.c_str(), NULL));
+      }
+      
       circle->definePhysics(space);
       addObject(circle);
     } else if (object_node->ToElement()->Attribute("type") == string("PIN")) {
