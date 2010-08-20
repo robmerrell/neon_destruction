@@ -8,4 +8,6 @@
   <level id="6" name="Stack" filename="stack.xml" />
   <level id="7" name="Elevator" filename="elevator.xml" />
   <level id="8" name="Bottoms Up" filename="bottoms_up.xml" />
+  <level id="9" name="Plink" filename="plinko.xml" />
+  <level id="10" name="Tramampoline" filename="tramampoline.xml" />
 </levels>

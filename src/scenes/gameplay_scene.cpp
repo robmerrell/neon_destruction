@@ -395,7 +395,7 @@ void GameplayScene::loadLevel(string level_file) {
   
   vector<Sprite*> pinned;
 
-  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num, text, mass;
+  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num, text, mass, elasticity;
   string fixed = "";
   string body1, body2, body1_x, body1_y, body2_x, body2_y;
   cpBody *pinbody1, *pinbody2;
@@ -614,6 +614,13 @@ void GameplayScene::loadLevel(string level_file) {
 
       // create the 
       circle = new Circle(physics);
+      
+      if (object_node->ToElement()->Attribute("elasticity") != NULL) {
+        cout << "passes\n";
+        elasticity = object_node->ToElement()->Attribute("elasticity");
+        circle->setElasticity(strtof(elasticity.c_str(), NULL));
+      }
+      
       circle->setX(strtof(x.c_str(), NULL));
       circle->setY(strtof(y.c_str(), NULL));
       circle->setRadius(strtof(radius.c_str(), NULL));

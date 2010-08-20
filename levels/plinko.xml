@@ -1,0 +1,36 @@
+<?xml version="1.0">
+<level>
+  <object type="CANNON" x="105.0f" y="-18.0f" orientation="N" />
+  
+  <object type="CIRCLE" x="35.0f" y="130.0f" radius="20.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="135.0f" y="130.0f" radius="20.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="235.0f" y="130.0f" radius="20.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="335.0f" y="130.0f" radius="20.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="435.0f" y="130.0f" radius="20.0f" physics="STATIC" />
+  
+  
+  <object type="CIRCLE" x="85.0f" y="190.0f" radius="20.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="185.0f" y="190.0f" radius="20.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="285.0f" y="190.0f" radius="20.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="385.0f" y="190.0f" radius="20.0f" physics="STATIC" />
+  
+  
+  <object type="CIRCLE" x="35.0f" y="250.0f" radius="20.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="135.0f" y="250.0f" radius="20.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="235.0f" y="250.0f" radius="20.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="335.0f" y="250.0f" radius="20.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="435.0f" y="250.0f" radius="20.0f" physics="STATIC" />
+  
+  <object type="GOAL" x="240.0f" y="280.0f" />
+</level>

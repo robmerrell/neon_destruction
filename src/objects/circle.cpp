@@ -3,6 +3,7 @@
 
 Circle::Circle(string sim_type) : Sprite("", 64, 64, CIRCLE_TAG) {
   simulation_type = sim_type;
+  elasticity = 0.8f;
 }
 
 void Circle::destroy(cpSpace *space) {
@@ -20,6 +21,11 @@ void Circle::setRadius(float _rad) {
   radius = _rad;
 }
 
+void Circle::setElasticity(float _el) {
+  elasticity = _el;
+  cout << _el << "\n";
+}
+
 void Circle::definePhysics(cpSpace *space) {
   // body
   if (simulation_type == "DYNAMIC")
@@ -32,7 +38,7 @@ void Circle::definePhysics(cpSpace *space) {
 
   // ball shape
   circleShape = cpCircleShapeNew(body, radius, cpvzero);
-  circleShape->e = 0.8;
+  circleShape->e = elasticity;
   circleShape->u = 0.2;
   circleShape->data = this;
   circleShape->collision_type = CIRCLE_COLLISION;
