@@ -17,8 +17,7 @@ GameplayScene::GameplayScene() {
   draw_physics = false;
   in_loop = false;
   frame = 0;
-  joystick = SDL_JoystickOpen(0);
-  
+    
   // set up the Chipmunk physics space
   cpInitChipmunk();
   space = cpSpaceNew();
@@ -562,6 +561,8 @@ void GameplayScene::loadLevel(string level_file) {
       accel_switch = new AccelSwitch(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL));
       accel_switch->definePhysics(space);
       addObject(accel_switch);
+      
+      joystick = SDL_JoystickOpen(0);
     } else if (object_node->ToElement()->Attribute("type") == string("BOX")) {
       // extract data from XML
       physics = object_node->ToElement()->Attribute("physics");
@@ -719,6 +720,11 @@ bool GameplayScene::replaceLevel(string level_file) {
   space->gravity = cpv(0, GRAVITY_RATE);
   level_reset = false;
   go_to_level = false;
+  
+  if (joystick != NULL) {
+    SDL_JoystickClose(joystick);
+    joystick = NULL;
+  }
   
   // free all of the sprites
   vector<Sprite*>::iterator iter;
