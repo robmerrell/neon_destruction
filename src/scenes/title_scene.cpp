@@ -92,6 +92,7 @@ void TitleScene::gameLoop() {
       TexManager::Instance()->loadTexture("assets/blue_circle_atlas.png", true);
       TexManager::Instance()->loadTexture("assets/green_circle_atlas.png", true);
       TexManager::Instance()->loadTexture("assets/arrow_down.png", true);
+      TexManager::Instance()->loadTexture("assets/accel_switch.png", true);
       
       SoundManager::Instance()->loadMusic("assets/music.mp3");
       SoundManager::Instance()->loadEffects();
@@ -108,7 +109,7 @@ void TitleScene::gameLoop() {
       }
       
       if (!playing_music && animation.get_ticks() >= 4000) {
-        SoundManager::Instance()->soundOn(true);
+        SoundManager::Instance()->soundOn(false);
         playing_music = true;
       }
       

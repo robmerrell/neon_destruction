@@ -27,6 +27,8 @@ class GameplayScene : public Scene {
     bool go_to_level;
     Menu *menu;
     
+    SDL_Joystick *joystick;
+    
     // frame capping
     int frame;
     Timer fps;
@@ -48,6 +50,8 @@ class GameplayScene : public Scene {
     ~GameplayScene();
     
     static bool finished_level;
+    static bool accel_control;
+    static bool cannon_dimmed;
     
     bool setup();
     void gameLoop();
@@ -80,5 +84,6 @@ void updateShape(void*, void*);
 static int ignore_pre_solve(cpArbiter*, cpSpace*, void*);
 static int pre_solve_goal(cpArbiter*, cpSpace*, void*);
 static int gravity_switch_solver(cpArbiter*, cpSpace*, void*);
+static int accel_switch_solver(cpArbiter*, cpSpace*, void*);
 
 #endif

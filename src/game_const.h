@@ -7,6 +7,7 @@
 ** Physics **
 *************/
 const int GRAVITY_RATE = 400;
+const int ACCEL_GRAVITY_RATE = 600;
 
 const int CANNON_TAG = 1;
 const int BALL_TAG = 2;
@@ -24,6 +25,7 @@ const int LEVEL_STRING_TAG = 13;
 const int SCORE_STRING_TAG = 14;
 const int MENU_TAG = 15;
 const int DIALOG_TAG = 16;
+const int ACCEL_SWITCH_TAG = 17;
 
 const int CANNON_COLLISION = 1;
 const int BALL_COLLISION = 2;
@@ -33,6 +35,7 @@ const int GRAVITY_SWITCH_COLLISION = 5;
 const int BOX_COLLISION = 6;
 const int CIRCLE_COLLISION = 7;
 const int TRIANGLE_COLLISION = 8;
+const int ACCEL_SWITCH_COLLISION = 9;
 
 const int GRAVITY_UP = 1;
 const int GRAVITY_DOWN = 2;
@@ -51,7 +54,7 @@ const int SCREEN_BPP = 32;
 /*************
 ** Graphics **
 **************/
-const int TEXTURE_COUNT = 25;
+const int TEXTURE_COUNT = 19;
 const int STARS_PER_FIELD = 170;
 const float STAR_FIELD1_SPEED = 100.0f;
 const float STAR_FIELD2_SPEED = 50.0f;

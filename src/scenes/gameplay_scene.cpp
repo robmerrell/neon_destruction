@@ -3,6 +3,8 @@
 #include <iostream>
 
 bool GameplayScene::finished_level = false;
+bool GameplayScene::accel_control = false;
+bool GameplayScene::cannon_dimmed = false;
 
 GameplayScene::GameplayScene() {
   menu = new Menu();
@@ -15,6 +17,7 @@ GameplayScene::GameplayScene() {
   draw_physics = false;
   in_loop = false;
   frame = 0;
+  joystick = SDL_JoystickOpen(0);
   
   // set up the Chipmunk physics space
   cpInitChipmunk();
@@ -27,6 +30,7 @@ GameplayScene::GameplayScene() {
   
   // by default ignore collisions between the cannon and the balls and goals
   cpSpaceAddCollisionHandler(space, GRAVITY_SWITCH_COLLISION, BALL_COLLISION, gravity_switch_solver, NULL, NULL, NULL, NULL);
+  cpSpaceAddCollisionHandler(space, ACCEL_SWITCH_COLLISION, BALL_COLLISION, accel_switch_solver, NULL, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION, pre_solve_goal, NULL, NULL, NULL, NULL);
   
   // generate the backgrounds
@@ -89,6 +93,10 @@ void GameplayScene::gameLoop() {
   CrossHair *crosshair = new CrossHair(-100, -100);
   addObject(crosshair);
   
+  // accel
+  float xForce = 0.0f;
+  float yForce = 0.0f;
+  
   // timestepping
   float accumulator = 0.0f;
   int millistep = 16;
@@ -99,6 +107,13 @@ void GameplayScene::gameLoop() {
     
   while (in_loop) {
     glClear(GL_COLOR_BUFFER_BIT);
+    
+    if (accel_control) {
+      xForce = (float) SDL_JoystickGetAxis(joystick, 1) / 32768.0;
+      yForce = ((float) SDL_JoystickGetAxis(joystick, 0) / 32768.0) * -1.0f;
+
+      space->gravity = cpv(xForce * ACCEL_GRAVITY_RATE, yForce * ACCEL_GRAVITY_RATE);
+    }
     
     // capture the events and send the relevent tap events to the game scene
     while (SDL_PollEvent(&event)) {
@@ -121,16 +136,12 @@ void GameplayScene::gameLoop() {
         Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
         if (cannon != NULL) {
           angle = getInvertedMouseAngle(cpv(cannon->getX() + 64.0f, cannon->getY() + 51.0f), event_coords);
-          
-          // if (angle < 17 || angle > 144)
-            cannon->rotateTurret(angle);
+          cannon->rotateTurret(angle);
         }
       } else if (event.type == SDL_MOUSEBUTTONUP) {
         cpVect event_coords = translatedMouseCoords(event.button.x, event.button.y);
         
-        // cout << "x: " << event_coords.x << "  y: " << event_coords.y << "\n";
-
-        if (!menu_open && !dialog_open) {
+        if (!menu_open && !dialog_open && !accel_control) {
           SoundManager::Instance()->playCannon();
         
           // reposition the crosshair
@@ -310,6 +321,16 @@ void GameplayScene::gameLoop() {
     // blending
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
+    
+    if (!cannon_dimmed && accel_control) {
+      Cannon *to_dim = (Cannon*)findObject(CANNON_TAG);
+      to_dim->setAlpha(0.1f);
+      
+      AccelSwitch *ac = (AccelSwitch*)findObject(ACCEL_SWITCH_TAG);
+      ac->block();
+      
+      cannon_dimmed = true;
+    }
 
     // display
     vector<Sprite*>::iterator sprite;
@@ -413,6 +434,7 @@ void GameplayScene::loadLevel(string level_file) {
   Triangle *triangle;
   Gear *gear;
   GravitySwitch *gravity_switch;
+  AccelSwitch *accel_switch;
   int gravity_direction = GRAVITY_DOWN;
   
   TiXmlNode* level = level_data.FirstChild("level");
@@ -533,6 +555,13 @@ void GameplayScene::loadLevel(string level_file) {
       gravity_switch = new GravitySwitch(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL), gravity_direction);
       gravity_switch->definePhysics(space);
       addObject(gravity_switch);
+    } else if (object_node->ToElement()->Attribute("type") == string("ACCEL_SWTICH")) {
+      x = object_node->ToElement()->Attribute("x");
+      y = object_node->ToElement()->Attribute("y");
+
+      accel_switch = new AccelSwitch(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL));
+      accel_switch->definePhysics(space);
+      addObject(accel_switch);
     } else if (object_node->ToElement()->Attribute("type") == string("BOX")) {
       // extract data from XML
       physics = object_node->ToElement()->Attribute("physics");
@@ -685,6 +714,8 @@ void GameplayScene::loadLevel(string level_file) {
 
 
 bool GameplayScene::replaceLevel(string level_file) {
+  accel_control = false;
+  cannon_dimmed = false;
   space->gravity = cpv(0, GRAVITY_RATE);
   level_reset = false;
   go_to_level = false;
@@ -892,5 +923,10 @@ static int gravity_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
       space->gravity = cpv(-GRAVITY_RATE, 0);
   }
   
+  return 0;
+}
+
+static int accel_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
+  GameplayScene::accel_control = true;
   return 0;
 }

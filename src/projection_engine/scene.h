@@ -24,6 +24,7 @@
 #include "../objects/texture_string.h"
 #include "../objects/menu.h"
 #include "../objects/dialog.h"
+#include "../objects/accel_switch.h"
 
 // engine
 #include "sprite.h"
