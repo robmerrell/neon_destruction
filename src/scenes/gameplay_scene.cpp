@@ -17,6 +17,7 @@ GameplayScene::GameplayScene() {
   draw_physics = false;
   in_loop = false;
   frame = 0;
+  joystick = NULL;
     
   // set up the Chipmunk physics space
   cpInitChipmunk();
