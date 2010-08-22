@@ -76,7 +76,7 @@ void Dialog::display() {
     tx = new TextureString(80.0f, 150.0f, "how hard you try.");
     tx->display();
     delete tx;
-  } else if (level_id == "8") {
+  } else if (level_id == "3") {
     TextureString *tx = new TextureString(80.0f, 30.0f, "Sometimes you get yourself");
     tx->display();
     delete tx;
@@ -94,6 +94,30 @@ void Dialog::display() {
     delete tx;
     
     tx = new TextureString(80.0f, 175.0f, "area and tap 'restart level'.");
+    tx->display();
+    delete tx;
+  } else if (level_id == "8") {
+    TextureString *tx = new TextureString(80.0f, 30.0f, "Switches marked with an 'A'");
+    tx->display();
+    delete tx;
+
+    tx = new TextureString(80.0f, 55.0f, "let you control gravity with");
+    tx->display();
+    delete tx;
+
+    tx = new TextureString(80.0f, 80.0f, "the accelerometer when hit.");
+    tx->display();
+    delete tx;
+
+    tx = new TextureString(80.0f, 150.0f, "Plan carefully. You can't");
+    tx->display();
+    delete tx;
+
+    tx = new TextureString(80.0f, 175.0f, "fire the cannon after the");
+    tx->display();
+    delete tx;
+    
+    tx = new TextureString(80.0f, 200.0f, "switch has been hit.");
     tx->display();
     delete tx;
   }

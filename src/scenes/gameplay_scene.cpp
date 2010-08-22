@@ -555,7 +555,7 @@ void GameplayScene::loadLevel(string level_file) {
       gravity_switch = new GravitySwitch(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL), gravity_direction);
       gravity_switch->definePhysics(space);
       addObject(gravity_switch);
-    } else if (object_node->ToElement()->Attribute("type") == string("ACCEL_SWTICH")) {
+    } else if (object_node->ToElement()->Attribute("type") == string("ACCEL_SWITCH")) {
       x = object_node->ToElement()->Attribute("x");
       y = object_node->ToElement()->Attribute("y");
 
