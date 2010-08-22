@@ -54,7 +54,7 @@ void AccelSwitch::display() {
   if (!should_block)
     glColor4f(alpha, alpha, alpha, alpha);
   else
-    glColor4f(0.0f, 1.0f, 0.0f, alpha);
+    glColor4f(0.3f, 0.3f, 0.3f, alpha);
   
   TexManager::Instance()->bindTexture(18);
   

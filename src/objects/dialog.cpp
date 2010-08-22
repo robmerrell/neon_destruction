@@ -97,15 +97,15 @@ void Dialog::display() {
     tx->display();
     delete tx;
   } else if (level_id == "8") {
-    TextureString *tx = new TextureString(80.0f, 30.0f, "Switches marked with an 'A'");
+    TextureString *tx = new TextureString(80.0f, 30.0f, "Hit switches marked with");
     tx->display();
     delete tx;
 
-    tx = new TextureString(80.0f, 55.0f, "let you control gravity with");
+    tx = new TextureString(80.0f, 55.0f, "an 'A' to control gravity");
     tx->display();
     delete tx;
 
-    tx = new TextureString(80.0f, 80.0f, "the accelerometer when hit.");
+    tx = new TextureString(80.0f, 80.0f, "by tilting the device.");
     tx->display();
     delete tx;
 

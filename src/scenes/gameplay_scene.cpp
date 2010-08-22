@@ -324,7 +324,7 @@ void GameplayScene::gameLoop() {
     
     if (!cannon_dimmed && accel_control) {
       Cannon *to_dim = (Cannon*)findObject(CANNON_TAG);
-      to_dim->setAlpha(0.1f);
+      to_dim->setAlpha(0.4f);
       
       AccelSwitch *ac = (AccelSwitch*)findObject(ACCEL_SWITCH_TAG);
       ac->block();
