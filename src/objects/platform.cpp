@@ -10,6 +10,12 @@ Platform::Platform(string sim_type) : Sprite("", 64, 64, PLATFORM_TAG) {
   physics_height = 12.0f;
   width = 0.0f;
   mass = 10.0f;
+
+  dir = 0;
+  min_pos = 0.0f;
+  max_pos = 0.0f;
+  
+  infinite_moment = false;
 }
 
 void Platform::destroy(cpSpace *space) {
@@ -28,6 +34,42 @@ void Platform::destroy(cpSpace *space) {
   cpBodyFree(body);
   
   if (fixed) cpBodyFree(pbody);
+}
+
+void Platform::move(int ticks) {
+  float new_y = 0.0f;
+  float new_x = 0.0f;
+  
+  if (dir == 0) {
+    new_y = pbody->p.y + (PLATFORM_SPEED * (ticks * 0.001));
+    new_x = x;
+    if (new_y >= max_pos) dir = 1;
+  } else if (dir == 1) {
+    new_y = pbody->p.y - (PLATFORM_SPEED * (ticks * 0.001));
+    new_x = x;
+    if (new_y <= min_pos) dir = 0;
+  } else if (dir == 2) {
+    new_x = pbody->p.x + (PLATFORM_SPEED * (ticks * 0.001));
+    new_y = y;
+    if (new_x >= max_pos) dir = 3;
+  } else if (dir == 3) {
+    new_x = pbody->p.x - (PLATFORM_SPEED * (ticks * 0.001));
+    new_y = y;
+    if (new_x <= min_pos) dir = 2;
+  }
+  
+  pbody->p = cpv(new_x, new_y);
+}
+
+void Platform::setMoveable(float _min, float _max, int _dir) {
+  max_pos = _max;
+  min_pos = _min;
+  dir = _dir;
+  moves = true;
+}
+
+bool Platform::moveable() {
+  return moves;
 }
 
 void Platform::setWidth(float _width) {
@@ -50,12 +92,15 @@ cpBody* Platform::getBody() {
   return body;
 }
 
-void Platform::definePhysics(cpSpace *space) {  
+void Platform::definePhysics(cpSpace *space) {
   // body
   cpVect verts[] = { cpv(-width/2 + 9, -3), cpv(-width/2 + 9, 3), cpv(width/2 - 9, 3), cpv(width/2 - 9, -3) };
-  if (simulation_type == "DYNAMIC")
-    body = cpBodyNew(mass, cpMomentForPoly(mass, 4, verts, cpvzero));
-  else
+  if (simulation_type == "DYNAMIC") {
+    if (!infinite_moment)
+      body = cpBodyNew(mass, cpMomentForPoly(mass, 4, verts, cpvzero));
+    else
+      body = cpBodyNew(mass, INFINITY);
+  } else
     body = cpBodyNew(INFINITY, INFINITY);
   body->p = cpv(x, y);
   cpBodySetAngle(body, DEG2RAD(angle));
@@ -86,6 +131,10 @@ void Platform::fix(cpSpace *space) {
   fixed = true;
 }
 
+void Platform::infiniteMoment() {
+  infinite_moment = true;
+}
+
 void Platform::display() {
   float start_x = x;
   float start_y = y;
@@ -109,7 +158,7 @@ void Platform::display() {
   
   glColor4f(alpha, alpha, alpha, alpha);
   
-  if (simulation_type == "DYNAMIC")
+  if (simulation_type == "DYNAMIC" && !infinite_moment)
     TexManager::Instance()->bindTexture(8);
   else
     TexManager::Instance()->bindTexture(7);

@@ -20,6 +20,12 @@ class Platform : public Sprite {
     float physics_height;
     bool fixed;
     
+    bool infinite_moment;
+    
+    int dir; // 0 - down    1 - up     2 - left     3 - right
+    float min_pos;
+    float max_pos;
+    
     string simulation_type;
     string id;
 
@@ -61,6 +67,12 @@ class Platform : public Sprite {
     void setMass(float);
     
     cpBody* getBody();
+    
+    bool moveable();
+    void setMoveable(float, float, int);
+    void move(int);
+    
+    void infiniteMoment();
 };
 
 #endif

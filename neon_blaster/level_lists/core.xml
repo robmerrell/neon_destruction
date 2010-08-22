@@ -10,4 +10,5 @@
   <level id="8" name="Bottoms Up" filename="bottoms_up.xml" />
   <level id="9" name="Plink" filename="plinko.xml" />
   <level id="10" name="Tramampoline" filename="tramampoline.xml" />
+  <level id="11" name="Ramp" filename="ramp.xml" />
 </levels>

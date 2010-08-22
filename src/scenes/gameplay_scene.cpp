@@ -319,6 +319,13 @@ void GameplayScene::gameLoop() {
          (*sprite)->manageParticles(particle_timer.get_ticks(), fps.get_ticks());
       }
       
+      // move platforms if needed
+      if ((*sprite)->getTag() == PLATFORM_TAG) {
+        if ((*sprite)->moveable()) {
+          (*sprite)->move(animation_ticks);
+        }
+      }
+      
       if (!menu_open && !dialog_open)
         (*sprite)->display();
       else if (dialog_open) {
@@ -396,6 +403,7 @@ void GameplayScene::loadLevel(string level_file) {
   vector<Sprite*> pinned;
 
   string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num, text, mass, elasticity;
+  string min_pos, max_pos, direction;
   string fixed = "";
   string body1, body2, body1_x, body1_y, body2_x, body2_y;
   cpBody *pinbody1, *pinbody2;
@@ -580,10 +588,27 @@ void GameplayScene::loadLevel(string level_file) {
       if (object_node->ToElement()->Attribute("mass") != NULL) {
         mass = object_node->ToElement()->Attribute("mass");
         platform->setMass(strtof(mass.c_str(), NULL));
-      } 
+      }
       
       if (object_node->ToElement()->Attribute("fixed") != NULL)
         fixed = object_node->ToElement()->Attribute("fixed");
+        
+      if (object_node->ToElement()->Attribute("inf") != NULL) {
+        platform->infiniteMoment();
+      }
+        
+      if (object_node->ToElement()->Attribute("direction") != NULL) {
+        min_pos = object_node->ToElement()->Attribute("min_pos");
+        max_pos = object_node->ToElement()->Attribute("max_pos");
+        direction = object_node->ToElement()->Attribute("direction");
+        
+        int dir = 0;
+        if (direction == string("N")) dir = 1;
+        else if (direction == string("E")) dir = 2;
+        else if (direction == string("W")) dir = 3;
+        
+        platform->setMoveable(strtof(min_pos.c_str(), NULL), strtof(max_pos.c_str(), NULL), dir);
+      }
         
       // create the platform
       platform->setX(strtof(x.c_str(), NULL));

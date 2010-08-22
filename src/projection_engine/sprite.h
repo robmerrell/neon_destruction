@@ -14,6 +14,7 @@ class Sprite : public GameObject {
     float width;
     float height;
     float angle;
+    bool moves;
     int tag;
     int animation_state;
     
@@ -38,6 +39,8 @@ class Sprite : public GameObject {
     int getTag();
     void setTag(int);
     
+    bool moveable();
+    
     void setAnimationState(int);
     int getAnimationState();
     
@@ -45,6 +48,7 @@ class Sprite : public GameObject {
     virtual void destroy(cpSpace*) {};
     virtual void emitParticles(int) {};
     virtual void manageParticles(int, int) {};
+    virtual void move(int) {};
 };
 
 #endif

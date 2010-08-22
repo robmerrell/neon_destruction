@@ -57,6 +57,8 @@ const float STAR_FIELD1_SPEED = 100.0f;
 const float STAR_FIELD2_SPEED = 50.0f;
 const int PARTICLE_TOTAL = 120;
 
+const float PLATFORM_SPEED = 100.0f;
+
 const int ANIMATE_NONE = 0;
 const int ANIMATE_FADE_IN = 1;
 const int ANIMATE_FADE_OUT = 2;

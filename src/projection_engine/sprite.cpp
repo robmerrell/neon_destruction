@@ -8,6 +8,11 @@ Sprite::Sprite(std::string filename, float _width, float _height, int _tag) {
   
   alpha = 0.0f;
   animation_state = ANIMATE_FADE_IN;
+  moves = false;
+}
+
+bool Sprite::moveable() {
+  return moves;
 }
 
 void Sprite::setAngle(float _angle) {

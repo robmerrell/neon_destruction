@@ -1,10 +1,10 @@
 {
-	"id": "com.trackera.namemebeta",
+	"id": "com.trackera.plasmacannon",
 	"version": "0.0.2",
 	"vendor": "Rob Merrell",
 	"type": "pdk",
 	"main": "main",
-	"title": "Name Me Beta",
+	"title": "Plasma Cannon",
 	"icon": "icon.png",
 	"requiredMemory": "32"
 }
