@@ -76,7 +76,7 @@ void Dialog::display() {
     tx = new TextureString(80.0f, 150.0f, "how hard you try.");
     tx->display();
     delete tx;
-  } else if (level_id == "3") {
+  } else if (level_id == "4") {
     TextureString *tx = new TextureString(80.0f, 30.0f, "Sometimes you get yourself");
     tx->display();
     delete tx;
