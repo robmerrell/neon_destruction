@@ -44,6 +44,7 @@ class GameplayScene : public Scene {
     // physics
     cpSpace *space;
     cpBody *staticBody;
+    vector<cpConstraint*> constraints;
   
   public:
     GameplayScene();

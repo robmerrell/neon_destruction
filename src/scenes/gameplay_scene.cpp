@@ -424,8 +424,6 @@ void GameplayScene::loadLevel(string level_file) {
   TiXmlDocument level_data(path.append(level_file).c_str());
   level_data.LoadFile();
   
-  vector<Sprite*> pinned;
-
   string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num, text, mass, elasticity;
   string min_pos, max_pos, direction;
   string fixed = "";
@@ -528,6 +526,11 @@ void GameplayScene::loadLevel(string level_file) {
       gear->setWidth(strtof(width.c_str(), NULL));
       gear->setAngle(strtof(angle.c_str(), NULL));
       gear->definePhysics(space);
+      
+      if (object_node->ToElement()->Attribute("id") != NULL) {
+        gear->setId(object_node->ToElement()->Attribute("id"));
+      }
+      
       addObject(gear);
 
       if (object_node->ToElement()->Attribute("impulse_x") != NULL) {
@@ -590,6 +593,11 @@ void GameplayScene::loadLevel(string level_file) {
       box->setHeight(strtof(height.c_str(), NULL));
       box->setAngle(strtof(angle.c_str(), NULL));
       box->definePhysics(space);
+      
+      if (object_node->ToElement()->Attribute("id") != NULL) {
+        box->setId(object_node->ToElement()->Attribute("id"));
+      }
+      
       addObject(box);
     } else if (object_node->ToElement()->Attribute("type") == string("TRIANGLE")) {
       // extract data from XML
@@ -688,6 +696,10 @@ void GameplayScene::loadLevel(string level_file) {
         circle->setMass(strtof(mass.c_str(), NULL));
       }
       
+      if (object_node->ToElement()->Attribute("id") != NULL) {
+        circle->setId(object_node->ToElement()->Attribute("id"));
+      }
+      
       circle->definePhysics(space);
       addObject(circle);
     } else if (object_node->ToElement()->Attribute("type") == string("PIN")) {
@@ -701,16 +713,18 @@ void GameplayScene::loadLevel(string level_file) {
       
       vector<Sprite*>::iterator iter;
       for (iter = objects.begin(); iter != objects.end(); iter++) {
-        if (platform->getId() == body1) pinbody1 = (*iter)->getBody();
-        if (platform->getId() == body2) pinbody2 = (*iter)->getBody();
+        if ((*iter)->getId() == body1) pinbody1 = (*iter)->getBody();
+        if ((*iter)->getId() == body2) pinbody2 = (*iter)->getBody();
       }
       
-      cpSpaceAddConstraint(space, cpPinJointNew(
+      cpConstraint *cons = cpSpaceAddConstraint(space, cpPinJointNew(
         pinbody1,
         pinbody2,
         cpv(strtof(body1_x.c_str(), NULL), strtof(body1_y.c_str(), NULL)),
         cpv(strtof(body2_x.c_str(), NULL), strtof(body2_y.c_str(), NULL))
       ));
+      
+      constraints.push_back(cons);
     }
     
   }
@@ -728,6 +742,15 @@ bool GameplayScene::replaceLevel(string level_file) {
     SDL_JoystickClose(joystick);
     joystick = NULL;
   }
+  
+  // clear all of the constraints
+  vector<cpConstraint*>::iterator cons;
+  for (cons = constraints.begin(); cons != constraints.end(); cons++) {  
+    cpSpaceRemoveConstraint(space, (*cons));
+    cpConstraintFree((*cons));
+    (*cons) = NULL;
+  }
+  constraints.clear();
   
   // free all of the sprites
   vector<Sprite*>::iterator iter;
