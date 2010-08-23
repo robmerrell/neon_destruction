@@ -33,9 +33,10 @@ file :build_chipmunk => :arch_settings do
     "-Isrc/chipmunk/headers",
     "-std=gnu99",
     "-O3",
-    "-DNDEBUG",
     "-ffast-math"
   ]
+  
+  flags << "-DNDEBUG" if !ENV["DEBUG"]
   
   # compile all of the files
   files = Dir.glob("src/chipmunk/**/*.c")
