@@ -17,6 +17,7 @@ class Sprite : public GameObject {
     bool moves;
     int tag;
     int animation_state;
+    std::string id;
     
   public:
     /**
@@ -38,6 +39,8 @@ class Sprite : public GameObject {
     void setAngle(float);
     int getTag();
     void setTag(int);
+    void setId(std::string);
+    std::string getId();
     
     bool moveable();
     

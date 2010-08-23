@@ -46,3 +46,11 @@ int Sprite::getAnimationState() {
 void Sprite::setAnimationState(int state) {
   animation_state = state;
 }
+
+std::string Sprite::getId() {
+  return id;
+}
+
+void Sprite::setId(std::string _id) {
+  id = _id;
+}

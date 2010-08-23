@@ -80,14 +80,6 @@ void Platform::setMass(float _m) {
   mass = _m;
 }
 
-void Platform::setId(string _id) {
-  id = _id;
-}
-
-string Platform::getId() {
-  return id;
-}
-
 cpBody* Platform::getBody() {
   return body;
 }

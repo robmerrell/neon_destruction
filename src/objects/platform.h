@@ -27,7 +27,6 @@ class Platform : public Sprite {
     float max_pos;
     
     string simulation_type;
-    string id;
 
   public:
     /**
@@ -60,9 +59,6 @@ class Platform : public Sprite {
      * Fix the platform in place with a pivot joint
      */
     void fix(cpSpace*);
-    
-    void setId(string);
-    string getId();
     
     void setMass(float);
     
