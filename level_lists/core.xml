@@ -11,4 +11,5 @@
   <level id="9" name="Plink" filename="plinko.xml" />
   <level id="10" name="Tramampoline" filename="tramampoline.xml" />
   <level id="11" name="Ramp" filename="ramp.xml" />
+  <level id="12" name="Chain Reaction" filename="chain_reaction.xml" />
 </levels>
