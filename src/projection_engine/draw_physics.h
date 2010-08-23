@@ -22,4 +22,6 @@ static void draw_segment(cpBody*, cpSegmentShape*);
 
 static void draw_poly(cpBody*, cpPolyShape*);
 
+static void draw_constraint(cpConstraint*);
+
 #endif
