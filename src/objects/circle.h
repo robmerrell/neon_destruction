@@ -36,6 +36,8 @@ class Circle : public Sprite {
     void setRadius(float);
     void setElasticity(float);
     void setMass(float);
+    
+    cpBody* getBody();
 };
 
 #endif

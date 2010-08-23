@@ -27,6 +27,10 @@ void Goal::definePhysics(cpSpace *space) {
   cpSpaceAddShape(space, goalShape);
 }
 
+cpBody* Goal::getBody() {
+  return body;
+}
+
 void Goal::display() {
   float start_x = x;
   float start_y = y;

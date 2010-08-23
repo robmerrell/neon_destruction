@@ -701,9 +701,8 @@ void GameplayScene::loadLevel(string level_file) {
       
       vector<Sprite*>::iterator iter;
       for (iter = objects.begin(); iter != objects.end(); iter++) {
-        platform = (Platform*)(*iter);
-        if (platform->getId() == body1) pinbody1 = platform->getBody();
-        if (platform->getId() == body2) pinbody2 = platform->getBody();
+        if (platform->getId() == body1) pinbody1 = (*iter)->getBody();
+        if (platform->getId() == body2) pinbody2 = (*iter)->getBody();
       }
       
       cpSpaceAddConstraint(space, cpPinJointNew(

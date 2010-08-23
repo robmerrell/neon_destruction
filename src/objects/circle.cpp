@@ -30,6 +30,10 @@ void Circle::setMass(float _m) {
   mass = _m;
 }
 
+cpBody* Circle::getBody() {
+  return body;
+}
+
 void Circle::definePhysics(cpSpace *space) {
   // body
   if (simulation_type == "DYNAMIC")

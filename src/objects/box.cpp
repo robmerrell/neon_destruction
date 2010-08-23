@@ -33,6 +33,10 @@ void Box::setMass(float _m) {
   mass = _m;
 }
 
+cpBody* Box::getBody() {
+  return body;
+}
+
 void Box::definePhysics(cpSpace *space) {
   // body
   cpVect verts[] = { cpv(-width/2 + 3, -height/2 + 9), cpv(-width/2 + 3, height/2 - 9), cpv(width/2 - 3, height/2 - 9), cpv(width/2 - 3, -height/2 + 9) };

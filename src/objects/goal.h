@@ -30,6 +30,8 @@ class Goal : public Sprite {
      * Display the goal
      */
     void display();
+    
+    cpBody* getBody();
 };
 
 #endif

@@ -42,6 +42,8 @@ class Box : public Sprite {
      void setHeight(float);
      
      void setMass(float);
+     
+     cpBody* getBody();
 };
 
 #endif

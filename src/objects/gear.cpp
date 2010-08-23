@@ -23,6 +23,10 @@ void Gear::setWidth(float _width) {
   width = _width;
 }
 
+cpBody* Gear::getBody() {
+  return body;
+}
+
 void Gear::definePhysics(cpSpace *space) {  
   // body
   cpVect verts[] = { cpv(-width/2, -physics_height/2), cpv(-width/2, physics_height/2), cpv(width/2, physics_height/2), cpv(width/2, -physics_height/2) };

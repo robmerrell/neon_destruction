@@ -45,6 +45,8 @@ class Gear : public Sprite {
      * Apply an impulse to the body at coordinates
      */
     void applyImpulse(float, float);
+    
+    cpBody* getBody();
 };
 
 #endif
