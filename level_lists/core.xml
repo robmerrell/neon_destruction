@@ -18,4 +18,5 @@
   <level id="16" name="Multiplatform" filename="multiplatform.xml" />
   <level id="17" name="Plug" filename="plug.xml" />
   <level id="18" name="Slice" filename="slice.xml" />
+  <level id="19" name="Good Guess" filename="good_guess.xml" />
 </levels>
