@@ -15,5 +15,6 @@
   <level id="13" name="Half Pipe" filename="half_pipe.xml" />
   <level id="14" name="Triangle" filename="triangle.xml" />
   <level id="15" name="Windmill" filename="windmill.xml" />
-  <level id="16" name="Multiplatform" filename="multiplatfor.xml" />
+  <level id="16" name="Multiplatform" filename="multiplatform.xml" />
+  <level id="17" name="Plug" filename="plug.xml" />
 </levels>
