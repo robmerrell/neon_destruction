@@ -17,4 +17,5 @@
   <level id="15" name="Windmill" filename="windmill.xml" />
   <level id="16" name="Multiplatform" filename="multiplatform.xml" />
   <level id="17" name="Plug" filename="plug.xml" />
+  <level id="18" name="Slice" filename="slice.xml" />
 </levels>
