@@ -13,4 +13,5 @@
   <level id="11" name="Ramp" filename="ramp.xml" />
   <level id="12" name="Chain Reaction" filename="chain_reaction.xml" />
   <level id="13" name="Half Pipe" filename="half_pipe.xml" />
+  <level id="14" name="Triangle" filename="triangle.xml" />
 </levels>
