@@ -18,6 +18,7 @@ class Gear : public Sprite {
     float width;
     float height;
     float physics_height;
+    float mass;
 
   public:
     /**
@@ -40,6 +41,7 @@ class Gear : public Sprite {
      * Size
      */
     void setWidth(float);
+    void setMass(float);
     
     /**
      * Apply an impulse to the body at coordinates

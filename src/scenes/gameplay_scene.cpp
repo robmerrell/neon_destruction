@@ -521,6 +521,12 @@ void GameplayScene::loadLevel(string level_file) {
       angle = object_node->ToElement()->Attribute("angle");
       
       gear = new Gear();
+      
+      if (object_node->ToElement()->Attribute("mass") != NULL) {
+        mass = object_node->ToElement()->Attribute("mass");
+        gear->setMass(strtof(mass.c_str(), NULL));
+      }
+      
       gear->setX(strtof(x.c_str(), NULL));
       gear->setY(strtof(y.c_str(), NULL));
       gear->setWidth(strtof(width.c_str(), NULL));

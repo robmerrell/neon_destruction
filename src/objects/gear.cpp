@@ -5,6 +5,7 @@ Gear::Gear() : Sprite("", 64, 64, GEAR_TAG) {
   height = 25.0f; // always 25 so that it matches our sprite
   physics_height = 12.0f;
   width = 0.0f;
+  mass = 10.0f;
 }
 
 void Gear::destroy(cpSpace *space) {
@@ -21,6 +22,10 @@ void Gear::destroy(cpSpace *space) {
 
 void Gear::setWidth(float _width) {
   width = _width;
+}
+
+void Gear::setMass(float _mass) {
+  mass = _mass;
 }
 
 cpBody* Gear::getBody() {
