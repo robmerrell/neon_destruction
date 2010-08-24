@@ -19,4 +19,5 @@
   <level id="17" name="Plug" filename="plug.xml" />
   <level id="18" name="Slice" filename="slice.xml" />
   <level id="19" name="Good Guess" filename="good_guess.xml" />
+  <level id="20" name="Tunnel Vision" filename="tunnel_vision.xml" />
 </levels>
