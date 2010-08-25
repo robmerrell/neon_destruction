@@ -21,4 +21,5 @@
   <level id="19" name="Good Guess" filename="good_guess.xml" />
   <level id="20" name="Tunnel Vision" filename="tunnel_vision.xml" />
   <level id="21" name="Ball Pit" filename="ball_pit.xml" />
+  <level id="22" name="Maze" filename="maze.xml" />
 </levels>
