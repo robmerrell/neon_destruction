@@ -23,4 +23,5 @@
   <level id="21" name="Ball Pit" filename="ball_pit.xml" />
   <level id="22" name="Maze" filename="maze.xml" />
   <level id="23" name="Mmmmmm pi" filename="pi.xml" />
+  <level id="24" name="Tum-ball" filename="tumball.xml" />
 </levels>
