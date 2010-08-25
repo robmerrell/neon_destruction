@@ -1,0 +1,30 @@
+<?xml version="1.0">
+<level>
+  <object type="CANNON" x="382.0f" y="180.0f" orientation="E" />
+  
+  <object type="PLATFORM" x="240.0f" y="40.0f" width="126.0f" angle="0.0f" physics="STATIC" id="plat" />
+  
+  <object type="CIRCLE" x="240.0f" y="65.0f" radius="20.0f" physics="DYNAMIC" id="circle1" />
+
+  <object type="PIN" body1="plat" body1_x="0.0f" body1_y="0.0f" body2="circle1" body2_x="0.0f" body2_y="0.0f" />
+  
+  <object type="CIRCLE" x="240.0f" y="105.0f" radius="20.0f" physics="DYNAMIC" id="circle2" />
+
+  <object type="PIN" body1="circle1" body1_x="0.0f" body1_y="20.0f" body2="circle2" body2_x="0.0f" body2_y="0.0f" />
+  
+  <object type="CIRCLE" x="240.0f" y="145.0f" radius="20.0f" physics="DYNAMIC" id="circle3" />
+
+  <object type="PIN" body1="circle2" body1_x="0.0f" body1_y="20.0f" body2="circle3" body2_x="0.0f" body2_y="0.0f" />
+  
+  
+  <object type="CIRCLE" x="240.0f" y="215.0f" radius="50.0f" physics="DYNAMIC" id="circle4" />
+  
+  <object type="PIN" body1="circle3" body1_x="0.0f" body1_y="20.0f" body2="circle4" body2_x="0.0f" body2_y="0.0f" />
+  
+  
+  <object type="PLATFORM" x="115.0f" y="260.0f" width="40.0f" angle="0.0f" physics="STATIC" />
+  
+  <object type="GOAL" x="115.0f" y="230.0f" />
+
+  
+</level>

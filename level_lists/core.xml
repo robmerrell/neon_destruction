@@ -25,4 +25,5 @@
   <level id="23" name="Mmmmmm Pi" filename="pi.xml" />
   <level id="24" name="Tum-ball" filename="tumball.xml" />
   <level id="25" name="Going Up" filename="going_up.xml" />
+  <level id="26" name="Swing" filename="swing.xml" />
 </levels>
