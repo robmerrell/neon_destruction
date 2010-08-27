@@ -28,4 +28,5 @@
   <level id="26" name="Swing" filename="swing.xml" />
   <level id="27" name="Pi squared" filename="pi_squared.xml" />
   <level id="28" name="Bounce" filename="bounce.xml" />
+  <level id="29" name="Sliding Push" filename="sliding_push.xml" />
 </levels>
