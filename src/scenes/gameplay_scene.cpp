@@ -85,6 +85,7 @@ bool GameplayScene::setup() {
 
 
 void GameplayScene::gameLoop() {
+  bool paused = false;
   in_loop = true;
   float angle, radians;
   cpVect ball_start_coords, calc_vect;
@@ -120,6 +121,12 @@ void GameplayScene::gameLoop() {
       if (event.type == SDL_QUIT) {
         in_loop = false;
         quit = true;
+      } else if (event.type == SDL_ACTIVEEVENT) {
+        if (event.active.gain == 1 && event.active.state & SDL_APPACTIVE) {
+          paused = false;
+        } else if (event.active.gain == 0 && event.active.state & SDL_APPACTIVE) {
+          paused = true;
+        }
       } else if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == PDLK_GESTURE_BACK && !dialog_open) {
           if (menu_open) {
@@ -304,7 +311,7 @@ void GameplayScene::gameLoop() {
     fps.start();
     
     while (accumulator >= millistep) {
-      if (!menu_open && !dialog_open) {
+      if (!menu_open && !dialog_open && !paused) {
         cpSpaceStep(space, timeStep);
         cpSpaceHashEach(space->activeShapes, &updateShape, NULL);
       }
@@ -314,9 +321,11 @@ void GameplayScene::gameLoop() {
     glDisable(GL_BLEND);
     
     // draw the background
-    moveBackground(animation_ticks);
-    updateAnimation(animation_ticks);
-    drawBackground();
+    if (!paused) {
+      moveBackground(animation_ticks);
+      updateAnimation(animation_ticks);
+      drawBackground();
+    }
     
     // blending
     glEnable(GL_BLEND);
@@ -336,38 +345,39 @@ void GameplayScene::gameLoop() {
     }
 
     // display
-    vector<Sprite*>::iterator sprite;
-    for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
-      if ((*sprite)->getTag() == BALL_TAG) {
-         (*sprite)->emitParticles(particle_timer.get_ticks());
-         (*sprite)->manageParticles(particle_timer.get_ticks(), fps.get_ticks());
-      }
-      
-      // move platforms if needed
-      if ((*sprite)->getTag() == PLATFORM_TAG) {
-        if ((*sprite)->moveable()) {
-          (*sprite)->move(animation_ticks);
+    if (!paused) {
+      vector<Sprite*>::iterator sprite;
+      for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
+        if ((*sprite)->getTag() == BALL_TAG) {
+           (*sprite)->emitParticles(particle_timer.get_ticks());
+           (*sprite)->manageParticles(particle_timer.get_ticks(), fps.get_ticks());
         }
-      }
       
-      if (!menu_open && !dialog_open)
-        (*sprite)->display();
-      else if (dialog_open) {
-        if ((*sprite)->getTag() == DIALOG_TAG) {
+        // move platforms if needed
+        if ((*sprite)->getTag() == PLATFORM_TAG) {
+          if ((*sprite)->moveable()) {
+            (*sprite)->move(animation_ticks);
+          }
+        }
+      
+        if (!menu_open && !dialog_open)
           (*sprite)->display();
+        else if (dialog_open) {
+          if ((*sprite)->getTag() == DIALOG_TAG) {
+            (*sprite)->display();
+          }
         }
       }
-    }
     
-    if (draw_physics)
-      draw_chipmunk(space);
+      if (draw_physics)
+        draw_chipmunk(space);
     
-    if (menu_open) {
-      menu->display();
-    }
+      if (menu_open) {
+        menu->display();
+      }
     
-    // update the screen
-    SDL_GL_SwapBuffers();
+      // update the screen
+      SDL_GL_SwapBuffers();
     
     if (ball_count > 15) {
       for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
@@ -385,31 +395,32 @@ void GameplayScene::gameLoop() {
       }
     }
    
-    if (finished_level) {
-      SoundManager::Instance()->playLevelEnd();
+      if (finished_level) {
+        SoundManager::Instance()->playLevelEnd();
       
-      for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
-        (*sprite)->setAnimationState(ANIMATE_FADE_OUT);
-      }
+        for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
+          (*sprite)->setAnimationState(ANIMATE_FADE_OUT);
+        }
       
-      Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
+        Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
       
-      if (cannon->getAlpha() <= 0.0f || level_reset || go_to_level) {
-        finished_level = false;
-        in_loop = false;
-        if (!level_reset && !go_to_level) {
-          stringstream score_stream;
-          score_stream << score;
+        if (cannon->getAlpha() <= 0.0f || level_reset || go_to_level) {
+          finished_level = false;
+          in_loop = false;
+          if (!level_reset && !go_to_level) {
+            stringstream score_stream;
+            score_stream << score;
           
-          LevelData::Instance()->updateCurrentScore(score_stream.str());
-          LevelData::Instance()->setCurrentLevel(LevelData::Instance()->getNextLevel());
-          LevelData::Instance()->writeUserData();
-        } else
-          level_reset = false;
+            LevelData::Instance()->updateCurrentScore(score_stream.str());
+            LevelData::Instance()->setCurrentLevel(LevelData::Instance()->getNextLevel());
+            LevelData::Instance()->writeUserData();
+          } else
+            level_reset = false;
+        }
       }
-    }
     
-    frame++;
+      frame++;
+    }
   }
 }
 
