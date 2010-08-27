@@ -29,4 +29,5 @@
   <level id="27" name="Pi squared" filename="pi_squared.xml" />
   <level id="28" name="Bounce" filename="bounce.xml" />
   <level id="29" name="Sliding Push" filename="sliding_push.xml" />
+  <level id="30" name="Pwn Sauce" filename="pwn_sauce.xml" />
 </levels>
