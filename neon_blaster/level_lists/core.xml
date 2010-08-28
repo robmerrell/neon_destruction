@@ -12,4 +12,25 @@
   <level id="10" name="Tramampoline" filename="tramampoline.xml" />
   <level id="11" name="Ramp" filename="ramp.xml" />
   <level id="12" name="Chain Reaction" filename="chain_reaction.xml" />
+  <level id="13" name="Half Pipe" filename="half_pipe.xml" />
+  <level id="14" name="Triangle" filename="triangle.xml" />
+  <level id="15" name="Windmill" filename="windmill.xml" />
+  <level id="16" name="Multiplatform" filename="multiplatform.xml" />
+  <level id="17" name="Plug" filename="plug.xml" />
+  <level id="18" name="Slice" filename="slice.xml" />
+  <level id="19" name="Good Guess" filename="good_guess.xml" />
+  <level id="20" name="Tunnel Vision" filename="tunnel_vision.xml" />
+  <level id="21" name="Ball Pit" filename="ball_pit.xml" />
+  <level id="22" name="Maze" filename="maze.xml" />
+  <level id="23" name="Mmmmmm Pi" filename="pi.xml" />
+  <level id="24" name="Tum-ball" filename="tumball.xml" />
+  <level id="25" name="Going Up" filename="going_up.xml" />
+  <level id="26" name="Swing" filename="swing.xml" />
+  <level id="27" name="Pi squared" filename="pi_squared.xml" />
+  <level id="28" name="Bounce" filename="bounce.xml" />
+  <level id="29" name="Sliding Push" filename="sliding_push.xml" />
+  <level id="30" name="Pwn Sauce" filename="pwn_sauce.xml" />
+  <level id="31" name="Diddly-doodly" filename="diddly_doodly.xml" />
+  <level id="32" name="Illusions, Michael" filename="illusions_michael.xml" />
+  <level id="33" name="Steinberg" filename="steinberg.xml" />
 </levels>
