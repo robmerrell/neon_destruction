@@ -11,6 +11,7 @@ class Goal : public Sprite {
   private:
     cpBody *body;
     cpShape *goalShape;
+    float mass;
 
   public:
     /**
@@ -32,6 +33,7 @@ class Goal : public Sprite {
     void display();
     
     cpBody* getBody();
+    void setMass(float);
 };
 
 #endif

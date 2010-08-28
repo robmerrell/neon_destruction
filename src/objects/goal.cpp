@@ -3,6 +3,7 @@
 Goal::Goal(float x, float y) : Sprite("", 64, 64, GOAL_TAG) {
   setX(x);
   setY(y);
+  mass = 20.0f;
 }
 
 void Goal::destroy(cpSpace *space) {
@@ -14,7 +15,7 @@ void Goal::destroy(cpSpace *space) {
 
 void Goal::definePhysics(cpSpace *space) {
   // body
-  body = cpBodyNew(20.0f, INFINITY);
+  body = cpBodyNew(mass, INFINITY);
   body->p = cpv(x, y);
   cpSpaceAddBody(space, body);
 
@@ -25,6 +26,10 @@ void Goal::definePhysics(cpSpace *space) {
   goalShape->data = this;
   goalShape->collision_type = GOAL_COLLISION;
   cpSpaceAddShape(space, goalShape);
+}
+
+void Goal::setMass(float _m) {
+  mass = _m;
 }
 
 cpBody* Goal::getBody() {

@@ -500,6 +500,12 @@ void GameplayScene::loadLevel(string level_file) {
       y = object_node->ToElement()->Attribute("y");
       
       Goal *goal = new Goal(strtof(x.c_str(), NULL), strtof(y.c_str(), NULL));
+      
+      if (object_node->ToElement()->Attribute("mass") != NULL) {
+        mass = object_node->ToElement()->Attribute("mass");
+        goal->setMass(strtof(mass.c_str(), NULL));
+      }
+      
       goal->definePhysics(space);
       addObject(goal);
       has_goal = true;

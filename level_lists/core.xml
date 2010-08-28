@@ -31,4 +31,5 @@
   <level id="29" name="Sliding Push" filename="sliding_push.xml" />
   <level id="30" name="Pwn Sauce" filename="pwn_sauce.xml" />
   <level id="31" name="Diddly-doodly" filename="diddly_doodly.xml" />
+  <level id="32" name="Illusions, Michael" filename="illusions_michael.xml" />
 </levels>
