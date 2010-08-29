@@ -12,6 +12,7 @@ class Goal : public Sprite {
     cpBody *body;
     cpShape *goalShape;
     float mass;
+    float elasticity;
 
   public:
     /**
@@ -34,6 +35,7 @@ class Goal : public Sprite {
     
     cpBody* getBody();
     void setMass(float);
+    void setElasticity(float);
 };
 
 #endif

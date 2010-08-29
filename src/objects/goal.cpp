@@ -4,6 +4,8 @@ Goal::Goal(float x, float y) : Sprite("", 64, 64, GOAL_TAG) {
   setX(x);
   setY(y);
   mass = 20.0f;
+  id="goal";
+  elasticity = 0.5;
 }
 
 void Goal::destroy(cpSpace *space) {
@@ -21,7 +23,7 @@ void Goal::definePhysics(cpSpace *space) {
 
   // goal shape
   goalShape = cpCircleShapeNew(body, 19.0f, cpvzero);
-  goalShape->e = 0.5;
+  goalShape->e = elasticity;
   goalShape->u = 0.3;
   goalShape->data = this;
   goalShape->collision_type = GOAL_COLLISION;
@@ -32,11 +34,16 @@ void Goal::setMass(float _m) {
   mass = _m;
 }
 
+void Goal::setElasticity(float _e) {
+  elasticity = _e;
+}
+
 cpBody* Goal::getBody() {
   return body;
 }
 
 void Goal::display() {
+  // cout << x << "," << y << "\n";
   float start_x = x;
   float start_y = y;
   

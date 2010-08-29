@@ -506,6 +506,11 @@ void GameplayScene::loadLevel(string level_file) {
         goal->setMass(strtof(mass.c_str(), NULL));
       }
       
+      if (object_node->ToElement()->Attribute("elasticity") != NULL) {
+         elasticity = object_node->ToElement()->Attribute("elasticity");
+         goal->setElasticity(strtof(elasticity.c_str(), NULL));
+       }
+      
       goal->definePhysics(space);
       addObject(goal);
       has_goal = true;
