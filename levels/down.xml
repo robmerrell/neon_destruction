@@ -1,0 +1,12 @@
+<?xml version="1.0">
+<level>
+  <object type="CANNON" x="-32.0f" y="100.0f" orientation="W" />
+
+  <object type="PLATFORM" x="250.0f" y="180.0f" width="276.0f" angle="0.0f" physics="STATIC" />
+  
+  <object type="PLATFORM" x="395.0f" y="190.0f" width="168.0f" angle="70.0f" physics="DYNAMIC" fixed="true" />
+  
+  <object type="PLATFORM" x="410.0f" y="270.0f" width="168.0f" angle="0.0f" physics="STATIC" />
+  
+  <object type="GOAL" x="350.0f" y="250.0F" />
+</level>

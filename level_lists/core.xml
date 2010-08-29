@@ -36,4 +36,5 @@
   <level id="34" name="Drop" filename="drop.xml" />
   <level id="35" name="Newton's Cradle" filename="newtons_cradle.xml" />
   <level id="36" name="Boing" filename="boing.xml" />
+  <level id="37" name="Down" filename="down.xml" />
 </levels>
