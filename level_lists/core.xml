@@ -39,4 +39,5 @@
   <level id="37" name="Down" filename="down.xml" />
   <level id="38" name="Fort" filename="fort.xml" />
   <level id="39" name="Safe" filename="safe.xml" />
+  <level id="40" name="Zen" filename="zen.xml" />
 </levels>
