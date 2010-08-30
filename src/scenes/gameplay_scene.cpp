@@ -354,9 +354,11 @@ void GameplayScene::gameLoop() {
         }
       
         // move platforms if needed
-        if ((*sprite)->getTag() == PLATFORM_TAG) {
-          if ((*sprite)->moveable()) {
-            (*sprite)->move(animation_ticks);
+        if (!menu_open && !dialog_open) {
+          if ((*sprite)->getTag() == PLATFORM_TAG) {
+            if ((*sprite)->moveable()) {
+              (*sprite)->move(animation_ticks);
+            }
           }
         }
       
