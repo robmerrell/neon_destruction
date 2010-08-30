@@ -435,7 +435,7 @@ void GameplayScene::loadLevel(string level_file) {
   TiXmlDocument level_data(path.append(level_file).c_str());
   level_data.LoadFile();
   
-  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num, text, mass, elasticity;
+  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num, text, mass, elasticity, friction;
   string min_pos, max_pos, direction;
   string fixed = "";
   string body1, body2, body1_x, body1_y, body2_x, body2_y;
@@ -658,6 +658,11 @@ void GameplayScene::loadLevel(string level_file) {
       if (object_node->ToElement()->Attribute("mass") != NULL) {
         mass = object_node->ToElement()->Attribute("mass");
         platform->setMass(strtof(mass.c_str(), NULL));
+      }
+      
+      if (object_node->ToElement()->Attribute("friction") != NULL) {
+        friction = object_node->ToElement()->Attribute("friction");
+        platform->setFriction(strtof(friction.c_str(), NULL));
       }
       
       if (object_node->ToElement()->Attribute("fixed") != NULL)

@@ -14,6 +14,7 @@ class Platform : public Sprite {
     cpShape *platformShape;
     cpConstraint *constraint;
 
+    float friction;
     float mass;
     float width;
     float height;
@@ -61,6 +62,7 @@ class Platform : public Sprite {
     void fix(cpSpace*);
     
     void setMass(float);
+    void setFriction(float);
     
     cpBody* getBody();
     

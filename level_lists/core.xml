@@ -38,4 +38,5 @@
   <level id="36" name="Boing" filename="boing.xml" />
   <level id="37" name="Down" filename="down.xml" />
   <level id="38" name="Fort" filename="fort.xml" />
+  <level id="39" name="Safe" filename="safe.xml" />
 </levels>

@@ -10,6 +10,7 @@ Platform::Platform(string sim_type) : Sprite("", 64, 64, PLATFORM_TAG) {
   physics_height = 12.0f;
   width = 0.0f;
   mass = 10.0f;
+  friction = 0.3f;
 
   dir = 0;
   min_pos = 0.0f;
@@ -80,6 +81,10 @@ void Platform::setMass(float _m) {
   mass = _m;
 }
 
+void Platform::setFriction(float _f) {
+  friction = _f;
+}
+
 cpBody* Platform::getBody() {
   return body;
 }
@@ -101,7 +106,7 @@ void Platform::definePhysics(cpSpace *space) {
   // poly shape box
   platformShape = cpPolyShapeNew(body, 4, verts, cpvzero);
   platformShape->e = 0.1;
-  platformShape->u = 0.3;
+  platformShape->u = friction;
   platformShape->data = this;
   platformShape->collision_type = PLATFORM_COLLISION;
   
