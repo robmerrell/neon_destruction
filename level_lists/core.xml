@@ -41,4 +41,5 @@
   <level id="39" name="Safe" filename="safe.xml" />
   <level id="40" name="Zen" filename="zen.xml" />
   <level id="41" name="Crash" filename="crash.xml" />
+  <level id="42" name="Plasma Snake" filename="plasma_snake.xml" />
 </levels>
