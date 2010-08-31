@@ -1,0 +1,31 @@
+<?xml version="1.0">
+<level>
+  <object type="CANNON" x="175.0f" y="236.0f" />
+  
+  <object type="GOAL" x="340.0f" y="40.0f" elasticity="1.0f" mass="0.5f" />
+
+  <object type="BOX" x="80.0f" y="70.0f" width="72.0f" height="40.0f" angle="0.0f" physics="STATIC" id="box1" />
+  <object type="BOX" x="440.0f" y="70.0f" width="72.0f" height="40.0f" angle="0.0f" physics="STATIC" id="box2" />
+  
+  <object type="CIRCLE" x="135.0f" y="70.0f" radius="20.0f" physics="DYNAMIC" id="b1" mass="1.0f" />
+  <object type="PIN" body1="box1" body1_x="34.0f" body1_y="0.0f" body2="b1" body2_x="0.0f" body2_y="0.0f" />
+  
+  <object type="CIRCLE" x="185.0f" y="70.0f" radius="20.0f" physics="DYNAMIC" id="b2" mass="1.0f" />
+  <object type="PIN" body1="b1" body1_x="0.0f" body1_y="0.0f" body2="b2" body2_x="0.0f" body2_y="0.0f" />
+  
+  <object type="CIRCLE" x="235.0f" y="90.0f" radius="20.0f" physics="DYNAMIC" id="b3" mass="1.0f" />
+  <object type="PIN" body1="b2" body1_x="0.0f" body1_y="0.0f" body2="b3" body2_x="0.0f" body2_y="0.0f" />
+  
+  
+  <object type="CIRCLE" x="275.0f" y="90.0f" radius="20.0f" physics="DYNAMIC" id="b4" mass="1.0f" />
+  <object type="PIN" body1="b3" body1_x="34.0f" body1_y="0.0f" body2="b4" body2_x="0.0f" body2_y="0.0f" />
+  
+  <object type="CIRCLE" x="315.0f" y="70.0f" radius="20.0f" physics="DYNAMIC" id="b5" mass="1.0f" />
+  <object type="PIN" body1="b4" body1_x="0.0f" body1_y="0.0f" body2="b5" body2_x="0.0f" body2_y="0.0f" />
+  
+  <object type="CIRCLE" x="365.0f" y="70.0f" radius="20.0f" physics="DYNAMIC" id="b6" mass="1.0f" />
+  <object type="PIN" body1="b5" body1_x="0.0f" body1_y="0.0f" body2="b6" body2_x="0.0f" body2_y="0.0f" />
+  
+  <object type="PIN" body1="b6" body1_x="10.0f" body1_y="0.0f" body2="box2" body2_x="-30.0f" body2_y="0.0f" />
+
+</level>
