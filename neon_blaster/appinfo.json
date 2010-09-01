@@ -1,6 +1,6 @@
 {
-	"id": "com.trackera.plasmacannon",
-	"version": "0.0.2",
+	"id": "com.robdor.plasmacannon",
+	"version": "1.0.0",
 	"vendor": "Rob Merrell",
 	"type": "pdk",
 	"main": "main",
