@@ -459,13 +459,6 @@ void GameplayScene::loadLevel(string level_file) {
     addObject(testd);
     dialog_open = true;
   }
-  
-  
-  if (LevelData::Instance()->getCurrentDetails().id == "1" || LevelData::Instance()->getCurrentDetails().id == "2") {
-    Dialog *testd = new Dialog(LevelData::Instance()->getCurrentDetails().id);
-    addObject(testd);
-    dialog_open = true;
-  }
 
   if (LevelData::Instance()->getCurrentDetails().filename != "end_scene.xml") {    
     TextureString *level_name = new TextureString(0.0f, 0.0f, LevelData::Instance()->getCurrentDetails().name);
