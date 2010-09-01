@@ -22,6 +22,7 @@ class Platform : public Sprite {
     bool fixed;
     
     bool infinite_moment;
+    bool normal_color;
     
     int dir; // 0 - down    1 - up     2 - left     3 - right
     float min_pos;
@@ -71,6 +72,7 @@ class Platform : public Sprite {
     void move(int);
     
     void infiniteMoment();
+    void infiniteNormalColor();
 };
 
 #endif

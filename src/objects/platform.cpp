@@ -17,6 +17,7 @@ Platform::Platform(string sim_type) : Sprite("", 64, 64, PLATFORM_TAG) {
   max_pos = 0.0f;
   
   infinite_moment = false;
+  normal_color = false;
 }
 
 void Platform::destroy(cpSpace *space) {
@@ -132,6 +133,10 @@ void Platform::infiniteMoment() {
   infinite_moment = true;
 }
 
+void Platform::infiniteNormalColor() {
+  normal_color = true;
+}
+
 void Platform::display() {
   float start_x = x;
   float start_y = y;
@@ -155,10 +160,10 @@ void Platform::display() {
   
   glColor4f(alpha, alpha, alpha, alpha);
   
-  if (simulation_type == "DYNAMIC" && !infinite_moment)
-    TexManager::Instance()->bindTexture(8);
-  else
+  if (simulation_type == "STATIC" || (infinite_moment && !normal_color))
     TexManager::Instance()->bindTexture(7);
+  else
+    TexManager::Instance()->bindTexture(8);
   
   glLoadIdentity();
   glTranslatef(start_x - width/2, start_y + height/2, 0.0);

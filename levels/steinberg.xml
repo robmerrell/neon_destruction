@@ -8,7 +8,7 @@
   <object type="PLATFORM" x="250.0f" y="120.0f" width="72.0f" angle="90.0f" physics="STATIC" />
   
   <object type="BOX" x="215.0f" y="120.0f" width="72.0f" height="72.0f" angle="0.0f" mass="1.0f" physics="DYNAMIC" id="box" />
-  <object type="PLATFORM" x="240.0f" y="82.0f" width="40.0f" angle="90.0f" physics="DYNAMIC" inf="true" id="poker" mass="0.5f" />
+  <object type="PLATFORM" x="240.0f" y="82.0f" width="40.0f" angle="90.0f" physics="DYNAMIC" inf="true" infnocolor="true" id="poker" mass="0.5f" />
   <object type="PIN" body1="box" body1_x="25.0f" body1_y="-25.0f" body2="poker" body2_x="0.0f" body2_y="0.0f" />
   
   <object type="PLATFORM" x="260.0f" y="60.0f" width="40.0f" angle="0.0f" physics="STATIC" />

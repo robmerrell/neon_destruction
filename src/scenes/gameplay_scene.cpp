@@ -671,6 +671,10 @@ void GameplayScene::loadLevel(string level_file) {
       if (object_node->ToElement()->Attribute("inf") != NULL) {
         platform->infiniteMoment();
       }
+      
+      if (object_node->ToElement()->Attribute("infnocolor") != NULL) {
+        platform->infiniteNormalColor();
+      }
         
       if (object_node->ToElement()->Attribute("direction") != NULL) {
         min_pos = object_node->ToElement()->Attribute("min_pos");
