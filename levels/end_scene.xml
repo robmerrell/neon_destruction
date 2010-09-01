@@ -1,0 +1,9 @@
+<?xml version="1.0">
+<level>
+  <object type="CANNON" x="170.0f" y="50.0f" />
+  
+  <object type="STRING" x="140.0f" y="150.0f" text="A WINNER IS YOU" />
+  
+  <object type="STRING" x="30.0f" y="250.0f" text="Watch the app catalog for new levels" />
+  <object type="STRING" x="30.0f" y="280.0f" text="and game objects" />
+</level>

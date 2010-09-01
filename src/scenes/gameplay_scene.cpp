@@ -163,7 +163,7 @@ void GameplayScene::gameLoop() {
             stringstream ss;
             ss << score;
             TextureString *score_string = (TextureString*)findObject(SCORE_STRING_TAG);
-            score_string->setMessage(string("Shots: " + ss.str()));
+            if (score_string != NULL) score_string->setMessage(string("Shots: " + ss.str()));
           
             radians = getMouseRadians(cpv(cannon->getX() + 64.0f, cannon->getY() + 51.0f), event_coords);
 
@@ -460,27 +460,33 @@ void GameplayScene::loadLevel(string level_file) {
     dialog_open = true;
   }
   
-  TextureString *level_name = new TextureString(0.0f, 0.0f, LevelData::Instance()->getCurrentDetails().name);
-  level_name->setTag(LEVEL_STRING_TAG);
-  addObject(level_name);
   
   if (LevelData::Instance()->getCurrentDetails().id == "1" || LevelData::Instance()->getCurrentDetails().id == "2") {
     Dialog *testd = new Dialog(LevelData::Instance()->getCurrentDetails().id);
     addObject(testd);
     dialog_open = true;
   }
-    
-  TextureString *score_string = new TextureString(350.0f, 0.0f, "Shots: 0");
-  score_string->setTag(SCORE_STRING_TAG);
-  addObject(score_string);
-  
-  string best = "Best: ";
-  best.append(LevelData::Instance()->getCurrentDetails().score);
-  TextureString *best_score_string = new TextureString(350.0f, 20.0f, best);
-  addObject(best_score_string);
 
-  if (level->ToElement()->Attribute("name") != NULL) {
-    level_name->setMessage(level->ToElement()->Attribute("name"));
+  if (LevelData::Instance()->getCurrentDetails().filename != "end_scene.xml") {    
+    TextureString *level_name = new TextureString(0.0f, 0.0f, LevelData::Instance()->getCurrentDetails().name);
+    level_name->setTag(LEVEL_STRING_TAG);
+    addObject(level_name);
+        
+    if (level->ToElement()->Attribute("name") != NULL) {
+      level_name->setMessage(level->ToElement()->Attribute("name"));
+    }
+    
+    TextureString *score_string = new TextureString(350.0f, 0.0f, "Shots: 0");
+    score_string->setTag(SCORE_STRING_TAG);
+    addObject(score_string);
+  
+    string best = "Best: ";
+    best.append(LevelData::Instance()->getCurrentDetails().score);
+    TextureString *best_score_string = new TextureString(350.0f, 20.0f, best);
+    addObject(best_score_string);
+  } else {
+    TextureString *final_score = new TextureString(125.0f, 180.0f, LevelData::Instance()->getFinalScore());
+    addObject(final_score);
   }
   
   for (object_node = level->FirstChild(); object_node != 0; object_node = object_node->NextSibling() ) {

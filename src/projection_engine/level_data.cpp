@@ -53,7 +53,9 @@ void LevelData::parseLevelList(string set) {
     
     if (set == "core.xml") {
       core_levels.push_back(details);
-      core_level_count++;
+      
+      if (details.filename != "end_scene.xml")
+        core_level_count++;
     }
   }
 }
@@ -101,8 +103,9 @@ void LevelData::parseUserData() {
 void LevelData::writeUserData() {
   ofstream config_file("tmp_save.mja");
   
+  
   if (config_file.is_open()) {
-    if (!current_level.empty()) {
+    if (!current_level.empty() && getDetailsById(current_level).filename != "end_scene.xml") {
       config_file << "(inp)" << endl;
       config_file << "core:" << current_level << endl;
       config_file << "(endinp)" << endl;
@@ -196,4 +199,21 @@ bool LevelData::canLoadNextLevel() {
 
 int LevelData::getCoreLevelCount() {
   return core_level_count;
+}
+
+string LevelData::getFinalScore() {
+  vector<LevelDetails>::iterator iter;
+  int score_count = 0;
+  string message = "Total Shots Fired: ";
+  
+  for (iter = core_levels.begin(); iter != core_levels.end(); iter++) {
+    score_count += atoi(iter->score.c_str()); 
+  }
+  
+  stringstream score_stream;
+  score_stream << score_count;
+  
+  message.append(score_stream.str());
+  
+  return message;
 }

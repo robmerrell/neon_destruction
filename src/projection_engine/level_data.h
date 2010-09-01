@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <vector>
 #include "../tinyxml/tinyxml.h"
 
@@ -74,6 +75,11 @@ class LevelData {
      * Get the count of all core levels
      */
     int getCoreLevelCount();
+    
+    /**
+     * Count the final score for the game
+     **/
+    string getFinalScore();
 };
 
 #endif
