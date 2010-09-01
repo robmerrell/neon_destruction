@@ -120,7 +120,6 @@ void Ball::display() {
   
   TexManager::Instance()->bindTexture(6);
   
-  // draw the particles
   for (int i=0; i < PARTICLE_TOTAL; i++) {
     if (!particles[i]->dead) {
       glLoadIdentity();
@@ -140,6 +139,7 @@ void Ball::display() {
       glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     }
   }
+  
 }
 
 void Ball::emitParticles(int timestep) {
@@ -147,13 +147,13 @@ void Ball::emitParticles(int timestep) {
   float dy = y - last_particle_y;
   float distance = sqrt(dx * dx + dy * dy);
   
-  if (distance <= 10) return;
+  if (distance <= 20) return;
   
   last_particle_x = x;
   last_particle_y = y;
   
   // emit 3 particles at a time
-  for (int i=0; i < 6; i++) {
+  for (int i=0; i < 3; i++) {
     for (int j=0; j < PARTICLE_TOTAL; j++) {
       if (particles[j]->dead) {
         particles[j]->x = x + 5.0f + i;
