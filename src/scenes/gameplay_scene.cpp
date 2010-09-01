@@ -428,7 +428,6 @@ void GameplayScene::gameLoop() {
 
 
 void GameplayScene::loadLevel(string level_file) {
-  cout << "loading: " << level_file << "\n";
   ball_count = 0;
   has_cannon = false;
   has_goal = false;
