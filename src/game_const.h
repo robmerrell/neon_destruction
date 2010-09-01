@@ -7,7 +7,7 @@
 ** Physics **
 *************/
 const int GRAVITY_RATE = 400;
-const int ACCEL_GRAVITY_RATE = 600;
+const int ACCEL_GRAVITY_RATE = 800;
 
 const int CANNON_TAG = 1;
 const int BALL_TAG = 2;
