@@ -6,8 +6,6 @@
   
   <object type="CIRCLE" x="115.0f" y="300.0f" radius="20.0f" physics="DYNAMIC" />
   
-  <object type="CIRCLE" x="175.0f" y="20.0f" radius="30.0f" physics="DYNAMIC" />
-  
   <object type="CIRCLE" x="160.0f" y="120.0f" radius="20.0f" physics="DYNAMIC" />
   
   <object type="CIRCLE" x="278.0f" y="275.0f" radius="20.0f" physics="DYNAMIC" />
