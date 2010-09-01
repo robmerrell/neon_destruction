@@ -21,16 +21,10 @@ int main(int argc, char* argv[]) {
   // delete title_scene;
   
   if (!quit) {
-    GameplayScene *gameplay_scene = new GameplayScene();
-    quit = engine.showScene(gameplay_scene);
-    delete gameplay_scene;
-  }
-  
-  if (!quit) {
-    ThankYouScene *thank_you_scene = new ThankYouScene();
-    engine.showScene(thank_you_scene);
-    // delete thank_you_scene;
-  }
+     GameplayScene *gameplay_scene = new GameplayScene();
+     quit = engine.showScene(gameplay_scene);
+     delete gameplay_scene;
+   }
   
   return 0;
 }
