@@ -4,6 +4,7 @@
 Circle::Circle(string sim_type) : Sprite("", 64, 64, CIRCLE_TAG) {
   simulation_type = sim_type;
   elasticity = 0.8f;
+  egg = false;
 }
 
 void Circle::destroy(cpSpace *space) {
@@ -34,6 +35,10 @@ cpBody* Circle::getBody() {
   return body;
 }
 
+void Circle::eColl() {
+  egg = true;
+}
+
 void Circle::definePhysics(cpSpace *space) {
   // body
   if (simulation_type == "DYNAMIC")
@@ -49,7 +54,10 @@ void Circle::definePhysics(cpSpace *space) {
   circleShape->e = elasticity;
   circleShape->u = 0.2;
   circleShape->data = this;
-  circleShape->collision_type = CIRCLE_COLLISION;
+  if (!egg)
+    circleShape->collision_type = CIRCLE_COLLISION;
+  else
+    circleShape->collision_type = EGG_CIRCLE_COLLISION;
   
   if (simulation_type == "DYNAMIC")
     cpSpaceAddShape(space, circleShape);

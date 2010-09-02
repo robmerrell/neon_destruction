@@ -36,6 +36,8 @@ const int BOX_COLLISION = 6;
 const int CIRCLE_COLLISION = 7;
 const int TRIANGLE_COLLISION = 8;
 const int ACCEL_SWITCH_COLLISION = 9;
+const int EGG_CIRCLE_COLLISION = 10;
+const int EGG_INVIS_COLLISION = 11;
 
 const int GRAVITY_UP = 1;
 const int GRAVITY_DOWN = 2;

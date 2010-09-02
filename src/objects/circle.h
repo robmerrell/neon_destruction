@@ -13,6 +13,8 @@ class Circle : public Sprite {
     float radius;
     float elasticity;
     float mass;
+    
+    bool egg;
 
     string simulation_type;
   public:
@@ -36,6 +38,8 @@ class Circle : public Sprite {
     void setRadius(float);
     void setElasticity(float);
     void setMass(float);
+    
+    void eColl();
     
     cpBody* getBody();
 };

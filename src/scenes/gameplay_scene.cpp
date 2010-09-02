@@ -6,6 +6,9 @@ bool GameplayScene::finished_level = false;
 bool GameplayScene::accel_control = false;
 bool GameplayScene::cannon_dimmed = false;
 
+bool GameplayScene::egg_circle = false;
+bool GameplayScene::egg_invis = false;
+
 GameplayScene::GameplayScene() {
   menu = new Menu();
   menu_open = false;
@@ -32,6 +35,9 @@ GameplayScene::GameplayScene() {
   cpSpaceAddCollisionHandler(space, GRAVITY_SWITCH_COLLISION, BALL_COLLISION, gravity_switch_solver, NULL, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, ACCEL_SWITCH_COLLISION, BALL_COLLISION, accel_switch_solver, NULL, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION, pre_solve_goal, NULL, NULL, NULL, NULL);
+  cpSpaceAddCollisionHandler(space, EGG_CIRCLE_COLLISION, BALL_COLLISION, pre_solve_egg_circle, NULL, NULL, NULL, NULL);
+  cpSpaceAddCollisionHandler(space, EGG_INVIS_COLLISION, BALL_COLLISION, pre_solve_egg_invis, NULL, NULL, NULL, NULL);
+  egg_shape = NULL;
   
   // generate the backgrounds
   int x, y = 0;
@@ -114,6 +120,14 @@ void GameplayScene::gameLoop() {
       yForce = ((float) SDL_JoystickGetAxis(joystick, 0) / 32768.0) * -1.0f;
 
       space->gravity = cpv(xForce * ACCEL_GRAVITY_RATE, yForce * ACCEL_GRAVITY_RATE);
+    }
+    
+    if (egg_circle && egg_invis) {
+      TextureString *egg_txt = new TextureString(30.0f, 60.0f, "103512485");
+      addObject(egg_txt);      
+      
+      egg_circle = false;
+      egg_invis = false;
     }
     
     // capture the events and send the relevent tap events to the game scene
@@ -453,6 +467,12 @@ void GameplayScene::loadLevel(string level_file) {
   TiXmlNode* level = level_data.FirstChild("level");
   TiXmlNode* object_node;
   
+  if (level_file == "safe.xml") {
+    egg_shape = cpSpaceAddStaticShape(space, cpCircleShapeNew(staticBody, 10.0f, cpv(5.0f, 5.0f)));
+    egg_shape->sensor = 1;
+    egg_shape->collision_type = EGG_INVIS_COLLISION;
+  }
+  
   if (LevelData::Instance()->getCurrentDetails().id == "1" || LevelData::Instance()->getCurrentDetails().id == "2" || LevelData::Instance()->getCurrentDetails().id == "4" || LevelData::Instance()->getCurrentDetails().id == "8") {
     Dialog *testd = new Dialog(LevelData::Instance()->getCurrentDetails().id);
     addObject(testd);
@@ -737,6 +757,10 @@ void GameplayScene::loadLevel(string level_file) {
         circle->setId(object_node->ToElement()->Attribute("id"));
       }
       
+      if (LevelData::Instance()->getCurrentDetails().filename == "safe.xml") {
+        circle->eColl();
+      }
+      
       circle->definePhysics(space);
       addObject(circle);
     } else if (object_node->ToElement()->Attribute("type") == string("PIN")) {
@@ -778,6 +802,13 @@ bool GameplayScene::replaceLevel(string level_file) {
   if (joystick != NULL) {
     SDL_JoystickClose(joystick);
     joystick = NULL;
+  }
+  
+  // clear the easter egg shape if applicable
+  if (egg_shape != NULL) {
+    cpSpaceRemoveStaticShape(space, egg_shape);
+    cpShapeFree(egg_shape);
+    egg_shape = NULL;
   }
   
   // clear all of the constraints
@@ -997,5 +1028,15 @@ static int gravity_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
 
 static int accel_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
   GameplayScene::accel_control = true;
+  return 0;
+}
+
+static int pre_solve_egg_circle(cpArbiter *arb, cpSpace *space, void *ignore) {
+  GameplayScene::egg_circle = true;
+  return 1;
+}
+
+static int pre_solve_egg_invis(cpArbiter *arb, cpSpace *space, void *ignore) {
+  GameplayScene::egg_invis = true;
   return 0;
 }
