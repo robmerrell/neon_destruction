@@ -468,7 +468,7 @@ void GameplayScene::loadLevel(string level_file) {
   TiXmlNode* object_node;
   
   if (level_file == "safe.xml") {
-    egg_shape = cpSpaceAddStaticShape(space, cpCircleShapeNew(staticBody, 10.0f, cpv(5.0f, 5.0f)));
+    egg_shape = cpSpaceAddStaticShape(space, cpCircleShapeNew(staticBody, 20.0f, cpv(10.0f, 10.0f)));
     egg_shape->sensor = 1;
     egg_shape->collision_type = EGG_INVIS_COLLISION;
   }

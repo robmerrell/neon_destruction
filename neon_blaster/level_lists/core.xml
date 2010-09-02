@@ -8,41 +8,47 @@
   <level id="6" name="Stack" filename="stack.xml" />
   <level id="7" name="Elevator" filename="elevator.xml" />
   <level id="8" name="Bottoms Up" filename="bottoms_up.xml" />
-  <level id="9" name="Plink" filename="plinko.xml" />
-  <level id="10" name="Tramampoline" filename="tramampoline.xml" />
-  <level id="11" name="Ramp" filename="ramp.xml" />
-  <level id="12" name="Chain Reaction" filename="chain_reaction.xml" />
-  <level id="13" name="Half Pipe" filename="half_pipe.xml" />
-  <level id="14" name="Triangle" filename="triangle.xml" />
-  <level id="15" name="Windmill" filename="windmill.xml" />
-  <level id="16" name="Multiplatform" filename="multiplatform.xml" />
-  <level id="17" name="Plug" filename="plug.xml" />
-  <level id="18" name="Slice" filename="slice.xml" />
-  <level id="19" name="Good Guess" filename="good_guess.xml" />
-  <level id="20" name="Tunnel Vision" filename="tunnel_vision.xml" />
-  <level id="21" name="Ball Pit" filename="ball_pit.xml" />
-  <level id="22" name="Maze" filename="maze.xml" />
-  <level id="23" name="Mmmmmm Pi" filename="pi.xml" />
-  <level id="24" name="Tum-ball" filename="tumball.xml" />
-  <level id="25" name="Going Up" filename="going_up.xml" />
-  <level id="26" name="Swing" filename="swing.xml" />
-  <level id="27" name="Pi squared" filename="pi_squared.xml" />
-  <level id="28" name="Bounce" filename="bounce.xml" />
-  <level id="29" name="Sliding Push" filename="sliding_push.xml" />
-  <level id="30" name="Pwn Sauce" filename="pwn_sauce.xml" />
-  <level id="31" name="Diddly-doodly" filename="diddly_doodly.xml" />
-  <level id="32" name="Illusions, Michael" filename="illusions_michael.xml" />
-  <level id="33" name="Steinberg" filename="steinberg.xml" />
-  <level id="34" name="Drop" filename="drop.xml" />
-  <level id="35" name="Newton's Cradle" filename="newtons_cradle.xml" />
-  <level id="36" name="Boing" filename="boing.xml" />
-  <level id="37" name="Down" filename="down.xml" />
-  <level id="38" name="Fort" filename="fort.xml" />
-  <level id="39" name="Safe" filename="safe.xml" />
-  <level id="40" name="Zen" filename="zen.xml" />
-  <level id="41" name="Crash" filename="crash.xml" />
-  <level id="42" name="Plasma Snake" filename="plasma_snake.xml" />
-  <level id="43" name="Chains" filename="chains.xml" />
-  <level id="44" name="Push" filename="push.xml" />
-  <level id="45" name="A WINNER IS YOU" filename="end_scene.xml" />
+  <level id="9" name="Zen" filename="zen.xml" />
+  <level id="10" name="Half Pipe" filename="half_pipe.xml" />
+  <level id="11" name="Swing" filename="swing.xml" />
+  <level id="12" name="Windmill" filename="windmill.xml" />
+  <level id="13" name="Diddly-doodly" filename="diddly_doodly.xml" />
+  <level id="14" name="Push" filename="push.xml" />
+  <level id="15" name="Flaps" filename="flaps.xml" />
+  <level id="16" name="Plink" filename="plinko.xml" />
+  <level id="17" name="Tunnel Vision" filename="tunnel_vision.xml" />
+  <level id="18" name="Tramampoline" filename="tramampoline.xml" />
+  <level id="19" name="Ramp" filename="ramp.xml" />
+  <level id="20" name="Good Guess" filename="good_guess.xml" />
+  <level id="21" name="Maze" filename="maze.xml" />
+  <level id="22" name="Tum-ball" filename="tumball.xml" />
+  <level id="23" name="Going Up" filename="going_up.xml" />
+  <level id="24" name="Pi squared" filename="pi_squared.xml" />
+  <level id="25" name="Safe" filename="safe.xml" />
+  <level id="26" name="Down" filename="down.xml" />
+  <level id="27" name="Drop" filename="drop.xml" />
+  <level id="28" name="Newton's Cradle" filename="newtons_cradle.xml" />
+  <level id="29" name="Crash" filename="crash.xml" />
+  <level id="30" name="Plasma Snake" filename="plasma_snake.xml" />
+  <level id="31" name="Basket" filename="basket.xml" />
+  <level id="32" name="Router" filename="router.xml" />
+  <level id="33" name="Bounce" filename="bounce.xml" />
+  <level id="34" name="Slice" filename="slice.xml" />
+  <level id="35" name="Ball Pit" filename="ball_pit.xml" />
+  <level id="36" name="Chain Reaction" filename="chain_reaction.xml" />
+  <level id="37" name="Triangle" filename="triangle.xml" />
+  <level id="38" name="Multiplatform" filename="multiplatform.xml" />
+  <level id="39" name="Plug" filename="plug.xml" />
+  <level id="40" name="Steinberg" filename="steinberg.xml" />
+  <level id="41" name="Mmmmmm Pi" filename="pi.xml" />
+  <level id="42" name="Sliding Push" filename="sliding_push.xml" />
+  <level id="43" name="Pwn Sauce" filename="pwn_sauce.xml" />
+  <level id="44" name="Illusions, Michael" filename="illusions_michael.xml" />
+  <level id="45" name="Boing" filename="boing.xml" />
+  <level id="46" name="Fort" filename="fort.xml" />
+  <level id="47" name="Chains" filename="chains.xml" />
+  <level id="48" name="Pass" filename="pass.xml" />
+  <level id="49" name="smrt" filename="smrt.xml" />
+  <level id="50" name="D'oh" filename="doh.xml" />
+  <level id="51" name="A WINNER IS YOU" filename="end_scene.xml" />
 </levels>

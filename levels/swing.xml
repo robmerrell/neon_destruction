@@ -3,6 +3,7 @@
   <object type="CANNON" x="382.0f" y="180.0f" orientation="E" />
   
   <object type="PLATFORM" x="240.0f" y="40.0f" width="126.0f" angle="0.0f" physics="STATIC" id="plat" />
+  <object type="BOX" x="240.0f" y="20.0f" width="72.0f" height="40.0f" angle="0.0f" physics="DYNAMIC" mass="100.0f" />
   
   <object type="CIRCLE" x="240.0f" y="65.0f" radius="20.0f" physics="DYNAMIC" id="circle1" />
 
