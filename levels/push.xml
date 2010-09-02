@@ -1,10 +1,17 @@
 <?xml version="1.0">
 <level>
-  <object type="CANNON" x="-5.0f" y="236.0f" />
+  <object type="CANNON" x="360.0f" y="236.0f" />
 
-  <object type="GEAR" x="270.0f" y="210.0f" width="126.0f" angle="0.0f" />
+  <object type="BOX" x="260.0f" y="264.0f" width="104.0f" height="126.0f" angle="0.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="280.0f" y="190.0f" radius="20.0f" physics="DYNAMIC" />
+  
+  <object type="BOX" x="260.0f" y="140.0f" width="104.0f" height="72.0f" angle="0.0f" physics="STATIC" />
+  
+  <object type="BOX" x="275.0f" y="86.0f" width="72.0f" height="72.0f" angle="0.0f" physics="DYNAMIC" mass="10.0f" />
+  
+  <object type="GOAL" x="220.0f" y="94.0f" mass="1.0f" />
+  
+  <object type="BOX" x="260.0f" y="30.0f" width="104.0f" height="72.0f" angle="0.0f" physics="STATIC" />
 
-  <object type="GOAL" x="380.0f" y="20.0f" />
-
-  <object type="PLATFORM" x="390.0f" y="100.0f" width="168.0f" angle="310.0f" physics="STATIC" />
 </level>
