@@ -44,5 +44,6 @@
   <level id="42" name="Plasma Snake" filename="plasma_snake.xml" />
   <level id="43" name="Chains" filename="chains.xml" />
   <level id="44" name="Push" filename="push.xml" />
-  <level id="45" name="A WINNER IS YOU" filename="end_scene.xml" />
+  <level id="45" name="Pass" filename="pass.xml" />
+  <level id="46" name="A WINNER IS YOU" filename="end_scene.xml" />
 </levels>
