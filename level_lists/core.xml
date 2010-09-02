@@ -46,5 +46,6 @@
   <level id="44" name="Push" filename="push.xml" />
   <level id="45" name="Pass" filename="pass.xml" />
   <level id="46" name="Flaps" filename="flaps.xml" />
-  <level id="47" name="A WINNER IS YOU" filename="end_scene.xml" />
+  <level id="47" name="smrt" filename="smrt.xml" />
+  <level id="48" name="A WINNER IS YOU" filename="end_scene.xml" />
 </levels>
