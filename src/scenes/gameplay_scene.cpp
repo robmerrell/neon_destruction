@@ -429,9 +429,9 @@ void GameplayScene::gameLoop() {
           
             LevelData::Instance()->updateCurrentScore(score_stream.str());
             LevelData::Instance()->setCurrentLevel(LevelData::Instance()->getNextLevel());
-            LevelData::Instance()->writeUserData();
           } else
             level_reset = false;
+          LevelData::Instance()->writeUserData();
         }
       }
     

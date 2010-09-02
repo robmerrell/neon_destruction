@@ -118,7 +118,8 @@ void LevelData::writeUserData() {
       string score = iter->score;
       if (score == "--") score = "0";
       
-      config_file << iter->id << ":" << score << ":" << iter->completed << ":" << iter->skipped << endl;
+      if (iter->filename != "end_scene.xml")
+        config_file << iter->id << ":" << score << ":" << iter->completed << ":" << iter->skipped << endl;
     }
     config_file << "(endlvl)";
   }
