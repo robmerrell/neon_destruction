@@ -1,0 +1,20 @@
+<?xml version="1.0">
+<level>
+  <object type="CANNON" x="340.0f" y="72.0f" />
+  
+  <object type="PLATFORM" x="305.0f" y="160.0f" width="360.0f" angle="0.0f" physics="STATIC" />
+  <object type="PLATFORM" x="20.0f" y="160.0f" width="72.0f" angle="0.0f" physics="STATIC" />
+  <object type="PLATFORM" x="100.0f" y="140.0f" width="168.0f" angle="0.0f" physics="DYNAMIC" />
+  
+  
+  <object type="PLATFORM" x="240.0f" y="110.0f" width="104.0f" angle="90.0f" physics="STATIC" />
+  <object type="PLATFORM" x="240.0f" y="0.0f" width="72.0f" angle="90.0f" physics="STATIC" />
+  <object type="GRAVITY_SWTICH" x="40.0f" y="40.0f" default_direction="down" />
+  
+  
+  <object type="PLATFORM" x="240.0f" y="310.0f" width="104.0f" angle="90.0f" physics="STATIC" />
+  <object type="PLATFORM" x="240.0f" y="195.0f" width="72.0f" angle="90.0f" physics="STATIC" />
+  <object type="ACCEL_SWITCH" x="60.0f" y="280.0f" />
+  
+  <object type="GOAL" x="400.0f" y="260.0f" mass="1.0f" />
+</level>

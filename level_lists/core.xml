@@ -49,5 +49,6 @@
   <level id="47" name="smrt" filename="smrt.xml" />
   <level id="48" name="Basket" filename="basket.xml" />
   <level id="49" name="Router" filename="router.xml" />
-  <level id="50" name="A WINNER IS YOU" filename="end_scene.xml" />
+  <level id="50" name="D'oh" filename="doh.xml" />
+  <level id="51" name="A WINNER IS YOU" filename="end_scene.xml" />
 </levels>
