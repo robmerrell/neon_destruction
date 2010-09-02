@@ -1,0 +1,25 @@
+<?xml version="1.0">
+<level>
+  <object type="CANNON" x="382.0f" y="140.0f" orientation="E" />
+
+  <object type="PLATFORM" x="145.0f" y="80.0f" width="168.0f" angle="90.0f" physics="STATIC" />
+  <object type="PLATFORM" x="145.0f" y="230.0f" width="72.0f" angle="90.0f" physics="STATIC" />
+  <object type="PLATFORM" x="195.0f" y="230.0f" width="72.0f" angle="90.0f" physics="STATIC" />
+  <object type="PLATFORM" x="195.0f" y="80.0f" width="168.0f" angle="90.0f" physics="STATIC" />
+  
+  <object type="CIRCLE" x="168.0f" y="299.0f" radius="20.0f" physics="DYNAMIC" mass="7.0f" />
+  <object type="CIRCLE" x="168.0f" y="259.0f" radius="20.0f" physics="DYNAMIC" mass="7.0f" />
+  <object type="CIRCLE" x="168.0f" y="219.0f" radius="20.0f" physics="DYNAMIC" mass="7.0f" />
+  <object type="CIRCLE" x="168.0f" y="179.0f" radius="20.0f" physics="DYNAMIC" mass="7.0f" />
+  <object type="CIRCLE" x="168.0f" y="139.0f" radius="20.0f" physics="DYNAMIC" mass="7.0f" />
+  <object type="CIRCLE" x="168.0f" y="99.0f" radius="20.0f" physics="DYNAMIC" mass="7.0f" />
+  <object type="CIRCLE" x="168.0f" y="59.0f" radius="20.0f" physics="DYNAMIC" mass="7.0f" />
+  <object type="CIRCLE" x="168.0f" y="19.0f" radius="20.0f" physics="DYNAMIC" mass="7.0f" />
+  
+  <object type="PLATFORM" x="220.0f" y="205.0f" width="72.0f" angle="0.0f" physics="STATIC" />
+  <object type="CIRCLE" x="220.0f" y="185.0f" radius="20.0f" physics="DYNAMIC" mass="7.0f" />
+  
+  <object type="PLATFORM" x="115.0f" y="255.0f" width="72.0f" angle="0.0f" physics="STATIC" />
+  <object type="GOAL" x="105.0f" y="99.0f" mass="7.0f" />  
+  
+</level>
