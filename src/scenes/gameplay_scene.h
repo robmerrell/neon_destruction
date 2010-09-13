@@ -20,6 +20,12 @@ class GameplayScene : public Scene {
     bool quit;
     
     int ball_count;
+
+    // meters
+    int meter;
+    int meter_ball_count1;
+    int meter_ball_count2;
+    int meter_ball_count3;
     
     bool dialog_open;
     bool menu_open;

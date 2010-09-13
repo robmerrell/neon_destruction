@@ -178,7 +178,7 @@ void GameplayScene::gameLoop() {
             score++;
           
             stringstream ss;
-            ss << score;
+            ss << meter;
             TextureString *score_string = (TextureString*)findObject(SCORE_STRING_TAG);
             if (score_string != NULL) score_string->setMessage(string("Shots: " + ss.str()));
           
@@ -198,6 +198,9 @@ void GameplayScene::gameLoop() {
             ball->applyImpulse(event_coords, ball_start_coords, space->gravity.y);
             addObject(ball);
             ball_count++;
+
+            if (score == meter_ball_count1-1 || score == meter_ball_count2-1 || score == meter_ball_count3-1)
+              meter -= 1000;
           }
         } else if (dialog_open) {
           // resume
@@ -433,7 +436,11 @@ void GameplayScene::gameLoop() {
           if (!level_reset && !go_to_level) {
             stringstream score_stream;
             score_stream << score;
+
+            stringstream meter_stream;
+            meter_stream << meter;
           
+            LevelData::Instance()->updateCurrentMeter(meter_stream.str());
             LevelData::Instance()->updateCurrentScore(score_stream.str());
             LevelData::Instance()->setCurrentLevel(LevelData::Instance()->getNextLevel());
           } else
@@ -449,6 +456,11 @@ void GameplayScene::gameLoop() {
 
 
 void GameplayScene::loadLevel(string level_file) {
+  meter = 3000;
+  meter_ball_count1 = 2;
+  meter_ball_count2 = 3;
+  meter_ball_count3 = 4;
+
   ball_count = 0;
   has_cannon = false;
   has_goal = false;
@@ -496,10 +508,10 @@ void GameplayScene::loadLevel(string level_file) {
       level_name->setMessage(level->ToElement()->Attribute("name"));
     }
     
-    TextureString *score_string = new TextureString(350.0f, 0.0f, "Shots: 0");
+    TextureString *score_string = new TextureString(350.0f, 0.0f, "3000");
     score_string->setTag(SCORE_STRING_TAG);
     addObject(score_string);
-  
+
     string best = "Best: ";
     best.append(LevelData::Instance()->getCurrentDetails().score);
     TextureString *best_score_string = new TextureString(350.0f, 20.0f, best);

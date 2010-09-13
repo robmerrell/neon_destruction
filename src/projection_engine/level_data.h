@@ -19,6 +19,7 @@ struct LevelDetails {
   string completed;
   string score;
   string skipped;
+  string meter;
 };
 
 class LevelData {
@@ -80,6 +81,11 @@ class LevelData {
      * Count the final score for the game
      **/
     string getFinalScore();
+
+    /**
+     * Meter
+     */
+    void updateCurrentMeter(string);
 };
 
 #endif
