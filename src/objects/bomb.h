@@ -15,6 +15,7 @@ class Bomb : public Sprite {
     float elasticity;
     float mass;
     bool exploding;
+    bool destroyed;
     bool destroyed_physics;
     bool destroyed_sprite;
     string simulation_type;

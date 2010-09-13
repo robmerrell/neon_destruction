@@ -7,8 +7,9 @@ Bomb::Bomb(string sim_type) : Sprite("", 64, 64, BOMB_TAG) {
   elasticity = 0.8f;
   mass = 0.4f;
   exploding = false;
-  destroyed_phsics = false;
-  destroyed_sprite = false;
+  destroyed = false;
+ // destroyed_phsics = false;
+ // destroyed_sprite = false;
   
   particles = new Particle *[PARTICLE_TOTAL];
   
@@ -27,7 +28,7 @@ Bomb::Bomb(string sim_type) : Sprite("", 64, 64, BOMB_TAG) {
 }
 
 void Bomb::destroy(cpSpace *space) {
-  if (!destroyed_physics) {
+  if (!destroyed) {
     destroyed = true;
     if (simulation_type == "DYNAMIC")
       cpSpaceRemoveShape(space, bombShape);
