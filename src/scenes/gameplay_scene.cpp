@@ -6,6 +6,8 @@ bool GameplayScene::finished_level = false;
 bool GameplayScene::accel_control = false;
 bool GameplayScene::cannon_dimmed = false;
 
+Timer GameplayScene::particle_timer;
+
 bool GameplayScene::egg_circle = false;
 bool GameplayScene::egg_invis = false;
 
@@ -35,6 +37,7 @@ GameplayScene::GameplayScene() {
   cpSpaceAddCollisionHandler(space, GRAVITY_SWITCH_COLLISION, BALL_COLLISION, gravity_switch_solver, NULL, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, ACCEL_SWITCH_COLLISION, BALL_COLLISION, accel_switch_solver, NULL, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION, pre_solve_goal, NULL, NULL, NULL, NULL);
+  cpSpaceAddCollisionHandler(space, BOMB_COLLISION, BALL_COLLISION, pre_solve_bomb, NULL, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, EGG_CIRCLE_COLLISION, BALL_COLLISION, pre_solve_egg_circle, NULL, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, EGG_INVIS_COLLISION, BALL_COLLISION, pre_solve_egg_invis, NULL, NULL, NULL, NULL);
   egg_shape = NULL;
@@ -366,6 +369,10 @@ void GameplayScene::gameLoop() {
            (*sprite)->emitParticles(particle_timer.get_ticks());
            (*sprite)->manageParticles(particle_timer.get_ticks(), fps.get_ticks());
         }
+        
+        if ((*sprite)->getTag() == BOMB_TAG) {
+           (*sprite)->manageParticles(particle_timer.get_ticks(), fps.get_ticks(), space);
+        }
       
         // move platforms if needed
         if (!menu_open && !dialog_open) {
@@ -460,6 +467,7 @@ void GameplayScene::loadLevel(string level_file) {
   Circle *circle;
   Triangle *triangle;
   Gear *gear;
+  Bomb *bomb;
   GravitySwitch *gravity_switch;
   AccelSwitch *accel_switch;
   int gravity_direction = GRAVITY_DOWN;
@@ -534,6 +542,27 @@ void GameplayScene::loadLevel(string level_file) {
       goal->definePhysics(space);
       addObject(goal);
       has_goal = true;
+    } else if (object_node->ToElement()->Attribute("type") == string("BOMB")) {
+      physics = object_node->ToElement()->Attribute("physics");
+      x = object_node->ToElement()->Attribute("x");
+      y = object_node->ToElement()->Attribute("y");
+
+      Bomb *bomb = new Bomb(physics);
+
+      if (object_node->ToElement()->Attribute("mass") != NULL) {
+        mass = object_node->ToElement()->Attribute("mass");
+        bomb->setMass(strtof(mass.c_str(), NULL));
+      }
+
+      if (object_node->ToElement()->Attribute("elasticity") != NULL) {
+         elasticity = object_node->ToElement()->Attribute("elasticity");
+         bomb->setElasticity(strtof(elasticity.c_str(), NULL));
+       }
+
+      bomb->setX(strtof(x.c_str(), NULL));
+      bomb->setY(strtof(y.c_str(), NULL));
+      bomb->definePhysics(space);
+      addObject(bomb);
     } else if (object_node->ToElement()->Attribute("type") == string("TEXTURE")) {
       x = object_node->ToElement()->Attribute("x");
       y = object_node->ToElement()->Attribute("y");
@@ -1029,6 +1058,34 @@ static int gravity_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
 static int accel_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
   GameplayScene::accel_control = true;
   return 0;
+}
+
+static int pre_solve_bomb(cpArbiter *arb, cpSpace *space, void *ignore) {
+  cpShape *a, *b; cpArbiterGetShapes(arb, &a, &b);
+  
+  Bomb *sprite = (Bomb*)a->data;
+  sprite->explode(GameplayScene::particle_timer.get_ticks());
+  
+  cpSpaceHashEach(space->activeShapes, &explode_shapes, &a->body->p);
+  
+  // remove the bomb
+  // cpSpaceAddPostStepCallback(space, (cpPostStepFunc)remove_bomb, a, NULL);
+    
+  return 0;
+}
+
+void explode_shapes(void *ptr, void* pos) {
+  cpShape *shape = (cpShape*)ptr;
+  cpVect *p = (cpVect*)pos;
+  
+  cpVect local_p = cpv(p->x, p->y);
+  
+  if (cpvnear(local_p, shape->body->p, 300)) {
+    cpVect temp = cpvsub(shape->body->p, local_p); // Vector from explosion to object
+    temp = cpvclamp(temp, 300-cpvlength(temp)); // invert vector to have nearer objects blow away faster
+    temp = cpvmult(temp, 13); // make it a little more faster :D
+    cpBodyApplyImpulse(shape->body, temp, cpvzero); //Gogogo
+  }
 }
 
 static int pre_solve_egg_circle(cpArbiter *arb, cpSpace *space, void *ignore) {

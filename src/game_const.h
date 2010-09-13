@@ -26,6 +26,7 @@ const int SCORE_STRING_TAG = 14;
 const int MENU_TAG = 15;
 const int DIALOG_TAG = 16;
 const int ACCEL_SWITCH_TAG = 17;
+const int BOMB_TAG = 18;
 
 const int CANNON_COLLISION = 1;
 const int BALL_COLLISION = 2;
@@ -38,6 +39,7 @@ const int TRIANGLE_COLLISION = 8;
 const int ACCEL_SWITCH_COLLISION = 9;
 const int EGG_CIRCLE_COLLISION = 10;
 const int EGG_INVIS_COLLISION = 11;
+const int BOMB_COLLISION = 12;
 
 const int GRAVITY_UP = 1;
 const int GRAVITY_DOWN = 2;

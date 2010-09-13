@@ -32,7 +32,6 @@ class GameplayScene : public Scene {
     // frame capping
     int frame;
     Timer fps;
-    Timer particle_timer;
     float animation_ticks;
     
     cpVect starfield1[STARS_PER_FIELD];
@@ -54,6 +53,7 @@ class GameplayScene : public Scene {
     static bool finished_level;
     static bool accel_control;
     static bool cannon_dimmed;
+    static Timer particle_timer;
     
     static bool egg_circle;
     static bool egg_invis;
@@ -90,6 +90,9 @@ static int ignore_pre_solve(cpArbiter*, cpSpace*, void*);
 static int pre_solve_goal(cpArbiter*, cpSpace*, void*);
 static int gravity_switch_solver(cpArbiter*, cpSpace*, void*);
 static int accel_switch_solver(cpArbiter*, cpSpace*, void*);
+
+static int pre_solve_bomb(cpArbiter*, cpSpace*, void*);
+void explode_shapes(void*, void*);
 
 static int pre_solve_egg_circle(cpArbiter*, cpSpace*, void*);
 static int pre_solve_egg_invis(cpArbiter*, cpSpace*, void*);

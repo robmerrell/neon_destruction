@@ -53,6 +53,7 @@ class Sprite : public GameObject {
     virtual void destroy(cpSpace*) {};
     virtual void emitParticles(int) {};
     virtual void manageParticles(int, int) {};
+    virtual void manageParticles(int, int, cpSpace*) {};
     virtual void move(int) {};
 };
 
