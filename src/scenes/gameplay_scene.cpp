@@ -169,6 +169,12 @@ void GameplayScene::gameLoop() {
           crosshair->setX(event_coords.x);
           crosshair->setY(event_coords.y);
         
+          if (LevelData::Instance()->getCurrentDetails().filename == "end_scene.xml") {
+            if (event_coords.x >= 74 && event_coords.x <= 421 && event_coords.y >= 226 && event_coords.y <= 287) {
+              PDL_LaunchBrowser("http://developer.palm.com/appredirect/?packageid=com.robdor.plasmacannon");
+            }
+          }
+        
           // find the cannon game object
           Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
           if (cannon != NULL) {

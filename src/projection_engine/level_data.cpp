@@ -34,30 +34,102 @@ LevelData* LevelData::Instance() {
 
 
 void LevelData::parseLevelList(string set) {
-  string path = "level_lists/";
+  LevelDetails details1;
+  details1.id="1";
+  details1.name="Intro";
+  details1.filename="intro.xml";
+  details1.score="--";
+  details1.completed="0";
+  details1.skipped="0";
+  core_levels.push_back(details1);
+  core_level_count++;
   
-  TiXmlDocument level_details(path.append(set).c_str());
-  level_details.LoadFile();
   
-  TiXmlNode* list = level_details.FirstChild("levels");
-  TiXmlNode* level_node;
+  LevelDetails details2;
+  details2.id="2";
+  details2.name="Green vs Ble";
+  details2.filename="green_vs_blue.xml";
+  details2.score="--";
+  details2.completed="0";
+  details2.skipped="0";
+  core_levels.push_back(details2);
+  core_level_count++;
   
-  for (level_node = list->FirstChild(); level_node != 0; level_node = level_node->NextSibling() ) {
-    LevelDetails details;
-    details.id = level_node->ToElement()->Attribute("id");
-    details.name = level_node->ToElement()->Attribute("name");
-    details.filename = level_node->ToElement()->Attribute("filename");
-    details.score = "--";
-    details.completed = "0";
-    details.skipped = "0";
-    
-    if (set == "core.xml") {
-      core_levels.push_back(details);
-      
-      if (details.filename != "end_scene.xml")
-        core_level_count++;
-    }
-  }
+  
+  LevelDetails details3;
+  details3.id="3";
+  details3.name="Gauntlet Treasure";
+  details3.filename="gauntlet_treasure.xml";
+  details3.score="--";
+  details3.completed="0";
+  details3.skipped="0";
+  core_levels.push_back(details3);
+  core_level_count++;
+  
+  
+  LevelDetails details4;
+  details4.id="4";
+  details4.name="Clock Tower";
+  details4.filename="clock_tower.xml";
+  details4.score="--";
+  details4.completed="0";
+  details4.skipped="0";
+  core_levels.push_back(details4);
+  core_level_count++;
+  
+  
+  LevelDetails details5;
+  details5.id="5";
+  details5.name="Steps";
+  details5.filename="steps.xml";
+  details5.score="--";
+  details5.completed="0";
+  details5.skipped="0";
+  core_levels.push_back(details5);
+  core_level_count++;
+  
+  
+  LevelDetails details6;
+  details6.id="6";
+  details6.name="Swing";
+  details6.filename="swing.xml";
+  details6.score="--";
+  details6.completed="0";
+  details6.skipped="0";
+  core_levels.push_back(details6);
+  core_level_count++;
+  
+  
+  LevelDetails details7;
+  details7.id="7";
+  details7.name="Stack";
+  details7.filename="stack.xml";
+  details7.score="--";
+  details7.completed="0";
+  details7.skipped="0";
+  core_levels.push_back(details7);
+  core_level_count++;
+  
+  
+  LevelDetails details8;
+  details8.id="8";
+  details8.name="Bottoms Up";
+  details8.filename="bottoms_up.xml";
+  details8.score="--";
+  details8.completed="0";
+  details8.skipped="0";
+  core_levels.push_back(details8);
+  core_level_count++;
+  
+  
+  LevelDetails details9;
+  details9.id="9";
+  details9.name="PROMOTION";
+  details9.filename="end_scene.xml";
+  details9.score="--";
+  details9.completed="0";
+  details9.skipped="0";
+  core_levels.push_back(details9);
 }
 
 

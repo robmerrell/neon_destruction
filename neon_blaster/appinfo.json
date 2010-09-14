@@ -1,10 +1,10 @@
 {
-	"id": "com.robdor.plasmacannon",
+	"id": "com.robdor.plasmacannonlite",
 	"version": "1.0.0",
 	"vendor": "Rob Merrell",
 	"type": "pdk",
 	"main": "main",
-	"title": "Plasma Cannon",
+	"title": "Plasma Cannon LITE",
 	"icon": "icon.png",
 	"requiredMemory": "32"
 }
