@@ -1,3 +1,1 @@
 I know that when you see the files in levels and level_lists you start getting all sorts of crazy ideas about modifying them.  Well, don't do it.  The xml structure of the level file formats wasn't optimized for speed or readability, but for laziness.  Yes, laziness.  Each object tag, representing a different game object, is very easy to handle on the parsing side.  There are a lot of things that simply don't make sense in the format from an outsider's perspective that do make sense from inside the game engine.  It would suck if Plasma Cannon started crashing because of some bad changes.
-
-One more thing: If you can find the easter egg in the safe level send me a tweet at @robmerrell. I'll send a $25 Amazon gift card to the first person that finds it.
