@@ -188,6 +188,22 @@ string LevelData::getNextLevel() {
 }
 
 
+int LevelData::getCurrentLevelPlacement() {
+  bool found_current = false;
+  vector<LevelDetails>::iterator iter;
+  int count=0;
+  
+  for (iter = core_levels.begin(); iter != core_levels.end(); iter++) {
+    if (found_current) return count;
+    if (iter->id == current_level) found_current = true;
+    
+    count++;
+  }
+  
+  return 0;
+}
+
+
 bool LevelData::canLoadNextLevel() {
   string next_level = getNextLevel();
   

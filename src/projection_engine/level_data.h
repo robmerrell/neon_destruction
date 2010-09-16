@@ -62,6 +62,7 @@ class LevelData {
      * Get and set the current level id
      */
     string getCurrentLevel();
+    int getCurrentLevelPlacement();
     void setCurrentLevel(string);
     string getNextLevel();
     bool canLoadNextLevel();

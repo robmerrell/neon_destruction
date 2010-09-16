@@ -15,7 +15,6 @@ bool Menu::getLevelPicker() {
 
 void Menu::setLevelPicker(bool _lp) {
   level_picker = _lp;
-  page = 0;
 }
 
 int Menu::getPage() {
@@ -30,6 +29,11 @@ void Menu::prevPage() {
 void Menu::nextPage() {
   if ((page+1)*3 <= LevelData::Instance()->getCoreLevelCount())
     page++;
+}
+
+void Menu::setPage() {
+  int placement = LevelData::Instance()->getCurrentLevelPlacement();
+  page = (int)ceil((float)placement / (float)3) - 1;
 }
 
 void Menu::display() {

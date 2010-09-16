@@ -5,6 +5,7 @@
 #include "../projection_engine/event_translations.h"
 #include "../objects/texture_string.h"
 #include "../projection_engine/level_data.h"
+#include <math.h>
 
 #ifndef MENU_H
 #define MENU_H
@@ -29,6 +30,7 @@ class Menu : public Sprite {
     void nextPage();
     void prevPage();
     int getPage();
+    void setPage();
     
     /**
      * Display the platform

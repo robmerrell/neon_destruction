@@ -149,8 +149,10 @@ void GameplayScene::gameLoop() {
           if (menu_open) {
             menu_open = false;
             menu->setLevelPicker(false);
-          } else
+          } else {
             menu_open = true;
+            menu->setPage();
+          }
         }
         
       } else if (event.type == SDL_MOUSEMOTION) {
