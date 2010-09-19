@@ -8,6 +8,7 @@ Bomb::Bomb(string sim_type) : Sprite("", 64, 64, BOMB_TAG) {
   mass = 0.4f;
   exploding = false;
   destroyed = false;
+  force = 13;
  // destroyed_phsics = false;
  // destroyed_sprite = false;
   
@@ -54,6 +55,14 @@ void Bomb::setElasticity(float _el) {
 
 void Bomb::setMass(float _m) {
   mass = _m;
+}
+
+void Bomb::setForce(int _f) {
+  force = _f;
+}
+
+int Bomb::getForce() {
+  return force;
 }
 
 void Bomb::definePhysics(cpSpace *space) {

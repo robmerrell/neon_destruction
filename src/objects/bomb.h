@@ -12,6 +12,7 @@ class Bomb : public Sprite {
   private:
     cpBody *body;
     cpShape *bombShape;
+    int force;
     float elasticity;
     float mass;
     bool exploding;
@@ -42,6 +43,8 @@ class Bomb : public Sprite {
     
     void setElasticity(float);
     void setMass(float);
+    void setForce(int);
+    int getForce();
     
     void explode(int);
     
