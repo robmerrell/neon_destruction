@@ -28,7 +28,7 @@ void Menu::prevPage() {
 }
 
 void Menu::nextPage() {
-  if ((page+1)*3 <= LevelData::Instance()->getCoreLevelCount())
+  if ((page+1)*3 <= LevelData::Instance()->getCoreLevelCount()-1)
     page++;
 }
 
@@ -113,7 +113,7 @@ void Menu::display() {
     }
     
     // next
-    if ((page+1)*3 <= LevelData::Instance()->getCoreLevelCount()) {
+    if ((page+1)*3 <= LevelData::Instance()->getCoreLevelCount()-1) {
       glLoadIdentity();
       glTranslatef(396.0f, 285.0f, 0.0);
 
