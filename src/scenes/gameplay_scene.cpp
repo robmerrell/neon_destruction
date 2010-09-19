@@ -459,7 +459,7 @@ void GameplayScene::loadLevel(string level_file) {
   TiXmlDocument level_data(path.append(level_file).c_str());
   level_data.LoadFile();
   
-  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num, text, mass, elasticity, friction;
+  string id, size, x, y, angle, type, physics, width, height, radius, dir, impulse_x, impulse_y, num, text, mass, elasticity, friction, force;
   string min_pos, max_pos, direction;
   string fixed = "";
   string body1, body2, body1_x, body1_y, body2_x, body2_y;
@@ -557,9 +557,14 @@ void GameplayScene::loadLevel(string level_file) {
       }
 
       if (object_node->ToElement()->Attribute("elasticity") != NULL) {
-         elasticity = object_node->ToElement()->Attribute("elasticity");
-         bomb->setElasticity(strtof(elasticity.c_str(), NULL));
-       }
+        elasticity = object_node->ToElement()->Attribute("elasticity");
+        bomb->setElasticity(strtof(elasticity.c_str(), NULL));
+      }
+      
+      if (object_node->ToElement()->Attribute("force") != NULL) {
+        force = object_node->ToElement()->Attribute("force");
+        bomb->setForce(strtof(force.c_str(), NULL));
+      }
 
       bomb->setX(strtof(x.c_str(), NULL));
       bomb->setY(strtof(y.c_str(), NULL));
@@ -1070,9 +1075,6 @@ static int pre_solve_bomb(cpArbiter *arb, cpSpace *space, void *ignore) {
   
   cpSpaceHashEach(space->activeShapes, &explode_shapes, &a->body->p);
   
-  // remove the bomb
-  // cpSpaceAddPostStepCallback(space, (cpPostStepFunc)remove_bomb, a, NULL);
-    
   return 0;
 }
 
@@ -1085,7 +1087,7 @@ void explode_shapes(void *ptr, void* pos) {
   if (cpvnear(local_p, shape->body->p, 300)) {
     cpVect temp = cpvsub(shape->body->p, local_p); // Vector from explosion to object
     temp = cpvclamp(temp, 300-cpvlength(temp)); // invert vector to have nearer objects blow away faster
-    temp = cpvmult(temp, 13); // make it a little more faster :D
+    temp = cpvmult(temp, ((Bomb*)shape->data)->getForce()); // make it a little more faster :D
     cpBodyApplyImpulse(shape->body, temp, cpvzero); //Gogogo
   }
 }
