@@ -124,12 +124,23 @@ void LevelData::parseLevelList(string set) {
   
   LevelDetails details9;
   details9.id="9";
-  details9.name="PROMOTION";
-  details9.filename="end_scene.xml";
+  details9.name="Tramampoline";
+  details9.filename="tramampoline.xml";
   details9.score="--";
   details9.completed="0";
   details9.skipped="0";
   core_levels.push_back(details9);
+  core_level_count++;
+  
+  
+  LevelDetails details10;
+  details10.id="10";
+  details10.name="PROMOTION";
+  details10.filename="end_scene.xml";
+  details10.score="--";
+  details10.completed="0";
+  details10.skipped="0";
+  core_levels.push_back(details10);
 }
 
 
