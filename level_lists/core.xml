@@ -50,5 +50,6 @@
   <level id="48" name="Pass" filename="pass.xml" />
   <level id="49" name="smrt" filename="smrt.xml" />
   <level id="50" name="D'oh" filename="doh.xml" />
-  <level id="51" name="A WINNER IS YOU" filename="end_scene.xml" />
+  <level id="51" name="Blast" filename="blast.xml" />
+  <level id="52" name="A WINNER IS YOU" filename="end_scene.xml" />
 </levels>
