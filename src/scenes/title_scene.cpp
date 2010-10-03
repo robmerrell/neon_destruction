@@ -93,6 +93,8 @@ void TitleScene::gameLoop() {
       TexManager::Instance()->loadTexture("assets/green_circle_atlas.png", true);
       TexManager::Instance()->loadTexture("assets/arrow_down.png", true);
       TexManager::Instance()->loadTexture("assets/accel_switch.png", true);
+      TexManager::Instance()->loadTexture("assets/star.png", true);
+      TexManager::Instance()->loadTexture("assets/end_level.png", true);
       
       SoundManager::Instance()->loadMusic("assets/music.mp3");
       SoundManager::Instance()->loadEffects();

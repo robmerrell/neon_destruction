@@ -27,6 +27,7 @@ const int MENU_TAG = 15;
 const int DIALOG_TAG = 16;
 const int ACCEL_SWITCH_TAG = 17;
 const int BOMB_TAG = 18;
+const int LEVEL_DIALOG_TAG = 19;
 
 const int CANNON_COLLISION = 1;
 const int BALL_COLLISION = 2;
@@ -58,7 +59,7 @@ const int SCREEN_BPP = 32;
 /*************
 ** Graphics **
 **************/
-const int TEXTURE_COUNT = 19;
+const int TEXTURE_COUNT = 21;
 const int STARS_PER_FIELD = 170;
 const float STAR_FIELD1_SPEED = 100.0f;
 const float STAR_FIELD2_SPEED = 50.0f;

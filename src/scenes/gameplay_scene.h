@@ -26,6 +26,7 @@ class GameplayScene : public Scene {
     bool level_reset;
     bool go_to_level;
     Menu *menu;
+    LevelDialog *level_dialog;
     
     SDL_Joystick *joystick;
     
@@ -50,6 +51,7 @@ class GameplayScene : public Scene {
     GameplayScene();
     ~GameplayScene();
     
+    static bool show_end_level;
     static bool finished_level;
     static bool accel_control;
     static bool cannon_dimmed;

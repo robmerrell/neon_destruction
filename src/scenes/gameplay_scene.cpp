@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+bool GameplayScene::show_end_level = false;
 bool GameplayScene::finished_level = false;
 bool GameplayScene::accel_control = false;
 bool GameplayScene::cannon_dimmed = false;
@@ -23,6 +24,8 @@ GameplayScene::GameplayScene() {
   in_loop = false;
   frame = 0;
   joystick = NULL;
+  
+  level_dialog = new LevelDialog();
     
   // set up the Chipmunk physics space
   cpInitChipmunk();
@@ -71,6 +74,9 @@ GameplayScene::~GameplayScene() {
   
   delete menu;
   menu = NULL;
+  
+  delete level_dialog;
+  level_dialog = NULL;
 }
 
 bool GameplayScene::setup() {
@@ -167,7 +173,7 @@ void GameplayScene::gameLoop() {
       } else if (event.type == SDL_MOUSEBUTTONUP) {
         cpVect event_coords = translatedMouseCoords(event.button.x, event.button.y);
         
-        if (!menu_open && !dialog_open && !accel_control) {
+        if (!menu_open && !dialog_open && !accel_control && !show_end_level) {
           SoundManager::Instance()->playCannon();
         
           // reposition the crosshair
@@ -200,6 +206,19 @@ void GameplayScene::gameLoop() {
             ball->applyImpulse(event_coords, ball_start_coords, space->gravity.y);
             addObject(ball);
             ball_count++;
+          }
+        } else if (show_end_level) {
+          // replay
+          if (event_coords.x >= 62 && event_coords.x <= 175 && event_coords.y >= 240 && event_coords.y <= 296) {
+            show_end_level = false;
+            level_reset = true;
+            finished_level = true;
+          }
+          
+          // next
+          if (event_coords.x >= 305 && event_coords.x <= 418 && event_coords.y >= 240 && event_coords.y <= 296) {
+            show_end_level = false;
+            finished_level = true;
           }
         } else if (dialog_open) {
           // resume
@@ -330,7 +349,7 @@ void GameplayScene::gameLoop() {
     fps.start();
     
     while (accumulator >= millistep) {
-      if (!menu_open && !dialog_open && !paused) {
+      if (!menu_open && !dialog_open && !paused && !show_end_level && !finished_level) {
         cpSpaceStep(space, timeStep);
         cpSpaceHashEach(space->activeShapes, &updateShape, NULL);
       }
@@ -377,7 +396,7 @@ void GameplayScene::gameLoop() {
         }
       
         // move platforms if needed
-        if (!menu_open && !dialog_open) {
+        if (!menu_open && !dialog_open && !show_end_level) {
           if ((*sprite)->getTag() == PLATFORM_TAG) {
             if ((*sprite)->moveable()) {
               (*sprite)->move(animation_ticks);
@@ -385,7 +404,7 @@ void GameplayScene::gameLoop() {
           }
         }
       
-        if (!menu_open && !dialog_open)
+        if (!menu_open && !dialog_open && !show_end_level)
           (*sprite)->display();
         else if (dialog_open) {
           if ((*sprite)->getTag() == DIALOG_TAG) {
@@ -399,6 +418,10 @@ void GameplayScene::gameLoop() {
     
       if (menu_open) {
         menu->display();
+      }
+      
+      if (show_end_level) {
+        level_dialog->display();
       }
     
       // update the screen
@@ -421,8 +444,6 @@ void GameplayScene::gameLoop() {
     }
    
       if (finished_level) {
-        SoundManager::Instance()->playLevelEnd();
-      
         for (sprite = objects.begin(); sprite != objects.end(); sprite++) {
           (*sprite)->setAnimationState(ANIMATE_FADE_OUT);
         }
@@ -1028,7 +1049,10 @@ static int ignore_pre_solve(cpArbiter *arb, cpSpace *space, void *ignore) {
 }
 
 static int pre_solve_goal(cpArbiter *arb, cpSpace *space, void *ignore) {
-  GameplayScene::finished_level = true;
+  if (!GameplayScene::show_end_level)
+    SoundManager::Instance()->playLevelEnd();
+  
+  GameplayScene::show_end_level = true;
   return 0;
 }
 

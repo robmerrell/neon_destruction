@@ -26,6 +26,7 @@
 #include "../objects/dialog.h"
 #include "../objects/accel_switch.h"
 #include "../objects/bomb.h"
+#include "../objects/level_dialog.h"
 
 // engine
 #include "sprite.h"
