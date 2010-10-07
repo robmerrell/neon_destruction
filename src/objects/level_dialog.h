@@ -26,12 +26,17 @@ class LevelDialog : public Sprite {
     
     bool star1_begin_fade;
     bool star1_end_fade;
+    
+    string message;
+    float message_x;
+    float message_y;
 
   public:
     /**
      * Load the Dialog onto the scene
      */
     LevelDialog();
+    
     void destroy(cpSpace*) {};
     void definePhysics(cpSpace*) {};
     

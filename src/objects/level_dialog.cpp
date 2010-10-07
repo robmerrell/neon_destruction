@@ -49,8 +49,6 @@ void LevelDialog::display() {
   GLfloat star_tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
   TexManager::Instance()->bindTexture(19);
   
-  Image *image;
-  
   // star 1
   if (show_star1) {
     glLoadIdentity();
@@ -79,7 +77,7 @@ void LevelDialog::display() {
   }
   
   // message
-  TextureString *tx = new TextureString(120.0f, 125.0f, "Boooooooooooooooo!");
+  TextureString *tx = new TextureString(message_x, message_y, message);
   tx->display();
   delete tx;
   
@@ -124,5 +122,103 @@ void LevelDialog::setScoreData(int _shots) {
     if (shots <= star1) show_star1 = true;
     if (shots <= star2) show_star2 = true;
     if (shots <= star3) show_star3 = true;
+  }
+
+  message_y = 130.0f;
+  
+  // 3 stars
+  if (show_star3) {
+    int index = rand() % 4;
+    
+    switch(index) {
+      case 1:
+        message = "Woohoo!";
+        message_x = 195.0f;
+        break;
+
+      case 2:
+        message = "You are so S-M-R-T";
+        message_x = 132.0f;
+        break;
+
+      case 3:
+        message = "Your mom must be proud";
+        message_x = 113.0f;
+        break;
+    }
+  }
+  
+  
+  // 2 stars
+  if (show_star2 && !show_star3) {
+    int index = rand() % 4;
+
+    switch(index) {
+      case 1:
+        message = "So close";
+        message_x = 185.0f;
+        break;
+
+      case 2:
+        message = "Not bad";
+        message_x = 195.0f;
+        break;
+
+      case 3:
+        message = "You can do it!";
+        message_x = 155.0f;
+        break;
+    }
+  }
+
+
+  // 1 star
+  if (show_star1 && !show_star2 && !show_star3) {
+    int index = rand() % 4;
+    
+    switch(index) {
+      case 1:
+        message = "meh";
+        message_x = 210.0f;
+        break;
+
+      case 2:
+        message = "Give it another try";
+        message_x = 125.0f;
+        break;
+
+      case 3:
+        message = "Getting better";
+        message_x = 155.0f;
+        break;
+    }
+  }
+  
+  
+  // 0 stars
+  if (!show_star1 && !show_star2 && !show_star3) {
+    int index = rand() % 5;
+    
+    switch(index) {
+      case 1:
+        message = "Boooooooooooooo!";
+        message_x = 145.0f;
+        break;
+
+      case 2:
+        message = "What was that all about?";
+        message_x = 100.0f;
+        break;
+        
+      case 3:
+        message = "At least it can't get any worse";
+        message_x = 60.0f;
+        break;
+
+      case 4:
+        message = "Lame";
+        message_x = 210.0f;
+        break;
+    }
   }
 }
