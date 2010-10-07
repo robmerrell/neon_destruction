@@ -46,11 +46,18 @@ class GameplayScene : public Scene {
     cpBody *staticBody;
     cpShape *egg_shape;
     vector<cpConstraint*> constraints;
+    
+    // score data
+    int star1;
+    int star2;
+    int star3;
+    string star_type;
   
   public:
     GameplayScene();
     ~GameplayScene();
-    
+  
+    static bool update_end_level;
     static bool show_end_level;
     static bool finished_level;
     static bool accel_control;

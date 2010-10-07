@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+bool GameplayScene::update_end_level = false;
 bool GameplayScene::show_end_level = false;
 bool GameplayScene::finished_level = false;
 bool GameplayScene::accel_control = false;
@@ -123,6 +124,11 @@ void GameplayScene::gameLoop() {
     
   while (in_loop) {
     glClear(GL_COLOR_BUFFER_BIT);
+    
+    if (update_end_level) {
+      level_dialog->setScoreData(score);
+      update_end_level = false;
+    }
     
     if (accel_control) {
       xForce = (float) SDL_JoystickGetAxis(joystick, 1) / 32768.0;
@@ -484,6 +490,7 @@ void GameplayScene::loadLevel(string level_file) {
   string min_pos, max_pos, direction;
   string fixed = "";
   string body1, body2, body1_x, body1_y, body2_x, body2_y;
+  // string star1_data, star2_data, star3_data;
   cpBody *pinbody1, *pinbody2;
   Box *box;
   Platform *platform;
@@ -531,6 +538,14 @@ void GameplayScene::loadLevel(string level_file) {
     TextureString *final_score = new TextureString(125.0f, 180.0f, LevelData::Instance()->getFinalScore());
     addObject(final_score);
   }
+  
+  // score data
+  star1 = atoi(level->ToElement()->Attribute("star1"));
+  star2 = atoi(level->ToElement()->Attribute("star2"));
+  star3 = atoi(level->ToElement()->Attribute("star3"));
+  star_type = level->ToElement()->Attribute("star_type");
+  
+  level_dialog->setStarData(star1, star2, star3, star_type);
   
   for (object_node = level->FirstChild(); object_node != 0; object_node = object_node->NextSibling() ) {
     if (object_node->ToElement()->Attribute("type") == string("CANNON") && !has_cannon) {
@@ -1053,6 +1068,7 @@ static int pre_solve_goal(cpArbiter *arb, cpSpace *space, void *ignore) {
     SoundManager::Instance()->playLevelEnd();
   
   GameplayScene::show_end_level = true;
+  GameplayScene::update_end_level = true;
   return 0;
 }
 
