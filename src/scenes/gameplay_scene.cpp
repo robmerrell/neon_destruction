@@ -215,14 +215,14 @@ void GameplayScene::gameLoop() {
           }
         } else if (show_end_level) {
           // replay
-          if (event_coords.x >= 62 && event_coords.x <= 175 && event_coords.y >= 240 && event_coords.y <= 296) {
+          if (event_coords.x >= 72 && event_coords.x <= 190 && event_coords.y >= 239 && event_coords.y <= 290) {
             show_end_level = false;
             level_reset = true;
             finished_level = true;
           }
           
           // next
-          if (event_coords.x >= 305 && event_coords.x <= 418 && event_coords.y >= 240 && event_coords.y <= 296) {
+          if (event_coords.x >= 312 && event_coords.x <= 413 && event_coords.y >= 239 && event_coords.y <= 290) {
             show_end_level = false;
             finished_level = true;
           }
