@@ -7,8 +7,10 @@ bool GameplayScene::show_end_level = false;
 bool GameplayScene::finished_level = false;
 bool GameplayScene::accel_control = false;
 bool GameplayScene::cannon_dimmed = false;
+bool GameplayScene::init_level_timer = false;
 
 Timer GameplayScene::particle_timer;
+Timer GameplayScene::level_timer;
 
 bool GameplayScene::egg_circle = false;
 bool GameplayScene::egg_invis = false;
@@ -410,9 +412,18 @@ void GameplayScene::gameLoop() {
           }
         }
       
-        if (!menu_open && !dialog_open && !show_end_level)
+        if (!menu_open && !dialog_open && !show_end_level) {
+          if ((*sprite)->getTag() == TIMER_STRING_TAG) {
+            if (init_level_timer) {
+              (*sprite)->setAlpha(1.0f);
+              init_level_timer = false;
+            }
+            
+            (*sprite)->setMessage(level_timer.elapsed_as_string());
+          }
+        
           (*sprite)->display();
-        else if (dialog_open) {
+        } else if (dialog_open) {
           if ((*sprite)->getTag() == DIALOG_TAG) {
             (*sprite)->display();
           }
@@ -483,6 +494,9 @@ void GameplayScene::loadLevel(string level_file) {
   has_goal = false;
   string path = "levels/";
   
+  init_level_timer = false;
+  level_timer.stop();
+  
   TiXmlDocument level_data(path.append(level_file).c_str());
   level_data.LoadFile();
   
@@ -538,6 +552,11 @@ void GameplayScene::loadLevel(string level_file) {
     TextureString *final_score = new TextureString(125.0f, 180.0f, LevelData::Instance()->getFinalScore());
     addObject(final_score);
   }
+  
+  TextureString *level_timer_string = new TextureString(150.0f, 0.0f, "");
+  level_timer_string->setAlpha(0.0f);
+  level_timer_string->setTag(TIMER_STRING_TAG);
+  addObject(level_timer_string);
   
   // score data
   star1 = atoi(level->ToElement()->Attribute("star1"));
@@ -1104,6 +1123,8 @@ static int gravity_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
 
 static int accel_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
   GameplayScene::accel_control = true;
+  GameplayScene::level_timer.start();
+  GameplayScene::init_level_timer = true;
   return 0;
 }
 

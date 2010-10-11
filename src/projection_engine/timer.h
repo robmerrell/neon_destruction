@@ -1,4 +1,6 @@
 #include "SDL.h"
+#include <string>
+#include <sstream>
 
 #ifndef TIMER_H
 #define TIMER_H
@@ -25,8 +27,10 @@ class Timer {
     void pause();
     void unpause();
 
-    //Gets the timer's time
+    // Gets the timer's time
     int get_ticks();
+    
+    std::string elapsed_as_string();
 
     //Checks the status of the timer
     bool is_started();

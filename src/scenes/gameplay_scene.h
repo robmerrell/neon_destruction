@@ -62,7 +62,10 @@ class GameplayScene : public Scene {
     static bool finished_level;
     static bool accel_control;
     static bool cannon_dimmed;
+    static bool init_level_timer;
     static Timer particle_timer;
+    
+    static Timer level_timer;
     
     static bool egg_circle;
     static bool egg_invis;

@@ -76,6 +76,16 @@ int Timer::get_ticks()
     return 0;
 }
 
+std::string Timer::elapsed_as_string() {
+  float casted = get_ticks() / 1000.0f;
+  
+  
+  std::stringstream ss;
+  ss << casted;
+  
+  return ss.str().substr(0, 3);
+}
+
 bool Timer::is_started()
 {
     return started;
