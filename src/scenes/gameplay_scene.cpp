@@ -556,6 +556,7 @@ void GameplayScene::loadLevel(string level_file) {
   TextureString *level_timer_string = new TextureString(150.0f, 0.0f, "");
   level_timer_string->setAlpha(0.0f);
   level_timer_string->setTag(TIMER_STRING_TAG);
+  level_timer_string->useLarge();
   addObject(level_timer_string);
   
   // score data

@@ -79,11 +79,14 @@ int Timer::get_ticks()
 std::string Timer::elapsed_as_string() {
   float casted = get_ticks() / 1000.0f;
   
-  
+  casted = floor(pow(10, 1) * casted) / pow(10, 1);
+
   std::stringstream ss;
   ss << casted;
   
-  return ss.str().substr(0, 3);
+  if (floor(casted) == casted) ss << ".0";
+  
+  return ss.str();
 }
 
 bool Timer::is_started()

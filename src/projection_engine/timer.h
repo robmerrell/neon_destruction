@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include <string>
 #include <sstream>
+#include <math.h>
 
 #ifndef TIMER_H
 #define TIMER_H
