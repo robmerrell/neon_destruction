@@ -1123,8 +1123,11 @@ static int gravity_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
 }
 
 static int accel_switch_solver(cpArbiter *arb, cpSpace *space, void *ignore) {
+  if (!GameplayScene::accel_control)
+    GameplayScene::level_timer.start();
+    
   GameplayScene::accel_control = true;
-  GameplayScene::level_timer.start();
+    
   GameplayScene::init_level_timer = true;
   return 0;
 }
