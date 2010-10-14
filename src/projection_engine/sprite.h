@@ -56,6 +56,7 @@ class Sprite : public GameObject {
     virtual void manageParticles(int, int, cpSpace*) {};
     virtual void move(int) {};
     virtual void setMessage(std::string) {};
+    virtual void color(float, float, float) {};
 };
 
 #endif

@@ -416,6 +416,7 @@ void GameplayScene::gameLoop() {
           if ((*sprite)->getTag() == TIMER_STRING_TAG) {
             if (init_level_timer) {
               (*sprite)->setAlpha(1.0f);
+              (*sprite)->color(1.0f, 0.5f, 0.5f);
               init_level_timer = false;
             }
             
@@ -553,8 +554,9 @@ void GameplayScene::loadLevel(string level_file) {
     addObject(final_score);
   }
   
-  TextureString *level_timer_string = new TextureString(150.0f, 0.0f, "");
+  TextureString *level_timer_string = new TextureString(180.0f, 0.0f, "");
   level_timer_string->setAlpha(0.0f);
+  level_timer_string->color(0.0f, 0.0f, 0.0f);
   level_timer_string->setTag(TIMER_STRING_TAG);
   level_timer_string->useLarge();
   addObject(level_timer_string);
