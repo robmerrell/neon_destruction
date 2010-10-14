@@ -110,18 +110,30 @@ void LevelDialog::setStarData(int s1, int s2, int s3, string s_type) {
   star_type = s_type;
 }
 
-void LevelDialog::setScoreData(int _shots) {
+void LevelDialog::setTimerData(int s1, int s2, int s3) {
+  time1 = s1;
+  time2 = s2;
+  time3 = s3;
+}
+
+void LevelDialog::setScoreData(int _shots, int _timer, string _elapsed) {
   shots = _shots;
+  timer = _timer;
+  elapsed = _elapsed;
   
   show_star1 = false;
   show_star2 = false;
   show_star3 = false;
- 
+  
   // determine which stars we should show
   if (star_type == "shots") {
     if (shots <= star1) show_star1 = true;
     if (shots <= star2) show_star2 = true;
     if (shots <= star3) show_star3 = true;
+  } else if (star_type == "timer") {
+    if (shots <= star1 && timer <= time1) show_star1 = true;
+    if (shots <= star2 && timer <= time2) show_star2 = true;
+    if (shots <= star3 && timer <= time3) show_star3 = true;
   }
 
   message_y = 130.0f;

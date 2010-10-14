@@ -51,6 +51,9 @@ class GameplayScene : public Scene {
     int star1;
     int star2;
     int star3;
+    int time1;
+    int time2;
+    int time3;
     string star_type;
   
   public:

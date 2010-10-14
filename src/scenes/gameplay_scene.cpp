@@ -128,7 +128,7 @@ void GameplayScene::gameLoop() {
     glClear(GL_COLOR_BUFFER_BIT);
     
     if (update_end_level) {
-      level_dialog->setScoreData(score);
+      level_dialog->setScoreData(score, floor(level_timer.get_ticks() / 1000.0f), level_timer.elapsed_as_string());
       update_end_level = false;
     }
     
@@ -505,7 +505,6 @@ void GameplayScene::loadLevel(string level_file) {
   string min_pos, max_pos, direction;
   string fixed = "";
   string body1, body2, body1_x, body1_y, body2_x, body2_y;
-  // string star1_data, star2_data, star3_data;
   cpBody *pinbody1, *pinbody2;
   Box *box;
   Platform *platform;
@@ -568,6 +567,13 @@ void GameplayScene::loadLevel(string level_file) {
   star_type = level->ToElement()->Attribute("star_type");
   
   level_dialog->setStarData(star1, star2, star3, star_type);
+  
+  if (level->ToElement()->Attribute("time1") != NULL) {
+    time1 = atoi(level->ToElement()->Attribute("time1"));
+    time2 = atoi(level->ToElement()->Attribute("time2"));
+    time3 = atoi(level->ToElement()->Attribute("time3"));
+    level_dialog->setTimerData(time1, time2, time3);
+  }
   
   for (object_node = level->FirstChild(); object_node != 0; object_node = object_node->NextSibling() ) {
     if (object_node->ToElement()->Attribute("type") == string("CANNON") && !has_cannon) {

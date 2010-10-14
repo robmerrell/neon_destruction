@@ -16,9 +16,14 @@ class LevelDialog : public Sprite {
     int star1;
     int star2;
     int star3;
+    int time1;
+    int time2;
+    int time3;
     string star_type;
     
     int shots;
+    int timer;
+    string elapsed;
     
     bool show_star1;
     bool show_star2;
@@ -46,9 +51,14 @@ class LevelDialog : public Sprite {
     void setStarData(int, int, int, string);
     
     /**
-     * shots
+     * star1, star2, star3
      */
-    void setScoreData(int);
+    void setTimerData(int, int, int);
+    
+    /**
+     * shots, timer, elapsed
+     */
+    void setScoreData(int, int, string);
     
     /**
      * Display the dialog
