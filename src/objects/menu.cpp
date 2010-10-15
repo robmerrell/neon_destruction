@@ -162,6 +162,31 @@ void Menu::display() {
         tx = new TextureString(50.0f, 20.0f + count*65.0f + 16.0f, score);
         if (!can_show) tx->color(0.5f, 0.5f, 0.5f);
         tx->display();
+            
+            
+        // stars
+        Image *im = new Image(300.0f, 20.0f + count*65.0f, 32.0f, 32.0f, 19);
+            
+        if (level.stars == "3" || level.stars == "2" || level.stars == "1") {
+          im->setAlpha(1.0f);
+          im->display();
+          delete im;          
+        }    
+        
+        if (level.stars == "3" || level.stars == "2") {
+          im = new Image(340.0f, 20.0f + count*65.0f, 32.0f, 32.0f, 19);
+          im->setAlpha(1.0f);
+          im->display();
+          delete im;          
+        }
+        
+        if (level.stars == "3") {
+          im = new Image(380.0f, 20.0f + count*65.0f, 32.0f, 32.0f, 19);
+          im->setAlpha(1.0f);
+          im->display();
+          delete im;          
+        }
+  
         count++;
       }
     }

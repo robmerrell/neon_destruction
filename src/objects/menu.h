@@ -4,6 +4,7 @@
 #include "../projection_engine/sound_manager.h"
 #include "../projection_engine/event_translations.h"
 #include "../objects/texture_string.h"
+#include "../objects/image.h"
 #include "../projection_engine/level_data.h"
 #include <math.h>
 
