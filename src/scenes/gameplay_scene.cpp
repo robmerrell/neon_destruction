@@ -155,15 +155,19 @@ void GameplayScene::gameLoop() {
       } else if (event.type == SDL_ACTIVEEVENT) {
         if (event.active.gain == 1 && event.active.state & SDL_APPACTIVE) {
           paused = false;
+          level_timer.unpause();
         } else if (event.active.gain == 0 && event.active.state & SDL_APPACTIVE) {
           paused = true;
+          level_timer.pause();
         }
       } else if (event.type == SDL_KEYDOWN) {
         if (event.key.keysym.sym == PDLK_GESTURE_BACK && !dialog_open) {
           if (menu_open) {
+            level_timer.unpause();
             menu_open = false;
             menu->setLevelPicker(false);
           } else {
+            level_timer.pause();
             menu_open = true;
             menu->setPage();
           }
@@ -344,6 +348,7 @@ void GameplayScene::gameLoop() {
           
           // resume
           if (event_coords.x >= 136 && event_coords.x <= 329 && event_coords.y >= 236 && event_coords.y <= 289) {
+            level_timer.unpause();
             menu_open = false;
             menu->setLevelPicker(false);
           }
