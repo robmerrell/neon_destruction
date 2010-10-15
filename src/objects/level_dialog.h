@@ -60,6 +60,8 @@ class LevelDialog : public Sprite {
      */
     void setScoreData(int, int, string);
     
+    int getStarCount();
+    
     /**
      * Display the dialog
      */

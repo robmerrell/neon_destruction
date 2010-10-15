@@ -481,6 +481,7 @@ void GameplayScene::gameLoop() {
             score_stream << score;
           
             LevelData::Instance()->updateCurrentScore(score_stream.str());
+            LevelData::Instance()->updateCurrentStars(level_dialog->getStarCount());
             LevelData::Instance()->setCurrentLevel(LevelData::Instance()->getNextLevel());
           } else
             level_reset = false;

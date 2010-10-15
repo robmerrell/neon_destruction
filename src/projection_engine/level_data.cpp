@@ -50,6 +50,7 @@ void LevelData::parseLevelList(string set) {
     details.score = "--";
     details.completed = "0";
     details.skipped = "0";
+    details.stars = "0";
     
     if (set == "core.xml") {
       core_levels.push_back(details);
@@ -81,7 +82,7 @@ void LevelData::parseUserData() {
     }
     
     if (state == "level_data" && line != "(lvl)") {
-      // id,score,completed,skipped
+      // id,score,completed,skipped,stars
       vector<string> parsed_level;
       string_explode(line, ":", &parsed_level);
       
@@ -92,6 +93,8 @@ void LevelData::parseUserData() {
           iter->score = parsed_level[1];
           iter->completed = parsed_level[2];
           iter->skipped = parsed_level[3];
+          if (parsed_level.size() >= 5)
+            iter->stars = parsed_level[4];
         }
       }
     }
@@ -119,7 +122,7 @@ void LevelData::writeUserData() {
       if (score == "--") score = "0";
       
       if (iter->filename != "end_scene.xml")
-        config_file << iter->id << ":" << score << ":" << iter->completed << ":" << iter->skipped << endl;
+        config_file << iter->id << ":" << score << ":" << iter->completed << ":" << iter->skipped << ":" << iter->stars << endl;
     }
     config_file << "(endlvl)";
   }
@@ -170,6 +173,19 @@ void LevelData::updateCurrentScore(string new_score) {
         iter->score = new_score;
         iter->completed = "1";
       }
+    }
+  } 
+}
+
+void LevelData::updateCurrentStars(int star_count) {
+  vector<LevelDetails>::iterator iter;
+  
+  for (iter = core_levels.begin(); iter != core_levels.end(); iter++) {
+    if (iter->id == current_level) {
+      stringstream star_stream;
+      star_stream << star_count;
+      
+      iter->stars = star_stream.str();
     }
   } 
 }

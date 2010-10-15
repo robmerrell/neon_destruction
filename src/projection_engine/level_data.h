@@ -19,6 +19,7 @@ struct LevelDetails {
   string completed;
   string score;
   string skipped;
+  string stars;
 };
 
 class LevelData {
@@ -71,6 +72,11 @@ class LevelData {
      * Update data for the current level
      */
     void updateCurrentScore(string);
+    
+    /**
+     * Update stars for the current level
+     */
+    void updateCurrentStars(int);
     
     /**
      * Get the count of all core levels

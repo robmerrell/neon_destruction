@@ -234,3 +234,13 @@ void LevelDialog::setScoreData(int _shots, int _timer, string _elapsed) {
     }
   }
 }
+
+int LevelDialog::getStarCount() {
+  int stars = 0;
+  
+  if (show_star1) stars += 1;
+  if (show_star2) stars += 1;
+  if (show_star3) stars += 1;
+  
+  return stars;
+}
