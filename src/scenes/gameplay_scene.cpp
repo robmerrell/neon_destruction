@@ -224,13 +224,11 @@ void GameplayScene::gameLoop() {
           if (event_coords.x >= 72 && event_coords.x <= 190 && event_coords.y >= 239 && event_coords.y <= 290) {
             show_end_level = false;
             level_reset = true;
-            finished_level = true;
           }
           
           // next
           if (event_coords.x >= 312 && event_coords.x <= 413 && event_coords.y >= 239 && event_coords.y <= 290) {
             show_end_level = false;
-            finished_level = true;
           }
         } else if (dialog_open) {
           // resume
@@ -394,6 +392,8 @@ void GameplayScene::gameLoop() {
       
       cannon_dimmed = true;
     }
+    
+    Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
 
     // display
     if (!paused) {
@@ -417,7 +417,7 @@ void GameplayScene::gameLoop() {
           }
         }
       
-        if (!menu_open && !dialog_open && !show_end_level) {
+        if (!menu_open && !dialog_open && cannon->getAlpha() >= 0.2f) {
           if ((*sprite)->getTag() == TIMER_STRING_TAG) {
             if (init_level_timer) {
               (*sprite)->setAlpha(1.0f);
@@ -443,10 +443,10 @@ void GameplayScene::gameLoop() {
         menu->display();
       }
       
-      if (show_end_level) {
+      if (cannon->getAlpha() <= 0.2f && show_end_level) {
         level_dialog->display();
       }
-    
+      
       // update the screen
       SDL_GL_SwapBuffers();
     
@@ -471,9 +471,7 @@ void GameplayScene::gameLoop() {
           (*sprite)->setAnimationState(ANIMATE_FADE_OUT);
         }
       
-        Cannon *cannon = (Cannon*)findObject(CANNON_TAG);
-      
-        if (cannon->getAlpha() <= 0.0f || level_reset || go_to_level) {
+        if (level_reset || go_to_level) {
           finished_level = false;
           in_loop = false;
           if (!level_reset && !go_to_level) {
@@ -1103,6 +1101,7 @@ static int pre_solve_goal(cpArbiter *arb, cpSpace *space, void *ignore) {
   
   GameplayScene::show_end_level = true;
   GameplayScene::update_end_level = true;
+  GameplayScene::finished_level = true;
   return 0;
 }
 

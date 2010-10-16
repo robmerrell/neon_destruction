@@ -110,7 +110,7 @@ void Ball::display() {
   glVertexPointer(3, GL_FLOAT, 0, ball_vertices);
   glTexCoordPointer(3, GL_FLOAT, 0, tex);
   
-  glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+  glColor4f(alpha, alpha, alpha, alpha);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   
   glDisableClientState(GL_VERTEX_ARRAY);
