@@ -91,6 +91,17 @@ void LevelDialog::display() {
   tx->display();
   delete tx;
   
+  // time
+  if (timer > 0) {
+    string timer_str = "Time: ";
+    timer_str.append(elapsed);
+    timer_str.append("s");
+    
+    tx = new TextureString(74.0f, 170.0f, timer_str);
+    tx->display();
+    delete tx;
+  }
+  
   // best
   string best_str = "Best: ";
   best_str.append(LevelData::Instance()->getCurrentDetails().score);
