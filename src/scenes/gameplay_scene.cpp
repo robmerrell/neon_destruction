@@ -1098,6 +1098,8 @@ static int ignore_pre_solve(cpArbiter *arb, cpSpace *space, void *ignore) {
 static int pre_solve_goal(cpArbiter *arb, cpSpace *space, void *ignore) {
   if (!GameplayScene::show_end_level)
     SoundManager::Instance()->playLevelEnd();
+    
+  GameplayScene::level_timer.pause();
   
   GameplayScene::show_end_level = true;
   GameplayScene::update_end_level = true;
