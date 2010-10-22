@@ -1,0 +1,8 @@
+<?xml version="1.0">
+<levels name="Level pack 1">
+  <level id="101" name="Intro" filename="intro.xml" />
+  <level id="102" name="Green vs Blue" filename="green_vs_blue.xml" />
+  <level id="103" name="Gauntlet Treasure" filename="gauntlet_treasure.xml" />
+  <level id="104" name="Clock Tower" filename="clock_tower.xml" />
+  <level id="105" name="Steps" filename="steps.xml" />
+</levels>

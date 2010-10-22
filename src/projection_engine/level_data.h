@@ -20,6 +20,7 @@ struct LevelDetails {
   string score;
   string skipped;
   string stars;
+  string system_locked;
 };
 
 class LevelData {

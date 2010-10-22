@@ -58,6 +58,13 @@ void LevelData::parseLevelList(string set) {
       if (details.filename != "end_scene.xml")
         core_level_count++;
     }
+    
+    if (set == "pack1.xml") {
+      details.system_locked = "1";
+      
+      core_levels.push_back(details);
+      core_level_count++;
+    }
   }
 }
 
