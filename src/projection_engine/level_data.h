@@ -31,6 +31,7 @@ class LevelData {
     
     static LevelData* inst;
     int core_level_count;
+    int locked_level_count;
     string current_level;
     
     vector<LevelDetails> core_levels;

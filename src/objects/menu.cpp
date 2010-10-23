@@ -6,6 +6,8 @@ using namespace std;
 
 Menu::Menu() : Sprite("", 64, 64, MENU_TAG) {  
   level_picker = false;
+  category_picker = false;
+  show_core = true;
   page = 0;
 }
 
@@ -15,6 +17,22 @@ bool Menu::getLevelPicker() {
 
 void Menu::setLevelPicker(bool _lp) {
   level_picker = _lp;
+}
+
+bool Menu::getCategoryPicker() {
+  return category_picker;
+}
+
+void Menu::setCategoryPicker(bool _cp) {
+  category_picker = _cp;
+}
+
+bool Menu::getShowCore() {
+  return show_core;
+}
+
+void Menu::setShowCore(bool _sc) {
+  show_core = _sc;
 }
 
 int Menu::getPage() {
@@ -56,34 +74,37 @@ void Menu::display() {
   
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-   
-  if (!level_picker) {
-    TexManager::Instance()->bindTexture(12);
+     
+  if (category_picker) {
+    float x = 32.0f;
+    float y = 0.0f;
+
+    // coordinates for texture
+    float x1 = 16.0f;
+    float y1 = 11.0f;
+    float x2 = 435.0f;
+    float y2 = 340.0f;
+
+    float length = y2-y1;
+    float bottom_length = x2-x1;
+
+    glColor4f(alpha, alpha, alpha, alpha);
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+    TexManager::Instance()->bindTexture(23);
 
     GLfloat vertices_back[] = {0,length,0, bottom_length,length,0, 0,0,0, bottom_length,0,0};
-    GLfloat tex_back[] = {0,length/512.0f,0, bottom_length/512.0f,length/512.0f,0, 0,0,0, bottom_length/512.0f,0,0};
-  
+    GLfloat tex_back[] = {x1/512.0f,y2/512.0f,0, x2/512.0f,y2/512.0f,0, x1/512.0f,y1/512.0f,0, x2/512.0f,y1/512.0f,0};
+
     glLoadIdentity();
     glColor4f(1.0f, 1.0f, 1.0f, alpha);
     glTranslatef(x, y, 0.0f);
     glVertexPointer(3, GL_FLOAT, 0, vertices_back);
     glTexCoordPointer(3, GL_FLOAT, 0, tex_back);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-  
-    GLfloat sound_vertices[] = {0,64,0, 64,64,0, 0,0,0, 64,0,0};
-    GLfloat sound_tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
-
-    TexManager::Instance()->bindTexture(13);
-  
-    glLoadIdentity();
-    if (SoundManager::Instance()->soundOn())
-      glTranslatef(206.0f, 126.0f, 0.0f);
-    else
-      glTranslatef(318.0f, 126.0f, 0.0f);
-    glVertexPointer(3, GL_FLOAT, 0, sound_vertices);
-    glTexCoordPointer(3, GL_FLOAT, 0, sound_tex);
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-  } else {
+  } else if (level_picker) {
     TexManager::Instance()->bindTexture(14);
 
     GLfloat vertices_back[] = {0,length,0, bottom_length,length,0, 0,0,0, bottom_length,0,0};
@@ -190,6 +211,33 @@ void Menu::display() {
         count++;
       }
     }
+  } else {
+    TexManager::Instance()->bindTexture(12);
+
+    GLfloat vertices_back[] = {0,length,0, bottom_length,length,0, 0,0,0, bottom_length,0,0};
+    GLfloat tex_back[] = {0,length/512.0f,0, bottom_length/512.0f,length/512.0f,0, 0,0,0, bottom_length/512.0f,0,0};
+  
+    glLoadIdentity();
+    glColor4f(1.0f, 1.0f, 1.0f, alpha);
+    glTranslatef(x, y, 0.0f);
+    glVertexPointer(3, GL_FLOAT, 0, vertices_back);
+    glTexCoordPointer(3, GL_FLOAT, 0, tex_back);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  
+    GLfloat sound_vertices[] = {0,64,0, 64,64,0, 0,0,0, 64,0,0};
+    GLfloat sound_tex[] = {0,1,0, 1,1,0, 0,0,0, 1,0,0};
+
+    TexManager::Instance()->bindTexture(13);
+  
+    glLoadIdentity();
+    if (SoundManager::Instance()->soundOn())
+      glTranslatef(206.0f, 126.0f, 0.0f);
+    else
+      glTranslatef(318.0f, 126.0f, 0.0f);
+      
+    glVertexPointer(3, GL_FLOAT, 0, sound_vertices);
+    glTexCoordPointer(3, GL_FLOAT, 0, sound_tex);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   }
   
   glDisableClientState(GL_VERTEX_ARRAY);

@@ -167,6 +167,7 @@ void GameplayScene::gameLoop() {
             level_timer.unpause();
             menu_open = false;
             menu->setLevelPicker(false);
+            menu->setCategoryPicker(false);
           } else {
             level_timer.pause();
             menu_open = true;
@@ -250,7 +251,7 @@ void GameplayScene::gameLoop() {
             }
           }
         } else if (menu_open) {
-          if (!menu->getLevelPicker()) {
+          if (!menu->getLevelPicker() && !menu->getCategoryPicker()) {
             // reset button
             if (event_coords.x >= 59 && event_coords.x <= 231 && event_coords.y >= 26 && event_coords.y <= 78) {
               finished_level = true;
@@ -259,7 +260,7 @@ void GameplayScene::gameLoop() {
           
             // go to level button
             if (event_coords.x >= 250 && event_coords.x <= 423 && event_coords.y >= 26 && event_coords.y <= 78) {
-              menu->setLevelPicker(true);
+              menu->setCategoryPicker(true);
             }
           
             // sound on
@@ -271,7 +272,33 @@ void GameplayScene::gameLoop() {
             if (event_coords.x >= 325 && event_coords.x <= 378 && event_coords.y >= 140 && event_coords.y <= 181) {
               SoundManager::Instance()->soundOn(false);
             }
-          } else {
+            
+            // resume
+            if (event_coords.x >= 136 && event_coords.x <= 329 && event_coords.y >= 236 && event_coords.y <= 289) {
+              level_timer.unpause();
+              menu_open = false;
+              menu->setLevelPicker(false);
+            }
+          } else if (menu->getCategoryPicker()) {
+            menu->setShowCore(true);
+            
+            // core
+            if (event_coords.x >= 75 && event_coords.x <= 405 && event_coords.y >= 50 && event_coords.y <= 133) {
+              cout << "core\n";
+              menu->setLevelPicker(true);
+              menu->setCategoryPicker(false);
+              menu->setShowCore(true);
+            }
+            
+            // unlocked
+            if (event_coords.x >= 75 && event_coords.x <= 305 && event_coords.y >= 193 && event_coords.y <= 273) {
+              cout << "unlocked\n";
+              menu->setLevelPicker(true);
+              menu->setCategoryPicker(false);
+              menu->setShowCore(false);
+            }
+            
+          } else if (menu->getLevelPicker()) {
             // first
             if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 16 && event_coords.y <= 54) {
               int pos = menu->getPage()*3 + 1;
@@ -344,14 +371,15 @@ void GameplayScene::gameLoop() {
             if (event_coords.x >= 348 && event_coords.x <= 392 && event_coords.y >= 239 && event_coords.y <= 281) {
               menu->nextPage();
             }
+            
+            // resume
+            if (event_coords.x >= 136 && event_coords.x <= 329 && event_coords.y >= 236 && event_coords.y <= 289) {
+              level_timer.unpause();
+              menu_open = false;
+              menu->setLevelPicker(false);
+            }
           }
-          
-          // resume
-          if (event_coords.x >= 136 && event_coords.x <= 329 && event_coords.y >= 236 && event_coords.y <= 289) {
-            level_timer.unpause();
-            menu_open = false;
-            menu->setLevelPicker(false);
-          }
+
         }
       }
     }

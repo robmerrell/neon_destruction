@@ -26,6 +26,7 @@ LevelData* LevelData::Instance() {
     inst = new LevelData;
     
     inst->core_level_count = 0;
+    inst->locked_level_count = 0;
     inst->current_level = "1";
   }
     
@@ -63,7 +64,7 @@ void LevelData::parseLevelList(string set) {
       details.system_locked = "1";
       
       core_levels.push_back(details);
-      core_level_count++;
+      locked_level_count++;
     }
   }
 }

@@ -96,11 +96,13 @@ void TitleScene::gameLoop() {
       TexManager::Instance()->loadTexture("assets/star.png", true);
       TexManager::Instance()->loadTexture("assets/end_level.png", true);
       TexManager::Instance()->loadTexture("assets/font_large.png", true);
+      TexManager::Instance()->loadTexture("assets/categories.png", true);
       
       SoundManager::Instance()->loadMusic("assets/music.mp3");
       SoundManager::Instance()->loadEffects();
             
       LevelData::Instance()->parseLevelList("core.xml");
+      LevelData::Instance()->parseLevelList("pack1.xml");
       LevelData::Instance()->parseUserData();
       
       loaded = true;
@@ -112,7 +114,7 @@ void TitleScene::gameLoop() {
       }
       
       if (!playing_music && animation.get_ticks() >= 4000) {
-        SoundManager::Instance()->soundOn(true);
+        SoundManager::Instance()->soundOn(false);
         playing_music = true;
       }
       

@@ -15,6 +15,8 @@ class Menu : public Sprite {
 
   private:
     bool level_picker;
+    bool category_picker;
+    bool show_core;
     int page;
 
   public:
@@ -27,6 +29,12 @@ class Menu : public Sprite {
     
     void setLevelPicker(bool);
     bool getLevelPicker();
+    
+    void setCategoryPicker(bool);
+    bool getCategoryPicker();
+    
+    void setShowCore(bool);
+    bool getShowCore();
     
     void nextPage();
     void prevPage();
