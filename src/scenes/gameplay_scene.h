@@ -66,6 +66,7 @@ class GameplayScene : public Scene {
     static bool accel_control;
     static bool cannon_dimmed;
     static bool init_level_timer;
+    static bool clicked_next;
     static Timer particle_timer;
     
     static Timer level_timer;

@@ -8,6 +8,7 @@ bool GameplayScene::finished_level = false;
 bool GameplayScene::accel_control = false;
 bool GameplayScene::cannon_dimmed = false;
 bool GameplayScene::init_level_timer = false;
+bool GameplayScene::clicked_next = false;
 
 Timer GameplayScene::particle_timer;
 Timer GameplayScene::level_timer;
@@ -229,6 +230,7 @@ void GameplayScene::gameLoop() {
           // next
           if (event_coords.x >= 312 && event_coords.x <= 413 && event_coords.y >= 239 && event_coords.y <= 290) {
             show_end_level = false;
+            clicked_next = true;
           }
         } else if (dialog_open) {
           // resume
@@ -471,19 +473,22 @@ void GameplayScene::gameLoop() {
           (*sprite)->setAnimationState(ANIMATE_FADE_OUT);
         }
       
-        finished_level = false;
-        in_loop = false;
-        if (!level_reset && !go_to_level) {
-          stringstream score_stream;
-          score_stream << score;
+        if (clicked_next) {
+          finished_level = false;
+          in_loop = false;
+          clicked_next = false;
+          if (!level_reset && !go_to_level) {
+            stringstream score_stream;
+            score_stream << score;
         
-          LevelData::Instance()->updateCurrentScore(score_stream.str());
-          LevelData::Instance()->updateCurrentStars(level_dialog->getStarCount());
-          LevelData::Instance()->setCurrentLevel(LevelData::Instance()->getNextLevel());
-        } else
-          level_reset = false;
-        LevelData::Instance()->writeUserData();
-      }
+            LevelData::Instance()->updateCurrentScore(score_stream.str());
+            LevelData::Instance()->updateCurrentStars(level_dialog->getStarCount());
+            LevelData::Instance()->setCurrentLevel(LevelData::Instance()->getNextLevel());
+          } else
+            level_reset = false;
+            LevelData::Instance()->writeUserData();
+          }
+        }
     
       frame++;
     }
