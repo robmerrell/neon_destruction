@@ -473,7 +473,7 @@ void GameplayScene::gameLoop() {
           (*sprite)->setAnimationState(ANIMATE_FADE_OUT);
         }
       
-        if (clicked_next) {
+        if (clicked_next || go_to_level || level_reset) {
           finished_level = false;
           in_loop = false;
           clicked_next = false;
