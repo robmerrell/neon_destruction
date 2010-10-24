@@ -300,6 +300,11 @@ void GameplayScene::gameLoop() {
             // first
             if (event_coords.x >= 59 && event_coords.x <= 420 && event_coords.y >= 16 && event_coords.y <= 54) {
               int pos = menu->getPage()*3 + 1;
+              
+              if (!menu->getShowCore()) {
+                pos += 51;
+              }
+              
               LevelDetails details = LevelData::Instance()->getDetailsByPosition(pos);
               
               bool can_show = false;
@@ -307,6 +312,11 @@ void GameplayScene::gameLoop() {
               if (pos != 1) {
                 LevelDetails prev_level = LevelData::Instance()->getDetailsByPosition(pos-1);
                 if (prev_level.completed == "1") can_show = true;
+              }
+              
+              if (!menu->getShowCore()) {
+                can_show = false;
+                if (details.completed == "1" || details.unlocked == "1") can_show = true;
               }
                             
               if (can_show) {              

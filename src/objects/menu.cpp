@@ -165,9 +165,14 @@ void Menu::display() {
         
         bool can_show = false;
         if (level.completed == "1") can_show = true;
-        if (i != 0) {
+        if (i != 0 && !show_core) {
           LevelDetails prev_level = LevelData::Instance()->getDetailsByPosition(i+offset);
           if (prev_level.completed == "1") can_show = true;
+        }
+        
+        // unlockable levels...
+        if (!show_core) {
+          if (level.unlocked == "1") can_show = true;
         }
         
         stringstream name;

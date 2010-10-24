@@ -18,7 +18,7 @@ struct LevelDetails {
   string id;
   string completed;
   string score;
-  string skipped;
+  string unlocked;
   string stars;
   string system_locked;
 };

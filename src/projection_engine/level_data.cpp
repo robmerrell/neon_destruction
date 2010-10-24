@@ -50,7 +50,7 @@ void LevelData::parseLevelList(string set) {
     details.filename = level_node->ToElement()->Attribute("filename");
     details.score = "--";
     details.completed = "0";
-    details.skipped = "0";
+    details.unlocked = "0";
     details.stars = "0";
     
     if (set == "core.xml") {
@@ -90,7 +90,7 @@ void LevelData::parseUserData() {
     }
     
     if (state == "level_data" && line != "(lvl)") {
-      // id,score,completed,skipped,stars
+      // id,score,completed,unlocked,stars
       vector<string> parsed_level;
       string_explode(line, ":", &parsed_level);
       
@@ -100,7 +100,7 @@ void LevelData::parseUserData() {
         if (iter->id == parsed_level[0]) {
           iter->score = parsed_level[1];
           iter->completed = parsed_level[2];
-          iter->skipped = parsed_level[3];
+          iter->unlocked = parsed_level[3];
           if (parsed_level.size() >= 5)
             iter->stars = parsed_level[4];
         }
@@ -130,7 +130,7 @@ void LevelData::writeUserData() {
       if (score == "--") score = "0";
       
       if (iter->filename != "end_scene.xml")
-        config_file << iter->id << ":" << score << ":" << iter->completed << ":" << iter->skipped << ":" << iter->stars << endl;
+        config_file << iter->id << ":" << score << ":" << iter->completed << ":" << iter->unlocked << ":" << iter->stars << endl;
     }
     config_file << "(endlvl)";
   }
