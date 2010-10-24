@@ -45,7 +45,7 @@ void Menu::prevPage() {
 }
 
 void Menu::nextPage() {
-  if ((page+1)*3 <= LevelData::Instance()->getCoreLevelCount())
+  if ((page+1)*3 <= LevelData::Instance()->getCoreLevelCount(show_core))
     page++;
 }
 
@@ -138,7 +138,7 @@ void Menu::display() {
     }
     
     // next
-    if ((page+1)*3 <= LevelData::Instance()->getCoreLevelCount()) {
+    if ((page+1)*3 <= LevelData::Instance()->getCoreLevelCount(show_core)) {
       glLoadIdentity();
       glTranslatef(396.0f, 285.0f, 0.0);
 
@@ -152,15 +152,21 @@ void Menu::display() {
       glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     }
 
+    // add an offset for the locked levels
+    int offset = 0;
+    if (!show_core) {
+      offset = 51;
+    }
+
     int count = 0;
     for (int i = 3*page; i < 3*page + 3; i++) {
-      if (i < LevelData::Instance()->getCoreLevelCount()) {
-        LevelDetails level = LevelData::Instance()->getDetailsByPosition(i+1);
+      if (i < LevelData::Instance()->getCoreLevelCount(show_core)) {
+        LevelDetails level = LevelData::Instance()->getDetailsByPosition(i+1+offset);
         
         bool can_show = false;
         if (level.completed == "1") can_show = true;
         if (i != 0) {
-          LevelDetails prev_level = LevelData::Instance()->getDetailsByPosition(i);
+          LevelDetails prev_level = LevelData::Instance()->getDetailsByPosition(i+offset);
           if (prev_level.completed == "1") can_show = true;
         }
         

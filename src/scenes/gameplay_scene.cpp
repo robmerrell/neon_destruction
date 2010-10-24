@@ -284,7 +284,6 @@ void GameplayScene::gameLoop() {
             
             // core
             if (event_coords.x >= 75 && event_coords.x <= 405 && event_coords.y >= 50 && event_coords.y <= 133) {
-              cout << "core\n";
               menu->setLevelPicker(true);
               menu->setCategoryPicker(false);
               menu->setShowCore(true);
@@ -292,7 +291,6 @@ void GameplayScene::gameLoop() {
             
             // unlocked
             if (event_coords.x >= 75 && event_coords.x <= 305 && event_coords.y >= 193 && event_coords.y <= 273) {
-              cout << "unlocked\n";
               menu->setLevelPicker(true);
               menu->setCategoryPicker(false);
               menu->setShowCore(false);

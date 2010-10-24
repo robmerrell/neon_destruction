@@ -242,6 +242,15 @@ int LevelData::getCoreLevelCount() {
   return core_level_count;
 }
 
+
+int LevelData::getCoreLevelCount(bool show_core=true) {
+  if (show_core)
+    return core_level_count;
+  else
+    return locked_level_count;
+}
+
+
 string LevelData::getFinalScore() {
   vector<LevelDetails>::iterator iter;
   int score_count = 0;

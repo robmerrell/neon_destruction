@@ -84,6 +84,7 @@ class LevelData {
      * Get the count of all core levels
      */
     int getCoreLevelCount();
+    int getCoreLevelCount(bool);
     
     /**
      * Count the final score for the game
