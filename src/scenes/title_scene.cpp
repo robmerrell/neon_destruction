@@ -102,7 +102,6 @@ void TitleScene::gameLoop() {
       SoundManager::Instance()->loadEffects();
             
       LevelData::Instance()->parseLevelList("core.xml");
-      LevelData::Instance()->parseLevelList("pack1.xml");
       LevelData::Instance()->parseUserData();
       
       loaded = true;

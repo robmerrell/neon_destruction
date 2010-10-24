@@ -260,7 +260,8 @@ void GameplayScene::gameLoop() {
           
             // go to level button
             if (event_coords.x >= 250 && event_coords.x <= 423 && event_coords.y >= 26 && event_coords.y <= 78) {
-              menu->setCategoryPicker(true);
+              // menu->setCategoryPicker(true);
+              menu->setLevelPicker(true);
             }
           
             // sound on
