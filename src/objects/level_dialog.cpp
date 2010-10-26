@@ -61,7 +61,7 @@ void LevelDialog::display() {
   // star 2
   if (show_star2) {
     glLoadIdentity();
-    glTranslatef(207.0f, 30.0f, 0.0f);
+    glTranslatef(208.0f, 30.0f, 0.0f);
     glVertexPointer(3, GL_FLOAT, 0, star_vertices);
     glTexCoordPointer(3, GL_FLOAT, 0, star_tex);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
@@ -70,7 +70,7 @@ void LevelDialog::display() {
   // star 3
   if (show_star3) {
     glLoadIdentity();
-    glTranslatef(277.0f, 30.0f, 0.0f);
+    glTranslatef(278.0f, 30.0f, 0.0f);
     glVertexPointer(3, GL_FLOAT, 0, star_vertices);
     glTexCoordPointer(3, GL_FLOAT, 0, star_tex);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
