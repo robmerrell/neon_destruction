@@ -193,7 +193,8 @@ void LevelData::updateCurrentStars(int star_count) {
       stringstream star_stream;
       star_stream << star_count;
       
-      iter->stars = star_stream.str();
+      if (star_count > atoi(iter->stars.c_str()))
+        iter->stars = star_stream.str();
     }
   } 
 }
