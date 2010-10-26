@@ -152,7 +152,7 @@ void LevelDialog::setScoreData(int _shots, int _timer, string _elapsed) {
   // 3 stars
   if (show_star3) {
     int index = rand() % 4;
-    
+  
     switch(index) {
       case 1:
         message = "Woohoo!";
@@ -164,7 +164,7 @@ void LevelDialog::setScoreData(int _shots, int _timer, string _elapsed) {
         message_x = 132.0f;
         break;
 
-      case 3:
+      default:
         message = "Your mom must be proud";
         message_x = 113.0f;
         break;
@@ -187,7 +187,7 @@ void LevelDialog::setScoreData(int _shots, int _timer, string _elapsed) {
         message_x = 195.0f;
         break;
 
-      case 3:
+      default:
         message = "You can do it!";
         message_x = 155.0f;
         break;
@@ -210,7 +210,7 @@ void LevelDialog::setScoreData(int _shots, int _timer, string _elapsed) {
         message_x = 125.0f;
         break;
 
-      case 3:
+      default:
         message = "Getting better";
         message_x = 155.0f;
         break;
@@ -238,7 +238,7 @@ void LevelDialog::setScoreData(int _shots, int _timer, string _elapsed) {
         message_x = 60.0f;
         break;
 
-      case 4:
+      default:
         message = "Lame";
         message_x = 210.0f;
         break;
