@@ -1,5 +1,5 @@
 <?xml version="1.0">
-<level>
+<level star1="8" star2="4" star3="1" star_type="shots">
   <object type="CANNON" x="-32.0f" y="150.0f" orientation="W" />
   
   <object type="PLATFORM" x="250.0f" y="45.0f" width="126.0f" angle="0.0f" physics="DYNAMIC" mass="1.0f" />

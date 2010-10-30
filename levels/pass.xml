@@ -1,5 +1,5 @@
 <?xml version="1.0">
-<level>
+<level star1="10" star2="6" star3="3" star_type="shots">
   <object type="CANNON" x="-5.0f" y="236.0f" />
   
   <object type="CIRCLE" x="40.0f" y="40.0f" radius="40.0f" physics="DYNAMIC" mass="3.0f" elasticity="1.0f" />

@@ -1,5 +1,5 @@
 <?xml version="1.0">
-<level>
+<level star1="8" star2="6" star3="4" star_type="shots">
   <object type="CANNON" x="200.0f" y="236.0f" />
 
   <object type="GOAL" x="80.0f" y="10.0f" elasticity="1.0f" />
