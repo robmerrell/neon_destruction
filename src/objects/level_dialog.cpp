@@ -81,6 +81,13 @@ void LevelDialog::display() {
   tx->display();
   delete tx;
   
+  // 0 stars
+  if (!show_star1) {
+    tx = new TextureString(157.0f, 60.0f, "D'oh, 0 Stars!");
+    tx->display();
+    delete tx;
+  }
+  
   // shots
   string shots_str = "Shots: ";
   stringstream ss;
