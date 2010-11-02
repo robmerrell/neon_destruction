@@ -197,7 +197,7 @@ void Menu::display() {
             
             
         // stars
-        Image *im = new Image(300.0f, 20.0f + count*65.0f, 32.0f, 32.0f, 19);
+        Image *im = new Image(80.0f, 50.0f + count*65.0f, 32.0f, 32.0f, 19);
             
         if (level.stars == "3" || level.stars == "2" || level.stars == "1") {
           im->setAlpha(1.0f);
@@ -206,14 +206,14 @@ void Menu::display() {
         }    
         
         if (level.stars == "3" || level.stars == "2") {
-          im = new Image(340.0f, 20.0f + count*65.0f, 32.0f, 32.0f, 19);
+          im = new Image(120.0f, 50.0f + count*65.0f, 32.0f, 32.0f, 19);
           im->setAlpha(1.0f);
           im->display();
           delete im;          
         }
         
         if (level.stars == "3") {
-          im = new Image(380.0f, 20.0f + count*65.0f, 32.0f, 32.0f, 19);
+          im = new Image(160.0f, 50.0f + count*65.0f, 32.0f, 32.0f, 19);
           im->setAlpha(1.0f);
           im->display();
           delete im;          
