@@ -71,7 +71,11 @@ void LevelData::parseLevelList(string set) {
 
 
 void LevelData::parseUserData() {
-  ifstream config_file("user_data.mja");
+  char app_dir[255];
+  int ret = PDL_GetDataFilePath("my_data.mja", app_dir, 256);
+  string file_path(app_dir);
+
+  ifstream config_file(file_path.c_str());
   string line;
   string state="none"; // none, level_data, inprocess
   
@@ -108,12 +112,17 @@ void LevelData::parseUserData() {
     }
     
   }
+  
+  config_file.close();
 }
 
 
 void LevelData::writeUserData() {
-  ofstream config_file("tmp_save.mja");
+  char app_dir[255];
+  int ret = PDL_GetDataFilePath("my_data.mja", app_dir, 256);
+  string file_path(app_dir);
   
+  ofstream config_file(file_path.c_str());
   
   if (config_file.is_open()) {
     if (!current_level.empty() && getDetailsById(current_level).filename != "end_scene.xml") {
@@ -129,14 +138,19 @@ void LevelData::writeUserData() {
       string score = iter->score;
       if (score == "--") score = "0";
       
-      if (iter->filename != "end_scene.xml")
+      if (iter->filename != "end_scene.xml") {
+        // cout << "s: " << score << endl;
+        cout << iter->id << ":" << score << ":" << iter->completed << ":" << iter->unlocked << ":" << iter->stars << endl;
         config_file << iter->id << ":" << score << ":" << iter->completed << ":" << iter->unlocked << ":" << iter->stars << endl;
+      }
     }
     config_file << "(endlvl)";
   }
   
+  config_file.close();
+  
   // rename tmp_save.mja to user_data.mja
-  rename("tmp_save.mja", "user_data.mja");
+  // int res = rename("./tmp_save.mja", "./my_data.mja");
 }
 
 

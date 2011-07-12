@@ -45,8 +45,6 @@ GameplayScene::GameplayScene() {
   cpSpaceAddCollisionHandler(space, ACCEL_SWITCH_COLLISION, BALL_COLLISION, accel_switch_solver, NULL, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION, pre_solve_goal, NULL, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, BOMB_COLLISION, BALL_COLLISION, pre_solve_bomb, NULL, NULL, NULL, NULL);
-  cpSpaceAddCollisionHandler(space, EGG_CIRCLE_COLLISION, BALL_COLLISION, pre_solve_egg_circle, NULL, NULL, NULL, NULL);
-  cpSpaceAddCollisionHandler(space, EGG_INVIS_COLLISION, BALL_COLLISION, pre_solve_egg_invis, NULL, NULL, NULL, NULL);
   egg_shape = NULL;
   
   // generate the backgrounds
@@ -126,7 +124,8 @@ void GameplayScene::gameLoop() {
   animation_ticks = 0;
     
   while (in_loop) {
-    glClear(GL_COLOR_BUFFER_BIT);
+    if (!paused)
+        glClear(GL_COLOR_BUFFER_BIT);
     
     if (update_end_level) {
       level_dialog->setScoreData(score, floor(level_timer.get_ticks() / 1000.0f), level_timer.elapsed_as_string());
