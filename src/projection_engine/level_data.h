@@ -7,6 +7,8 @@
 
 #include "../game_const.h"
 
+#include "PDL.h"
+
 #ifndef LEVEL_DATA_H
 #define LEVEL_DATA_H
 

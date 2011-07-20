@@ -1,6 +1,6 @@
 {
-	"id": "com.robdor.plasmacannon",
-	"version": "1.0.0",
+	"id": "com.robdor.plasmacannonlite",
+	"version": "1.2.1",
 	"vendor": "Rob Merrell",
 	"type": "pdk",
 	"main": "main",

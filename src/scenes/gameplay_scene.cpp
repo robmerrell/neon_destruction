@@ -35,8 +35,6 @@ GameplayScene::GameplayScene() {
   cpSpaceAddCollisionHandler(space, GRAVITY_SWITCH_COLLISION, BALL_COLLISION, gravity_switch_solver, NULL, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, ACCEL_SWITCH_COLLISION, BALL_COLLISION, accel_switch_solver, NULL, NULL, NULL, NULL);
   cpSpaceAddCollisionHandler(space, GOAL_COLLISION, BALL_COLLISION, pre_solve_goal, NULL, NULL, NULL, NULL);
-  cpSpaceAddCollisionHandler(space, EGG_CIRCLE_COLLISION, BALL_COLLISION, pre_solve_egg_circle, NULL, NULL, NULL, NULL);
-  cpSpaceAddCollisionHandler(space, EGG_INVIS_COLLISION, BALL_COLLISION, pre_solve_egg_invis, NULL, NULL, NULL, NULL);
   egg_shape = NULL;
   
   // generate the backgrounds
@@ -113,7 +111,8 @@ void GameplayScene::gameLoop() {
   animation_ticks = 0;
     
   while (in_loop) {
-    glClear(GL_COLOR_BUFFER_BIT);
+    if (!paused)
+      glClear(GL_COLOR_BUFFER_BIT);
     
     if (accel_control) {
       xForce = (float) SDL_JoystickGetAxis(joystick, 1) / 32768.0;

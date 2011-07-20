@@ -62,7 +62,12 @@ void LevelData::parseLevelList(string set) {
 
 
 void LevelData::parseUserData() {
-  ifstream config_file("user_data.mja");
+  char app_dir[255];
+  int ret = PDL_GetDataFilePath("plasma_data.mja", app_dir, 256);
+  string file_path(app_dir);
+
+  ifstream config_file(file_path.c_str());
+  
   string line;
   string state="none"; // none, level_data, inprocess
   
@@ -97,12 +102,17 @@ void LevelData::parseUserData() {
     }
     
   }
+  
+  config_file.close();
 }
 
 
 void LevelData::writeUserData() {
-  ofstream config_file("tmp_save.mja");
+  char app_dir[255];
+  int ret = PDL_GetDataFilePath("plasma_data.mja", app_dir, 256);
+  string file_path(app_dir);
   
+  ofstream config_file(file_path.c_str());
   
   if (config_file.is_open()) {
     if (!current_level.empty() && getDetailsById(current_level).filename != "end_scene.xml") {
@@ -124,8 +134,7 @@ void LevelData::writeUserData() {
     config_file << "(endlvl)";
   }
   
-  // rename tmp_save.mja to user_data.mja
-  rename("tmp_save.mja", "user_data.mja");
+  config_file.close();
 }
 
 
