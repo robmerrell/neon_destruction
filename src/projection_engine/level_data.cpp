@@ -27,6 +27,8 @@ LevelData* LevelData::Instance() {
     
     inst->core_level_count = 0;
     inst->current_level = "1";
+    
+    inst->version = PDL_GetPDKVersion();
   }
     
   return inst;
@@ -62,10 +64,15 @@ void LevelData::parseLevelList(string set) {
 
 
 void LevelData::parseUserData() {
-  char app_dir[255];
-  int ret = PDL_GetDataFilePath("plasma_data.mja", app_dir, 256);
-  string file_path(app_dir);
-
+  string file_path;
+  if (version < 200) {
+    file_path = "plasma_data.mja";
+  } else {
+    char app_dir[255];
+    int ret = PDL_GetDataFilePath("plasma_data.mja", app_dir, 256);
+    file_path = app_dir;
+  }
+  
   ifstream config_file(file_path.c_str());
   
   string line;
@@ -108,9 +115,14 @@ void LevelData::parseUserData() {
 
 
 void LevelData::writeUserData() {
-  char app_dir[255];
-  int ret = PDL_GetDataFilePath("plasma_data.mja", app_dir, 256);
-  string file_path(app_dir);
+  string file_path;
+  if (version < 200) {
+    file_path = "plasma_data.mja";
+  } else {
+    char app_dir[255];
+    int ret = PDL_GetDataFilePath("plasma_data.mja", app_dir, 256);
+    file_path = app_dir;
+  }
   
   ofstream config_file(file_path.c_str());
   

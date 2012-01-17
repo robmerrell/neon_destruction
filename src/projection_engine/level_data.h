@@ -32,6 +32,7 @@ class LevelData {
     static LevelData* inst;
     int core_level_count;
     string current_level;
+    int version;
     
     vector<LevelDetails> core_levels;
     
